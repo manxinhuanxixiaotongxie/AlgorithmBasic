@@ -68,7 +68,7 @@ public class Code01_MergeSort {
         int rIndex = mid+1;
         int index = 0;
 
-        int[] help = new int[R-L];
+        int[] help = new int[R-L+1];
 
         /**
          * 构建一个辅助数组  谁小放谁
