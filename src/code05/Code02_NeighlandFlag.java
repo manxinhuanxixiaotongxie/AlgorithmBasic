@@ -70,7 +70,7 @@ public class Code02_NeighlandFlag {
 
         int index = L;
 //        int num = arr[R]
-        while (left < right) {
+        while (index < right) {
             if (arr[index] == arr[R]) {
                 index++;
             }
