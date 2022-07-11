@@ -6,6 +6,8 @@ package code05;
  * @Date 2022-06-29 19:28
  */
 
+import com.sun.java.swing.plaf.windows.WindowsDesktopIconUI;
+
 import javax.print.DocFlavor;
 import java.sql.Ref;
 
@@ -43,21 +45,24 @@ public class Code02_NeighlandFlag {
         // 右边界
         int right = arr.length;
 
-        for (int i =0;i<arr.length;) {
-            if (arr[i] == num) {
-                i++;
+//        for (int i =0;i<arr.length;) {
+        int index = 0;
+        while (index < right) {
+            if (arr[index] == num) {
+                index++;
             }
 
-            if (arr[i] < num) {
+            if (arr[index] < num) {
 
-                swap(arr,++left,i++);
+                swap(arr, ++left, index++);
 //                left++;
 //                i++;
             }
 
-            if (arr[i] > num) {
-                swap(arr,i,--right);
+            if (arr[index] > num) {
+                swap(arr, index, --right);
             }
+//        }
         }
 
     }
