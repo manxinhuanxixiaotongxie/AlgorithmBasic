@@ -103,6 +103,7 @@ public class Code01_TrieTree {
                         cur.nexts[index] = null;
                         return true;
                     }
+                    cur = cur.nexts[index];
                 }
                 cur.end--;
                 return true;
