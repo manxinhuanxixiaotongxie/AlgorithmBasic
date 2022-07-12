@@ -65,7 +65,8 @@ public class Code01_TrieTree {
                 }
                 cur = cur.nexts[way];
             }
-            return true;
+//            return true;
+            return cur.end >0;
         }
 
         // word这个单词加入过几次
