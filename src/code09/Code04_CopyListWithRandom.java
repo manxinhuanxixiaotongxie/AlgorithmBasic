@@ -80,12 +80,35 @@ public class Code04_CopyListWithRandom {
 
         // 处理random 拆分链表
         cur = head;
-        Node res = cur.next;
+        /**
+         * 这样写有问题
+         * 当前节点的下一个指针指向了原有的位置
+         * 这时候已经无法找到复制节点
+         */
+//        while (cur != null) {
+//            next = cur.next.next;
+//            cur.next.random = cur.random;
+//            cur.next = next;
+//            cur.next.next = next.next;
+//            cur = next;
+//        }
+
+        // 处理random指针
         while (cur != null) {
             next = cur.next.next;
             cur.next.random = cur.random;
-            cur.next = next;
+            cur = next;
+
+        }
+
+        cur = head;
+        Node res = cur.next;
+
+        // 拆分链表
+        while (cur != null) {
+            next = cur.next.next;
             cur.next.next = next.next;
+            cur.next = next;
             cur = next;
         }
         return res;
