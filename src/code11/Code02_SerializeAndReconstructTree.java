@@ -121,7 +121,7 @@ public class Code02_SerializeAndReconstructTree {
     /**
      * 先序序列反序列化
      *
-     *  1 2 3 4 null null 5 null null  6 null null 7 null null
+     *  1 2  4 null null null 3 5 6 null null 7 null null null
      */
     public static Node preb(Queue<Node> queue) {
         Node poll = queue.poll();
