@@ -12,6 +12,16 @@ import java.util.Stack;
  * 实现栈中元素的逆序
  * 只能使用递归函数
  */
+
+/**
+ * 实现思路：
+ * 手下一个原则：
+ * 一次递归并不能完全倒装一个栈
+ * 设计两个函数：
+ * 第一个函数，找到栈底元素
+ * 第二个函数 翻转栈
+ * @param <T>
+ */
 public class ReverseStack<T> {
 
     public static void main(String[] args) {
@@ -47,6 +57,7 @@ public class ReverseStack<T> {
             return t;
         }
     }
+
 
     public static void reverse(Stack<Integer> stack) {
         if (stack.isEmpty()) {
