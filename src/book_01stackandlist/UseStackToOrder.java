@@ -48,15 +48,11 @@ public class UseStackToOrder {
             if (help.isEmpty()) {
                 help.push(pop);
             }
-//            while (!help.isEmpty()) {
-//                if (pop > help.peek()) {
-//                    Integer helpPop = help.pop();
-//                    stack.push(helpPop);
-//                } else {
-//                 help.push(pop);
-//                }
-//
-//            }
+            while (!help.isEmpty() && (pop > help.peek())) {
+                    Integer helpPop = help.pop();
+                    stack.push(helpPop);
+            }
+            help.push(pop);
 
         }
         while (!help.isEmpty()) {
