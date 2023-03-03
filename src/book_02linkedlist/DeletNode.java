@@ -62,7 +62,7 @@ public class DeletNode {
 //        }
 //        cur.next = cur.next.next;
         DeleteKNode.Node cur = head;
-        int n = 1;
+        int n = 0;
         while (cur!= null) {
             n++;
             cur = cur.next;

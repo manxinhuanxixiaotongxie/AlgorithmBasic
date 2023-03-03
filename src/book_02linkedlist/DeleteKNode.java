@@ -57,6 +57,12 @@ public class DeleteKNode {
 //                break;
 //            }
 //        }
+        if (k< 0) {
+            while (++k < 0) {
+                cur = cur.next;
+            }
+            cur.next = cur.next.next;
+        }
 
         /**
          * 双链表
