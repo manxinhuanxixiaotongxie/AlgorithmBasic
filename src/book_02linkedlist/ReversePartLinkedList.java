@@ -35,9 +35,10 @@ public class ReversePartLinkedList {
             // 如果from值是1的话，那么就从head到to进行翻转
             // 如果from的值是链表的长度，那么直接已经来到链表的最后一步
             // 找到当前节点的前一个节点
-            fromNode = from==1?null:from==len+1?cur:cur;
+//            fromNode = from==1?null:from==len+1?cur:cur;
+            fromNode = len==from-1?cur:fromNode;
             // 找到当前节点的下一个节点
-            toNode = to==len?cur.next:null;
+            toNode = len==to+1?cur:toNode;
             cur = cur.next;
         }
 
@@ -46,7 +47,7 @@ public class ReversePartLinkedList {
         }
 
         // 从from的上一个节点开始遍历
-        cur = fromNode.next;
+        // 头节点的上一个节点为空意味着从head到to进行翻转，头部要进行处理
         /**
          * 要翻转链表需要进行一个处理
          * 涉及要一个换头的问题
@@ -58,8 +59,13 @@ public class ReversePartLinkedList {
          * 1 2 3 4   1 3   ----> 3 2 1 4
          * 1 2 3 4   2 3   ----> 1 3 2 4
          */
-        DeleteKNode.Node newHead = head;
+        cur = fromNode == null?head:fromNode.next;
+
         DeleteKNode.Node nextNode = toNode;
+
+        DeleteKNode.Node node2 = cur.next;
+        node2.next = toNode;
+
 
         while (cur != toNode) {
             DeleteKNode.Node next = cur.next;
@@ -69,7 +75,13 @@ public class ReversePartLinkedList {
 
         }
 
+        // fromnode不为空 不需要换头
+        if (fromNode != null) {
+            fromNode.next = cur;
+            return head;
+        }
 
-        return newHead;
+
+        return cur;
     }
 }
