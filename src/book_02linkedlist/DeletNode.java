@@ -70,7 +70,7 @@ public class DeletNode {
 
         double index = a/b;
         // 应该删除的节点
-        int ceil = (int) Math.ceil((double) (n * index));
+        n = (int) Math.ceil((double) (n * index));
 
         if (index > n) {
             return head;
@@ -82,9 +82,6 @@ public class DeletNode {
             cur = cur.next;
         }
         cur.next = cur.next.next;
-
-
-
 
         return head;
     }
