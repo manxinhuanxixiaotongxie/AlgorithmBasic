@@ -53,19 +53,31 @@ public class RingLinekList {
             head = tail.next;
         }
 
-        while (head != tail) {
-            if (++index == num) {
-                tail.next = tail.next.next;
-                index = 0;
-
-            }else {
-
-                tail = tail.next;
-
-            }
-
-            head = tail.next;
-        }
+//        while (head != tail) {
+//            if (++index == num) {
+//                tail.next = tail.next.next;
+//                index = 0;
+//
+//            }else {
+//
+//                tail = tail.next;
+//
+//            }
+//
+//            head = tail.next;
+//        }
         return head;
+    }
+
+    /**
+     * todo 时间复杂度o(n)
+     * @param head
+     * @param count
+     * @return
+     */
+    public static Node killPeopleImprove(Node head,int count) {
+
+        return null;
+
     }
 }
