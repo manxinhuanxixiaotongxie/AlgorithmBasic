@@ -12,6 +12,10 @@ public class DeleteKNode {
         Node next;
         Node last;
 
+        Node(int value) {
+            this.value = value;
+        }
+
         Node(Node node,int value,Node last) {
             this.value = value;
             this.next = next;

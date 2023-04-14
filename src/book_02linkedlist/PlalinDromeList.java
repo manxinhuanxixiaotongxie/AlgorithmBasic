@@ -117,4 +117,67 @@ public class PlalinDromeList {
         return res;
 
     }
+
+    /**
+     * 测试运行成功
+     * @param head
+     * @return
+     */
+    public static boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        ListNode n1 = head;
+        ListNode n2 = head;
+        // 1 0 0
+
+        while (n1.next != null &&  n2.next != null && n2.next.next != null) {
+
+            n1 = n1.next;
+            n2 = n2.next.next;
+
+        }
+
+        // 此时n1走到了中点  n2走到了最后一步
+        ListNode n3 = n1;
+        n1 = n1.next;
+        n3.next = null;
+        // n1走到最后一步
+        while (n1 != null) {
+            n2 = n1.next;
+            n1.next = n3;
+            n3 = n1;
+            n1 = n2;
+
+        }
+
+        boolean res = true;
+        n2 = head;
+        n1 = n3;
+        while (n2 != null) {
+            if (n2.val != n3.val) {
+                res = false;
+                break;
+            }
+            n2 = n2.next;
+            n3 = n3.next;
+        }
+
+        // 1  2  2 1
+        // 恢复链表
+
+        n2 = n1.next;
+        n3.next = null;
+        // 1 2 3 4
+        while (n2 != null) {
+            n1 = n2.next;
+            n2.next = n3;
+            n3 = n2;
+            n2 = n1;
+
+        }
+        return res;
+
+    }
 }

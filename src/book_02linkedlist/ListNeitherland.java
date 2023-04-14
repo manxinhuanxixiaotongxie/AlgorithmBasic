@@ -7,61 +7,267 @@ package book_02linkedlist;
  */
 public class ListNeitherland {
 
-    public static boolean test01(DeleteKNode.Node head) {
+    public static void main(String[] args) {
+        ListNode node1 = new ListNode(1);
+        ListNode node2 = new ListNode(0);
+        ListNode node3 = new ListNode(1);
+    }
 
-        if (head == null || head.next == null) {
-            return true;
+
+    /**
+     * 将单项链表划分成左边小、右边大
+     *
+     * @param head
+     * @return
+     */
+    public static ListNode listNeightland(ListNode head, int value) {
+
+        if (head == null) {
+            return head;
         }
 
-        // 找到左半边节点  右半区的开始节点
-        DeleteKNode.Node n1 = head;
-        DeleteKNode.Node n2 = head;
-
-        while (n1.next != null && n2.next != null) {
-            n1 = n1.next;
-            n2 = n2.next.next;
+        ListNode cur = head;
+        int length = 0;
+        while (cur.next != null) {
+            length++;
         }
-        // n1为左半区最后一个节点
-        n2 = n1.next;
-        // 翻转右半区链表
-        n1.next = null;
+        ListNode[] array = new ListNode[length];
 
-        DeleteKNode.Node n3 = null;
+        /**
+         * 思路：
+         * 1.为后序的快速排序奠定基础
+         * 2。划分左区
+         * 3.当index的值比给定的值小的话左半区加1
+         * 4.给定值比index的值要小，index++
+         * 5.结束之后就是左边小，右边大
+         */
+        int left = -1;
+        int index = 0;
+        while (index < length) {
+            if (array[index].val < value) {
+                swap(array, ++left, index++);
 
-        // 翻转链接
-        while (n2.next != null) {
-            n3 = n2.next;
-            n2.next = n1;
-            n1 = n2;
-            n2 = n3;
-        }
-
-        boolean res = true;
-        n3 = n2;
-        n2 = head;
-        // 翻转之后 n2变成最右边的节点
-        while (n2 != null && n1 != null) {
-            if (n1.value != n2.value) {
-                res = false;
-                break;
             }
-            n1 = n1.next;
-            n2 = n2.next;
+            if (array[index].val >= value) {
+                index++;
+            }
+
+
+        }
+        return head;
+    }
+
+    /**
+     * 将单项链表划分成左边小、中间相等、右边大的形式
+     * 时间复杂度o(N) 空间复杂度o(N)
+     *
+     * @param head
+     * @return
+     */
+    public static ListNode listNeightlandUp(ListNode head, int value) {
+
+        if (head == null) {
+            return head;
         }
 
-        // 恢复链表
-        n1 = n3.next;
-        n3.next = null;
-        // 0 0 0 0 0
-        while (n1 != null) {
-            n2 = n1.next;
-            n1.next = n3;
-            n3 = n1;
-            n1 = n2;
+        ListNode cur = head;
+        int length = 0;
+        while (cur.next != null) {
+            length++;
+        }
+        ListNode[] array = new ListNode[length];
+        cur = head;
+
+        int left = -1;
+        int right = length;
+        length = 0;
+        while (cur.next != null) {
+            array[length++] = cur;
+            cur = cur.next;
         }
 
-        return res;
+        /**
+         * 思路：
+         * 1.left从数组最左边开始
+         * 2.right从数组最右边开始
+         * 3.当前值比给定值小 交换左边区的最近的数与当前值，并且index+1
+         * 4.当前值比给定值要大，交换right最近的值，index不变，并且right向左移动
+         * 5.如果相等交换index+1
+         */
+        int index = 0;
+        while (index < length) {
+            if (array[left].val < value) {
+                swap(array, ++left, index++);
+            }
+            if (array[left].val > value) {
+                swap(array, index, --right);
+            }
+            if (array[left].val == value) {
+                index++;
+            }
 
+        }
+
+        for (int i = 1; i < array.length; i++) {
+            array[i - 1].next = array[i];
+        }
+
+        return array[0];
+    }
+
+    /**
+     * 将单项链表划分成左边小、中间相等、右边大的形式
+     * 实现一种方式时间复杂度O(N),空间复杂度N（1）
+     * 时间复杂度o(N) 空间复杂度o(1)
+     *
+     * @param head
+     * @return
+     */
+    public static ListNode listNeightlandUpImprove(ListNode head, int value) {
+
+        if (head == null) {
+            return head;
+        }
+
+        ListNode smallHead = null;
+        ListNode smallTail = null;
+        ListNode equalHead = null;
+        ListNode equalTail = null;
+        ListNode biggerHead = null;
+        ListNode biggerTail = null;
+        ListNode cur = head;
+        while (cur.next != null) {
+            if (cur.val < value) {
+                if (smallHead == null) {
+                    smallHead = cur;
+                } else {
+                    smallTail.next = cur;
+                    smallTail = cur;
+                }
+            }
+
+            if (cur.val == value) {
+                if (equalHead == null) {
+                    equalHead = cur;
+                    equalTail = cur;
+                } else {
+                    equalTail.next = cur;
+                    equalTail = cur;
+                }
+            }
+
+            if (cur.val > value) {
+                if (biggerHead == null) {
+                    biggerHead = cur;
+                    biggerTail = cur;
+                } else {
+                    biggerTail.next = cur;
+                    biggerTail = cur;
+                }
+            }
+
+            cur = cur.next;
+
+        }
+        if (smallHead != null) {
+            head = smallHead;
+            while (smallHead.next != null) {
+                smallTail = smallHead.next;
+            }
+        }
+
+        if (equalHead != null) {
+            head = equalHead;
+            while (equalHead.next != null) {
+                equalHead = equalHead.next;
+            }
+        }
+
+        if (smallTail != null) {
+            smallTail.next = equalHead == null ? biggerHead : equalHead;
+        } else {
+            if (equalTail != null) {
+                equalTail.next = biggerHead;
+            }
+        }
+
+        return head;
+    }
+
+
+    /**
+     * 将单项链表划分成左边小、中间相等、右边大的形式
+     * 实现一种方式时间复杂度O(N),空间复杂度N（1）
+     * 时间复杂度o(N) 空间复杂度o(1)
+     *
+     * 亲测有效
+     *
+     * @param head
+     * @return
+     */
+    public static ListNode listNeightlandUpImprove2(ListNode head, int value) {
+
+        if (head == null) {
+            return head;
+        }
+
+        ListNode smallHead = null;
+        ListNode smallTail = null;
+        ListNode equalHead = null;
+        ListNode equalTail = null;
+        ListNode biggerHead = null;
+        ListNode biggerTail = null;
+        ListNode next = null;
+
+        while (head != null) {
+            next = head.next;
+            head.next = null;
+            if (head.val < value) {
+                if (smallHead == null) {
+                    smallHead = head;
+                    smallTail = head;
+                } else {
+                    smallTail.next = head;
+                    smallTail = head;
+                }
+            }
+            if (head.val == value) {
+                if (equalHead == null) {
+                    equalHead = head;
+                    equalTail = head;
+                } else {
+                    equalTail.next = head;
+                }
+            }
+
+            if (head.val > value) {
+                if (biggerHead == null) {
+                    biggerHead = head;
+                    biggerTail = head;
+                } else {
+                    biggerTail.next = head;
+                }
+            }
+            head = next;
+        }
+
+        if (smallTail != null) {
+            smallTail.next = equalHead;
+            equalTail = equalHead == null ? smallTail : equalTail;
+        }
+
+        if (equalTail != null) {
+            equalTail.next = biggerHead;
+        }
+
+        return smallHead != null ? smallHead : equalHead != null ? equalHead : biggerHead;
+    }
+
+    public static void swap(ListNode[] array, int left, int right) {
+
+        ListNode leftNode = array[left];
+        array[left] = array[right];
+        array[right] = leftNode;
 
     }
 }
