@@ -187,26 +187,27 @@ public class AddList {
         int n2 = 0;
         int n = 0;
         ListNode newHead = null;
-        ListNode head = null;
         pre = null;
-        while (head1 != null || head2 != null) {
+        ListNode c1 = head1;
+        ListNode c2 = head2;
+        while (c1 != null || c2 != null) {
             n1 = head1 == null?0:head1.val;
             n2 = head2 == null?0:head2.val;
             n = n1 + n2 + cal;
             newHead = new ListNode(n%10);
-            if (head == null) {
-                head = newHead;
-            }
             cal = n/10;
 
             newHead.next = pre;
 
-            if (head1 != null) {
-                head1 = head1.next;
-            }
-            if (head2 != null) {
-                head2 = head2.next;
-            }
+//            if (head1 != null) {
+//                head1 = head1.next;
+//            }
+//            if (head2 != null) {
+//                head2 = head2.next;
+//            }
+            c1 = head1 != null?c1.next:null;
+            c2 = head2 != null?c2.next:null;
+
 
         }
 
