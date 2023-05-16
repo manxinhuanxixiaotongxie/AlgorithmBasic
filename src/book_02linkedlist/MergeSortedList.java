@@ -19,11 +19,11 @@ public class MergeSortedList {
         // 1 6 8
         // 3 5 7 9
         // 保证从最小的开始
-        ListNode head = head1.val<head2.val?head1:head2;
-        ListNode cur1 = head== head1?head1:head2;
-        ListNode cur2 = head== head1?head2:head1;
+        ListNode head = head1.val < head2.val ? head1 : head2;
+        ListNode cur1 = head == head1 ? head1 : head2;
+        ListNode cur2 = head == head1 ? head2 : head1;
         ListNode next;
-        ListNode pre= null;
+        ListNode pre = null;
 
 
         while (cur1 != null && cur2 != null) {
@@ -40,7 +40,7 @@ public class MergeSortedList {
             }
         }
         // 链表1或者的链表2走到尽头
-        pre.next = cur1 == null?cur2:cur1;
+        pre.next = cur1 == null ? cur2 : cur1;
 
 
         return head;
