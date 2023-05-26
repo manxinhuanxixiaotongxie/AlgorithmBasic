@@ -31,7 +31,7 @@ public class BitMap {
      * @param num
      */
     public void delete(int num) {
-        bits[num >> 6] &= ~(1 << (num & 63));
+        bits[num >> 6] &= ~(1L << (num & 63));
     }
 
     /**
@@ -41,7 +41,7 @@ public class BitMap {
      * @return
      */
     public boolean contains(int num) {
-        return (bits[num >> 6] & (1 << (num & 63))) != 0;
+        return (bits[num >> 6] & (1L << (num & 63))) != 0;
     }
 
 

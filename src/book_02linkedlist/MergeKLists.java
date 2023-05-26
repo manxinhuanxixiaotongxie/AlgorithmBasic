@@ -62,13 +62,26 @@ public class MergeKLists {
         ListNode head = newHead;
 
         ListNode cur = head;
+        /**
+         * 这也是对的
+         */
+//        while (!myHeap.isEmpty()) {
+//            ListNode minNode = myHeap.poll();
+//            if (minNode.next != null) {
+//                myHeap.add(minNode.next);
+//            }
+//            cur.next = myHeap.peek();
+//            cur = cur.next;
+//        }
+
         while (!myHeap.isEmpty()) {
-            ListNode minNode = myHeap.poll();
-            if (minNode.next != null) {
-                myHeap.add(minNode.next);
+            if (cur.next != null) {
+                myHeap.add(cur.next);
             }
-            cur.next = myHeap.peek();
-            cur = cur.next;
+            ListNode mindNode = myHeap.poll();
+            cur.next = mindNode;
+            cur = mindNode;
+
         }
 
         return head;
