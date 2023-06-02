@@ -1,5 +1,7 @@
 package book_02linkedlist;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 /**
  * @Description
  * @Author Scurry
@@ -123,7 +125,7 @@ public class PlalinDromeList {
      * @param head
      * @return
      */
-    public static boolean isPalindrome(ListNode head) {
+    public static boolean isPalindrome1(ListNode head) {
         if (head == null || head.next == null) {
             return true;
         }
@@ -179,5 +181,75 @@ public class PlalinDromeList {
         }
         return res;
 
+    }
+
+    /**
+     * https://leetcode.cn/problems/palindrome-linked-list/description/
+     * 判断是否是回文链表
+     * @param head
+     * @return
+     */
+    public static boolean isPalindrome(ListNode head) {
+
+        if(head == null || head.next == null) {
+            return true;
+        }
+
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // 翻转后半部分链表
+        ListNode listNode = reverseList(slow);
+        ListNode cur1 = head;
+        ListNode cur2 = listNode;
+        while (cur1 != null && cur2 != null) {
+            if (cur1.val != cur2.val) {
+                return false;
+            }
+            cur1 = cur1.next;
+            cur2 = cur2.next;
+        }
+
+        // 恢复链表
+        ListNode listNode1 = reverseList(listNode);
+        slow.next = listNode1;
+        return true;
+    }
+
+    /**
+     * 1 2 2 1
+     * @param head
+     * @return
+     */
+    public static ListNode reverseList(ListNode head) {
+        ListNode cur = head;
+        ListNode pre = null;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
+    public static void main(String[] args) {
+        ListNode n1 = new ListNode(1);
+        ListNode n2 = new ListNode(0);
+        ListNode n3 = new ListNode(3);
+        ListNode n4 = new ListNode(4);
+        ListNode n5 = new ListNode(0);
+        ListNode n6 = new ListNode(1);
+        n1.next = n2;
+        n2.next = n3;
+        n3.next = n4;
+        n4.next = n5;
+        n5.next = n6;
+        isPalindrome(n1);
     }
 }
