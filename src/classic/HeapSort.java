@@ -10,7 +10,6 @@ import static classic.InsertSort.insertSort1;
 public class HeapSort {
 
     /**
-     *
      * @param arr
      */
     public static void heapsort(int[] arr) {
@@ -30,17 +29,17 @@ public class HeapSort {
 
         int heapSize = arr.length;
 
-        swap(arr,0,--heapSize);
+        swap(arr, 0, --heapSize);
 
-       while (heapSize>0) {
-           heapify(arr,0,heapSize);
+        while (heapSize > 0) {
+            heapify(arr, 0, heapSize--);
 
-           swap(arr,0,--heapSize);
-       }
+            swap(arr, 0, heapSize);
+        }
 
     }
 
-    public static void heapify(int[] arr, int index,int heapSize) {
+    public static void heapify(int[] arr, int index, int heapSize) {
         int left = index * 2 + 1;
         while (left < heapSize) {
             int maxValueIndex = left + 1 < heapSize && arr[left + 1] > arr[left] ? left + 1 : left;
