@@ -12,17 +12,6 @@ package code11;
  */
 public class Code07_PaperFolding {
 
-    /**
-     * 从前到后打印，意味着就是整棵树的中序遍历
-     * 凹
-     * 凹  凸
-     * 凹 凸 凹凸
-     * <p>
-     * 怎么处理？
-     * 对折N次  建立整棵树
-     *
-     *
-     */
 
     public static void main(String[] args) {
         printAllFolds(3);
@@ -32,19 +21,13 @@ public class Code07_PaperFolding {
         process(1, N, true);
     }
 
+
     /**
-     * 脑海想象一棵树
-     * i代表层级  N代表节点数
-     * 递归的过程：
-     * 从第一层开始向下递归
-     * 一直到最后一层
-     * 进行中序遍历
-     * 左子树一定是凹折痕
-     * 右子树一定是凸折痕
-     *
-     *这么进行理解：
-     *
-     *
+     * 想象成一棵树其实就是一棵树的中序优先遍历
+     * 中序优先遍历的过程
+     * 1.左树到底
+     * 2.弹出返回并且打印
+     * 3.右树到底
      *
      * @param i
      * @param n
@@ -55,7 +38,7 @@ public class Code07_PaperFolding {
             return;
         }
         process(i + 1, n, true);
-        System.out.print(down ? "凹 " : "凸 ");
+        System.out.print(down ? "凹" : "凸");
         process(i + 1, n, false);
     }
 

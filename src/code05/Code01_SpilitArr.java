@@ -20,7 +20,23 @@ public class Code01_SpilitArr {
      * 2.范围最右侧的数比给定的数大 不处理  index++ 范围 不动
      */
 
-    public static void  partition() {
+    public static void  partition(int[] arr,int num) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+        int left = -1;
+        for (int i = 0;i< arr.length;i++) {
+            if (arr[i] < num) {
+                swap(arr,++left,i++);
+            } else {
+                i++;
+            }
+        }
+    }
 
+    public static void swap(int[] arr,int left ,int right) {
+        int temp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = temp;
     }
 }
