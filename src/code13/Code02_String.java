@@ -56,6 +56,7 @@ public class Code02_String {
         // no
         process2(chars,index+1,ans,path);
 
+        // yes
         process2(chars,index+1,ans,path+chars[index]);
 
     }
@@ -74,18 +75,21 @@ public class Code02_String {
      * acdb
      * adbc
      * adcb
+     *
      * bacd
      * badc
      * bcad
      * bcda
      * bdac
      * bdca
+     *
      * cabd
      * cadb
      * cbad
      * cbda
      * cdab
      * cdba
+     *
      * dabc
      * dacb
      * dbac
