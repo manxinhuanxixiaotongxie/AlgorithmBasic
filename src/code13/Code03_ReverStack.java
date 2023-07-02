@@ -16,6 +16,15 @@ public class Code03_ReverStack {
         if (stack.isEmpty()) {
             return;
         }
+        // 1 2 3 4 5
+        /**
+         * 递归过程如下：
+         *
+         * 获取栈最底部的值
+         * 压栈
+         * 出栈
+         *
+         */
         //获取栈最底部的数值
         int bottomResult = getBottomResult(stack);
         reversStack(stack);
@@ -24,12 +33,14 @@ public class Code03_ReverStack {
 
     public static int getBottomResult(Stack<Integer> stack) {
         Integer result = stack.pop();
+        System.out.println(result);
         if (stack.isEmpty()) {
             return result;
+        } else {
+            int bottomResult = getBottomResult(stack);
+            stack.push(result);
+            return bottomResult;
         }
-        int bottomResult = getBottomResult(stack);
-        stack.push(result);
-        return bottomResult;
     }
 
     public static void main(String[] args) {
@@ -40,9 +51,9 @@ public class Code03_ReverStack {
         test.push(4);
         test.push(5);
         reversStack(test);
-        while (!test.isEmpty()) {
-            System.out.println(test.pop());
-        }
+//        while (!test.isEmpty()) {
+//            System.out.println(test.pop());
+//        }
 
     }
 }
