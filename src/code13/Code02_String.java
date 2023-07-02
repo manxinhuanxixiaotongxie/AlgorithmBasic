@@ -36,12 +36,13 @@ public class Code02_String {
 
     public static List<String> zixulie(String str) {
         List<String> ans = new ArrayList<>();
-        process2(str.toCharArray(),0,ans,"");
+        process2(str.toCharArray(), 0, ans, "");
         return ans;
     }
 
     /**
      * 求子序列
+     *
      * @param chars
      * @param index
      * @param ans
@@ -50,24 +51,24 @@ public class Code02_String {
     public static void process2(char[] chars, int index, List<String> ans, String path) {
         if (index == chars.length) {
             ans.add(path);
-            System.out.println("子序列："+ path);
+            System.out.println("子序列：" + path);
             return;
         }
         // no
-        process2(chars,index+1,ans,path);
+        process2(chars, index + 1, ans, path);
 
         // yes
-        process2(chars,index+1,ans,path+chars[index]);
+        process2(chars, index + 1, ans, path + chars[index]);
 
     }
 
     /**
      * 整个递归过程如下：
      * 以abcd为例
-     *
+     * <p>
      * abcd 整个过程结束以后 弹出  再次循环  直到C弹出 继续递归选出D 再继续递归弹出B 继续递归   这样一个循环之后得到 abcd abdc acdb ...以a开头的全排列
      * 继续弹出  以b开头   然后以C开头  再以C开头等等
-     *
+     * <p>
      * 整个递归过如下：
      * abcd
      * abdc
@@ -75,21 +76,21 @@ public class Code02_String {
      * acdb
      * adbc
      * adcb
-     *
+     * <p>
      * bacd
      * badc
      * bcad
      * bcda
      * bdac
      * bdca
-     *
+     * <p>
      * cabd
      * cadb
      * cbad
      * cbda
      * cdab
      * cdba
-     *
+     * <p>
      * dabc
      * dacb
      * dbac
