@@ -112,7 +112,6 @@ public class Code02_String {
             return;
         }
 
-
         for (int i = 0; i < chars.length; i++) {
             if (!set.contains(i)) {
                 set.add(i);
