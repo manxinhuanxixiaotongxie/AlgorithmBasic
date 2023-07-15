@@ -179,14 +179,42 @@ public class Code02_String {
         /**
          *
          */
-        for (int i = 0; i < chars.length; i++) {
-            swap(chars,i,index);
-            process2(chars,index+1,path+chars[i],set);
-            swap(chars,i,index);
+        for (int i = index; i < chars.length; i++) {
+            swap(chars, i, index);
+            process2(chars, index + 1, path + chars[i], set);
+            swap(chars, i, index);
         }
     }
 
-    public static void swap(char[] chars,int i,int j) {
+
+    public static void process3(char[] chars, int index, String path, HashSet<String> set) {
+
+        if (index == chars.length) {
+            set.add(path);
+//            System.out.println(path);
+            return;
+        }
+
+        /**
+         *去重：两种思路：
+         * 1.全量递归 根据set进行去重
+         * 2.在递归过程中，出现了已经出现的就进行结束
+         * 以ABA
+         * 假设：第一个A来到0位置，此时：字符串变成ABA
+         * 第一个B来到了
+         */
+        boolean[] visited = new boolean[256];
+        for (int i = index; i < chars.length; i++) {
+            if (!visited[chars[i]]) {
+                visited[chars[i]] = true;
+                swap(chars, i, index);
+                process3(chars, index + 1, path + chars[i], set);
+                swap(chars, i, index);
+            }
+        }
+    }
+
+    public static void swap(char[] chars, int i, int j) {
         char temp = chars[i];
         chars[i] = chars[j];
         chars[j] = temp;
