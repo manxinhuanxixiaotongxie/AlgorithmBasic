@@ -55,6 +55,17 @@ public class Code01_RobotWalk {
         return process1(N, cur + 1, rest - 1, aim) + process1(N, cur - 1, rest - 1, aim);
     }
 
+    /**
+     * 这个递归其实是错的
+     * 上面的递归过程从左树一直递归到右树
+     * 而这个递归过程从右树一直递归到左树
+     * 会导致右树的会被重复统计
+     * @param N
+     * @param cur
+     * @param rest
+     * @param aim
+     * @return
+     */
     public static int process2(int N,int cur,int rest,int aim) {
         if (rest == 0) {
             return cur == aim ? 1 : 0;

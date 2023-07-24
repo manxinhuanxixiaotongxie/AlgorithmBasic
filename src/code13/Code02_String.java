@@ -12,10 +12,10 @@ import java.util.List;
 public class Code02_String {
 
     public static void main(String[] args) {
-        permutation("abcd");
+        permutation("aab");
 
         System.out.println("=====================");
-        zixulie("abcd");
+//        zixulie("abcd");
     }
 
     /**
@@ -26,7 +26,7 @@ public class Code02_String {
             return null;
         }
         HashSet<String> list = new HashSet<>();
-        process1(str.toCharArray(), 0, "", list, new HashSet<>());
+        process1Test(str.toCharArray(), 0, "", list);
         String[] strings = new String[list.size()];
         Object[] objects = list.toArray();
         for (int i = 0; i < objects.length; i++) {
@@ -106,23 +106,107 @@ public class Code02_String {
      * @param list
      * @param set
      */
-    public static void process1(char[] chars, int index, String path, HashSet<String> list, HashSet<Integer> set) {
+    public static void process1(char[] chars, int index, String path, HashSet<String> list, HashSet<String> set) {
 
         if (index == chars.length) {
             list.add(path);
-//            System.out.println(path);
-            return;
         }
 
         /**
+         *以abcd为例
+         *process1(chars, index + 1, path + chars[i], list, set);
+         *
+         * 递归过程：
+         *
+         *
          *
          */
         for (int i = 0; i < chars.length; i++) {
             if (!set.contains(i)) {
-                set.add(i);
+                set.add(String.valueOf(i));
                 process1(chars, index + 1, path + chars[i], list, set);
                 set.remove(i);
             }
+        }
+    }
+
+
+    /**
+     * 这段代码是用于求字符串全排列的两个递归函数，分别是 process1 和 process1Test。它们的参数含义如下：
+     * <p>
+     * chars：表示待排列的字符数组。
+     * index：表示当前已经排列到的位置。
+     * path：表示已经排列好的路径。
+     * list：表示存储所有排列结果的 HashSet 集合。
+     * set：表示已经使用过的字符下标的集合。
+     * 其中，process1 函数和之前的 process1Test 函数相比，多了一个参数 set，用于存储已经使用过的字符下标。在函数的开头，同样进行了一个判断，如果当前已经排列到了字符数组的末尾，说明已经排列完毕，将路径添加到结果集合中，并直接返回。
+     * <p>
+     * 如果还没有排列完毕，就需要进行递归调用。在递归调用之前，需要遍历所有的字符，对于每个字符，如果它没有被使用过，就将它加入路径中，然后进行递归调用，将 index 加 1。
+     * 递归调用结束后，需要将当前字符从路径中删除，并从已经使用过的字符下标集合中删除，以便进行下一次排列。
+     * <p>
+     * 在 process1Test 函数中，注释中的 aab 是一个示例，它展示了在字符数组中有重复字符时，如果不加判断会产生重复排列的情况。在这个例子中，如果不加判断，会产生如下的重复排列：
+     * <p>
+     * aab
+     * aba
+     * aba
+     * aab
+     * baa
+     * baa
+     * 因此，在 process1 函数中，加入了一个判断，只有当当前字符没有被使用过时，才进行递归调用。这样可以避免重复排列的情况。
+     *
+     * @param chars
+     * @param index
+     * @param path
+     * @param list
+     */
+    public static void process1Test(char[] chars, int index, String path, HashSet<String> list) {
+
+        if (index == chars.length) {
+            list.add(path);
+            System.out.println(path);
+        }
+
+        /**
+         *
+         *                  以aab为例
+         *
+         *
+         * process1Test(chars, index + 1, path + chars[i], list, set);
+         *
+         * 递归过程：
+         *
+         *process1Test(chars, 0, "", list);
+         *   process1Test(chars, 1, "a", list);
+         *   process1Test(chars, 2, "aa", list);
+         *   process1Test(chars, 3, "aab", list);
+         *
+         *
+         *    list.add("aab");
+         *    System.out.println("aab");
+         *
+         *
+         *    process1Test(chars, 2, "aa", list);
+         *    process1Test(chars, 3, "aba", list);
+         *    list.add("aba");
+         *    System.out.println("aba");
+         *    process1Test(chars, 2, "aa", list);
+         *    process1Test(chars, 3, "baa", list);
+         *    list.add("baa");
+         *    System.out.println("baa");
+         *    process1Test(chars, 1, "a", list);
+         *    ........
+         *
+         *
+         *
+         *
+         */
+
+
+        for (int i = 0; i < chars.length; i++) {
+            System.out.println("执行1");
+            process1Test(chars, index + 1, path + chars[i], list);
+            System.out.println("执行2");
+
         }
     }
 
@@ -172,8 +256,6 @@ public class Code02_String {
 
         if (index == chars.length) {
             set.add(path);
-//            System.out.println(path);
-            return;
         }
 
         /**
@@ -191,17 +273,27 @@ public class Code02_String {
 
         if (index == chars.length) {
             set.add(path);
-//            System.out.println(path);
-            return;
         }
 
         /**
          *去重：两种思路：
          * 1.全量递归 根据set进行去重
          * 2.在递归过程中，出现了已经出现的就进行结束
-         * 以ABA
-         * 假设：第一个A来到0位置，此时：字符串变成ABA
-         * 第一个B来到了
+         *
+         * 解释一下这段代码，以aba为例
+         *                          f(0)
+         *
+         *
+         *
+         *                 f(aba)   f(baa)    f(aba)
+         *
+         * 哪个字符来到第一个位置，全部都是有可能的，所以需要遍历一遍，然后将当前字符和第一个位置的字符交换
+         * 去重是个什么思路：
+         * 这个visited这样理解：每一步递归都新生成一个，当递归到当前步的时候，就是当前步的visited，当递归结束的时候，就是上一步的visited
+         * 不共享
+         *
+         *
+         *
          */
         boolean[] visited = new boolean[256];
         for (int i = index; i < chars.length; i++) {
