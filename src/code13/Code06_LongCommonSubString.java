@@ -6,10 +6,8 @@
 
 package code13;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-
 /**
- * @desc:最长公共子序列测试
+ * @desc:最长公共子序列测试 https://leetcode.cn/problems/qJnOS7/description/
  * @author: Scurry
  * @date: 2023/8/15 23:37
  */
@@ -26,7 +24,8 @@ public class Code06_LongCommonSubString {
         }
         char[] chars1 = text1.toCharArray();
         char[] chars2 = text2.toCharArray();
-        return process2(chars1, chars2, chars1.length - 1, chars2.length - 1);
+//        return process2(chars1, chars2, chars1.length - 1, chars2.length - 1);
+        return dp2(chars1,chars2);
     }
 
     //ABCD ACDF
@@ -78,6 +77,26 @@ public class Code06_LongCommonSubString {
         }
 
     }
+
+
+    public int dp2(char[] chars1, char[] chars2) {
+        int m = chars1.length;
+        int n = chars2.length;
+        int[][] dp = new int[m][n];
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (chars1[i-1] == chars2[j-1]) {
+                    dp[i][j] = dp[i-1][j-1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+                }
+            }
+        }
+        return dp[m+1][n+1];
+    }
+
+
+
 
     public int dp(String text1, String text2) {
         int m = text1.length(), n = text2.length();
