@@ -21,9 +21,12 @@ public class Code02_MaxSum {
      * 请注意，最小乘积的最大值考虑的是取余操作 之前 的结果。题目保证最小乘积的最大值在 不取余 的情况下可以用 64 位有符号整数 保存。
      * <p>
      * 子数组 定义为一个数组的 连续 部分。
-     *
-     * 1 2 3 2
-     * 1 3 6 8
+     * <p>
+     * <p>
+     * 1.暴力方法
+     * 列举出所有的子数组
+     * 从i开始到N-1位置开始遍历
+     * 那么子数组的构成i到N-1就是所有子数组的数量
      *
      * @param nums
      * @return
@@ -34,21 +37,22 @@ public class Code02_MaxSum {
             return 0;
         }
         int ans = 0;
-        for (int i = 0;i< nums.length;i++) {
+        for (int i = 0; i < nums.length; i++) {
 
-            for (int j = i;j<nums.length;j++) {
+            for (int j = i; j < nums.length; j++) {
                 int min = 0;
                 int sum = 0;
-                for (int k = i;k<=j;k++) {
+                for (int k = i; k <= j; k++) {
                     sum += nums[k];
-                    min = Math.min(min,nums[k]);
+                    min = Math.min(min, nums[k]);
                 }
-                ans = Math.max(ans,min * sum);
+                ans = Math.max(ans, min * sum);
 
             }
         }
         return ans;
     }
+
     public int maxSumMinProduct2(int[] nums) {
 
         if (nums == null || nums.length <= 0) {
@@ -57,14 +61,14 @@ public class Code02_MaxSum {
 
         int size = nums.length;
 
-        int[] sum = new int[nums.length];
+        long[] sum = new long[nums.length];
         sum[0] = nums[0];
         for (int i = 1; i < nums.length; i++) {
             sum[i] = sum[i - 1] + nums[i];
         }
 
         Stack<Integer> stack = new Stack<>();
-        int ans = 0;
+        long ans = 0;
 
         for (int i = 0; i < nums.length; i++) {
             while (!stack.isEmpty() && nums[stack.peek()] >= nums[i]) {
@@ -81,7 +85,55 @@ public class Code02_MaxSum {
             int k = stack.isEmpty() ? -1 : stack.peek();
             ans = Math.max((k == -1 ? sum[size - 1] : sum[size - 1] - sum[k]) * nums[j], ans);
         }
-        return ans;
+        return (int) (ans % 1000000007);
+    }
+
+    public int maxSumMinProduct3(int[] nums) {
+
+        if (nums == null || nums.length <= 0) {
+            return 0;
+        }
+
+        int size = nums.length;
+
+        long[] sum = new long[nums.length];
+        sum[0] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            sum[i] = sum[i - 1] + nums[i];
+        }
+
+        int[] stack = new int[nums.length];
+        long ans = 0;
+        int stackSize = 0;
+        for (int i = 0; i < nums.length; i++) {
+            while (stackSize != 0 && nums[stack[stackSize - 1]] >= nums[i]) {
+                int j = stack[--stackSize];
+                // 左边小的数 右边小的数是i
+                int k = stackSize == 0 ? -1 : stack[stackSize - 1];
+                ans = Math.max((k == -1 ? sum[i - 1] : (sum[i - 1] - sum[k])) * nums[j], ans);
+            }
+            stack[stackSize++] = i;
+        }
+
+        while (stackSize != 0) {
+            int j = stack[--stackSize];
+            int k = stackSize == 0 ? -1 : stack[stackSize - 1];
+            ans = Math.max((k == -1 ? sum[size - 1] : sum[size - 1] - sum[k]) * nums[j], ans);
+        }
+        // 这里注意写法 (int) (ans % 1000000007);  写成(int) ans % 1000000007;会出现因为优先级问题导致的错误
+        /**
+         * 在Java中，类型转换运算符(int)的优先级比算术运算符%高，因此(int) ans % 1000000007会先将ans转换为int类型，然后再进行取模运算。
+         *
+         * 而(int) (ans % 1000000007)使用了括号，明确了取模运算的优先级高于类型转换运算符，因此会先计算ans % 1000000007，然后再将结果转换为int类型。
+         *
+         * 例如，假设ans的值为2147483648，即超出了int类型的范围，那么(int) ans % 1000000007的结果将是-2147483647，因为(int) ans将会截断高位的部分，得到的结果是-2147483648，然后再进行取模运算，得到的结果是-2147483647。
+         *
+         * 而(int) (ans % 1000000007)的结果将是147483641，因为先进行取模运算，得到的结果是147483648，然后再进行类型转换，将高位截断得到147483641。
+         *
+         * 因此，在进行类型转换和算术运算时，建议使用括号明确运算顺序，以避免出现意外的结果。
+         *
+         */
+        return (int) (ans % 1000000007);
     }
 
     public static void main(String[] args) {
