@@ -28,6 +28,33 @@ public class Code02_MaxSum {
      * 从i开始到N-1位置开始遍历
      * 那么子数组的构成i到N-1就是所有子数组的数量
      *
+     * 以0开头  0-0 0-1 0-2 0-N-1
+     * 以1开头  1-1 1-2 1-3 1-N-1
+     *
+     * 以N-1开头 N-1 N-1
+     *
+     * 以上就能列举出所有的子数组
+     *
+     *
+     * 2.暴力方法优化
+     * 单调栈实现
+     * 以i为底的情况下，左边最小值和右边最小值
+     *
+     * 以 1 3 5 3 2为例子
+     *
+     * 对数组进行加工
+     * 1 3 5  3  2
+     * 1 4 9 12 14
+     *
+     * 使用1向右走 本身就是最小值 乘积 1*1
+     * 使用3向右走 本身就是最小值 乘积 3*3
+     * 使用5向右走 本身就是最小值 乘积 5*5
+     * 使用3向右走 本身就是最小值 乘积 3*12
+     * 使用2向右走 本身就是最小值 乘积 2*14
+     *
+     *
+     *
+     *
      * @param nums
      * @return
      */
@@ -38,7 +65,6 @@ public class Code02_MaxSum {
         }
         int ans = 0;
         for (int i = 0; i < nums.length; i++) {
-
             for (int j = i; j < nums.length; j++) {
                 int min = 0;
                 int sum = 0;
@@ -53,6 +79,18 @@ public class Code02_MaxSum {
         return ans;
     }
 
+    /**
+     *
+     * 1 2 1 2
+     *
+     * 找到所有的子数组里面的最小值  然后找到这些子数组最小值*总和的最大值
+     *
+     *
+     *
+     *
+     * @param nums
+     * @return
+     */
     public int maxSumMinProduct2(int[] nums) {
 
         if (nums == null || nums.length <= 0) {
@@ -88,6 +126,11 @@ public class Code02_MaxSum {
         return (int) (ans % 1000000007);
     }
 
+    /**
+     * 自己实现一个栈（使用数组模拟节约空间）
+     * @param nums
+     * @return
+     */
     public int maxSumMinProduct3(int[] nums) {
 
         if (nums == null || nums.length <= 0) {
