@@ -6,6 +6,10 @@ package systemlearning.code15;
  * 如果城市a与城市b直接相连，且城市b与城市c直接相连，
  * 那么城市a与城市c间接相连。
  * 省份 是一组直接或间接相连的城市，
+ *
+ * https://leetcode.cn/problems/number-of-provinces/description/?utm_source=LCUS&utm_medium=ip_redirect&utm_campaign=transfer2china
+ *
+ *
  * @Author Scurry
  * @Date 2023-10-01 14:22
  */
@@ -99,15 +103,34 @@ public class Code01_FriendCircles {
         }
     }
 
+    public int findCircleNum2(int[][] isConnected) {
+        int cities = isConnected.length;
+        UnionFind unionFind = new UnionFind(cities);
+        for (int i = 0; i < cities; i++) {
+            for (int j = 0; j < cities; j++) {
+                if (isConnected[i][j] == 1) {
+                    unionFind.union(i, j);
+                }
+            }
+        }
+        return unionFind.getSets();
+    }
+
 
     // 并查集 使用数组实现
-    public static class UnionFind {
+    class UnionFind {
         // 新建一个用于定义父节点的数组
         private int[] partent;
         private int[] size;
         private int[] help;
 
+        private int sets;
+
         UnionFind(int N) {
+            sets = N;
+            size = new int[N];
+            partent = new int[N];
+            help = new int[N];
             for (int i = 0; i < N; i++) {
                 partent[i] = i;
                 size[i] = 1;
@@ -127,6 +150,12 @@ public class Code01_FriendCircles {
             return i;
         }
 
+        /**
+         * 合并两个集合
+         *
+         * @param i
+         * @param j
+         */
         public void union(int i, int j) {
             int iFather = findFather(i);
             int jFather = findFather(j);
@@ -138,11 +167,17 @@ public class Code01_FriendCircles {
                     partent[iFather] = jFather;
                     size[jFather] += size[iFather];
                 }
+                sets--;
             }
         }
+
+        public int getSets() {
+            return sets;
+        }
     }
-
-
 }
+
+
+
 
 
