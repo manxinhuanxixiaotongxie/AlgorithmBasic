@@ -258,6 +258,17 @@ public class Code01_MergeSortAndExport {
      * 有多少逆序对
      * （a,b）是逆序的
      * 逆序对问题思路：
+     * 归并排序依然是从小到大
+     * 如果左组或者右组从左边开始 即左组从L开始  右组从mid+1开始
+     *在左右两组进行过程中会出现重复计算
+     *
+     * 将左组右组从右边开始进行计算
+     *
+     * 这个过程就变成：
+     * p1从mid开始向左移动
+     * p2从R开始向左移动
+     * 那么这个过程中：
+     * 当p1>p2的时候 产生了多少个逆序对？p2-mid个
      *
      * @param arr
      * @param L
@@ -293,6 +304,15 @@ public class Code01_MergeSortAndExport {
 
     /**
      * merge3  merge3New都是对的
+     *
+     *
+     * merge3New的思路：
+     *
+     * 现在要求的是逆序对
+     * 就是右边有多少数比我小
+     * 我们现在将归并拍戏设计成从大到小的排序
+     * 如果左边的数比右边的数大，那么右边所有的数都会比左组当前数要小 总共有R-p2+1个数
+     * 这样每个数都能找到有多少逆序对
      *
      * @param arr
      * @param L
@@ -373,6 +393,8 @@ public class Code01_MergeSortAndExport {
         int ans = 0;
         // 目前囊括进来的数，是从[M+1, windowR)
         int windowR = mid + 1;
+        //【456】【123】
+        // 如果要找到满足条件的右边有多少数*2依然小于左组的数
         for (int i = L; i <= mid; i++) {
             while (windowR <= R && (long) arr[i] > (long) arr[windowR] * 2) {
                 windowR++;
@@ -416,10 +438,9 @@ public class Code01_MergeSortAndExport {
         Code01_MergeSortAndExport code01_mergeSortAndExport = new Code01_MergeSortAndExport();
         int maxVlaue = 100;
         int maxLength = 6;
-        int testTimes = 100000;
-        int[] test = new int[]{-2, -20, 11, 11, -18};
-        System.out.println(code01_mergeSortAndExport.comparator(test));
-        System.out.println(code01_mergeSortAndExport.getMinSum3(test));
+        int testTimes = 0;
+        int[] test = new int[]{-37, 58, -58, 44};
+        System.out.println(code01_mergeSortAndExport.getRightLessThanTwice(test));
         for (int i = 0; i < testTimes; i++) {
             int[] arr = code01_mergeSortAndExport.generateArr(maxVlaue, maxLength);
             int[] arr1 = Arrays.copyOf(arr, arr.length);
