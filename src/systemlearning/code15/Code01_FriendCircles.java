@@ -99,6 +99,50 @@ public class Code01_FriendCircles {
         }
     }
 
+
+    // 并查集 使用数组实现
+    public static class UnionFind {
+        // 新建一个用于定义父节点的数组
+        private int[] partent;
+        private int[] size;
+        private int[] help;
+
+        UnionFind(int N) {
+            for (int i = 0; i < N; i++) {
+                partent[i] = i;
+                size[i] = 1;
+            }
+        }
+
+        // findFather 是否是一个祖先
+        public int findFather(int i) {
+            int index = 0;
+            while (i != partent[i]) {
+                help[index++] = i;
+                i = partent[i];
+            }
+            for (int j = 0; j < index; j++) {
+                partent[help[j]] = i;
+            }
+            return i;
+        }
+
+        public void union(int i, int j) {
+            int iFather = findFather(i);
+            int jFather = findFather(j);
+            if (iFather != jFather) {
+                if (size[iFather] > size[jFather]) {
+                    partent[jFather] = iFather;
+                    size[iFather] += size[jFather];
+                } else {
+                    partent[iFather] = jFather;
+                    size[jFather] += size[iFather];
+                }
+            }
+        }
+    }
+
+
 }
 
 
