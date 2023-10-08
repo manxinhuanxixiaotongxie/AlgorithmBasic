@@ -47,8 +47,6 @@ public class Code02_IsLand {
 
     /**
      * 使用并查集解决问题
-     * 以下代码有问题
-     * 问题出在什么地方？
      *
      [["1","1","1","1","1","0","1","1","1","1"],["1","0","1","0","1","1","1","1","1","1"],["0","1","1","1","0","1","1","1","1","1"],["1","1","0","1","1","0","0","0","0","1"],["1","0","1","0","1","0","0","1","0","1"],["1","0","0","1","1","1","0","1","0","0"],["0","0","1","0","0","1","1","1","1","0"],["1","0","1","1","1","0","0","1","1","1"],["1","1","1","1","1","1","1","1","0","1"],["1","0","1","1","1","1","1","1","1","0"]]
      *
@@ -84,13 +82,13 @@ public class Code02_IsLand {
                 if (isLand[i][j] == '1') {
                     if (isLand[i][j - 1] == '1') {
                         unionFind.union(i, j - 1, i, j);
-                        System.out.println("i = " + i + ", j = " + j + ", i - 1 = " + (i - 1) + ", j = " + j+"sets:"+unionFind.getSets());
+                        System.out.println("i = " + i + ", j-1 = " + (j-1) + ", i  = " + (i ) + ", j = " + (j)+"sets:"+unionFind.getSets());
                     }
 
                     if (isLand[i - 1][j] == '1') {
                         unionFind.union(i - 1, j, i, j);
 
-                        System.out.println("i = " + i + ", j = " + j + ", i - 1 = " + (i - 1) + ", j = " + j+"sets:"+unionFind.getSets());
+                        System.out.println("i-1 = " + (i-1) + ", j = " + j + ", i = " + (i ) + ", j = " + j+"sets:"+unionFind.getSets());
 
                     }
 
@@ -143,7 +141,7 @@ public class Code02_IsLand {
         public int find(int i) {
             // 如果当前节点不等于父节点，就一直往上找
             int index = 0;
-            if (i != parent[i]) {
+            while (i != parent[i]) {
                 // 沿途记录遍历的节点信息
                 help[index++] = i;
                 i = parent[i];

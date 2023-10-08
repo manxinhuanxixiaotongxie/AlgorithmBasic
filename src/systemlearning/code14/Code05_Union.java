@@ -130,16 +130,14 @@ public class Code05_Union {
             int aFather = findfather(a);
             int bFather = findfather(b);
             if (aFather != bFather) {
-                int aSize = size[a];
-                int bSize = size[b];
+                int aSize = size[aFather];
+                int bSize = size[bFather];
                 if (aSize > bSize) {
-                    parent[b] = a;
-                    size[a] = aSize + bSize;
-                    size[b] = 0;
+                    parent[bFather] = aFather;
+                    size[aFather] = aSize + bSize;
                 } else {
-                    parent[a] = b;
-                    size[b] = aSize + bSize;
-                    size[a] = 0;
+                    parent[aFather] = bFather;
+                    size[bFather] = aSize + bSize;
                 }
             }
         }
