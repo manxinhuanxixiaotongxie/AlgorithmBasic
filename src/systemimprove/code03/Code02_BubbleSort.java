@@ -1,4 +1,4 @@
-package systemimprove.code01;
+package systemimprove.code03;
 
 import java.util.Arrays;
 
@@ -54,6 +54,23 @@ public class Code02_BubbleSort {
             // 如果前面数比后面数大，就交换
             for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
                 swap(arr, j, j + 1);
+            }
+        }
+    }
+
+    /**
+     * 插入排序2
+     * @param arr
+     */
+    public void sortForInsert2(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            // 如果前面数比后面数大，就交换
+            while (i - 1 >= 0 && arr[i - 1] > arr[i]) {
+                swap(arr, i - 1, i);
+                i--;
             }
         }
     }
