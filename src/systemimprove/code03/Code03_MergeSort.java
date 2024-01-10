@@ -51,6 +51,38 @@ public class Code03_MergeSort {
 
     }
 
+    /**
+     * 递归排序非递归实现
+     * 设置一个步长，每次步长翻倍
+     *
+     * @param arr
+     */
+    public void mergeSort2(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+
+        int step = 1;
+        int N = arr.length;
+        while (step < N) {
+            int L = 0;
+            while (L < N) {
+                int mid = L + step - 1;
+                if (mid >= N) {
+                    break;
+                }
+                int R = Math.min(mid + step, N - 1);
+                merge(arr, L, mid, R);
+                L = R + 1;
+            }
+            if (step > N / 2) {
+                break;
+            }
+            step <<= 1;
+        }
+
+    }
+
 
     public int[] generateArray(int maxLength, int maxValue) {
         int[] arr = new int[(int) ((maxLength + 1) * Math.random())];
