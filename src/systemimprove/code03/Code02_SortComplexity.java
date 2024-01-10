@@ -2,10 +2,11 @@ package systemimprove.code03;
 
 import java.util.Arrays;
 
-public class Code02_BubbleSort {
+public class Code02_SortComplexity {
 
     /**
      * 冒泡排序
+     *
      * @param arr
      */
     public void sortForBubble(int[] arr) {
@@ -25,6 +26,7 @@ public class Code02_BubbleSort {
 
     /**
      * 选择排序
+     *
      * @param arr
      */
     public void sortForSelect(int[] arr) {
@@ -44,6 +46,7 @@ public class Code02_BubbleSort {
 
     /**
      * 插入排序
+     *
      * @param arr
      */
     public void sortForInsert(int[] arr) {
@@ -60,6 +63,7 @@ public class Code02_BubbleSort {
 
     /**
      * 插入排序2
+     *
      * @param arr
      */
     public void sortForInsert2(int[] arr) {
@@ -77,6 +81,7 @@ public class Code02_BubbleSort {
 
     /**
      * 生成的随机数组
+     *
      * @param maxLength
      * @param maxValue
      * @return
@@ -91,6 +96,7 @@ public class Code02_BubbleSort {
 
     /**
      * 交换数组中的两个数
+     *
      * @param arr
      * @param i
      * @param j
@@ -103,6 +109,7 @@ public class Code02_BubbleSort {
 
     /**
      * 输出数组
+     *
      * @param arr
      */
     public void print(int[] arr) {
@@ -114,6 +121,7 @@ public class Code02_BubbleSort {
 
     /**
      * 数组拷贝
+     *
      * @param arr
      * @return
      */
@@ -127,6 +135,7 @@ public class Code02_BubbleSort {
 
     /**
      * 判断两个数组是否相等
+     *
      * @param arr1
      * @param arr2
      * @return
@@ -157,7 +166,7 @@ public class Code02_BubbleSort {
         int maxValue = 100;
         int testTimes = 1000000;
         int maxLength = 100;
-        Code02_BubbleSort code02_bubbleSort = new Code02_BubbleSort();
+        Code02_SortComplexity code02_bubbleSort = new Code02_SortComplexity();
         for (int i = 0; i < testTimes; i++) {
             int[] arr = code02_bubbleSort.generate(maxLength, maxValue);
             int[] arr1 = code02_bubbleSort.copyArray(arr);
