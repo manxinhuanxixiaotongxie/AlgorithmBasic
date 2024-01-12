@@ -1,6 +1,7 @@
 package systemimprove.code05;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public class Code03_FastSort {
 
@@ -16,6 +17,44 @@ public class Code03_FastSort {
             return;
         }
         process2(arr, 0, arr.length - 1);
+    }
+
+    // 快排非递归版本需要的辅助类
+    // 要处理的是什么范围上的排序
+    public static class Op {
+        public int l;
+        public int r;
+
+        public Op(int left, int right) {
+            l = left;
+            r = right;
+        }
+    }
+
+    // 快排3.0 非递归版本 用栈来执行
+    public  void sort3(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+        int N = arr.length;
+        swap(arr, (int) (Math.random() * N), N - 1);
+        int[] equalArea = netherlandsFlag(arr, 0, N - 1);
+        int el = equalArea[0];
+        int er = equalArea[1];
+        Stack<Op> stack = new Stack<>();
+        stack.push(new Op(0, el - 1));
+        stack.push(new Op(er + 1, N - 1));
+        while (!stack.isEmpty()) {
+            Op op = stack.pop(); // op.l ... op.r
+            if (op.l < op.r) {
+                swap(arr, op.l + (int) (Math.random() * (op.r - op.l + 1)), op.r);
+                equalArea = netherlandsFlag(arr, op.l, op.r);
+                el = equalArea[0];
+                er = equalArea[1];
+                stack.push(new Op(op.l, el - 1));
+                stack.push(new Op(er + 1, op.r));
+            }
+        }
     }
 
     public void process(int[] arr,int L,int R) {
