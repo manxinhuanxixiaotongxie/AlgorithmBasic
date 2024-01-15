@@ -11,7 +11,7 @@ import java.util.Map;
  *
  * @param <T>
  */
-public class Code04_HeapGreater<T extends Comparator> {
+public class Code04_HeapGreater<T extends Comparator<T>> {
     private T[] heap;
     private int limit;
     private int heapSize;
