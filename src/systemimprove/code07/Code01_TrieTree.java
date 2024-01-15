@@ -3,7 +3,7 @@ package systemimprove.code07;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Trie {
+public class Code01_TrieTree {
 
     // 前缀树
 
@@ -21,7 +21,7 @@ public class Trie {
         }
     }
 
-    public Trie() {
+    public Code01_TrieTree() {
         this.root = new Node(0,0);
     }
 
@@ -43,7 +43,7 @@ public class Trie {
             cur = cur.next.get(charArray[i] - 'A');
 
         }
-        root.end++;
+        cur.end++;
 
     }
 
