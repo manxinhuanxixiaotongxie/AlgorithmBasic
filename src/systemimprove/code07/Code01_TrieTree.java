@@ -64,6 +64,25 @@ public class Code01_TrieTree {
 
     }
 
+    public void delete(String word) {
+        if (search(word)) {
+            char[] charArray = word.toCharArray();
+            Node cur = root;
+            for (int i = 0; i < charArray.length; i++) {
+                // 沿途将pass--
+                root.pass--;
+                if (cur.next.get(charArray[i] - 'A').pass-- == 1) {
+                    cur.next.remove(charArray[i] - 'A');
+                    return;
+                }
+                cur = cur.next.get(charArray[i] - 'A');
+            }
+            cur.end--;
+
+        }
+    }
+
+
     /** Returns if there is any word in the trie that starts with the given prefix. */
     public boolean startsWith(String prefix) {
         char[] charArray = prefix.toCharArray();

@@ -32,16 +32,22 @@ public class Code02_RadixSort {
 
             // 从右到左处理
             // 假设我们真的准备了10个桶的话，那么index位置可以做一个转换
-            // 处理成前缀和数组 那么
+            // 处理成前缀和数组 那么对应原数组从右到左的话 0~index位置上的数值就是index位置上的数值的个数
             for (int j = arr.length - 1;j >= 0;j--) {
                 int num = getEndNum(arr[j],i);
                 sum[num]++;
             }
+
             // 处理成前缀和数组
+
             for (int j = 1;j < sum.length;j++) {
                 sum[j] = sum[j] + sum[j - 1];
             }
             // 从后往前遍历
+            // sum的含义：
+            // 经过上面的过程：sum[i]的含义已经变成了准备十个桶的含义相同
+            // sum[i]的值就是i这个数值在原数组中的位置
+            // 从右往左开始遍历原数组，每遍历一个数值，就找到这个数值在sum中的位置，然后将这个数值放到sum[i]的位置上
             int[] help = new int[arr.length];
             for (int j = arr.length - 1;j >= 0;j--) {
                 int num = getEndNum(arr[j],i);
