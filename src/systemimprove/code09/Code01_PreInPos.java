@@ -1,10 +1,8 @@
 package systemimprove.code09;
 
-import systemimprove.code08.ListNode;
-
 import java.util.Stack;
 
-public class Code_PreInPos {
+public class Code01_PreInPos {
 
     public static void pre(TreeNode root) {
         if (root == null) {
