@@ -52,6 +52,15 @@ public class Code01_MinLetter {
     }
 
     // strs中所有字符串全排列，返回所有可能的结果
+    // String[] strs = ["ab","cd","ef"]
+
+    /**
+     * 暴力解法
+     * 暴力的过程
+     * "ab"  ==>
+     * @param strs
+     * @return
+     */
     public static TreeSet<String> process(String[] strs) {
         TreeSet<String> ans = new TreeSet<>();
         if (strs.length == 0) {
