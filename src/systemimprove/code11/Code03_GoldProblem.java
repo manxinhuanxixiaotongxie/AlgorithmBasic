@@ -16,7 +16,7 @@ public class Code03_GoldProblem {
         if (arr.length == 1) {
             return pre;
         }
-        int ans = Integer.MIN_VALUE;
+        int ans = Integer.MAX_VALUE;
         for (int i = 0; i < arr.length; i++) {
             for (int j = i + 1; j < arr.length; j++) {
                 // 怎么进行转化呢？
