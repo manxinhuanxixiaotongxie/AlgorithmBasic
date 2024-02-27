@@ -76,7 +76,7 @@ public class Code05_IntersectionNode {
         ListNode cur = null;
         cur = n > 0?nodeA:nodeB;
         int abs = Math.abs(n);
-        while (abs >= 0) {
+        while (abs > 0) {
             abs--;
             cur = cur.next;
         }
