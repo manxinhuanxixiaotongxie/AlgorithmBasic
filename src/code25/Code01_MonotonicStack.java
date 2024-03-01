@@ -87,6 +87,36 @@ public class Code01_MonotonicStack {
     }
 
     /**
+     * 提供一个新的按照数组实现的方式
+     * 使用数组模拟一个栈
+     *
+     * @param arr
+     * @return
+     */
+    public int[][] getNearestNum3(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+        int[][] ans = new int[arr.length][2];
+        int[] stack = new int[arr.length];
+        int stackSize = 0;
+        for (int i = 0; i < arr.length; i++) {
+            while (stackSize > 0 && arr[stack[stackSize - 1]] > arr[i]) {
+                int popIndex = stack[--stackSize];
+                ans[popIndex][0] = stackSize == 0 ? -1 : stack[stackSize - 1];
+                ans[popIndex][1] = i;
+            }
+            stack[stackSize++] = i;
+        }
+        while (stackSize > 0) {
+            int popIndex = stack[--stackSize];
+            ans[popIndex][0] = stackSize == 0 ? -1 : stack[stackSize - 1];
+            ans[popIndex][1] = -1;
+        }
+        return ans;
+    }
+
+    /**
      * 生成不重复的数组
      *
      * @param max
@@ -174,10 +204,11 @@ public class Code01_MonotonicStack {
         int maxLength = 100;
         int testTimes = 100000;
         for (int i = 0; i < testTimes; i++) {
-            int[] arr = code01_monotonicStack.generateArr(max, maxLength);
+            int[] arr = code01_monotonicStack.generateArrNoRepeat(max, maxLength);
             int[][] ans1 = code01_monotonicStack.getNearstNum(arr);
-            int[][] ans2 = code01_monotonicStack.getNearestNum(arr);
-            if (!isEqual(ans1, ans2)) {
+            int[][] ans2 = code01_monotonicStack.getNearestNum2(arr);
+            int[][] ans3 = code01_monotonicStack.getNearestNum3(arr);
+            if (!isEqual(ans1, ans2) || !isEqual(ans1, ans3) || !isEqual(ans2, ans3)) {
                 System.out.println("Oops!");
             }
         }

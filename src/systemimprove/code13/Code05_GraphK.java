@@ -1,5 +1,7 @@
 package systemimprove.code13;
 
+import java.util.List;
+
 /**
  * 最小生成树算法
  * K算法：
@@ -11,4 +13,8 @@ package systemimprove.code13;
  *
  * */
 public class Code05_GraphK {
+
+//    public List<Graph> graphK(List<Edge> graph) {
+//
+//    }
 }

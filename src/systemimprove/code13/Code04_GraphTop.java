@@ -49,4 +49,27 @@ public class Code04_GraphTop {
         }
         return ans;
     }
+
+    public  List<Node> sortedTopology(Graph graph) {
+        Queue<Node> queue = new LinkedList<>();
+        Map<Node,Integer> inMap = new HashMap<>();
+        for (Node node : graph.nodes.values()) {
+            inMap.put(node,node.getIn());
+            if (node.getIn() == 0) {
+                queue.add(node);
+            }
+        }
+        List<Node> ans = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            Node cur = queue.poll();
+            ans.add(cur);
+            for (Node next : cur.nexts) {
+                inMap.put(next,inMap.get(next) - 1);
+                if (inMap.get(next) == 0) {
+                    queue.add(next);
+                }
+            }
+        }
+        return ans;
+    }
 }
