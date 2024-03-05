@@ -1,16 +1,15 @@
 package systemlearning.code16;
 
 /**
- * @Description
- * 边
+ * @Description 边
  * @Author Scurry
  * @Date 2023-10-08 10:12
  */
 public class Edge {
 
-    private int weight;
-    private Node from;
-    private Node to;
+    int weight;
+    Node from;
+    Node to;
 
     public Edge(int weight, Node from, Node to) {
         this.weight = weight;

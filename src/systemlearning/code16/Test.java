@@ -1,6 +1,6 @@
 package systemlearning.code16;
 
-import book_02linkedlist.ListNode;
+import java.util.Arrays;
 
 public class Test {
 
@@ -57,6 +57,69 @@ public class Test {
 //        node5.next = node6;
 
         test.mergeTwoLists(node2, node1);
+
+        int testTimes = 100000;
+        for (int i = 0; i < testTimes; i++) {
+            int[] arr = generateRandomArray(100, 100);
+            int[] arr1 = copyArray(arr);
+            int[] arr2 = copyArray(arr);
+            test.heapSort(arr1);
+            Arrays.sort(arr2);
+            if (!isEqual(arr1, arr2)) {
+                System.out.println("出错了");
+                printArray(arr);
+                printArray(arr1);
+                printArray(arr2);
+                break;
+            }
+        }
+    }
+
+    public static void printArray(int[] arr) {
+        if (arr == null) {
+            return;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static int[] generateRandomArray(int maxSize, int maxValue) {
+        int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) ((maxValue + 1) * Math.random()) - (int) (maxValue * Math.random());
+        }
+        return arr;
+    }
+
+    public static int[] copyArray(int[] arr) {
+        if (arr == null) {
+            return null;
+        }
+        int[] res = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            res[i] = arr[i];
+        }
+        return res;
+    }
+
+    public static boolean isEqual(int[] arr1, int[] arr2) {
+        if ((arr1 == null && arr2 != null) || (arr1 != null && arr2 == null)) {
+            return false;
+        }
+        if (arr1 == null && arr2 == null) {
+            return true;
+        }
+        if (arr1.length != arr2.length) {
+            return false;
+        }
+        for (int i = 0; i < arr1.length; i++) {
+            if (arr1[i] != arr2[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public class TreeNode {
@@ -313,8 +376,8 @@ public class Test {
     }
 
     /**
-     *
      * 合并两个链 lettcode测试通过
+     *
      * @param list1
      * @param list2
      * @return
@@ -350,6 +413,84 @@ public class Test {
         }
 
         return head;
+    }
+
+
+    // 回顾堆排序
+    public int[] heapSort(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return arr;
+        }
+
+        for (int N = arr.length - 1; N >= 0; N--) {
+//            heapInsert(arr, N);
+            heapify(arr, N, arr.length);
+        }
+
+        heapSize = arr.length;
+        while (heapSize > 0) {
+            swap(arr, 0, --heapSize);
+            heapify(arr, 0, heapSize);
+        }
+
+        return arr;
+    }
+
+    private int heapSize;
+    private int[] heap;
+
+    // 小跟堆
+    public void heapInsert(int[] arr, int index) {
+        int fatherIndex = (index - 1) / 2;
+        while (arr[index] < arr[fatherIndex]) {
+            swap(arr, index, fatherIndex);
+            fatherIndex = (fatherIndex - 1) / 2;
+        }
+    }
+
+    public void heapify(int[] arr, int index, int heapSize) {
+        int leftIndex = index * 2 + 1;
+//        int lowerIndex = leftIndex + 1 < heapSize && arr[leftIndex] > arr[leftIndex + 1] ? leftIndex + 1 : leftIndex;
+//        while (lowerIndex < heapSize && arr[index] > arr[lowerIndex]) {
+//            swap(arr, index, lowerIndex);
+//            index = lowerIndex;
+//            leftIndex = index * 2 + 1;
+//            lowerIndex = leftIndex + 1 < heapSize && arr[leftIndex] > arr[leftIndex + 1] ? leftIndex + 1 : leftIndex;
+//        }
+
+        while (leftIndex < heapSize) {
+            // 取左右孩子的最大值 进行比较 因为是小根堆 所以取最大值
+            int maxValueIndex = leftIndex + 1 < heapSize && arr[leftIndex] < arr[leftIndex + 1] ? leftIndex+1 : leftIndex;
+            maxValueIndex = arr[maxValueIndex] > arr[index] ? maxValueIndex : index;
+            if (maxValueIndex == index) {
+                break;
+            }
+            swap(arr, index, maxValueIndex);
+            index = maxValueIndex;
+            leftIndex = index * 2 + 1;
+        }
+    }
+
+    public  void heapify2(int[] arr, int index, int heapSize) {
+        int left = index * 2 + 1;
+        while (left < heapSize) {
+            int maxValueIndex = left + 1 < heapSize && arr[left + 1] > arr[left] ? left + 1 : left;
+
+            maxValueIndex = arr[maxValueIndex] > arr[index] ? maxValueIndex : index;
+
+            if (maxValueIndex == index) {
+                break;
+            }
+            swap(arr, index, maxValueIndex);
+            index = maxValueIndex;
+            left = index * 2 + 1;
+        }
+    }
+
+    public void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 
 }
