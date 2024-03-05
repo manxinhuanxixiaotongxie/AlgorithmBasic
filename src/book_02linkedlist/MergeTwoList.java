@@ -57,4 +57,43 @@ public class MergeTwoList {
 
         return head;
     }
+
+    /***
+     * lettcode 21题测试通过
+     * @param list1
+     * @param list2
+     * @return
+     */
+    public ListNode mergeTwoLists2(ListNode list1, ListNode list2) {
+        if (list1 == null || list2 == null) {
+            return list1 == null ? list2 : list1;
+        }
+        ListNode head = list1.val <= list2.val ? list1 : list2;
+        // 小头
+        ListNode cur = head == list1 ? list1 : list2;
+        // 大头
+        ListNode cur1 = head == list1 ? list2 : list1;
+
+        ListNode next = null;
+        ListNode pre = null;
+        while (cur != null && cur1 != null) {
+            if (cur.val > cur1.val) {
+                pre.next = cur1;
+                pre = cur1;
+                next = cur1.next;
+                cur1.next = cur;
+                cur1 = next;
+            } else {
+                next = cur.next;
+                pre = cur;
+                cur = next;
+            }
+        }
+        // 有一个先到
+        if (cur1 != null) {
+            pre.next = cur1;
+        }
+
+        return head;
+    }
 }

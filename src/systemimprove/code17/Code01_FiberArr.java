@@ -99,7 +99,7 @@ public class Code01_FiberArr {
 
     public static void main(String[] args) {
         Code01_FiberArr fiberArr = new Code01_FiberArr();
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 48; i++) {
             if (fiberArr.fiber(i) != fiberArr.fiber2(i)) {
                 System.out.println("Oops!");
                 break;
