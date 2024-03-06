@@ -1,6 +1,10 @@
 package systemlearning.code16;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+import leetcode.ListNode;
+
 import java.util.Arrays;
+import java.util.List;
 
 public class Test {
 
@@ -43,8 +47,8 @@ public class Test {
 //        int N = 45;
 //        System.out.println(test.fib(N));
 //        System.out.println(test.fib2(N));
-        ListNode node1 = new ListNode(1);
-        ListNode node2 = new ListNode(2);
+//        ListNode node1 = new ListNode(1);
+//        ListNode node2 = new ListNode(2);
 //        ListNode node3 = new ListNode(4);
 //        ListNode node4 = new ListNode(1);
 //        ListNode node5 = new ListNode(3);
@@ -56,23 +60,180 @@ public class Test {
 //        node4.next = node5;
 //        node5.next = node6;
 
-        test.mergeTwoLists(node2, node1);
+//        test.mergeTwoLists(node2, node1);
 
-        int testTimes = 100000;
-        for (int i = 0; i < testTimes; i++) {
-            int[] arr = generateRandomArray(100, 100);
-            int[] arr1 = copyArray(arr);
-            int[] arr2 = copyArray(arr);
-            test.heapSort(arr1);
-            Arrays.sort(arr2);
-            if (!isEqual(arr1, arr2)) {
-                System.out.println("出错了");
-                printArray(arr);
-                printArray(arr1);
-                printArray(arr2);
-                break;
-            }
-        }
+//        int testTimes = 100000;
+//        for (int i = 0; i < testTimes; i++) {
+//            int[] arr = generateRandomArray(100, 100);
+//            int[] arr1 = copyArray(arr);
+//            int[] arr2 = copyArray(arr);
+//            int[] arr3 = copyArray(arr);
+//            test.heapSort(arr1);
+//            test.mergeSort(arr3);
+//            Arrays.sort(arr2);
+//            if (!isEqual(arr1, arr2) || !isEqual(arr2, arr3)) {
+//                System.out.println("出错了");
+//                printArray(arr);
+//                printArray(arr1);
+//                printArray(arr2);
+//                break;
+//            }
+//        }
+
+//        ListNode node1 = new ListNode(2);
+//        ListNode node2 = new ListNode(4);
+//        ListNode node3 = new ListNode(3);
+//        ListNode node4 = new ListNode(5);
+//        ListNode node5 = new ListNode(6);
+//        ListNode node6 = new ListNode(4);
+//        node1.next = node2;
+//        node2.next = node3;
+//        node4.next = node5;
+//        node5.next = node6;
+//        ListNode node1 = new ListNode(9);
+//        ListNode node2 = new ListNode(1);
+//        ListNode node3 = new ListNode(9);
+//        ListNode node4 = new ListNode(9);
+//        ListNode node5 = new ListNode(9);
+//        ListNode node6 = new ListNode(9);
+//        ListNode node7 = new ListNode(9);
+//        ListNode node8 = new ListNode(9);
+//        ListNode node9 = new ListNode(9);
+//        ListNode node10 = new ListNode(9);
+//        ListNode node11 = new ListNode(9);
+//        node2.next = node3;
+//        node3.next = node4;
+//        node4.next = node5;
+//        node5.next = node6;
+//        node6.next = node7;
+//        node7.next = node8;
+//        node8.next = node9;
+//        node9.next = node10;
+//        node10.next = node11;
+
+//        ListNode node1 = new ListNode(0);
+//        ListNode node2 = new ListNode(8);
+//        ListNode node3 = new ListNode(6);
+//        ListNode node4 = new ListNode(5);
+//        ListNode node5 = new ListNode(6);
+//        ListNode node6 = new ListNode(8);
+//        ListNode node7 = new ListNode(3);
+//        ListNode node8 = new ListNode(5);
+//        ListNode node9 = new ListNode(7);
+//
+//        ListNode node10 = new ListNode(6);
+//        ListNode node11 = new ListNode(7);
+//        ListNode node12 = new ListNode(8);
+//        ListNode node13 = new ListNode(0);
+//        ListNode node14 = new ListNode(8);
+//        ListNode node15 = new ListNode(5);
+//        ListNode node16 = new ListNode(8);
+//        ListNode node17 = new ListNode(9);
+//        ListNode node18 = new ListNode(7);
+//        node1.next = node2;
+//        node2.next = node3;
+//        node3.next = node4;
+//        node4.next = node5;
+//        node5.next = node6;
+//        node6.next = node7;
+//        node7.next = node8;
+//        node8.next = node9;
+//
+//        node10.next = node11;
+//        node11.next = node12;
+//        node12.next = node13;
+//        node13.next = node14;
+//        node14.next = node15;
+//        node15.next = node16;
+//        node16.next = node17;
+//        node17.next = node18;
+
+        //	测试用例:[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+        //			[5,6,4]
+        // 超出long的范围
+//        ListNode node1 = new ListNode(1);
+//        ListNode node2 = new ListNode(0);
+//        ListNode node3 = new ListNode(0);
+//        ListNode node4 = new ListNode(0);
+//        ListNode node5 = new ListNode(0);
+//        ListNode node6 = new ListNode(0);
+//        ListNode node7 = new ListNode(0);
+//        ListNode node8 = new ListNode(0);
+//        ListNode node9 = new ListNode(0);
+//        ListNode node10 = new ListNode(0);
+//        ListNode node11 = new ListNode(0);
+//        ListNode node12 = new ListNode(0);
+//        ListNode node13 = new ListNode(0);
+//        ListNode node14 = new ListNode(0);
+//        ListNode node15 = new ListNode(0);
+//        ListNode node16 = new ListNode(0);
+//        ListNode node17 = new ListNode(0);
+//        ListNode node18 = new ListNode(0);
+//        ListNode node19 = new ListNode(0);
+//        ListNode node20 = new ListNode(0);
+//        ListNode node21 = new ListNode(0);
+//        ListNode node22 = new ListNode(0);
+//        ListNode node23 = new ListNode(0);
+//        ListNode node24 = new ListNode(0);
+//        ListNode node25 = new ListNode(0);
+//        ListNode node26 = new ListNode(0);
+//        ListNode node27 = new ListNode(0);
+//        ListNode node28 = new ListNode(0);
+//        ListNode node29 = new ListNode(0);
+//        ListNode node30 = new ListNode(0);
+//        ListNode node31 = new ListNode(1);
+//        node1.next = node2;
+//        node2.next = node3;
+//        node3.next = node4;
+//        node4.next = node5;
+//        node5.next = node6;
+//        node6.next = node7;
+//        node7.next = node8;
+//        node8.next = node9;
+//        node9.next = node10;
+//        node10.next = node11;
+//        node11.next = node12;
+//        node12.next = node13;
+//        node13.next = node14;
+//        node14.next = node15;
+//        node15.next = node16;
+//        node16.next = node17;
+//        node17.next = node18;
+//        node18.next = node19;
+//        node19.next = node20;
+//        node20.next = node21;
+//        node21.next = node22;
+//        node22.next = node23;
+//        node23.next = node24;
+//        node24.next = node25;
+//        node25.next = node26;
+//        node26.next = node27;
+//        node27.next = node28;
+//        node28.next = node29;
+//        node29.next = node30;
+//        node30.next = node31;
+//
+//
+//        ListNode node32 = new ListNode(5);
+//        ListNode node33 = new ListNode(6);
+//        ListNode node34 = new ListNode(4);
+//        node32.next = node33;
+//        node33.next = node34;
+
+        ListNode node1 = new ListNode(2);
+        ListNode node2 = new ListNode(4);
+        ListNode node3 = new ListNode(3);
+        node1.next = node2;
+        node2.next = node3;
+
+        ListNode node4 = new ListNode(5);
+        ListNode node5 = new ListNode(6);
+        ListNode node6 = new ListNode(4);
+        node4.next = node5;
+        node5.next = node6;
+
+
+        test.addTwoNumbers2(node1, node4);
     }
 
     public static void printArray(int[] arr) {
@@ -460,7 +621,7 @@ public class Test {
 
         while (leftIndex < heapSize) {
             // 取左右孩子的最大值 进行比较 因为是小根堆 所以取最大值
-            int maxValueIndex = leftIndex + 1 < heapSize && arr[leftIndex] < arr[leftIndex + 1] ? leftIndex+1 : leftIndex;
+            int maxValueIndex = leftIndex + 1 < heapSize && arr[leftIndex] < arr[leftIndex + 1] ? leftIndex + 1 : leftIndex;
             maxValueIndex = arr[maxValueIndex] > arr[index] ? maxValueIndex : index;
             if (maxValueIndex == index) {
                 break;
@@ -471,7 +632,7 @@ public class Test {
         }
     }
 
-    public  void heapify2(int[] arr, int index, int heapSize) {
+    public void heapify2(int[] arr, int index, int heapSize) {
         int left = index * 2 + 1;
         while (left < heapSize) {
             int maxValueIndex = left + 1 < heapSize && arr[left + 1] > arr[left] ? left + 1 : left;
@@ -491,6 +652,168 @@ public class Test {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
+    }
+
+    public int[] mergeSort(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return arr;
+        }
+        process(arr, 0, arr.length - 1);
+        return arr;
+    }
+
+    public void process(int[] arr, int L, int R) {
+        int mid = L + ((R - L) >> 1);
+        if (L == R) {
+            return;
+        }
+        process(arr, L, mid);
+        process(arr, mid + 1, R);
+        merge(arr, L, mid, R);
+    }
+
+    public void merge(int[] arr, int L, int mid, int R) {
+        int[] help = new int[R - L + 1];
+        int index = 0;
+        int left = L;
+        int right = mid + 1;
+        while (left <= mid && right <= R) {
+            help[index++] = arr[left] <= arr[right] ? arr[left++] : arr[right++];
+        }
+        while (left <= mid) {
+            help[index++] = arr[left++];
+        }
+
+        while (right <= R) {
+            help[index++] = arr[right++];
+        }
+        for (int i = 0; i < help.length; i++) {
+            arr[L + i] = help[i];
+        }
+    }
+
+    /***
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        if (l1 == null || l2 == null) {
+            return l1 == null ? l2 : l1;
+        }
+        if (l1.val == 0 && l1.next == null || l2.val == 0 && l2.next == null) {
+            return l1.val == 0 ? l2 : l1;
+        }
+
+        long intL1 = 0;
+        int power = 0;
+        while (l1 != null) {
+            intL1 += l1.val * Math.pow(10, power);
+            l1 = l1.next;
+            power++;
+        }
+        long intL2 = 0;
+        power = 0;
+        while (l2 != null) {
+            intL2 += l2.val * Math.pow(10, power);
+            l2 = l2.next;
+            power++;
+        }
+        long sum = intL1 + intL2;
+        power = 0;
+        long temp = sum;
+        while (temp > 0) {
+            temp /= 10;
+            power++;
+        }
+        ListNode head = null;
+        ListNode cur = null;
+        for (int i = 0; i < power; i++) {
+            int val = (int) (sum / (long) Math.pow(10, i) % 10);
+            if (i == 0) {
+                head = new ListNode(val);
+                cur = head;
+            } else {
+                cur.next = new ListNode(val);
+                cur = cur.next;
+            }
+        }
+        return head;
+    }
+
+    public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        if (l1 == null || l2 == null) {
+            return l1 == null ? l2 : l1;
+        }
+        if (l1.val == 0 && l1.next == null || l2.val == 0 && l2.next == null) {
+            return l1.val == 0 ? l2 : l1;
+        }
+        ListNode head = null;
+        ListNode cur = null;
+        ListNode pre = null;
+        int carry = 0;
+        while (l1 != null && l2 != null) {
+            int sum = l1.val + l2.val + carry;
+            if (sum >= 10) {
+                carry = 1;
+                sum -= 10;
+            } else {
+                carry = 0;
+            }
+            cur = new ListNode(sum);
+            if (head == null) {
+                head = cur;
+                pre = cur;
+            } else {
+                pre.next = cur;
+                pre = cur;
+            }
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+        while (l1 != null) {
+            int sum = l1.val + carry;
+            if (sum >= 10) {
+                carry = 1;
+                sum -= 10;
+            } else {
+                carry = 0;
+            }
+            cur = new ListNode(sum);
+            if (head == null) {
+                head = cur;
+                pre = cur;
+            } else {
+                pre.next = cur;
+                pre = cur;
+            }
+            l1 = l1.next;
+        }
+        while (l2 != null) {
+            int sum = l2.val + carry;
+            if (sum >= 10) {
+                carry = 1;
+                sum -= 10;
+            } else {
+                carry = 0;
+            }
+            cur = new ListNode(sum);
+            if (head == null) {
+                head = cur;
+                pre = cur;
+            } else {
+                pre.next = cur;
+                pre = cur;
+            }
+            l2 = l2.next;
+        }
+        if (carry == 1) {
+            cur = new ListNode(1);
+            pre.next = cur;
+        }
+
+        return head;
     }
 
 }

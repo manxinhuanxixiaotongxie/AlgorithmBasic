@@ -125,6 +125,16 @@ public class RadixSort {
         return index;
     }
 
+    /***
+     *
+     * 912 计算个位数  2 怎么算 912/1 % 10 = 2
+     * 912 计算十位数  1 怎么算 912/10 % 10 = 1
+     * 912 计算百位数  9 怎么算 912/100 % 10 = 9
+     *
+     * @param x
+     * @param d
+     * @return
+     */
     public static int getDigit(int x, int d) {
         return ((x / ((int) Math.pow(10, d - 1))) % 10);
     }
