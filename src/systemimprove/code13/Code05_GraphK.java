@@ -128,12 +128,15 @@ public class Code05_GraphK {
             swap(0, --heapSize);
             int index = 0;
             int leftIndex = index * 2 + 1;
-            int largeIndex = leftIndex + 1 < heapSize && comparator.compare((Edge) heap[leftIndex], (Edge) heap[leftIndex + 1]) > 0 ? leftIndex + 1 : leftIndex;
-            while (heapSize > largeIndex && comparator.compare((Edge) heap[index], (Edge) heap[largeIndex]) > 0) {
+            while (leftIndex < heapSize) {
+                int largeIndex = leftIndex + 1 < heapSize && comparator.compare((Edge) heap[leftIndex], (Edge) heap[leftIndex + 1]) > 0 ? leftIndex + 1 : leftIndex;
+                largeIndex = comparator.compare((Edge) heap[index], (Edge) heap[largeIndex]) > 0 ? largeIndex : index;
+                if (largeIndex == index) {
+                    break;
+                }
                 swap(index, largeIndex);
                 index = largeIndex;
                 leftIndex = index * 2 + 1;
-                largeIndex = leftIndex + 1 < heapSize && comparator.compare((Edge) heap[leftIndex], (Edge) heap[leftIndex + 1]) > 0 ? leftIndex + 1 : leftIndex;
             }
         }
 

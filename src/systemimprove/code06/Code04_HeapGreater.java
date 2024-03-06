@@ -30,23 +30,45 @@ public class Code04_HeapGreater<T extends Comparator<T>> {
         return heapSize == 0;
     }
 
-    public void heapInsert(T t) {
+    public void push(T t) {
+        indexMap.put(t,heapSize);
 
-        if (heapSize == limit) {
-            throw new RuntimeException("heap is full");
-        }
-        heap[heapSize] = t;
-        indexMap.put(t, heapSize);
-        reverseMap.put(heapSize,t);
-        int index = heapSize;
-        heapSize++;
-        // 向上调整
-        while (heap[index].compare(heap[index], heap[(index - 1) / 2]) > 0) {
-            swap( index, (index - 1) / 2);
+        heapInsert(heapSize++);
+    }
+
+    public void heapInsert(int index) {
+        while (heap[index].compare(heap[index], heap[(index - 1) / 2]) < 0) {
+            swap(index, (index - 1) / 2);
             index = (index - 1) / 2;
         }
-
     }
+
+    /***
+     * 这段代码只能新增元素，然后向上调整生成一个小根堆
+     *
+     * 但是在没有生成元素 只是元素的值发生了变化之后，这个方法就不适用了
+     *
+     * @param arr
+     * @param index
+     * @param heapSize
+     */
+//    public void heapInsert(T t) {
+//
+//        if (heapSize == limit) {
+//            throw new RuntimeException("heap is full");
+//        }
+//        heap[heapSize] = t;
+//        indexMap.put(t, heapSize);
+//        reverseMap.put(heapSize,t);
+//        int index = heapSize;
+//        heapSize++;
+//        // 向上调整
+//        while (heap[index].compare(heap[index], heap[(index - 1) / 2]) > 0) {
+//            swap( index, (index - 1) / 2);
+//            index = (index - 1) / 2;
+//        }
+//
+//    }
 
     public void heapify(T[] arr, int index, int heapSize) {
         int leftIndex = index * 2 + 1;
@@ -65,7 +87,7 @@ public class Code04_HeapGreater<T extends Comparator<T>> {
     public void resign(T t) {
         int index = indexMap.get(t);
         heapify(heap, index, heapSize);
-        heapInsert(t);
+        heapInsert(index);
     }
 
     /**
@@ -91,6 +113,7 @@ public class Code04_HeapGreater<T extends Comparator<T>> {
         // 更新indexMap中的索引
         indexMap.put(heap[l], l);
         indexMap.put(heap[j], j);
+
         reverseMap.put(l,heap[l]);
         reverseMap.put(j,heap[j]);
     }

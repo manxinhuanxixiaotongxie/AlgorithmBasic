@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Node {
     // 边集
-     List<Edge> edges;
+    public List<Edge> edges;
     // 点集
-     List<Node> nexts;
+    public List<Node> nexts;
     // 点值
     private int value;
     //入度
