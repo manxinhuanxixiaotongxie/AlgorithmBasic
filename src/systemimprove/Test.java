@@ -5,6 +5,7 @@ import systemimprove.code13.Node;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class Test {
@@ -122,11 +123,41 @@ public class Test {
 //        System.out.println(succeed ? "Nice!" : "Oops!");
 
         // 用3 5这个链表测试reverseBetween方法
-        Test test = new Test();
-        ListNode head = test.new ListNode(3);
-        ListNode node1 = test.new ListNode(5);
-        head.next = node1;
-        test.reverseBetween(head, 1, 2);
+//        Test test = new Test();
+//        ListNode head = test.new ListNode(3);
+//        ListNode node1 = test.new ListNode(5);
+//        head.next = node1;
+//        test.reverseBetween(head, 1, 2);
+
+//        ListNode head = new Test().new ListNode(0);
+//        ListNode node1 = new Test().new ListNode(1);
+//        ListNode node2 = new Test().new ListNode(2);
+//
+//        head.next = node1;
+//        node1.next = node2;
+//
+//        ListNode head2 = new Test().new ListNode(1000000);
+//        ListNode node3 = new Test().new ListNode(1000001);
+//        ListNode node4 = new Test().new ListNode(1000002);
+//        ListNode node5 = new Test().new ListNode(1000003);
+//        head2.next = node3;
+//        node3.next = node4;
+//        node4.next = node5;
+//        new Test().mergeInBetween(head, 1, 1, head2);
+
+        TreeNode node1 = new Test().new TreeNode(1);
+        TreeNode node2 = new Test().new TreeNode(3);
+        TreeNode node3 = new Test().new TreeNode(2);
+        TreeNode node4 = new Test().new TreeNode(5);
+        TreeNode node5 = new Test().new TreeNode(3);
+        TreeNode node6 = new Test().new TreeNode(9);
+
+        node1.left = node2;
+        node1.right = node3;
+        node2.left = node4;
+        node3.right = node5;
+        node4.left = node6;
+        new Test().widthOfBinaryTree(node1);
     }
 
     public int countOfRange(int[] arr) {
@@ -201,6 +232,16 @@ public class Test {
         ListNode(int val, ListNode next) {
             this.val = val;
             this.next = next;
+        }
+    }
+
+
+    class TreeNode {
+        TreeNode left;
+        TreeNode right;
+        int val;
+        TreeNode(int x) {
+            val = x;
         }
     }
 
@@ -362,6 +403,80 @@ public class Test {
         return result;
     }
 
+    public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
+        if (a <=0 || b <= 0 || list1 == null || list2 == null || a > b ) {
+            return list1;
+        }
+        int index = 0;
+        ListNode cur = list1;
+        ListNode preA = null;
+        ListNode preB = null;
+        while (index != b+1) {
+            if (index == a-1) {
+                preA = cur;
+            }
+            if (index == b-1) {
+                preB = cur;
+            }
+            if (a==b) {
+                preB = preA;
+            }
+            index++;
+            cur = cur.next;
+        }
+
+        preA.next = list2;
+        if (a != b) {
+            preB.next = null;
+        }
+        ListNode cur2 = list2;
+        while (cur2.next != null) {
+            cur2 = cur2.next;
+        }
+        cur2.next = cur;
+
+        return list1;
+
+    }
+
+    public int widthOfBinaryTree(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        // 使用宽度优先遍历
+        // 优化点 不使用额外的容器 比如使用map设置层数
+        // 当前层结束
+        TreeNode curLevelEnd = root;
+        TreeNode nextLevelEnd = null;
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int ans = 0;
+        int curSize = 0;
+        while (!queue.isEmpty()) {
+
+            TreeNode node = queue.poll();
+            if (node.left != null) {
+                nextLevelEnd = node.left;
+                queue.add(node.left);
+            }
+            if (node.right != null) {
+                nextLevelEnd = node.right;
+                queue.add(node.right);
+            }
+            if (curLevelEnd == node) {
+                // 当前层结束结算
+                curSize++;
+                ans = Math.max(ans, curSize);
+                curLevelEnd = nextLevelEnd;
+                curSize= 0;
+            } else {
+                // 当前层还没有结束的时候
+                curSize++;
+            }
+        }
+        return ans;
+
+    }
 
 
 

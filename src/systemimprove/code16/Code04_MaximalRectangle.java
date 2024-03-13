@@ -2,6 +2,19 @@ package systemimprove.code16;
 
 public class Code04_MaximalRectangle {
 
+    /**
+     * 给定一个二维数组matrix，其中的值不是0就是1，
+     * 返回全部由1组成的最大子矩形，内部有多少个1
+     *
+     * 转化一下：
+     * 1. 以每一行为底的情况下，求最大的矩形面积
+     * 2. 求最大的矩形面积
+     * 3.以某一行为底的情况下，求最大的矩形面积
+     * 4. 求最大的矩形面积
+     *
+     * @param matrix
+     * @return
+     */
     public int maximalRectangle(char[][] matrix) {
         int ans = 0;
         int[] height = new int[matrix[0].length];
