@@ -81,6 +81,15 @@ public class Code01_FiberArr {
         return ans;
     }
 
+    /**
+     *
+     * 如果一个 6*5的矩阵成语 5*6的矩阵
+     * 生成的结果一定是6*6的矩阵
+     *
+     * @param ans
+     * @param temp
+     * @return
+     */
     public int[][] muliMatrix(int[][] ans, int[][] temp) {
         // 这两个相乘生成的新的数组 行与ans数组的行相同，列与temp数组的列相同
         int[][] multi = new int[ans.length][temp[0].length];

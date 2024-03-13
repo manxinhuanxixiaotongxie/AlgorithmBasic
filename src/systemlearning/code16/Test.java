@@ -236,6 +236,16 @@ public class Test {
         test.addTwoNumbers2(node1, node4);
     }
 
+    public int hammingWeight(int n) {
+        int ans = 0;
+        for (; n != 0; n >>= 1) {
+            if ((n & 1) == 1) {
+                ans++;
+            }
+        }
+        return ans;
+    }
+
     public static void printArray(int[] arr) {
         if (arr == null) {
             return;
@@ -463,6 +473,12 @@ public class Test {
         return 1 * ans[0][0] + 1 * ans[1][0];
     }
 
+    /**
+     * 矩阵的p次方
+     * @param m
+     * @param p
+     * @return
+     */
     public static int[][] matrixPower(int[][] m, int p) {
         int[][] res = new int[m.length][m[0].length];
         for (int i = 0; i < res.length; i++) {
@@ -494,15 +510,17 @@ public class Test {
             temp = multiply(temp, temp);
         }
         // 打印ans
-        for (int i = 0; i < ans.length; i++) {
-            for (int j = 0; j < ans[0].length; j++) {
-                System.out.print(ans[i][j] + " ");
-            }
-            System.out.println();
-        }
         return ans;
     }
 
+    /**
+     * 矩阵相乘
+     * 矩阵相乘是怎么算
+     *
+     * @param ans
+     * @param temp
+     * @return
+     */
     public int[][] muliMatrix(int[][] ans, int[][] temp) {
         // 这两个相乘生成的新的数组 行与ans数组的行相同，列与temp数组的列相同
         int[][] multi = new int[ans.length][temp[0].length];
@@ -511,11 +529,9 @@ public class Test {
             // 列
             for (int j = 0; j < temp[0].length; j++) {
                 // 行与列依次相乘之后的和就是新数组 i j位置的值
-//                for (int k = 0; k < temp.length; k++) {
-//                    multi[i][j] += (int) (((long) ans[i][k] * temp[k][j]))%MOD;
-////                    multi[i][j] += (int) ((long) ans[i][k] % 1000000007 * (long) temp[k][j] % 1000000007);
-//                }
-                multi[i][j] = (int) (((long) ans[i][0] * temp[0][j] + (long) ans[i][1] * temp[1][j]) % MOD);
+                for (int k = 0; k < temp.length; k++) {
+                    multi[i][j] += ans[i][k] * temp[k][j];
+                }
             }
         }
         return multi;
