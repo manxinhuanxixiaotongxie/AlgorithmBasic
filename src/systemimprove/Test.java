@@ -5,7 +5,11 @@ import systemimprove.code13.Node;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 public class Test {
@@ -240,6 +244,7 @@ public class Test {
         TreeNode left;
         TreeNode right;
         int val;
+
         TreeNode(int x) {
             val = x;
         }
@@ -404,21 +409,21 @@ public class Test {
     }
 
     public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
-        if (a <=0 || b <= 0 || list1 == null || list2 == null || a > b ) {
+        if (a <= 0 || b <= 0 || list1 == null || list2 == null || a > b) {
             return list1;
         }
         int index = 0;
         ListNode cur = list1;
         ListNode preA = null;
         ListNode preB = null;
-        while (index != b+1) {
-            if (index == a-1) {
+        while (index != b + 1) {
+            if (index == a - 1) {
                 preA = cur;
             }
-            if (index == b-1) {
+            if (index == b - 1) {
                 preB = cur;
             }
-            if (a==b) {
+            if (a == b) {
                 preB = preA;
             }
             index++;
@@ -468,7 +473,7 @@ public class Test {
                 curSize++;
                 ans = Math.max(ans, curSize);
                 curLevelEnd = nextLevelEnd;
-                curSize= 0;
+                curSize = 0;
             } else {
                 // 当前层还没有结束的时候
                 curSize++;
@@ -478,6 +483,248 @@ public class Test {
 
     }
 
+    // 点
+    class Node {
+        public int value;
+        // 入度
+        public int in;
+        // 出度
+        public int out;
+
+        Node(int value) {
+            this.value = value;
+        }
+
+        List<Node> nexts;
+        List<Edge> edges;
+
+    }
+
+    // 图
+    class Graph {
+        // 图的表示
+        // 点集
+        Map<Integer, Node> nodes;
+
+        Set<Edge> edges;
+
+        Graph() {
+            nodes = new HashMap<>();
+            edges = new HashSet<>();
+        }
+
+    }
+
+    // 边
+    class Edge {
+        // 边的权重
+        public int weight;
+        // 边总是从一边指向另外一边
+        // 边的起点
+        public Node from;
+        // 边的终点
+        public Node to;
+
+        Edge(Node from, Node to, int weight) {
+            this.from = from;
+            this.to = to;
+            this.weight = weight;
+
+        }
+    }
+
+
+    public Graph creatGraph(int[][] arr) {
+        Graph graph = new Graph();
+        for (int i = 0; i < arr.length; i++) {
+            // 数组的第一列 代表的from
+            Node from = graph.nodes.get(arr[i][0]);
+            if (from == null) {
+                from = new Node(arr[i][0]);
+                graph.nodes.put(arr[i][0], from);
+            }
+            // 数组的第二列 代表的to
+            Node to = graph.nodes.get(arr[i][1]);
+            if (to == null) {
+                to = new Node(arr[i][1]);
+                graph.nodes.put(arr[i][1], to);
+            }
+
+            from.nexts.add(to);
+            from.out++;
+            to.in++;
+            Edge edge = new Edge(from, to, arr[i][2]);
+            from.edges.add(edge);
+            graph.edges.add(edge);
+
+
+        }
+        return graph;
+
+    }
+
+    public Map<Node, Integer> DIj1(Node from) {
+        if (from == null) {
+            return null;
+        }
+        Map<Node, Integer> distanceMap = new HashMap<>();
+        distanceMap.put(from, 0);
+        Set<Node> selectedNode = new HashSet<>();
+        Node minNode = getMinNode(distanceMap, selectedNode);
+        // 维护一张最小距离的表
+        while (minNode != null) {
+            // 找到临近的边
+            for (Edge edge : minNode.edges) {
+                Node to = edge.to;
+                if (distanceMap.get(to) == null) {
+                    distanceMap.put(to, edge.weight);
+                } else {
+                    // 如果在距离表已经有了  那么意味着可能会触发到距离的更新
+                    // 怎么更呢？
+                    // 是原有的distanceMap的距离 与从minNode出发到to的距离的比较取最小值
+                    distanceMap.put(to, Math.min(distanceMap.get(to), edge.weight + distanceMap.get(minNode)));
+                }
+            }
+            // 对每一个节点计算完成之后 该节点就需要进行结算 加入到selectedNode集合中
+            selectedNode.add(minNode);
+            // 重新获取没有结算过的点 并且在distanceMap中距离最小的点
+            minNode = getMinNode(distanceMap, selectedNode);
+        }
+        return distanceMap;
+
+    }
+
+    public Map<Node, Integer> diJ2(Node from, int size) {
+        if (from == null || size <= 0) {
+            return null;
+        }
+        Map<Node, Integer> distanceMap = new HashMap<>();
+        HeapGreater heapGreater = new HeapGreater(size);
+        heapGreater.addOrUpdateOrIgnore(from, 0);
+        while (!heapGreater.isEmpty()) {
+            NodeRecord nodeRecord = heapGreater.pop();
+            Node cur = nodeRecord.node;
+            int distance = nodeRecord.distance;
+            for (Edge edge : cur.edges) {
+                heapGreater.addOrUpdateOrIgnore(edge.to, edge.weight + distance);
+            }
+            distanceMap.put(cur, distance);
+        }
+        return distanceMap;
+    }
+
+
+    class HeapGreater {
+        // 使用node类型的堆结构 进行小跟堆的维护
+        private Node[] heap;
+        // 距离表 用于对比是否需要更新
+        private Map<Node, Integer> distanceMap;
+        // 堆结构大小限制
+        private int limit;
+
+        // 维护一个下标索引 进行堆的改造 允许堆内的数据进行更新
+        private Map<Node, Integer> indexMap;
+
+        // 堆的大小
+        private int size;
+
+        HeapGreater(int limit) {
+            this.limit = limit;
+            heap = new Node[limit];
+            distanceMap = new HashMap<>();
+            indexMap = new HashMap<>();
+            size = 0;
+        }
+
+        public boolean isEmpty() {
+            return size == 0;
+        }
+
+        public void addOrUpdateOrIgnore(Node node, int distance) {
+            if (inHeap(node)) {
+                // 如果在堆内 并且没有结算的话 那么就需要进行比较之后更新
+                distanceMap.put(node, Math.min(distanceMap.get(node), distance));
+                heapInsert(indexMap.get(node));
+            }
+            if (!isEntered(node)) {
+                // 没有进过的节点就是新增
+                distanceMap.put(node, distance);
+                indexMap.put(node, size);
+                heap[size] = node;
+                heapInsert(size++);
+            }
+        }
+
+        public NodeRecord pop() {
+            NodeRecord nodeRecord = new NodeRecord(heap[0], distanceMap.get(heap[0]));
+            // 交换第一位与最后一位
+            swap(0, size - 1);
+            distanceMap.remove(heap[size - 1]);
+            indexMap.put(heap[size - 1], -1);
+            heap[size - 1] = null;
+            size--;
+            heapify(0);
+            return nodeRecord;
+        }
+
+
+        public void heapify(int index) {
+            int left = index * 2 + 1;
+            while (left < size) {
+                int smallest = left + 1 < size && distanceMap.get(heap[left + 1]) < distanceMap.get(heap[left])
+                        ? left + 1
+                        : left;
+                smallest = distanceMap.get(heap[smallest]) < distanceMap.get(heap[index]) ? smallest : index;
+                if (smallest == index) {
+                    break;
+                }
+                swap(smallest, index);
+                index = smallest;
+                left = index * 2 + 1;
+            }
+        }
+
+        public void heapInsert(int index) {
+            while (distanceMap.get(heap[index]) < distanceMap.get(heap[(index - 1) / 2])) {
+                swap(index, (index - 1) / 2);
+                index = (index - 1) / 2;
+            }
+        }
+
+        public void swap(int i, int j) {
+            indexMap.put(heap[i], j);
+            indexMap.put(heap[j], i);
+            Node tmp = heap[i];
+            heap[i] = heap[j];
+            heap[j] = tmp;
+
+        }
+
+        // 经典的实现需要维护一个单独的数据结构才能知道是不是已经结算过了
+        // 在加强堆中 可以通过堆的indexMap知道是不是已经参与过结算
+        public boolean inHeap(Node node) {
+            return indexMap.get(node) != null && indexMap.get(node) != -1;
+        }
+
+        public boolean isEntered(Node node) {
+            return indexMap.get(node) != null && indexMap.get(node) == -1;
+        }
+
+    }
+
+    public Node getMinNode(Map<Node, Integer> distanceMap, Set<Node> selectedNode) {
+        Node ans = null;
+        int minValue = Integer.MAX_VALUE;
+        for (Map.Entry<Node, Integer> entry : distanceMap.entrySet()) {
+            Node node = entry.getKey();
+            int value = entry.getValue();
+            if (!selectedNode.contains(node) && value < minValue) {
+                ans = node;
+                minValue = value;
+            }
+        }
+        return ans;
+    }
 
 
 }
