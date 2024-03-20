@@ -1,9 +1,5 @@
 package systemimprove;
 
-import systemimprove.code13.Edge;
-import systemimprove.code13.Node;
-
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -149,19 +145,54 @@ public class Test {
 //        node4.next = node5;
 //        new Test().mergeInBetween(head, 1, 1, head2);
 
-        TreeNode node1 = new Test().new TreeNode(1);
-        TreeNode node2 = new Test().new TreeNode(3);
-        TreeNode node3 = new Test().new TreeNode(2);
-        TreeNode node4 = new Test().new TreeNode(5);
-        TreeNode node5 = new Test().new TreeNode(3);
-        TreeNode node6 = new Test().new TreeNode(9);
+//        TreeNode node1 = new Test().new TreeNode(1);
+//        TreeNode node2 = new Test().new TreeNode(3);
+//        TreeNode node3 = new Test().new TreeNode(2);
+//        TreeNode node4 = new Test().new TreeNode(5);
+//        TreeNode node5 = new Test().new TreeNode(3);
+//        TreeNode node6 = new Test().new TreeNode(9);
+//
+//        node1.left = node2;
+//        node1.right = node3;
+//        node2.left = node4;
+//        node3.right = node5;
+//        node4.left = node6;
+//        new Test().widthOfBinaryTree(node1);
 
-        node1.left = node2;
-        node1.right = node3;
-        node2.left = node4;
-        node3.right = node5;
-        node4.left = node6;
-        new Test().widthOfBinaryTree(node1);
+//        ListNode head = new Test().new ListNode(1);
+//        ListNode node1 = new Test().new ListNode(4);
+//        ListNode node2 = new Test().new ListNode(3);
+//        ListNode node3 = new Test().new ListNode(2);
+//        ListNode node4 = new Test().new ListNode(5);
+//        ListNode node5 = new Test().new ListNode(2);
+//        head.next = node1;
+//        node1.next = node2;
+//        node2.next = node3;
+//        node3.next = node4;
+//        node4.next = node5;
+//        ListNode head = new Test().new ListNode(4);
+//        ListNode node1 = new Test().new ListNode(3);
+//        ListNode node2 = new Test().new ListNode(2);
+//        ListNode node3 = new Test().new ListNode(5);
+//        ListNode node4 = new Test().new ListNode(2);
+//        head.next = node1;
+//        node1.next = node2;
+//        node2.next = node3;
+//        node3.next = node4;
+        ListNode head = new Test().new ListNode(1);
+        ListNode node1 = new Test().new ListNode(4);
+        ListNode node2 = new Test().new ListNode(3);
+        ListNode node3 = new Test().new ListNode(0);
+        ListNode node4 = new Test().new ListNode(2);
+        ListNode node5 = new Test().new ListNode(5);
+        ListNode node6 = new Test().new ListNode(2);
+        head.next = node1;
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node5;
+        node5.next = node6;
+        new Test().partition(head, 3);
     }
 
     public int countOfRange(int[] arr) {
@@ -724,6 +755,52 @@ public class Test {
             }
         }
         return ans;
+    }
+
+    public ListNode partition(ListNode head, int x) {
+        if (head == null) {
+            return null;
+        }
+
+        // 找到第一个大于X的节点
+        ListNode cur = head;
+        ListNode pre = null;
+        while (cur != null) {
+            if (cur.val >= x) {
+                break;
+            }
+            pre = cur;
+            cur = cur.next;
+        }
+//        cur = head;
+        ListNode pre2 = null;
+        ListNode next= null;
+        // 可能涉及到换头
+        while (cur != null) {
+            next = cur.next;
+            if (cur.val < x) {
+                // pre为空 需要将第一个小于X的节点置为头结点
+                if (pre == null) {
+                    // 当前节点作为新的头结点
+                    pre2.next = next;
+                    cur.next = head;
+                    head = cur;
+                    pre = cur;
+                } else {
+                    // 如果pre不为空 意味着不需要换头
+                    cur.next = pre.next;
+                    pre.next = cur;
+                    pre2.next = next;
+                    pre = cur;
+
+                }
+            } else {
+                pre2 = cur;
+            }
+//            pre2 = cur;
+            cur = next;
+        }
+        return head;
     }
 
 
