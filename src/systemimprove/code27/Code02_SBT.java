@@ -141,6 +141,7 @@ public class Code02_SBT {
                         des = des.left;
                         des.size--;
                     }
+                    // sbt删除节节点的时候  不需要进行平衡度的调整 在加入的时候 会进行调整
                     if (pre != null) {
                         pre.left = des.right;
                         des.right = cur.right;
