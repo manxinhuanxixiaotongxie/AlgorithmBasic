@@ -177,10 +177,21 @@ public class Code01_AVLTree {
             return left;
         }
 
+        public void put(K key,V value) {
+            AVLNode<K, V> lastIndex = findLastIndex(key);
+            if (lastIndex!=null && lastIndex.k.compareTo(key)==0) {
+                lastIndex.value = value;
+            }else {
+                size++;
+                root = add(root, key, value);
+            }
+        }
+
         /**
          * 新增节点
          */
-        public AVLNode add(AVLNode cur, K key, V value) {
+        private AVLNode add(AVLNode cur, K key, V value) {
+
             /**
              * 新增节点 先将节点放在对应的位置 按照二叉搜索树的特性
              * 放进去之后再进行AVL的补丁进行调整
@@ -188,7 +199,6 @@ public class Code01_AVLTree {
             if (cur == null) {
                 // 如果cur已经来到了空位置 那么意味着 已经来到了可以放节点位置的地方
                 AVLNode node = new AVLNode(key,value);
-                size++;
                 return node;
             }
             if (cur.k.compareTo(key) < 0) {
@@ -321,6 +331,7 @@ public class Code01_AVLTree {
                 return null;
             }
 
+
             if (key.compareTo(cur.k) < 0) {
                 cur.left = delete(cur.left, key);
             } else if (key.compareTo(cur.k) > 0) {
@@ -395,6 +406,65 @@ public class Code01_AVLTree {
                 return true;
             }
         }
+
+        private AVLNode<K, V> findLastIndex(K key) {
+            AVLNode<K, V> pre = root;
+            AVLNode<K, V> cur = root;
+            while (cur != null) {
+                pre = cur;
+                if (key.compareTo(cur.k) == 0) {
+                    break;
+                } else if (key.compareTo(cur.k) < 0) {
+                    cur = cur.left;
+                } else {
+                    cur = cur.right;
+                }
+            }
+            return pre;
+        }
+
+        /**
+         * 找到离key最近的节点比key小
+         * @param key
+         * @return
+         */
+        public K ceilingKey(K key) {
+            AVLNode<K, V> cur = root;
+            AVLNode<K, V> ans = null;
+            while (cur != null) {
+                if (cur.k.compareTo(key) == 0) {
+                    return cur.k;
+                } else if (cur.k.compareTo(key) < 0) {
+                    ans = cur;
+                    cur = cur.right;
+                } else {
+                    cur = cur.left;
+                }
+            }
+            return ans == null ? null : ans.k;
+        }
+
+        public AVLNode findFirstKey() {
+            AVLNode cur = root;
+            AVLNode ans = null;
+            while (cur != null) {
+                ans = cur;
+                cur = cur.left;
+            }
+            return ans;
+        }
+
+        public AVLNode findLastKey() {
+            AVLNode cur = root;
+            AVLNode ans = null;
+            while (cur != null) {
+                ans = cur;
+                cur = cur.right;
+            }
+            return ans;
+        }
+
+
 
     }
 

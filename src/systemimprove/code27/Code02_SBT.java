@@ -16,6 +16,9 @@ public class Code02_SBT {
     }
 
     public class SBTTree<k extends Comparable<k>,v> {
+
+        private SBTNode root;
+        private int size;
         /**
          *
          * BST size balance tree
@@ -58,7 +61,7 @@ public class Code02_SBT {
             return cur;
         }
 
-        public SBTNode maintein(SBTNode cur) {
+        private SBTNode maintein(SBTNode cur) {
             if (cur == null) {
                 return null;
             }
@@ -99,7 +102,17 @@ public class Code02_SBT {
             return cur;
         }
 
-        public SBTNode add(SBTNode<k,v> cur,k key,v value) {
+        public void put(k key,v value) {
+            SBTNode<k,v> lastIndex = findLastIndex(key);
+            if (lastIndex != null && key.compareTo(lastIndex.key) == 0) {
+                lastIndex.value = value;
+            }else {
+                size++;
+                root = add(root,key,value);
+            }
+        }
+
+        private SBTNode add(SBTNode<k,v> cur,k key,v value) {
             if (cur == null) {
                 return new SBTNode(key,value);
             } else {
@@ -114,12 +127,86 @@ public class Code02_SBT {
         }
 
         /**
+         * 找到是否存在节点 找到返回 找不到返回空
+         * @param key
+         * @return
+         */
+        public SBTNode contains(k key) {
+            if (key == null) {
+                return  null;
+            }
+            SBTNode<k,v> cur = root;
+            SBTNode<k,v> ans = null;
+            while (cur != null) {
+                if (key.compareTo(cur.key) == 0) {
+                    ans = cur;
+                    break;
+                } else if (key.compareTo(cur.key) < 0) {
+                    cur = cur.left;
+                } else {
+                    cur = cur.right;
+                }
+            }
+            return ans;
+        }
+
+        /**
+         * 如果存在 返回节点
+         * 不存在返回叶子节点
+         * @param key
+         * @return
+         */
+        private SBTNode findLastIndex(k key) {
+            SBTNode<k,v> ans = root;
+            SBTNode<k,v> cur = root;
+            while (cur != null) {
+                ans = cur;
+                if (key.compareTo(cur.key) == 0) {
+                    break;
+                } else if (key.compareTo(cur.key) < 0) {
+                    cur = cur.left;
+                } else {
+                    cur = cur.right;
+                }
+            }
+            return ans;
+        }
+
+        public boolean containsKey(k key) {
+            SBTNode<k,v> cur = root;
+            while (cur != null) {
+                if (cur.key.compareTo(key) == 0) {
+                    return true;
+                }else if (cur.key.compareTo(key) < 0) {
+                    cur = cur.right;
+                } else {
+                    cur = cur.left;
+                }
+
+            }
+            return false;
+        }
+
+        public void remove(k key) {
+            if (key == null) {
+                return;
+            }
+            size--;
+            if (containsKey(key)) {
+                root = delete(root, key);
+            }
+        }
+
+
+
+        /**
          * 删除节点
          * @param cur
          * @param key
          * @return
          */
-        public SBTNode delete(SBTNode<k,v> cur,k key) {
+        private SBTNode delete(SBTNode<k,v> cur,k key) {
+            cur.size--;
             if (key.compareTo(cur.key) < 0) {
                 cur.left = delete(cur.left,key);
             } else if (key.compareTo(cur.key) > 0) {
@@ -155,7 +242,9 @@ public class Code02_SBT {
             if (cur != null) {
                 cur.size = (cur.left != null ? cur.left.size : 0) + (cur.right != null ? cur.right.size : 0) + 1;
             }
-            return maintein(cur);
+            // SBT删除可以不进行平衡性的调整
+//            cur =  maintein(cur);
+            return cur;
         }
     }
 }
