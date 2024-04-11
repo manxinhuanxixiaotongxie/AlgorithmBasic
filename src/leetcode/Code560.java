@@ -65,8 +65,11 @@ public class Code560 {
 }
 
 
-
-
+/**
+ * SBT需要的特性：
+ * 1.需要有重复key
+ * 2.能够求出等于key的数量
+ */
 class SBTTree {
     private SBTNode root;
     private HashSet<Integer> set = new HashSet();
@@ -96,6 +99,12 @@ class SBTTree {
         return maintain(cur);
     }
 
+    /**
+     * 与经典的SBT实现方式一样 根据平衡因子进行保证该树调整完成之后依然是平衡
+     *
+     * @param cur
+     * @return
+     */
     public SBTNode maintain(SBTNode cur) {
         if (cur == null) {
             return null;
@@ -106,11 +115,15 @@ class SBTTree {
         int leftRightSize = cur.left == null || cur.left.right == null ? 0 : cur.left.right.size;
         int rightRightSize = cur.right == null || cur.right.right == null ? 0 : cur.right.right.size;
         int rightLeftSize = cur.right == null || cur.right.left == null ? 0 : cur.right.left.size;
+        // ll型违规 只需要进行右旋 右旋之后 新的cur节点以及cur的孩子发生变化 因为原来左树的右孩子会被新的cur的左树接管
+        // 因此需要将cur的右树以及cur进行平衡性的调整 RR型的违规同理
         if (leftLeftSize > rightSize) {
             cur = rightRotata(cur);
             cur.right = maintain(cur.right);
             cur = maintain(cur);
         } else if (leftRightSize > rightSize) {
+            // lr型的违规  需要将当前树的左树进行左旋 左旋之后将当前数进行右旋
+            // 进行了这个过程之后 新cur的左右两个孩子都会发生变化 需要进行调整 SBT树的调整是孩子节点发生了变化  那么整个树都需要进行平衡性的调整
             cur.left = leftRotata(cur.left);
             cur = rightRotata(cur);
             cur.left = maintain(cur.left);
@@ -131,6 +144,7 @@ class SBTTree {
         return cur;
     }
 
+    // 左旋 左旋需要注意 新节点会接管原来需要旋转的节点的size以及all 旋转的时候需要注意
     public SBTNode leftRotata(SBTNode cur) {
         int same = cur.all - (cur.left == null ? 0 : cur.left.all) - (cur.right == null ? 0 : cur.right.all);
         SBTNode right = cur.right;
@@ -172,6 +186,11 @@ class SBTTree {
     }
 }
 
+/**
+ * 1.这个有序表是按照value进行排序
+ * 2.能够接受重复值
+ * 3.引入all  all用于记录该树的所有的经过的数量
+ */
 class SBTNode {
     public int value;
     public int size;
