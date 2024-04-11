@@ -6,7 +6,7 @@ public class Code009 {
      */
 
     public int numSubarrayProductLessThanK(int[] nums, int k) {
-        if (nums == null || nums.length == 0 |  k <= 1) {
+        if (nums == null || nums.length == 0 | k <= 1) {
             return 0;
         }
         int left = 0;
@@ -33,4 +33,29 @@ public class Code009 {
         }
         return res;
     }
+
+    /**
+     * 衍生：求和等于K的子数组的数量
+     *
+     * 见code560
+     *
+     * @return
+     */
+//    public int numsOfEqual(int[] arr, int k) {
+//        int ans = 0;
+//        int left = 0;
+//        int sum = 0;
+//        for (int i = 0; i < arr.length; i++) {
+//           // 以i结尾的子数组的和等于K
+//            sum += arr[i];
+//            while(sum > k) {
+//                sum -= arr[left];
+//                left++;
+//            }
+//            if (sum == k) {
+//                ans++;
+//            }
+//        }
+//        return ans;
+//    }
 }
