@@ -103,7 +103,7 @@ class AVLGreater {
         }
         if (val < cur.val) {
             cur.left = add(cur.left, val, contains);
-        } else if (val > cur.val) {
+        } else {
             cur.right = add(cur.right, val, contains);
         }
         return maintain(cur);
