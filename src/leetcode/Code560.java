@@ -71,7 +71,7 @@ public class Code560 {
  * 2.能够求出等于key的数量
  */
 class SBTTree {
-    private SBTNode root;
+    private SbtNode root;
     private HashSet<Integer> set = new HashSet();
 
     public void put(int value) {
@@ -79,9 +79,9 @@ class SBTTree {
         set.add(value);
     }
 
-    public SBTNode add(SBTNode cur, int value, boolean contains) {
+    public SbtNode add(SbtNode cur, int value, boolean contains) {
         if (cur == null) {
-            return new SBTNode(value);
+            return new SbtNode(value);
         } else {
             cur.all++;
             if (value == cur.value) {
@@ -105,7 +105,7 @@ class SBTTree {
      * @param cur
      * @return
      */
-    public SBTNode maintain(SBTNode cur) {
+    public SbtNode maintain(SbtNode cur) {
         if (cur == null) {
             return null;
         }
@@ -145,9 +145,9 @@ class SBTTree {
     }
 
     // 左旋 左旋需要注意 新节点会接管原来需要旋转的节点的size以及all 旋转的时候需要注意
-    public SBTNode leftRotata(SBTNode cur) {
+    public SbtNode leftRotata(SbtNode cur) {
         int same = cur.all - (cur.left == null ? 0 : cur.left.all) - (cur.right == null ? 0 : cur.right.all);
-        SBTNode right = cur.right;
+        SbtNode right = cur.right;
         cur.right = right.left;
         right.left = cur;
         right.all = cur.all;
@@ -158,9 +158,9 @@ class SBTTree {
 
     }
 
-    public SBTNode rightRotata(SBTNode cur) {
+    public SbtNode rightRotata(SbtNode cur) {
         int same = cur.all - (cur.left == null ? 0 : cur.left.all) - (cur.right == null ? 0 : cur.right.all);
-        SBTNode left = cur.left;
+        SbtNode left = cur.left;
         cur.left = left.right;
         left.right = cur;
         left.all = cur.all;
@@ -171,7 +171,7 @@ class SBTTree {
     }
 
     public int fineNums(int value) {
-        SBTNode cur = root;
+        SbtNode cur = root;
         while (cur != null) {
             if (value == cur.value) {
                 return cur.all - (cur.left == null ? 0 : cur.left.all) - (cur.right == null ? 0 : cur.right.all);
@@ -195,8 +195,8 @@ class SBTNode {
     public int value;
     public int size;
     public int all;
-    SBTNode left;
-    SBTNode right;
+    SbtNode left;
+    SbtNode right;
 
     public SBTNode(int value) {
         this.value = value;
