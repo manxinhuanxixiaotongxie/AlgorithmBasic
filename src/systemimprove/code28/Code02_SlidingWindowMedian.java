@@ -256,4 +256,13 @@ public class Code02_SlidingWindowMedian {
         return ans;
     }
 
+    public static void main(String[] args) {
+        int[] nums = {-2147483648,-2147483648,2147483647,-2147483648,1,3,-2147483648,-100,8,17,22,-2147483648,-2147483648,2147483647,2147483647,2147483647,2147483647,-2147483648,2147483647,-2147483648};
+        int w = 6;
+        double[] ans = medianSlidingWindow(nums, w);
+        for (double an : ans) {
+            System.out.print(an + " ");
+        }
+    }
+
 }
