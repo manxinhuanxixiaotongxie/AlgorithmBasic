@@ -1,6 +1,12 @@
 package systemimprove.code18;
 
-public class Code01_JIngDianDiGui {
+/**
+ * 汉诺谈问题  焚天塔
+ * <p>
+ * 给定三个柱子 要将N层的圆盘从左移动到右 只能遵守小压大的原则
+ * 总共需要多少步数？
+ */
+public class Code02_Hanoi {
 
     /**
      * 打印汉诺塔的移动过程
@@ -21,7 +27,8 @@ public class Code01_JIngDianDiGui {
      */
 
     public static void main(String[] args) {
-        hanoi(10);
+//        hanoi(10);
+        hanoi2(10);
     }
 
     public static void hanoi(int n) {
@@ -106,5 +113,28 @@ public class Code01_JIngDianDiGui {
         System.out.printf("Move %d from mid to right\n", n);
         // 将刚刚从中间移动到左的n-1层圆盘 从左移动到右
         leftToRight(n - 1);
+    }
+
+    /**
+     * 尝试有好坏之分
+     * N层汉诺塔从左移动到右
+     * 有一个中间位置  使用这个中间位置标志汉诺塔的移动过程
+     */
+    public static void hanoi2(int N) {
+        process("from", "to", "mid", N);
+    }
+
+    public static void process(String from, String to, String other, int N) {
+        if (N == 1) {
+            System.out.println("Move 1 from " + from + " to " + to);
+            return;
+        }
+        // 要将N 从from移动到to 需要将N-1从from移动到other
+        process(from, other, to, N - 1);
+        // N-1已经从from移动到to了，只剩下最后一层，这时候就可以直接将N从from移动到to
+        System.out.println("Move " + N + " from " + from + " to " + to);
+        // N-1从from移动到other之后，只剩下最后一层，这时候就可以直接将N从other移动到to
+        process(other, to, from, N - 1);
+
     }
 }
