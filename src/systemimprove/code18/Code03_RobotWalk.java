@@ -111,10 +111,12 @@ public class Code03_RobotWalk {
         dp[0][aim] = 1;
         // 使用rest做行 cur做列的时候  我们先从行开始填
         for (int i = 1; i <= K; i++) {
+            // 由于使用rest做行 cur做列的时候 当cur==1的时候 依赖的位置是cur=2的位置以及rest-1的位置 右上角的位置
             dp[i][1] = dp[i - 1][2];
             for (int j = 2; j < N; j++) {
                 dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j + 1];
             }
+            // 坐上角的位置
             dp[i][N] = dp[i - 1][N - 1];
         }
         return dp[K][start];
@@ -134,6 +136,8 @@ public class Code03_RobotWalk {
         dp[aim][0] = 1;
         // 使用cur做行 rest做列的时候 当cur==1的时候
         for (int i = 1; i <= K; i++) {
+            // 由于是使用cur做行 那么当cur=1的时候依赖的位置就是cur=2的位置以及rest-1的位置 左下角的位置
+            // 再加上 这个表其实是才从列开始填的
             dp[1][i] = dp[2][i - 1];
             for (int j = 2; j < N; j++) {
                 dp[j][i] = dp[j - 1][i - 1] + dp[j + 1][i - 1];

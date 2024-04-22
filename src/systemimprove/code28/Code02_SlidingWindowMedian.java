@@ -107,6 +107,17 @@ public class Code02_SlidingWindowMedian {
             }
         }
 
+        /**
+         * 加入树的节点  当value相等的时候  就会使用数组的相对位置进行排序
+         * 删除的时候也按照这个及进行查找 为什么一定要这样呢
+         * 我们对这个平衡二叉树的要求：
+         * 1.能够添加重复值
+         * 2.允许删除节点 并且值相等的时候 能准确删除数组相对位置数
+         * 3.能够根据index找到对应的节点
+         * @param cur
+         * @param key
+         * @return
+         */
         private SBTNode<K> delete(SBTNode<K> cur, K key) {
             cur.size--;
             if (key.compareTo(cur.key) > 0) {
@@ -171,7 +182,7 @@ public class Code02_SlidingWindowMedian {
                 throw new RuntimeException("invalid parameter.");
             }
             SBTNode<K> lastNode = findLastIndex(key);
-            return lastNode != null && key.compareTo(lastNode.key) == 0 ? true : false;
+            return lastNode != null && key.compareTo(lastNode.key) == 0;
         }
 
         public void add(K key) {
@@ -218,15 +229,28 @@ public class Code02_SlidingWindowMedian {
             value = v;
         }
 
+        /**
+         *这里的比较需要注意 直接用减号不行
+         * 超过int的范围 会越界 导致判断不准确
+         * @param o the object to be compared.
+         * @return
+         */
         @Override
         public int compareTo(Node o) {
-            return value != o.value ? Integer.valueOf(value).compareTo(o.value)
-                    : Integer.valueOf(index).compareTo(o.index);
+            return value != o.value ? Integer.compare(value, o.value)
+                    : Integer.compare(index, o.index);
         }
     }
 
     /**
-     * 不需要重复值  这个tree存放的是index下标
+     * 这棵树当value相等的时候  排序的规则是按照数组的下标的相对位置进行处理
+     *
+     * 当value不相等的时候  就按照value的大小进行排序
+     *
+     * 那么就意味着 当value不相等的时候size的相对位置与原数组相对位置是相对的
+     * 当value相等的时候 size的位置与数组的相对位置是一一对应的  那么就意味着
+     * 不管在什么时候  size的相对的位置总是与原数组的下标总是相对应的
+     * 我们在删除一个节点的时候 只要给定index位置以及value值 就能准确的删除对应的节点
      * @param nums
      * @param k
      * @return
@@ -249,7 +273,7 @@ public class Code02_SlidingWindowMedian {
                 ans[index++] = ((double) upmid.value + (double) downmid.value) / 2;
             } else {
                 Node mid = map.getIndexKey(map.size() / 2);
-                ans[index++] = (double) mid.value;
+                ans[index++] = mid.value;
             }
             map.remove(new Node(i - k + 1, nums[i - k + 1]));
         }
