@@ -96,16 +96,12 @@ class Uniset {
 
     }
 
-//    public int getSize(int i, int j) {
-//
-//        return sizeMap.get(find(i, j));
-//    }
-
-
     public int getSize(int i, int j) {
 
-        return max;
+        return sizeMap.get(find(i, j));
     }
+
+
 
     public void union(int i1, int j1, int i2, int j2) {
         int father1 = find(i1, j1);
