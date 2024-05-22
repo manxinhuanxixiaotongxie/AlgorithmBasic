@@ -96,6 +96,8 @@ public class Code04_WaysOfMoney3 {
     /**
      * 斜率优化   分析严格位置依赖的动态规划  找到可能进行优化的机会
      *
+     *
+     * 目前这个斜率优化 还有问题  待后续优化
      * @param arr
      * @param aim
      * @return

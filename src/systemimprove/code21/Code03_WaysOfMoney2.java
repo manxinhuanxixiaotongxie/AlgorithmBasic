@@ -83,6 +83,8 @@ public class Code03_WaysOfMoney2 {
 //                    ways += dp[index + 1][rest - zhang * arr[index]];
 //                }
                 // 分析严格意义的位置依赖
+                // index rest位置值是             index+1 rest index+1 rest-1*arr[index]  rest -2*arr[index] ... rest - zhang*arr[index]
+                // index rest-arr[index] 位置值是 index+1 rest-arr[index] index+1 rest-arr[index]-1*arr[index] ... rest-arr[index]-zhang*arr[index]
                 ways = dp[index + 1][rest];
                 if (rest - arr[index] >= 0) {
                     ways += dp[index][rest - arr[index]];
