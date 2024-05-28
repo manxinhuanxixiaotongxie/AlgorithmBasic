@@ -1,4 +1,4 @@
-package systemimprove.code28;
+package systemimprove.code32;
 
 /**
  * 有一个滑动窗口（讲过的）：

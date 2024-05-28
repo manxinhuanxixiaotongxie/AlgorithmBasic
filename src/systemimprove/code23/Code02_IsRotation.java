@@ -54,12 +54,21 @@ public class Code02_IsRotation {
             // 第二种情况 如果不相等的话
             // 将y指向next[y]的位置 一直往前找 直到找到相等的位置
             else {
+                // 下标位置
                 int y = next[i - 1];
                 while (y != -1) {
+                    // 如果下标位置与i-1位置的字符相等的话
+                    // 那么next[i]的长度就是y+1
                     if (chars[i - 1] == chars[y]) {
                         next[i] = y + 1;
                         break;
                     }
+                    // 不相等的话就继续向前推
+                    /**
+                     * aabaab
+                     * 不相等的位置是b 与 t
+                     * 那么向前推的位置是a 使用1位置a与t进行比对
+                     */
                     y = next[y];
                 }
             }

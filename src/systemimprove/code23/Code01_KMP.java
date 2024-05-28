@@ -155,6 +155,7 @@ public class Code01_KMP {
 
     /**
      * 获取next数组 更优秀的写法
+     *
      * @param match
      * @return
      */
@@ -172,10 +173,18 @@ public class Code01_KMP {
         int cn = 0;
         while (i < next.length) {
             if (str2[i - 1] == str2[cn]) {
+                // 按照之前已经定义好的流程 如果i-1位置的字符与cn位置的字符相等的话 那么next[i] = cn+1
+                // 这里为什么要写成++cn呢？ 注意一点 cn不仅是i位置的下标 同时也是i位置的最长前缀后缀的长度
+                // 在不相等向前推进的时候，使用的位置是之前前缀后缀的长度+1
                 next[i++] = ++cn;
             } else if (cn > 0) {
+                // 必须要判断cn>0的情况
+                // 最极端的情况cn=0的时候 就是0位置对比i-1位置的字符
+                // =0不能继续向前推了 cn=0都不相等的话 那么next[i] = 0 cn=0
                 cn = next[cn];
             } else {
+                // 前面两个条件都不满足 说明cn=0的时候 0位置对比i-1位置的字符都不满足添加条件
+                // 当前位置的next数组的值就是0
                 next[i++] = 0;
             }
         }

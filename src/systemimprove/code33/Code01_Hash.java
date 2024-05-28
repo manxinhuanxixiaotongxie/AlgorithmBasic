@@ -1,4 +1,4 @@
-package systemimprove.code25;
+package systemimprove.code33;
 
 /**
  * 经典的hash结构的实现：
