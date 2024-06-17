@@ -153,7 +153,7 @@ public class Code01_AVLTree {
             // 要调整高度 当前节点的高度怎么计算 如果cur本身是有left节点的话 那么cur节点的高度就是cur.left 与cur.right的最大值
             cur.height = Math.max(cur.left == null ? 0 : cur.left.height,cur.right == null ? 0 : cur.right.height) + 1;
             // right节点的高度也要调整 调整之后的高度为cur节点的高度与right节点的右节点的高度的最大值
-            right.height = Math.max(right.left == null ? 0 : right.left.height,right.right == null ? 0 : right.right.height) + 1;
+            right.height = Math.max(right.left.height,right.right == null ? 0 : right.right.height) + 1;
             return right;
         }
 
@@ -173,7 +173,7 @@ public class Code01_AVLTree {
             left.right = cur;
             // 右旋调整高度
             cur.height = Math.max(cur.left == null ? 0 : cur.left.height,cur.right == null ? 0 : cur.right.height) + 1;
-            left.height = Math.max(left.left == null ? 0 : left.left.height,left.right == null ? 0 : left.right.height) + 1;
+            left.height = Math.max(left.left == null ? 0 : left.left.height, left.right.height) + 1;
             return left;
         }
 
@@ -407,6 +407,11 @@ public class Code01_AVLTree {
             }
         }
 
+        /**
+         * 在树中进行查找 如果存在当前key的节点 返回当前节点 否则返回离key最近的节点
+         * @param key
+         * @return
+         */
         private AVLNode<K, V> findLastIndex(K key) {
             AVLNode<K, V> pre = root;
             AVLNode<K, V> cur = root;
