@@ -14,6 +14,11 @@ class SKipList<K extends Comparable<K>, V> {
     private static final double PROBABILITY = 0.5;
     private int maxLevel;
 
+    SKipList(SkipNode head) {
+        head = new SkipNode(null,null);
+        head.next.add(null);
+    }
+
 
     public void add(K key) {
 
@@ -49,6 +54,36 @@ class SKipList<K extends Comparable<K>, V> {
             }
         }
 
+    }
+
+    public void delete(K key) {
+        if (contains(key)) {
+            int level = maxLevel;
+            SkipNode pre = head;
+            while (level >= 0) {
+                pre = findMostRightNodeInLevel(pre, level, key);
+                SkipNode next = (SkipNode) pre.next.get(level);
+                if (next != null && next.key.compareTo(key) == 0) {
+                    pre.next.set(level, next.next.get(level));
+                }
+                // 降层
+                if (level != 0 && pre==head&& pre.next.get(level) == null) {
+                    head.next.remove(level);
+                    maxLevel--;
+                }
+                level--;
+            }
+        }
+
+    }
+
+    private boolean contains(K key) {
+        SkipNode mostRightLessNodeInTree = findMostRightLessNodeInTree(key);
+        SkipNode next = null;
+        if (mostRightLessNodeInTree != null) {
+            next = (SkipNode) mostRightLessNodeInTree.next.get(0);
+        }
+        return mostRightLessNodeInTree != null && next.key.compareTo(key) == 0;
     }
 
 
@@ -92,5 +127,6 @@ class SkipNode<K extends Comparable<K>, V> {
         this.key = key;
         this.value = value;
         next = new ArrayList<>();
+        next.add(null);
     }
 }
