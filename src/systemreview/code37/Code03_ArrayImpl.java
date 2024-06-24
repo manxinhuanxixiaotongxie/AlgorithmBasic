@@ -52,7 +52,7 @@ public class Code03_ArrayImpl {
 
         System.out.println(isPass ? "pass" : "failed");
 
-        test = 5000000;
+        test = 500000;
         list = new ArrayList<>();
         map = new ArrayMap<>();
         long start = 0;
