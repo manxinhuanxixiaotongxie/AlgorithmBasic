@@ -2,6 +2,12 @@ package systemimprove.code01;
 
 public class Code01_Dichotomy {
 
+    /**
+     * 在一个有序数组中查找某个数是否存在
+     * @param arr
+     * @param num
+     * @return
+     */
     public static boolean findIfExist(int[] arr, int num) {
         if (arr == null || arr.length == 0) {
             return false;
@@ -13,6 +19,7 @@ public class Code01_Dichotomy {
             if (arr[mid] == num) {
                 return true;
             } else if (arr[mid] > num) {
+                // R不能从mid开始 如果L==R的话会死循环
                 R = mid - 1;
             } else {
                 L = mid + 1;
@@ -22,7 +29,7 @@ public class Code01_Dichotomy {
     }
 
     /**
-     * 找>=某个数最左侧的位置
+     * 在有序数组中找>=某个数最左侧的位置
      *
      * @param nums
      * @param num
@@ -48,7 +55,7 @@ public class Code01_Dichotomy {
     }
 
     /**
-     * 找<=某个数最右侧的位置
+     * 在有序数组中找<=某个数最右侧的位置
      *
      * @param nums
      * @param num
@@ -73,6 +80,14 @@ public class Code01_Dichotomy {
         return rightest;
     }
 
+    /**
+     * 局部最小值问题
+     * 在一个无序数组中找到一个局部最小值
+     *
+     *
+     * @param nums
+     * @return
+     */
     public int findPartMin(int[] nums) {
 
         if (nums == null || nums.length == 0) {
