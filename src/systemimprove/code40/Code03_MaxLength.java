@@ -52,7 +52,7 @@ public class Code03_MaxLength {
         minSum[arr.length - 1] = arr[arr.length - 1];
         minSumEnd[arr.length - 1] = arr.length - 1;
         for (int i = arr.length - 2; i >= 0; i--) {
-            if (minSum[i + 1] > 0) {
+            if (minSum[i + 1] <= 0) {
                 minSum[i] = arr[i] + minSum[i + 1];
                 minSumEnd[i] = minSumEnd[i + 1];
             } else {
@@ -65,7 +65,7 @@ public class Code03_MaxLength {
         int sum = 0;
         for (int i = 0; i < arr.length; i++) {
             // 如果当前位置最小的累加和比k要小的话 那么end进行右扩
-            while (end < arr.length && sum + minSum[i] <= k) {
+            while (end < arr.length && sum + minSum[end] <= k) {
                 sum += minSum[end];
                 end = minSumEnd[end] + 1;
             }
@@ -77,5 +77,78 @@ public class Code03_MaxLength {
             }
         }
         return ans;
+    }
+
+    public int right(int[] arr, int k) {
+        if (arr == null || arr.length == 0) {
+            return 0;
+        }
+        int ans = 0;
+        for (int i = 0; i < arr.length; i++) {
+            int sum = 0;
+            for (int j = i; j < arr.length; j++) {
+                sum += arr[j];
+                if (sum <= k) {
+                    ans = Math.max(ans, j - i + 1);
+                }
+            }
+
+        }
+        return ans;
+    }
+
+    public int[] generateArr(int maxValue, int maxLength) {
+        int[] res = new int[(int) (Math.random() * maxLength + 1)];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = (int) (Math.random() * maxValue + 1) - (int) (Math.random() * maxValue + 1);
+        }
+        return res;
+    }
+
+    public boolean isEuqal(int[] arr1, int[] arr2) {
+        if (arr1 == null && arr2 == null) {
+            return true;
+        }
+        if (arr1 == null || arr2 == null) {
+            return false;
+        }
+        if (arr1.length != arr2.length) {
+            return false;
+        }
+        for (int i = 0; i < arr1.length; i++) {
+            if (arr1[i] != arr2[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int[] copyArr(int[] arr) {
+        if (arr == null) {
+            return null;
+        }
+        int[] res = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            res[i] = arr[i];
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int maxValue = 100;
+        int maxLength = 10;
+        int testTimes = 100000;
+        Code03_MaxLength code = new Code03_MaxLength();
+        for (int i = 0; i < testTimes; i++) {
+            int[] arr = code.generateArr(maxValue, maxLength);
+            int k = (int) (Math.random() * maxValue) - (int) (Math.random() * maxValue);
+            int ans1 = code.maxLength1(code.copyArr(arr), k);
+            int ans2 = code.maxLength2(code.copyArr(arr), k);
+            int ans3 = code.right(code.copyArr(arr), k);
+            if (ans1 != ans2 || ans1 != ans3) {
+                System.out.println("Oops!");
+            }
+        }
+        System.out.println("finish!");
     }
 }
