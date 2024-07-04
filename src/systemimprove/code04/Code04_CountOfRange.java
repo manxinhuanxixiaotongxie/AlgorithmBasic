@@ -15,6 +15,9 @@ public class Code04_CountOfRange {
      * @return
      */
     public int countRangeSum(int[] nums, int lower, int upper) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
         int ans = 0;
         for (int i = 0; i < nums.length; i++) {
             for (int j = i; j < nums.length; j++) {
@@ -40,6 +43,9 @@ public class Code04_CountOfRange {
      * @return
      */
     public int countRangeSum2(int[] nums, int lower, int upper) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
         long[] sum = new long[nums.length];
         sum[0] = nums[0];
         for (int i = 1; i < nums.length; i++) {
@@ -96,6 +102,9 @@ public class Code04_CountOfRange {
      * sum[i-1] <= sum[j] - Lower
      */
     public int countRangeSum3(int[] nums, int lower, int upper) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
         long[] sum = new long[nums.length];
         sum[0] = nums[0];
         for (int i = 1; i < nums.length; i++) {
@@ -241,11 +250,48 @@ public class Code04_CountOfRange {
         return ans;
     }
 
+    public int[] generateRandomArray(int maxSize, int maxValue) {
+        int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) ((maxValue + 1) * Math.random()) - (int) ((maxValue) * Math.random());
+        }
+        return arr;
+    }
+
+    public int[] copyArray(int[] arr) {
+        if (arr == null) {
+            return null;
+        }
+        int[] res = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            res[i] = arr[i];
+        }
+        return res;
+    }
+
+
     public static void main(String[] args) {
-        int[] arr = {3, 1, 2, 4, 5, 1, 1, 0};
-        int lower = 3;
-        int upper = 6;
-        System.out.println(new Code04_CountOfRange().countRangeSum(arr, lower, upper));
+        Code04_CountOfRange code04_countOfRange = new Code04_CountOfRange();
+        int testTime = 100000;
+        int maxSize = 10;
+        int maxValue = 10;
+        for (int i = 0; i < testTime; i++) {
+            int[] arr = code04_countOfRange.generateRandomArray(maxSize, maxValue);
+            int[] arr1 = code04_countOfRange.copyArray(arr);
+            int[] arr2 = code04_countOfRange.copyArray(arr);
+            int[] arr3 = code04_countOfRange.copyArray(arr);
+            int lower = (int) ((maxValue + 1) * Math.random());
+            int upper = (int) ((maxValue + 1) * Math.random());
+            if (lower > upper) {
+                int tmp = lower;
+                lower = upper;
+                upper = tmp;
+            }
+            if (code04_countOfRange.countRangeSum(arr1, lower, upper) != code04_countOfRange.countRangeSum2(arr2, lower, upper) || code04_countOfRange.countRangeSum(arr1, lower, upper) != code04_countOfRange.countRangeSum3(arr3, lower, upper)) {
+                System.out.println("Oops!");
+            }
+        }
+        System.out.println("finish!");
     }
 
 
