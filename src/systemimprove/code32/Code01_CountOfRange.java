@@ -344,7 +344,7 @@ public class Code01_CountOfRange {
 
     public static void main(String[] args) {
         int maxValue = 100;
-        int maxLength = 10;
+        int maxLength = 100;
         int testTime = 100000;
         Code01_CountOfRange countOfRange = new Code01_CountOfRange();
         System.out.println("功能测试开始");
@@ -358,11 +358,14 @@ public class Code01_CountOfRange {
 //            arr[2] = 3;
 //            k1 = 4;
 //            k2 = 10;
-            int[] copy = countOfRange.copyArray(arr);
+            int[] arr1 = countOfRange.copyArray(arr);
+            int[] arr2 = countOfRange.copyArray(arr);
+            int[] arr3 = countOfRange.copyArray(arr);
+
             int ans1 = countOfRange.countOfRange(arr, k1, k2);
-            int ans2 = countOfRange.countOfRange2(copy, k1, k2);
-            int ans3 = countOfRange.countRangeSum(copy, k1, k2);
-            int ans4 = countOfRange.countRangeSum2(copy, k1, k2);
+            int ans2 = countOfRange.countOfRange2(arr1, k1, k2);
+            int ans3 = countOfRange.countRangeSum(arr2, k1, k2);
+            int ans4 = countOfRange.countRangeSum2(arr3, k1, k2);
             if (ans1 != ans2 || ans2 != ans3 || ans3 != ans4) {
                 System.out.println("Oops!");
                 countOfRange.printArray(arr);
