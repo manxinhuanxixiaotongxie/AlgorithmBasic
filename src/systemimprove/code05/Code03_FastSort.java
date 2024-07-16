@@ -32,7 +32,7 @@ public class Code03_FastSort {
     }
 
     // 快排3.0 非递归版本 用栈来执行
-    public  void sort3(int[] arr) {
+    public void sort3(int[] arr) {
         if (arr == null || arr.length < 2) {
             return;
         }
@@ -57,7 +57,16 @@ public class Code03_FastSort {
         }
     }
 
-    public void process(int[] arr,int L,int R) {
+    /**
+     * 随机快排  递归版本
+     * 经典快速排序的实现
+     * 在L-R范围上随机选择一个数作为基准值
+     *
+     * @param arr
+     * @param L
+     * @param R
+     */
+    public void process(int[] arr, int L, int R) {
         if (L >= R) {
             return;
         }
@@ -68,7 +77,16 @@ public class Code03_FastSort {
         process(arr, equalArea[1] + 1, R);
     }
 
-    public void process2(int[] arr,int L,int R) {
+    /**
+     * 使用最右侧的数作为基准值进行比较
+     * 存在最差情况
+     * 当数组是有序的时候 会导致时间复杂度为O(N^2)
+     *
+     * @param arr
+     * @param L
+     * @param R
+     */
+    public void process2(int[] arr, int L, int R) {
         if (L >= R) {
             return;
         }
@@ -86,9 +104,9 @@ public class Code03_FastSort {
      * @param R
      * @return
      */
-    public int[] netherlandsFlag(int[] arr,int L,int R) {
+    public int[] netherlandsFlag(int[] arr, int L, int R) {
 
-        int leftIndex = L-1;
+        int leftIndex = L - 1;
         int rightIndex = R;
         int index = L;
         while (index < rightIndex) {
@@ -113,9 +131,9 @@ public class Code03_FastSort {
      * @param R
      * @return
      */
-    public int[] netherlandsFlag2(int[] arr,int L,int R) {
+    public int[] netherlandsFlag2(int[] arr, int L, int R) {
 
-        int leftIndex = L-1;
+        int leftIndex = L - 1;
         int rightIndex = R;
         int index = L;
         while (index < rightIndex) {
@@ -131,15 +149,15 @@ public class Code03_FastSort {
         return new int[]{leftIndex + 1, rightIndex};
     }
 
-    public void swap(int[] arr,int l,int r) {
+    public void swap(int[] arr, int l, int r) {
         int swap = arr[l];
         arr[l] = arr[r];
         arr[r] = swap;
     }
 
-    public int[] generateRandomArray(int maxSize,int maxValue) {
+    public int[] generateRandomArray(int maxSize, int maxValue) {
         int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
-        for (int i = 0;i < arr.length;i++) {
+        for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) ((maxValue + 1) * Math.random()) - (int) ((maxValue) * Math.random());
         }
         return arr;
@@ -150,7 +168,7 @@ public class Code03_FastSort {
             return null;
         }
         int[] ans = new int[arr.length];
-        for (int i = 0;i < arr.length;i++) {
+        for (int i = 0; i < arr.length; i++) {
             ans[i] = arr[i];
         }
         return ans;
@@ -160,7 +178,7 @@ public class Code03_FastSort {
         if (arr == null) {
             return;
         }
-        for (int i = 0;i < arr.length;i++) {
+        for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");
         }
         System.out.println();
@@ -170,7 +188,7 @@ public class Code03_FastSort {
         Arrays.sort(arr);
     }
 
-    public boolean isEqual(int[] arr1,int[] arr2) {
+    public boolean isEqual(int[] arr1, int[] arr2) {
         if ((arr1 == null && arr2 != null) || (arr1 != null && arr2 == null)) {
             return false;
         }
@@ -183,7 +201,7 @@ public class Code03_FastSort {
             return false;
         }
 
-        for (int i = 0;i < arr1.length;i++) {
+        for (int i = 0; i < arr1.length; i++) {
             if (arr1[i] != arr2[i]) {
                 return false;
             }
@@ -198,7 +216,7 @@ public class Code03_FastSort {
         int testTime = 500000;
         int maxSize = 100;
         int maxValue = 100;
-        for (int i = 0;i < testTime;i++) {
+        for (int i = 0; i < testTime; i++) {
             int[] arr1 = fastSort.generateRandomArray(maxSize, maxValue);
             int[] arr2 = fastSort.copyArray(arr1);
             int[] arr3 = fastSort.copyArray(arr1);

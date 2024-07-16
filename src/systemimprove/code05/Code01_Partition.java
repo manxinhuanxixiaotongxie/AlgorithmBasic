@@ -4,7 +4,11 @@ package systemimprove.code05;
  * 给定一个数组arr，和一个整数num。请把小于等于num的数放在数组的左边，大于num的数放在数组的右边。
  *
  * 要求额外空间复杂度O(1)，时间复杂度O(N)
- *
+ *、
+ * 过程如下：
+ * 1.定义一个变量leftIndex，初始值为-1
+ * 2.该变量的含义是 小于等于num的数的右边界
+ * 3.如果当前数小于等于num，将当前数与leftIndex的下一个数进行交换 并且leftIndex++ 当前值++
  */
 public class Code01_Partition {
 

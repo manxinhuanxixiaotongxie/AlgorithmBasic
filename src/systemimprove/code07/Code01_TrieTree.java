@@ -3,6 +3,9 @@ package systemimprove.code07;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 前缀树
+ */
 public class Code01_TrieTree {
 
     // 前缀树

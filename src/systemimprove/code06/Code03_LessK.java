@@ -17,13 +17,10 @@ public class Code03_LessK {
         }
         PriorityQueue<Integer> heap = new PriorityQueue<>(k);
         int i= 0;
-        for (; i < Math.min(arr.length,k); i++) {
+        for (; i < Math.min(arr.length-1,k-1); i++) {
             heap.add(arr[i]);
         }
-//        int index = 0;
-//        while (!heap.isEmpty()) {
-//            arr[index++] = heap.poll();
-//        }
+
         // 以上实现有问题
         int index = 0;
         for (;i< arr.length;i++,index++) {
