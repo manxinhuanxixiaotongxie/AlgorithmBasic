@@ -5,6 +5,7 @@ package code09;
  * @Author Scurry
  * @Date 2022-07-20 19:28
  */
+
 /**
  * 将单向链表按某值划分成左边小、中间相等、右边大的形式
  * 1。把链表放入数组里，在数组上做partition 笔试用
@@ -15,31 +16,32 @@ public class Code03_SmallerEuqalBigger {
     static class Node {
         private int value;
         private Node next;
+
         Node(int value) {
             this.value = value;
         }
     }
 
-    public static void useArray(int[] arr){
+    public static void useArray(int[] arr) {
         int left = -1;
-        int right = arr.length-1;
-        int R = arr.length-1;
+        int right = arr.length - 1;
+        int R = arr.length - 1;
         int i = 0;
-        while (i<right) {
+        while (i < right) {
             if (arr[i] < arr[R]) {
-                swap(arr,++left,i++);
+                swap(arr, ++left, i++);
             }
             if (arr[i] == arr[R]) {
                 i++;
             }
             if (arr[i] > arr[R]) {
-                swap(arr,i,--right);
+                swap(arr, i, --right);
             }
         }
-        swap(arr,R,right);
+        swap(arr, R, right);
     }
 
-    public static Node useNoArray(Node head,int value) {
+    public static Node useNoArray(Node head, int value) {
 
         Node sH = null;
         Node sT = null;
@@ -48,40 +50,40 @@ public class Code03_SmallerEuqalBigger {
         Node bH = null;
         Node bT = null;
 
-        Node next = null;
-        while (next != null) {
-            next = head.next;
-            if (head.value < value) {
+        Node cur = head;
+        while (cur != null) {
+            Node next = cur.next;
+            cur.next = null;
+            if (cur.value < value) {
                 if (sH == null) {
                     sH = head;
                     sT = head;
                 } else {
                     sT.next = head;
-                    sT = head;
+                    sT = cur;
                 }
             }
 
-            if (head.value == value) {
+            if (cur.value == value) {
                 if (eH == null) {
                     eH = head;
                     eT = head;
-                }else {
+                } else {
                     eT.next = head;
-                    eT = head;
+                    eT = cur;
                 }
             }
 
-            if (head.value > value) {
+            if (cur.value > value) {
                 if (bH == null) {
                     bH = head;
                     bT = head;
                 } else {
                     bT.next = head;
-                    bT = head;
+                    bT = cur;
                 }
             }
-
-            head = next;
+            cur = next;
         }
 
         /**
@@ -99,9 +101,8 @@ public class Code03_SmallerEuqalBigger {
 //        return sH;
 
         if (sH != null) {
-//            sT.next = eH == null?bH:eH;
             sT.next = eH;
-            eT = eT==null?sT:eT;
+            eT = eT == null ? sT : eT;
         }
 
         if (eT != null) {
@@ -113,7 +114,7 @@ public class Code03_SmallerEuqalBigger {
 
     }
 
-    private static void swap(int[] arr,int a,int b) {
+    private static void swap(int[] arr, int a, int b) {
 
         int temp = arr[a];
         arr[a] = arr[b];

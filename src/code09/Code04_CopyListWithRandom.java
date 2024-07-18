@@ -40,10 +40,10 @@ public class Code04_CopyListWithRandom {
     public static Node copyList1(Node head) {
 
         Node cur = head;
-        Map<Node,Node> map = new HashMap<>();
+        Map<Node, Node> map = new HashMap<>();
 
         while (cur != null) {
-            map.put(cur,new Node(cur.value));
+            map.put(cur, new Node(cur.value));
             cur = cur.next;
         }
         /**
@@ -51,7 +51,7 @@ public class Code04_CopyListWithRandom {
          */
         cur = head;
         while (cur != null) {
-            map.get(cur).random = cur.random;
+            map.get(cur).random = map.get(cur.random);
             map.get(cur).next = cur.next;
             cur = cur.next;
         }
@@ -62,9 +62,13 @@ public class Code04_CopyListWithRandom {
     /**
      * 复制一份新节点 嵌套进去原有的链表
      * 然后将两个链表进行拆分
+     *
      * @return
      */
     public static Node copyList2(Node head) {
+        if (head == null) {
+            return head;
+        }
 
         Node cur = head;
         Node curRight = null;
@@ -96,7 +100,7 @@ public class Code04_CopyListWithRandom {
         // 处理random指针
         while (cur != null) {
             next = cur.next.next;
-            cur.next.random = cur.random;
+            cur.next.random = cur.random == null ? null : cur.random.next;
             cur = next;
 
         }

@@ -13,6 +13,7 @@ public class Code03_PartitionList {
             return;
         }
 
+        // 将链表转转换成数组 在数组上进行荷兰国旗问题的拆分
         List<ListNode> listNodes = new ArrayList<>();
         ListNode cur = head;
         while (cur != null) {
@@ -48,6 +49,8 @@ public class Code03_PartitionList {
         ListNode moreTail = null;
         ListNode cur = head;
         while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = null;
             // 如果是小于的话
             if (cur.val < value) {
                 if (lessHead == null) {
@@ -74,6 +77,7 @@ public class Code03_PartitionList {
                     moreTail = cur;
                 }
             }
+            cur = next;
         }
 
         // 将三个链表连接起来

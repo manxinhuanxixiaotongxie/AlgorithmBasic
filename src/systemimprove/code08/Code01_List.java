@@ -7,13 +7,19 @@ public class Code01_List {
      * 面试：时间复杂度放在第一位，但是一定要找到空间最省的方式
      */
     /**
-     * 技巧：
+     * 常见的链表题目的技巧：
+     *
+     *
      * 使用容器：map stack 等
      * 快慢指针
+     *
+     *
      */
 
     /**
+     *
      * 输入链表头节点，奇数长度返回中点，偶数长度返回上中点
+     *
      */
     public Node getLastMId(Node head) {
         if (head == null) {
