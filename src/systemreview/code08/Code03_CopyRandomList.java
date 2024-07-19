@@ -1,7 +1,5 @@
 package systemreview.code08;
 
-import code09.Code04_CopyListWithRandom;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,16 +69,5 @@ public class Code03_CopyRandomList {
 
         }
         return newHead;
-    }
-}
-
-
-class Node {
-    int value;
-    Node next;
-    Node random;
-
-    Node(int value) {
-        this.value = value;
     }
 }
