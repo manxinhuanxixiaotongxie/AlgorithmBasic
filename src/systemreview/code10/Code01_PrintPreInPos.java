@@ -195,7 +195,7 @@ public class Code01_PrintPreInPos {
                 }
             }
         }
-
+        // 后序遍历要考虑最右侧的一棵树  在Morris的过程中是没有打印的 单独进行处理
         printEdge(head);
     }
 
