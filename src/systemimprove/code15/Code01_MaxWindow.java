@@ -53,6 +53,14 @@ public class Code01_MaxWindow {
         System.out.println("finish!");
     }
 
+    /**
+     * 维护一个窗口最大值的更新结构
+     *
+     * 队列里面的大小是的从头到位一次减小
+     * @param arr
+     * @param k
+     * @return
+     */
     public int[] maxSlidingWindow(int[] arr, int k) {
         // 无效参数过滤
         if (arr == null || k < 1 || arr.length < k) {
