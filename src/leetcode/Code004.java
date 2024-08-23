@@ -1,11 +1,11 @@
 package leetcode;
 
-public class Code04 {
+public class Code004 {
     public static void main(String[] args) {
-        Code04 code04 = new Code04();
+        Code004 code004 = new Code004();
         int[] nums1 = {1, 2};
         int[] nums2 = {3, 4};
-        System.out.println(code04.findMedianSortedArrays(nums1, nums2));
+        System.out.println(code004.findMedianSortedArrays(nums1, nums2));
     }
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int m = nums1.length;

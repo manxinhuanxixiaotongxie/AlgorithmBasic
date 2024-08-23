@@ -1,6 +1,6 @@
 package leetcode;
 
-public class Code02 {
+public class Code002 {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
         ListNode cur1 = l1;
@@ -60,7 +60,7 @@ public class Code02 {
     }
 
     public static void main(String[] args) {
-        Code02 code02 = new Code02();
+        Code002 code002 = new Code002();
         ListNode l1 = new ListNode(0);
         ListNode l2 = new ListNode(8);
         ListNode l3 = new ListNode(6);
@@ -99,7 +99,7 @@ public class Code02 {
         l17.next = l18;
         l18.next = l19;
 
-        ListNode result = code02.addTwoNumbers(l1, l11);
+        ListNode result = code002.addTwoNumbers(l1, l11);
         while (result != null) {
             System.out.println(result.val);
             result = result.next;

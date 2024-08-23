@@ -28,10 +28,10 @@ public class Code010 {
     }
 
     public static void main(String[] args) {
-        Code010 code010 = new Code010();
+        Code010 code10 = new Code010();
         int[] nums = {1, 2, 3};
         int k = 3;
-        System.out.println(code010.subarraySum2(nums, k));
+        System.out.println(code10.subarraySum2(nums, k));
     }
 
     public int subarraySum2(int[] nums, int k) {

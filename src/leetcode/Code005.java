@@ -3,7 +3,7 @@ package leetcode;
 /**
  * 最长回文子串
  */
-public class Code05 {
+public class Code005 {
 
     /**
      * 使用manacher算法解决这个问题
