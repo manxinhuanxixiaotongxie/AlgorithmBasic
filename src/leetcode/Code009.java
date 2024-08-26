@@ -1,61 +1,49 @@
 package leetcode;
 
 public class Code009 {
-    /**
-     * 乘积小于K的子数组的数量
-     */
-
-    public int numSubarrayProductLessThanK(int[] nums, int k) {
-        if (nums == null || nums.length == 0 | k <= 1) {
-            return 0;
-        }
-        int left = 0;
-        int right = 0;
-        int cur = 1;
-        int res = 0;
-        /**
-         * 使用滑动窗口
-         *
-         * 这个滑动窗口的更新是按照right来更新的
-         * 流程如下：
-         * 当前窗口的乘积小于k的时候，right++
-         * 当前窗口的乘积大于等于k的时候，left++
-         *
-         */
-        for (int i = 0; i < nums.length; i++) {
-            cur *= nums[i];
-            while (cur >= k) {
-                cur /= nums[left];
-                left++;
+    public boolean isPalindrome(int x) {
+        // 获取一个数值的位数
+        int maxIndex = getIndex(x);
+        int minIndex = 0;
+        boolean ans = true;
+        int maxValue = x;
+        int minVlaue = x;
+        while (maxIndex > minIndex) {
+            int max = getNum(maxValue, maxIndex);
+            int min = minVlaue % 10;
+            if (max != min) {
+                ans = false;
+                break;
             }
-            right++;
-            res += right - left;
+            maxValue -= max * (int) Math.pow(10, maxIndex);
+            minVlaue /= 10;
+            maxIndex--;
+            minIndex++;
         }
-        return res;
+        return ans;
+    }
+
+    private int getNum(int origin, int index) {
+        return origin / (int) Math.pow(10, index);
     }
 
     /**
-     * 衍生：求和等于K的子数组的数量
+     * 获取整数的位数
      *
-     * 见code560
-     *
+     * @param num
      * @return
      */
-//    public int numsOfEqual(int[] arr, int k) {
-//        int ans = 0;
-//        int left = 0;
-//        int sum = 0;
-//        for (int i = 0; i < arr.length; i++) {
-//           // 以i结尾的子数组的和等于K
-//            sum += arr[i];
-//            while(sum > k) {
-//                sum -= arr[left];
-//                left++;
-//            }
-//            if (sum == k) {
-//                ans++;
-//            }
-//        }
-//        return ans;
-//    }
+    private int getIndex(int num) {
+        int index = 0;
+        while (num != 0) {
+            num /= 10;
+            index++;
+        }
+        return index - 1;
+    }
+
+    public static void main(String[] args) {
+        Code009 code009 = new Code009();
+        System.out.println(code009.isPalindrome(1000021));
+    }
 }
