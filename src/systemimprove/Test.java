@@ -1,5 +1,8 @@
 package systemimprove;
 
+import jdk.nashorn.internal.ir.SplitReturn;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -179,20 +182,40 @@ public class Test {
 //        node1.next = node2;
 //        node2.next = node3;
 //        node3.next = node4;
-        ListNode head = new Test().new ListNode(1);
-        ListNode node1 = new Test().new ListNode(4);
-        ListNode node2 = new Test().new ListNode(3);
-        ListNode node3 = new Test().new ListNode(0);
-        ListNode node4 = new Test().new ListNode(2);
-        ListNode node5 = new Test().new ListNode(5);
-        ListNode node6 = new Test().new ListNode(2);
-        head.next = node1;
-        node1.next = node2;
-        node2.next = node3;
-        node3.next = node4;
-        node4.next = node5;
-        node5.next = node6;
-        new Test().partition(head, 3);
+//        ListNode head = new Test().new ListNode(1);
+//        ListNode node1 = new Test().new ListNode(4);
+//        ListNode node2 = new Test().new ListNode(3);
+//        ListNode node3 = new Test().new ListNode(0);
+//        ListNode node4 = new Test().new ListNode(2);
+//        ListNode node5 = new Test().new ListNode(5);
+//        ListNode node6 = new Test().new ListNode(2);
+//        head.next = node1;
+//        node1.next = node2;
+//        node2.next = node3;
+//        node3.next = node4;
+//        node4.next = node5;
+//        node5.next = node6;
+//        new Test().partition(head, 3);
+        String[] nums = new String[]{"1", "2", "3"};
+        List<String> all = new Test().getAll(nums);
+        for (String s : all) {
+            System.out.println(s);
+        }
+    }
+
+    public List<String> getAll(String[] nums) {
+        List<String> ans = new ArrayList<>();
+        process(nums, 0, "", ans);
+        return ans;
+    }
+
+    private void process(String[] nums,int index,String path,List<String> ans) {
+        if (index == nums.length) {
+            ans.add(path);
+        }
+        for (int i = index;i < nums.length;i++) {
+            process(nums,i+1,path + nums[i],ans);
+        }
     }
 
     public int countOfRange(int[] arr) {
