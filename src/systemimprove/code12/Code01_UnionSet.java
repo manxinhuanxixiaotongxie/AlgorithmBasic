@@ -95,6 +95,7 @@ public class Code01_UnionSet {
         // 弹出之后 沿途节点都指向了头节点
         while (!stack.isEmpty()) {
             parentMap.put(stack.pop(), cur);
+            sizeMap.put(cur, sizeMap.get(cur) + 1);
         }
         return cur;
     }
