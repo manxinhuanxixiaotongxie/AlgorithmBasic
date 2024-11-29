@@ -9,10 +9,19 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-public class Code0207 {
+public class Code0210 {
 
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
+
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
         Graph graph = new Graph();
+        int[] ans = new int[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            ans[i] = i;
+        }
+        if (prerequisites == null || prerequisites.length == 0) {
+            return ans;
+        }
+
         Map<Integer, GraphNode> map = new HashMap<>();
         for (int i = 0; i < prerequisites.length; i++) {
             int from = prerequisites[i][1];
@@ -32,15 +41,19 @@ public class Code0207 {
         }
 
         Queue<GraphNode> queue = new LinkedList<>();
-        for (GraphNode node : map.values()) {
-            if (node.in == 0) {
-                queue.add(node);
+        int index = 0;
+        for (int i = 0;i < numCourses;i++) {
+            if (!map.containsKey(i)) {
+                ans[index++] = i;
+            }else if (map.get(i).in == 0) {
+                queue.add(map.get(i));
             }
         }
         Set<GraphNode> set = new HashSet<>();
         while (!queue.isEmpty()) {
             GraphNode node = queue.poll();
             set.add(node);
+            ans[index++] = (int) node.val;
             for (int i = 0; i < node.nexts.size(); i++) {
                 GraphNode to = (GraphNode) node.nexts.get(i);
                 to.in--;
@@ -50,8 +63,11 @@ public class Code0207 {
             }
         }
 
+        if (set.size() == graph.nodes.size()) {
+            return ans;
+        }
 
-        return set.size() == graph.nodes.size();
+        return new int[0];
     }
 
     class Graph {
@@ -88,6 +104,16 @@ public class Code0207 {
                 return this.val.equals(node.val);
             }
             return false;
+        }
+    }
+
+    public static void main(String[] args) {
+        Code0210 solution = new Code0210();
+        int numCourses = 4;
+        int[][] prerequisites = new int[][]{{3, 0}, {0, 1}};
+        int[] ans = solution.findOrder(numCourses, prerequisites);
+        for (int i = 0; i < ans.length; i++) {
+            System.out.print(ans[i] + " ");
         }
     }
 }
