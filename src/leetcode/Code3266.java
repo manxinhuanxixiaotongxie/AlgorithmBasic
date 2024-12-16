@@ -114,7 +114,7 @@ public class Code3266 {
         int pow = n;
         long ans = 1;
         while (pow != 0) {
-            if ((pow & n) == 1) {
+            if ((pow & 1) == 1) {
                 ans = ans * temp % MOD;
             }
             temp = temp * temp % MOD;
