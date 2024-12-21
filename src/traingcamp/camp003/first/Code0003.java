@@ -29,7 +29,7 @@ public class Code0003 {
                 stack.pop();
                 if (stack.isEmpty()) {
                     stack.push(i);
-                }else {
+                } else {
                     ans = Math.max(ans, i - stack.peek());
                 }
             }
