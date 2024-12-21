@@ -51,6 +51,15 @@ public class Code2266 {
     }
 
 
+    /**
+     * 以下这个递归会算多
+     *
+     *
+     * @param chars
+     * @param n
+     * @param index
+     * @return
+     */
     private int process(char[] chars, int n, int index) {
         if (index == n) {
             return 1;
@@ -71,9 +80,15 @@ public class Code2266 {
         int count;
         if (chars[index] == '7' || chars[index] == '9') {
             // 如果right是7 index是3   3 4 5 6 7
-            count = (right - index) % 4;
+            count = (right - index) ;
+            if (count > 4) {
+                return 0;
+            }
         } else {
-            count = (right - index) % 3;
+            count = (right - index) ;
+            if (count > 3) {
+                return 0;
+            }
         }
         for (int i = 0; i < count; i++) {
             System.out.printf("%c", chars[index], index + i + 1);
@@ -84,7 +99,7 @@ public class Code2266 {
 
     public static void main(String[] args) {
         Code2266 code2266 = new Code2266();
-        System.out.println(code2266.countTexts("2233333"));
-        System.out.println(code2266.countTextsRight("2233333"));
+        System.out.println(code2266.countTexts("22"));
+        System.out.println(code2266.countTextsRight("22"));
     }
 }

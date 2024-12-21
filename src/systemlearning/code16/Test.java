@@ -1,11 +1,5 @@
 package systemlearning.code16;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-import leetcode.ListNode;
-
-import java.util.Arrays;
-import java.util.List;
-
 public class Test {
 
     static final int MOD = 1000000007;
