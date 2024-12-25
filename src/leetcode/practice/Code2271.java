@@ -1,7 +1,5 @@
 package leetcode.practice;
 
-import traingcamp.camp003.first.Code0001;
-
 import java.util.Arrays;
 import java.util.Comparator;
 

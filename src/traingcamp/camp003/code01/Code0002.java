@@ -1,4 +1,4 @@
-package traingcamp.camp003.first;
+package traingcamp.camp003.code01;
 
 import java.util.Stack;
 
