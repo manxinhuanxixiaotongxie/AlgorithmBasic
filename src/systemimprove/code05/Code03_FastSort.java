@@ -71,7 +71,6 @@ public class Code03_FastSort {
             return;
         }
         // 随机快排
-        swap(arr, L + (int) (Math.random() * (R - L + 1)), R);
         int[] equalArea = netherlandsFlag(arr, L, R);
         process(arr, L, equalArea[0] - 1);
         process(arr, equalArea[1] + 1, R);
@@ -105,6 +104,7 @@ public class Code03_FastSort {
      * @return
      */
     public int[] netherlandsFlag(int[] arr, int L, int R) {
+        swap(arr, L + (int) (Math.random() * (R - L + 1)), R);
 
         int leftIndex = L - 1;
         int rightIndex = R;
@@ -216,6 +216,7 @@ public class Code03_FastSort {
         int testTime = 500000;
         int maxSize = 100;
         int maxValue = 100;
+        System.out.printf("测试开始\n");
         for (int i = 0; i < testTime; i++) {
             int[] arr1 = fastSort.generateRandomArray(maxSize, maxValue);
             int[] arr2 = fastSort.copyArray(arr1);
@@ -230,5 +231,6 @@ public class Code03_FastSort {
                 break;
             }
         }
+        System.out.printf("测试结束\n");
     }
 }
