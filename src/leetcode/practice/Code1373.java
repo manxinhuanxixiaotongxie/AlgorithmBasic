@@ -1,5 +1,7 @@
 package leetcode.practice;
 
+import leetcode.TreeNode;
+
 public class Code1373 {
 
     public static void main(String[] args) {

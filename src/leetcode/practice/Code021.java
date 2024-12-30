@@ -1,5 +1,7 @@
 package leetcode.practice;
 
+import leetcode.ListNode;
+
 public class Code021 {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         // 基本条件过滤

@@ -311,7 +311,7 @@ public class Code01_Bfprt {
             int ans1 = code01_bfprt.findK1(arr, k);
             int ans2 = code01_bfprt.findKRight(arr2, k);
             int ans3 = code01_bfprt.findK2(arr, k);
-            int ans4 = code01_bfprt.findK3(arr, k);
+            int ans4 = code01_bfprt.findK3(arr3, k);
             if (ans1 != ans2) {
                 System.out.println("Oops1!");
             }

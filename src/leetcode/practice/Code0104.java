@@ -1,5 +1,7 @@
 package leetcode.practice;
 
+import leetcode.TreeNode;
+
 public class Code0104 {
 
     public int maxDepth1(TreeNode root) {

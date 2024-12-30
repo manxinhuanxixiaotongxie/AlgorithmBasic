@@ -1,5 +1,7 @@
 package leetcode.practice;
 
+import leetcode.ListNode;
+
 public class Code0147 {
     public ListNode insertionSortList(ListNode head) {
         if (head == null || head.next == null) {

@@ -1,5 +1,7 @@
 package leetcode.practice;
 
+import leetcode.ListNode;
+
 public class Code025 {
     public ListNode reverseKGroup(ListNode head, int k) {
         if (head == null || k < 2) {

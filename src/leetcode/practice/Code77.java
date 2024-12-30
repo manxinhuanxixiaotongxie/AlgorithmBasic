@@ -1,5 +1,7 @@
 package leetcode.practice;
 
+import leetcode.ListNode;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

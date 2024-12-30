@@ -1,5 +1,7 @@
 package leetcode.practice;
 
+import leetcode.ListNode;
+
 public class Code0024 {
     public ListNode swapPairs(ListNode head) {
         if (head == null) {

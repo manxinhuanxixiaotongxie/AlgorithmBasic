@@ -1,5 +1,7 @@
 package leetcode.practice;
 
+import leetcode.TreeNode;
+
 public class Code0124 {
     public int maxPathSum(TreeNode root) {
         if (root == null) {

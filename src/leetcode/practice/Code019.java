@@ -1,5 +1,7 @@
 package leetcode.practice;
 
+import leetcode.ListNode;
+
 public class Code019 {
     /**
      * 提供两种思路的实现
