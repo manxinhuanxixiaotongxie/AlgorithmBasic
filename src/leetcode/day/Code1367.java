@@ -4,6 +4,7 @@ import leetcode.ListNode;
 import leetcode.TreeNode;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 给你一棵以 root 为根的二叉树和一个 head 为第一个节点的链表。
@@ -14,10 +15,10 @@ import java.util.LinkedList;
  */
 public class Code1367 {
     public boolean isSubPath(ListNode head, TreeNode root) {
-        if (head.next == null) {
-            return head.val == root.val || containsProcess(head, root.left) || containsProcess(head, root.right);
-        }
-        return containsProcess(head, root);
+//        if (head.next == null) {
+//            return head.val == root.val || containsProcess(head, root.left) || containsProcess(head, root.right);
+//        }
+        return containsProcess(head, head, root);
     }
 
     /**
@@ -33,30 +34,75 @@ public class Code1367 {
      * @param root
      * @return
      */
-    private boolean containsProcess(ListNode head, TreeNode root) {
+    private boolean containsProcess(ListNode head, ListNode cur, TreeNode root) {
+        if (cur == null) {
+            return true;
+        }
+        if (root == null) {
+            return false;
+        }
+        // 分情况讨论
+        // 第一种情况二叉树的节点与当前节点不相等
+        // 不相等只有一种情况满足条件 在当前二叉树的左树找到了  或者在当前二叉树的右树找到了
+//        if (root.val != head.val) {
+//            return cur == head && (containsProcess(head,cur,root.left) || containsProcess(head,cur,root.right));
+//        }
+//        // 第二种情况  二叉树的节点值与当前节点是相同的
+//        else {
+//            // 这样写 其实还是遗漏情况
+//            // 由于二叉树不保证没有重复节点
+//            // 因此会遗漏
+//            /**
+//             *       1
+//             *      1
+//             *     10
+//             *     这种情况就会遗漏
+//             */
+//            return (containsProcess(head,cur.next,root.left) || containsProcess(head,cur.next,root.right));
+//        }
+
+
+        /**
+         * 讨论情况
+         * 只有两种情况能够找到
+         * 第一种情况：
+         * 1.二叉树的当前节点与链表节点相等清切在二叉树遍历的过程中能够找到完全相等的
+         * 2.二叉树从当前节点出发找不到与链表相同的路径 但是后续左树与右树能够找到
+         */
+        return (cur.val == root.val && (containsProcess(head, cur.next, root.left) || containsProcess(head, cur.next, root.right))) ||
+                (cur == head && (containsProcess(head, cur, root.left) || containsProcess(head, cur, root.right)));
+    }
+
+    public boolean isSubPath3(ListNode head, TreeNode root) {
+        return containsProcess2(head, head, root);
+    }
+
+    /**
+     * 以root为头的二叉树 是否包含head为头的链表
+     *
+     * @param cur
+     * @param root
+     * @return
+     */
+    private boolean containsProcess2(ListNode head, ListNode cur, TreeNode root) {
+
+        if (cur == null) {
+            return true;
+        }
+
         if (root == null) {
             return false;
         }
 
-        // 如果链表已经来到了最后一个节点
-        if (head.next == null) {
-            return head.val == root.val;
-        }
-
-        // 如果二叉树来到了最后一个节点
-        if (root.left == null && root.right == null) {
-            return false;
-        }
 
         // 第一种情况
         // 二叉树的当前节点与链表的节点的值不相等
-        if (head.val != root.val) {
-            return containsProcess(head, root.left) || containsProcess(head, root.right);
-        } else {
-            // 如果是相等的话
-            return containsProcess(head.next, root.left) || containsProcess(head.next, root.right) ||
-                    containsProcess(head, root.left) || containsProcess(head, root.right);
-        }
+        // 如果是相等的话
+        // 这个方法会明显比上面的那个方法时间负责度高
+        // 这是为什么
+        boolean ans = root.val == cur.val && (containsProcess2(head, cur.next, root.left) || containsProcess2(head, cur.next, root.right));
+        ans = ans || (containsProcess2(head, head, root.left) || containsProcess2(head, head, root.right));
+        return ans;
     }
 
     public boolean isSubPath2(ListNode head, TreeNode root) {
