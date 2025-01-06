@@ -1,4 +1,4 @@
-package leetcode.dp;
+package systemimprove.dp;
 
 /**
  * 为了 打出 一个字母，Alice 需要 按 对应字母 i 次，i 是该字母在这个按键上所处的位置。
@@ -11,13 +11,28 @@ package leetcode.dp;
  * 给你一个字符串 pressedKeys ，表示 Bob 收到的字符串，请你返回 Alice 总共可能发出多少种文字信息 。
  * <p>
  * 由于答案可能很大，将它对 109 + 7 取余 后返回
+ * <p>
+ * <p>
+ * <p>
+ * <p>
+ * 2 abc
+ * 3 def
+ * 4 ghi
+ * 5 jkl
+ * 6 mno
+ * 7 pqrs
+ * 8 tuv
+ * 9 wxyz
+ * <p>
+ * <p>
+ * <p>
+ * 尝试：
+ * 给定一个字符串 返回总共能够产生的输入的可能性
  */
 public class Code2266 {
     public int countTexts(String pressedKeys) {
         char[] chars = pressedKeys.toCharArray();
-        int n = chars.length;
-        return process(chars, n, 0);
-
+        return process2(chars, 0);
     }
 
     private static final int MOD = 1_000_000_007;
@@ -50,56 +65,36 @@ public class Code2266 {
         return (int) ans;
     }
 
-
     /**
-     * 以下这个递归会算多
-     *
+     * 暴力递归怎么尝试
+     * 从左到右进行尝试
      *
      * @param chars
-     * @param n
-     * @param index
      * @return
      */
-    private int process(char[] chars, int n, int index) {
-        if (index == n) {
+    public int process2(char[] chars, int index) {
+        if (index == chars.length) {
             return 1;
         }
-
-        if (index > n) {
-            return 0;
+        int cur = index;
+        while (cur < chars.length - 1 && chars[cur] == chars[cur + 1]) {
+            cur++;
         }
-        // 从当前位置开始选
-        // 找到与当前位置不相等的一个数
-        int right = index + 1;
-        while (right < n && chars[right - 1] == chars[right]) {
-            right++;
-        }
-        // right是到不了的位置
-        // 从当前位置选一个  选两个  选right-index个
+        // 从index -cur都是相同的字符
         int ans = 0;
-        int count;
-        if (chars[index] == '7' || chars[index] == '9') {
-            // 如果right是7 index是3   3 4 5 6 7
-            count = (right - index) ;
-            if (count > 4) {
-                return 0;
-            }
-        } else {
-            count = (right - index) ;
-            if (count > 3) {
-                return 0;
-            }
+        // 尝试每一种方式
+        for (int i = index; i <= cur; i++) {
+            // 当前数作为一个
+            // 当前2个作为一个
+            // 当前三个作为一个
+            ans = ans % MOD + process2(chars, i + 1) % MOD;
         }
-        for (int i = 0; i < count; i++) {
-            System.out.printf("%c", chars[index], index + i + 1);
-            ans = ans % 1000000007 + process(chars, n, index + i + 1) % 1000000007;
-        }
-        return ans % 1000000007;
+        return ans;
     }
 
     public static void main(String[] args) {
         Code2266 code2266 = new Code2266();
-        System.out.println(code2266.countTexts("22"));
-        System.out.println(code2266.countTextsRight("22"));
+        System.out.println(code2266.countTexts("222222222222222222222222222222222222"));
+        System.out.println(code2266.countTextsRight("222222222222222222222222222222222222"));
     }
 }
