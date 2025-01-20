@@ -44,7 +44,7 @@ public class Code01_MaxPoint {
         return ans;
     }
 
-    // 给定一个范围 找到这个范围上大于等于某个数的最左侧位置
+    // 给定一个范围 找到这个范围上小于等于num的最右边的位置
     private static int findMostLeftBiggerThan(int[] nums, int l, int r, int num) {
         int ans = l;
         while (l <= r) {

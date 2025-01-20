@@ -10,6 +10,16 @@ import java.util.Map;
 import java.util.Queue;
 
 public class Code003 {
+    /**
+     *
+     * 这个写法无法AC
+     *
+     *
+     * @param edges1
+     * @param edges2
+     * @param k
+     * @return
+     */
     public int[] maxTargetNodes(int[][] edges1, int[][] edges2, int k) {
         // 构建图
         Code003Graph graph1 = new Code003Graph();
