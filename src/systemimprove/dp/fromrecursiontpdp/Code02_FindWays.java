@@ -1,4 +1,4 @@
-package systemimprove.dp.fromrecursion;
+package systemimprove.dp.fromrecursiontpdp;
 
 /**
  * 假设有排成一行的N个位置，记为1~N，N 一定大于或等于 2

@@ -1,4 +1,4 @@
-package systemimprove.dp.fromrecursion;
+package systemimprove.dp.fromrecursiontpdp;
 
 public class Code01_SumUp {
     /**
