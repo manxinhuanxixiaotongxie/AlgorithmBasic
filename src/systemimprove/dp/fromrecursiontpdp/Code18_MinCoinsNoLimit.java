@@ -188,7 +188,7 @@ public class Code18_MinCoinsNoLimit {
                 // 当前的rest是13
                 // dp[4][13] = dp[5][13] + dp[5][10] + dp[5][7] + dp[5][4] + dp[5][1] 这里面取最小值
                 // dp[4][10] = dp[5][10] + dp[5][7] + dp[5][4] + dp[5][1] 这里面取最小值
-                // dp[4][13] = dp[4][10] + dp[5][13] 这里面取最小值
+                // dp[4][13] = dp[4][10] + dp[5][13] 这里面取最小值 +1 多一张
                 dp[index][rest] = dp[index + 1][rest];
                 if (rest - arr[index] >= 0
                         && dp[index][rest - arr[index]] != Integer.MAX_VALUE) {
