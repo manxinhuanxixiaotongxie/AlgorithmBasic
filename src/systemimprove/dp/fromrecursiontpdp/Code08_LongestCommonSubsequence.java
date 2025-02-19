@@ -46,7 +46,7 @@ public class Code08_LongestCommonSubsequence {
                 int p1 = process1(str1, str2, l1 - 1, l2);
                 int p2 = process1(str1, str2, l1, l2 - 1);
                 int p3 = process1(str1, str2, l1 - 1, l2 - 1);
-                ans = Math.max(ans, Math.max(p3, Math.max(p1, p2)));
+                ans = Math.max(p3, Math.max(p1, p2));
             }
             return ans;
         }

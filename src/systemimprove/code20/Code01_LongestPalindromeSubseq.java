@@ -8,7 +8,7 @@ package systemimprove.code20;
 public class Code01_LongestPalindromeSubseq {
 
     /**
-     * 有一个偷鸡的方法  利用最长公共子序列 将字符串原地翻转
+     * 有一个投机取巧的方法  利用最长公共子序列 将字符串原地翻转
      * <p>
      * 这里提供一个新的思路
      * 利用范围尝试模型进行尝试
@@ -87,7 +87,9 @@ public class Code01_LongestPalindromeSubseq {
     }
 
     /**
-     * 这个函数的作用就是返回str[index....]中最长回文子序列的长度
+     * 使用范围上的尝试模型
+     *
+     * 这个递归函数的含义是在LR 范围上求最长回文子序列的长度
      *
      * @param str
      * @param L
@@ -98,12 +100,9 @@ public class Code01_LongestPalindromeSubseq {
         if (L == R) {
             return 1;
         }
+        // 这个basecase是因为当时R = L+1的时候如果不相等会导致错位
         if (L > R) {
             return 0;
-        }
-        // basecase
-        if (L == str.length - 1) {
-            return str[L] == str[R] ? 1 : 0;
         }
 
         if (str[L] == str[R]) {
@@ -118,5 +117,7 @@ public class Code01_LongestPalindromeSubseq {
         Code01_LongestPalindromeSubseq test = new Code01_LongestPalindromeSubseq();
         String str = "a12b3c43def2ghi1kpm";
         System.out.println(test.longestPalindromeSubseq1(str));
+        System.out.println(test.longestPalindromeSubseq2(str));
+        System.out.println(test.longestPalindromeSubseq3(str));
     }
 }

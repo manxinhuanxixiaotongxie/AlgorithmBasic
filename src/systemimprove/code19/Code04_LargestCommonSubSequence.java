@@ -10,9 +10,13 @@ package systemimprove.code19;
  * <p>
  * 比如 ： str1 = “a12b3c456d”,str2 = “1ef23ghi4j56k”
  * 最长公共子序列是“123456”，所以返回长度6
+ * <p>
  * https://leetcode.com/problems/longest-common-subsequence/
- * 测试通过  但是时间复杂度不好 待后续分析
- *
+ * <p>
+ * 测试通过  但是longestCommonSubsequence2时间复杂度不好 待后续分析：
+ * 是因为charAt方法耗时
+ * <p>
+ * 最长个公共组序列的另外一种写法见从暴力递归到动态规划专题
  */
 public class Code04_LargestCommonSubSequence {
 
@@ -21,25 +25,64 @@ public class Code04_LargestCommonSubSequence {
     }
 
     public int longestCommonSubsequence2(String str1, String str2) {
-        int[][] dp = new int[str1.length()][str2.length()];
+        int n1 = str1.length();
+        int n2 = str2.length();
+        int[][] dp = new int[n1][str2.length()];
         // 行为str1 列为str2
-        dp[str1.length()-1][str2.length()-1] = str1.charAt(str1.length()-1) == str2.charAt(str2.length()-1) ? 1 : 0;
+        dp[n1 - 1][n2 - 1] = str1.charAt(n1 - 1) == str2.charAt(n2 - 1) ? 1 : 0;
         // 最后一行
-        for (int i = str2.length()-2; i >= 0; i--) {
-            dp[str1.length()-1][i] = str1.charAt(str1.length()-1) == str2.charAt(i) ? 1 : dp[str1.length()-1][i+1];
+        for (int i = n2 - 2; i >= 0; i--) {
+            dp[n1 - 1][i] = str1.charAt(n1 - 1) == str2.charAt(i) ? 1 : dp[n1 - 1][i + 1];
         }
         // 最后一列
-        for (int i = str1.length()-2; i >= 0; i--) {
-            dp[i][str2.length()-1] = str1.charAt(i) == str2.charAt(str2.length()-1) ? 1 : dp[i+1][str2.length()-1];
+        for (int i = n1 - 2; i >= 0; i--) {
+            dp[i][n2 - 1] = str1.charAt(i) == str2.charAt(n2 - 1) ? 1 : dp[i + 1][n2 - 1];
         }
         // 普遍位置的依赖是什么
         // 根据暴力递归的过程 普遍位置依赖 下一行数 右一列的数 右下角数数 并且 当str1[i] == str2[j]时 还要依赖右下角数数+1
-        for (int i = str1.length()-2; i >= 0; i--) {
-            for (int j = str2.length()-2; j >= 0; j--) {
-                int p1 = dp[i][j+1];
-                int p2 = dp[i+1][j];
-                int p3 = dp[i+1][j+1];
-                int p4 = str1.charAt(i) == str2.charAt(j) ? 1 + dp[i+1][j+1] : 0;
+        for (int i = n1 - 2; i >= 0; i--) {
+            for (int j = n2 - 2; j >= 0; j--) {
+                int p1 = dp[i][j + 1];
+                int p2 = dp[i + 1][j];
+                int p3 = dp[i + 1][j + 1];
+                int p4 = str1.charAt(i) == str2.charAt(j) ? 1 + dp[i + 1][j + 1] : 0;
+                dp[i][j] = Math.max(Math.max(p1, p2), Math.max(p3, p4));
+            }
+        }
+        return dp[0][0];
+    }
+
+    /**
+     * 优化一点longestCommonSubsequence2的动态规划
+     *
+     * @param str1
+     * @param str2
+     * @return
+     */
+    public int longestCommonSubsequence3(String str1, String str2) {
+        char[] s1 = str1.toCharArray();
+        char[] s2 = str2.toCharArray();
+        int n1 = s1.length;
+        int n2 = s2.length;
+        int[][] dp = new int[n1][n2];
+        // 行为str1 列为str2
+        dp[n1 - 1][n2 - 1] = s1[n1 - 1] == s2[n2 - 1] ? 1 : 0;
+        // 最后一行
+        for (int i = n2 - 2; i >= 0; i--) {
+            dp[n1 - 1][i] = s1[n1 - 1] == s2[i] ? 1 : dp[n1 - 1][i + 1];
+        }
+        // 最后一列
+        for (int i = n1 - 2; i >= 0; i--) {
+            dp[i][n2 - 1] = s1[i] == s2[n2 - 1] ? 1 : dp[i + 1][n2 - 1];
+        }
+        // 普遍位置的依赖是什么
+        // 根据暴力递归的过程 普遍位置依赖 下一行数 右一列的数 右下角数数 并且 当str1[i] == str2[j]时 还要依赖右下角数数+1
+        for (int i = n1 - 2; i >= 0; i--) {
+            for (int j = n2 - 2; j >= 0; j--) {
+                int p1 = dp[i][j + 1];
+                int p2 = dp[i + 1][j];
+                int p3 = dp[i + 1][j + 1];
+                int p4 = s1[i] == s2[j] ? 1 + p3 : 0;
                 dp[i][j] = Math.max(Math.max(p1, p2), Math.max(p3, p4));
             }
         }
@@ -54,10 +97,10 @@ public class Code04_LargestCommonSubSequence {
         if (L == str1.length - 1 && R == str2.length - 1) {
             return str1[L] == str2[R] ? 1 : 0;
         }
-        if (L==str1.length-1) {
+        if (L == str1.length - 1) {
             return str1[L] == str2[R] ? 1 : process(str1, str2, L, R + 1);
         }
-        if (R==str2.length-1) {
+        if (R == str2.length - 1) {
             return str1[L] == str2[R] ? 1 : process(str1, str2, L + 1, R);
         }
 

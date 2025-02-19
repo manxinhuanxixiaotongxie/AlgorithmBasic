@@ -13,18 +13,25 @@ public class Code01_AppleMinBags {
         if (apple < 6) {
             return -1;
         }
+        // 要使用袋子数量最少 8号袋子使用必须足够多
         int bag8 = (apple >> 3);
-        int ans = Integer.MAX_VALUE;
         while (bag8 >= 0) {
             int rest = apple - (bag8 << 3);
             if (rest % 6 == 0) {
-                ans = Math.min(ans, bag8 + (rest / 6));
+                return bag8 + (rest / 6);
             }
             bag8--;
         }
-        return ans == Integer.MAX_VALUE ? -1 : ans;
+        return -1;
     }
 
+    /**
+     *
+     * 根据对舒淇找规律
+     *
+     * @param apple
+     * @return
+     */
     public static int minBagAwesome(int apple) {
         if ((apple & 1) != 0) { // 如果是奇数，返回-1
             return -1;
@@ -38,7 +45,7 @@ public class Code01_AppleMinBags {
 
     public static void main(String[] args) {
         for (int apple = 1; apple < 200; apple++) {
-//            System.out.println(apple + " : " + minBags(apple));
+            System.out.println(apple + " : " + minBags(apple));
             if (minBags(apple) != minBagAwesome(apple)) {
                 System.out.println("Oops!");
             }

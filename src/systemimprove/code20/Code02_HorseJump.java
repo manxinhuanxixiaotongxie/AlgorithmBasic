@@ -53,17 +53,17 @@ public class Code02_HorseJump {
         // 变化的的参数有 x y k 三个参数 三维数据
         int[][][] dp = new int[9][10][k + 1];
         dp[a][b][0] = 1;
-        for (int i = 1; i <=k;i ++) {
-            for (int j = 0;j < 9;j++) {
-                for (int l = 0;l < 10;l++) {
-                    int ways = pick(dp,j+1,l+2,i-1);
-                    ways += pick(dp,j+2,l+1,i-1);
-                    ways += pick(dp,j+2,l-1,i-1);
-                    ways += pick(dp,j+1,l-2,i-1);
-                    ways += pick(dp,j-1,l-2,i-1);
-                    ways += pick(dp,j-2,l-1,i-1);
-                    ways += pick(dp,j-2,l+1,i-1);
-                    ways += pick(dp,j-1,l+2,i-1);
+        for (int i = 1; i <= k; i++) {
+            for (int j = 0; j < 9; j++) {
+                for (int l = 0; l < 10; l++) {
+                    int ways = pick(dp, j + 1, l + 2, i - 1);
+                    ways += pick(dp, j + 2, l + 1, i - 1);
+                    ways += pick(dp, j + 2, l - 1, i - 1);
+                    ways += pick(dp, j + 1, l - 2, i - 1);
+                    ways += pick(dp, j - 1, l - 2, i - 1);
+                    ways += pick(dp, j - 2, l - 1, i - 1);
+                    ways += pick(dp, j - 2, l + 1, i - 1);
+                    ways += pick(dp, j - 1, l + 2, i - 1);
                     dp[j][l][i] = ways;
                 }
             }
@@ -71,7 +71,7 @@ public class Code02_HorseJump {
         return dp[0][0][k];
     }
 
-    public int pick(int[][][] dp,int x,int y,int k) {
+    public int pick(int[][][] dp, int x, int y, int k) {
         if (x > 8 || x < 0 || y > 9 || y < 0) {
             return 0;
         }

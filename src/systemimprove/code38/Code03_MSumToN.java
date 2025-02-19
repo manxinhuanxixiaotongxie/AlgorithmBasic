@@ -11,6 +11,13 @@ package systemimprove.code38;
  */
 public class Code03_MSumToN {
 
+    /**
+     * 暴力递归
+     * 每一个开头的数字都尝试
+     *
+     * @param num
+     * @return
+     */
     public boolean isNums(int num) {
         if (num <= 2) {
             return false;
@@ -70,8 +77,14 @@ public class Code03_MSumToN {
 
     public static void main(String[] args) {
         Code03_MSumToN code03_mSumToN = new Code03_MSumToN();
-        for (int i = 1; i < 1000; i++) {
-            System.out.println(i + " : " + code03_mSumToN.isNums(i));
+        int testTimes = 100000;
+        for (int i = 1; i < testTimes; i++) {
+            boolean ans1 = code03_mSumToN.isNums(i);
+            boolean ans2 = code03_mSumToN.isNums2(i);
+            boolean ans3 = code03_mSumToN.isNums3(i);
+            if (ans1 != ans2 || ans2 != ans3) {
+                System.out.println("Oops!");
+            }
         }
     }
 }
