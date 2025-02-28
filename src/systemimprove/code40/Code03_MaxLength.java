@@ -4,6 +4,7 @@ package systemimprove.code40;
  * 给定一个整数组成的无序数组arr，值可能正、可能负、可能0
  * 给定一个整数值K
  * 找到arr的所有子数组里，哪个子数组的累加和<=K，并且是长度最大的
+ *
  * 返回其长度
  */
 public class Code03_MaxLength {
@@ -46,6 +47,8 @@ public class Code03_MaxLength {
          * minSumEnd 含义是以i开头的子数组能够取到最小累加和的最右侧位置
          *
          * 有了这两个数组之后 我们接下来的流程是：
+         * 遍历数组 将数组的end扩到不能扩的位置
+         * 根据范围向右扩
          */
         int[] minSum = new int[arr.length];
         int[] minSumEnd = new int[arr.length];
@@ -63,6 +66,9 @@ public class Code03_MaxLength {
         int ans = 0;
         int end = 0;
         int sum = 0;
+        // 在这个过程中end是不会回退的
+        // 要注意 end所处的位置可能是会与i相等
+        // 当前数的大小就已经比K要大 end就不能往右扩大
         for (int i = 0; i < arr.length; i++) {
             // 如果当前位置最小的累加和比k要小的话 那么end进行右扩
             while (end < arr.length && sum + minSum[end] <= k) {
@@ -73,6 +79,8 @@ public class Code03_MaxLength {
             if (end > i) {
                 sum -= arr[i];
             } else {
+                // 完全扩不动了 从下一个位置开始
+                // 重新开始扩 看能不能扩大范围
                 end = i + 1;
             }
         }

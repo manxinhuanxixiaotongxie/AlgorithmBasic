@@ -31,6 +31,7 @@ public class Code05_PrintRectangle {
     private void priint(char[][] arr, int a, int b, int c, int d) {
         // a行b列打印到c行d列
         if (a == c) {
+            // 注意变成一条直线
             for (int i = b; i <= d; i++) {
                 System.out.println(arr[a][i]);
             }
@@ -58,9 +59,14 @@ public class Code05_PrintRectangle {
 
     public static void main(String[] args) {
         char[][] arr = new char[][]{
-                {'a', 'b', 'c', 'd'},
-                {'e', 'f', 'g', 'h'},
-                {'i', 'j', 'k', 'l'}
+//                {'a', 'b', 'c', 'd'},
+//                {'e', 'f', 'g', 'h'},
+//                {'i', 'j', 'k', 'l'}
+                {'a','b','c'},
+                {'d','e','f'},
+                {'g','h','i'},
+                {'j','k','l'},
+                {'m','n','o'}
         };
         Code05_PrintRectangle code05_printRectangle = new Code05_PrintRectangle();
         code05_printRectangle.printRec(arr);

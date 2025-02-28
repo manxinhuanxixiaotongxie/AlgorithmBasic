@@ -2,9 +2,9 @@ package systemimprove.code40;
 
 /**
  * 给定一个正方形矩阵matrix，原地调整成顺时针90度转动的样子
- * a  b  c		g  d  a
- * d  e  f			h  e   b
- * g  h  i			i    f   c
+ * a  b  c		    g  d  a
+ * d  e  f			h  e  b
+ * g  h  i			i  f  c
  */
 public class Code04_CycleSquale {
 
@@ -54,7 +54,7 @@ public class Code04_CycleSquale {
         // 右上角的纵坐标
         int d = col - 1;
         // 总共有多少圈
-        while (a <= c && b <= d) {
+        while (a < c) {
 //            cycle(arr, a++, b++, c--, d--);
             cycle2(arr, a++, c--);
         }
@@ -109,7 +109,10 @@ public class Code04_CycleSquale {
     }
 
     public static void main(String[] args) {
-        int[][] matrix = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
+        int[][] matrix = {{1, 2, 3, 4},
+                          {5, 6, 7, 8},
+                          {9, 10, 11, 12},
+                          {13, 14, 15, 16}};
         printMatrix(matrix);
         Code04_CycleSquale code04_cycleSquale = new Code04_CycleSquale();
         code04_cycleSquale.cycleArr(matrix);
