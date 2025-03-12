@@ -71,11 +71,11 @@ public class Code22_NQueens {
         return res;
     }
 
-    public static boolean isValid(int[] record, int i, int j) {
-        // 不能共行
+    public static boolean isValid(int[] record, int row, int col) {
+        // 不能共列
         // 遍历每一行
-        for (int k = 0; k < i; k++) {
-            if (record[k] == j || Math.abs(record[k] - j) == Math.abs(k - i)) {
+        for (int k = 0; k < row; k++) {
+            if (record[k] == col || Math.abs(record[k] - col) == Math.abs(k - row)) {
                 return false;
             }
         }
