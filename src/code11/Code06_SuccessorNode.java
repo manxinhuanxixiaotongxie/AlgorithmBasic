@@ -63,8 +63,8 @@ public class Code06_SuccessorNode {
 
             Node parent = cur.parent;
 
-            while (parent != null && parent.left != cur) {
-                cur = cur.parent;
+            while (parent != null && parent.right == cur) {
+                cur = parent;
                 parent = cur.parent;
             }
             return parent;

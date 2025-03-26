@@ -100,7 +100,6 @@ class AVLTree<K extends Comparable<K>, V> {
                 rightNode.left = cur.left;
                 rightNode.right = cur.right;
                 cur = rightNode;
-
             }
         }
         if (cur != null) {
