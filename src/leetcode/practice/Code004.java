@@ -22,31 +22,50 @@ public class Code004 {
         }
     }
 
+//    private int getKthElement(int[] nums1, int[] nums2, int index) {
+//        int i = 0;
+//        int lIndex = 0;
+//        int rIndex = 0;
+//        int ans = 0;
+//        while (lIndex < nums1.length || rIndex < nums2.length) {
+//            if (lIndex == nums1.length) {
+//                ans = nums2[rIndex];
+//                rIndex++;
+//            } else if (rIndex == nums2.length) {
+//                ans = nums1[lIndex];
+//                lIndex++;
+//            } else {
+//                if (nums1[lIndex] < nums2[rIndex]) {
+//                    ans = nums1[lIndex];
+//                    lIndex++;
+//                } else {
+//                    ans = nums2[rIndex];
+//                    rIndex++;
+//                }
+//            }
+//            if (i == index) {
+//                return ans;
+//            }
+//            i++;
+//        }
+//        return ans;
+//    }
+
     private int getKthElement(int[] nums1, int[] nums2, int index) {
         int i = 0;
         int lIndex = 0;
         int rIndex = 0;
         int ans = 0;
-        while (lIndex < nums1.length || rIndex < nums2.length) {
+        while (i++ <= index) {
             if (lIndex == nums1.length) {
-                ans = nums2[rIndex];
-                rIndex++;
+                ans = nums2[rIndex++];
             } else if (rIndex == nums2.length) {
-                ans = nums1[lIndex];
-                lIndex++;
+                ans = nums1[lIndex++];
+            } else if (nums1[lIndex] < nums2[rIndex]) {
+                ans = nums1[lIndex++];
             } else {
-                if (nums1[lIndex] < nums2[rIndex]) {
-                    ans = nums1[lIndex];
-                    lIndex++;
-                } else {
-                    ans = nums2[rIndex];
-                    rIndex++;
-                }
+                ans = nums2[rIndex++];
             }
-            if (i == index) {
-                return ans;
-            }
-            i++;
         }
         return ans;
     }

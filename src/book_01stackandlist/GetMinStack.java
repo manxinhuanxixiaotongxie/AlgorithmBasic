@@ -74,13 +74,11 @@ public class GetMinStack {
         public void push(Integer num) {
             if (minStack.isEmpty()) {
                 minStack.push(num);
-//                dataStack.push(num);
             }else {
                 Integer peek = getMin();
                 if (peek >= num) {
                     minStack.push(num);
                 }
-//                dataStack.push(num);
             }
             dataStack.push(num);
         }
