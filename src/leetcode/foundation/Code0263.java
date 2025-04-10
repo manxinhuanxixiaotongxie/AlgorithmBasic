@@ -1,5 +1,10 @@
 package leetcode.foundation;
 
+/**
+ * 依次除掉
+ * 将 n 除以 2、3、5，直到 n 不能被整除为止
+ *
+ */
 public class Code0263 {
     public boolean isUgly(int n) {
         if (n <= 0) {
