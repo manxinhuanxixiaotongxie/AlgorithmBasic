@@ -1,8 +1,5 @@
 package book_03binarytree;
 
-import com.sun.jmx.snmp.SnmpNull;
-
-import java.util.List;
 import java.util.Stack;
 
 /**

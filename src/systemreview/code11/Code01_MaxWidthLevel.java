@@ -1,7 +1,5 @@
 package systemreview.code11;
 
-import javafx.util.Pair;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -142,32 +140,7 @@ public class Code01_MaxWidthLevel {
             return 0;
         }
         int ans = Integer.MIN_VALUE;
-        Queue<List<Pair<TreeNode, Integer>>> queue = new LinkedList<>();
 
-        List<Pair<TreeNode, Integer>> list = new ArrayList<>();
-        list.add(new Pair<>(root, 1));
-        queue.add(list);
-
-        while (!queue.isEmpty()) {
-            list = queue.poll();
-            List<Pair<TreeNode, Integer>> nextList = new ArrayList<>();
-            for (Pair<TreeNode, Integer> pair : list) {
-                TreeNode node = pair.getKey();
-                Integer index = pair.getValue();
-                if (node.left != null) {
-                    nextList.add(new Pair<>(node.left, 2 * index));
-                }
-                if (node.right != null) {
-                    nextList.add(new Pair<>(node.right, 2 * index + 1));
-                }
-            }
-            int curLevel = list.get(list.size() - 1).getValue() - list.get(0).getValue() + 1;
-            ans = Math.max(ans, curLevel);
-            if (nextList.isEmpty()) {
-                break;
-            }
-            queue.add(nextList);
-        }
         return ans;
     }
 

@@ -1,7 +1,5 @@
 package systemreview.code10;
 
-import sun.management.snmp.jvminstr.JvmMemPoolEntryImpl;
-
 import java.util.Stack;
 
 /**

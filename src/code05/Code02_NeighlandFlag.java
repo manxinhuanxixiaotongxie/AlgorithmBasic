@@ -6,11 +6,6 @@ package code05;
  * @Date 2022-06-29 19:28
  */
 
-import com.sun.java.swing.plaf.windows.WindowsDesktopIconUI;
-
-import javax.print.DocFlavor;
-import java.sql.Ref;
-
 /**
  * 荷兰国旗问题
  *

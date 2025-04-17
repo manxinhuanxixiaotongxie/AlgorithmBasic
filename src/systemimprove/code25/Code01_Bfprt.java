@@ -84,12 +84,13 @@ public class Code01_Bfprt {
      * <p>
      * 我们看看在这个新数组中 求得的中位数
      * 4 5 5 5 5
-     * 假设新数组是这个样子  那么在这个新数组上 》=5至少有m的长度的一般的数
+     * 假设新数组是这个样子
      * 4 5 5 5 5   新数组
+     *     ^
      * 0 0 0 0 0
      * 0 0 0 0 0
      * * *
-     * 新数组找到的中位数 对应原始数组 意味着  至少有     3/N的长度 大于等于选出来的这个数
+     * 观察上面箭头位置的数 说明至少找到了N/5 *2个数是大于这个中位数的
      * <p>
      * <p>
      * 数组分组之后 每个组五个数  总共有n/5组
@@ -122,8 +123,6 @@ public class Code01_Bfprt {
         return bfprt(nums, left, right, k);
     }
 
-    // 根据bfprt的过程
-
     /**
      * 根据bfprt的过程
      * 我们需要找到一个严格位置中间的数
@@ -153,7 +152,7 @@ public class Code01_Bfprt {
             int leftIndex = (i * 5) + left;
             newArr[i] = getFiveMid(nums, leftIndex, Math.min(leftIndex + 4, right));
         }
-        // 针对新数组进行bfprt
+        // 针对新数组进行bfprt newArr是中位数数组
         return bfprt(newArr, 0, newArr.length - 1, newArr.length / 2);
     }
 
@@ -312,14 +311,8 @@ public class Code01_Bfprt {
             int ans2 = code01_bfprt.findKRight(arr2, k);
             int ans3 = code01_bfprt.findK2(arr, k);
             int ans4 = code01_bfprt.findK3(arr3, k);
-            if (ans1 != ans2) {
+            if (ans1 != ans2 || ans1 != ans3 || ans1 != ans4) {
                 System.out.println("Oops1!");
-            }
-            if (ans1 != ans3) {
-                System.out.println("Oops2!");
-            }
-            if (ans1 != ans4) {
-                System.out.println("Oops3!");
             }
         }
         System.out.println("finish!");

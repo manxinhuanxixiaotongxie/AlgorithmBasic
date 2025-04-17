@@ -1,7 +1,5 @@
 package book_02linkedlist;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
-
 /**
  * @Description
  * @Author Scurry

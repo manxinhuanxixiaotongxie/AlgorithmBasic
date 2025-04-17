@@ -1,9 +1,5 @@
 package systemimprove.dp.fromrecursiontpdp;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-
-import java.util.EventListener;
-
 /**
  * 给定两个长度都为N的数组weights和values，
  * weights[i]和values[i]分别代表 i号物品的重量和价值。

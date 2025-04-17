@@ -1,7 +1,5 @@
 package leetcode.practice;
 
-import sun.dc.pr.PRError;
-
 import java.util.Comparator;
 
 public class Code480 {
@@ -219,7 +217,7 @@ class MySBTTree {
     }
 
     /**
-     * 找地K个数
+     * 找第K个数
      *
      * @return
      */

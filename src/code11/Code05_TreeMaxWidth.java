@@ -6,7 +6,6 @@ package code11;
  * @Date 2022-07-23 16:32
  */
 
-import javafx.util.Pair;
 import newerclass.TreeNode;
 
 import java.util.ArrayList;
@@ -147,22 +146,12 @@ public class Code05_TreeMaxWidth {
      */
     public int widthOfBinaryTree(TreeNode root) {
         int res = 1;
-        List<Pair<TreeNode, Integer>> arr = new ArrayList<Pair<TreeNode, Integer>>();
-        arr.add(new Pair<TreeNode, Integer>(root, 1));
-        while (!arr.isEmpty()) {
-            List<Pair<TreeNode, Integer>> tmp = new ArrayList<Pair<TreeNode, Integer>>();
-            for (Pair<TreeNode, Integer> pair : arr) {
-                TreeNode node = pair.getKey();
-                int index = pair.getValue();
-                if (node.left != null) {
-                    tmp.add(new Pair<TreeNode, Integer>(node.left, index * 2));
-                }
-                if (node.right != null) {
-                    tmp.add(new Pair<TreeNode, Integer>(node.right, index * 2 + 1));
-                }
-            }
-            res = Math.max(res, arr.get(arr.size() - 1).getValue() - arr.get(0).getValue() + 1);
-            arr = tmp;
+        // JDK24已经的去除了javafx的包 没有替换选项
+        // 使用宽度优先遍历遍历这个树
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+
         }
         return res;
     }

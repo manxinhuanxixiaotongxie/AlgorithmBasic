@@ -2,8 +2,6 @@ package code12;
 
 import newerclass.TreeNode;
 
-import javax.rmi.PortableRemoteObject;
-
 /**
  * @Description
  * 给定一个二叉树的头结点

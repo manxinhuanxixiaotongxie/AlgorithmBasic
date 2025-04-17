@@ -1,7 +1,5 @@
 package systemlearning.code16;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
