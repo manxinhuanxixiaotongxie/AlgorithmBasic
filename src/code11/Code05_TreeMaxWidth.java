@@ -6,10 +6,8 @@ package code11;
  * @Date 2022-07-23 16:32
  */
 
-import newerclass.TreeNode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -21,35 +19,35 @@ import java.util.Queue;
  */
 public class Code05_TreeMaxWidth {
 
-    public static class Node {
+    public static class TreeNode {
         public int value;
-        public Node left;
-        public Node right;
+        public TreeNode left;
+        public TreeNode right;
 
-        public Node(int v) {
+        public TreeNode(int v) {
             value = v;
         }
     }
 
-    public static int maxWidthNoMap(Node head) {
+    public static int maxWidthNoMap(TreeNode head) {
 
         if (head == null) {
             return 0;
         }
 
-        Queue<Node> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
         queue.add(head);
 
         // 当前层，最右节点是谁
-        Node curEnd = head;
+        TreeNode curEnd = head;
         // 下一层，最右节点是谁
-        Node nextEnd = null;
+        TreeNode nextEnd = null;
         // 当前层有多少节点
         int curLevelNodes = 0;
         // 最大节点数
         int max = 0;
         while (!queue.isEmpty()) {
-            Node cur = queue.poll();
+            TreeNode cur = queue.poll();
             if (cur.left != null) {
                 queue.add(cur.left);
                 nextEnd = cur.left;
@@ -83,19 +81,18 @@ public class Code05_TreeMaxWidth {
      * @param root
      * @return
      */
-    public List<Integer> largestValues(TreeNode root) {
+    public List<Integer> largestValues(newerclass.TreeNode root) {
         if (root == null) {
             return new ArrayList<>();
         }
-        LinkedList<TreeNode> list = new LinkedList<>();
+        LinkedList<newerclass.TreeNode> list = new LinkedList<>();
         List<Integer> ans = new ArrayList<>();
         list.add(root);
-
         while (!list.isEmpty()) {
             int size = list.size();
             int max = list.peek().val;
             for (int i = 0; i < size; i++) {
-                TreeNode pop = list.pop();
+                newerclass.TreeNode pop = list.pop();
                 max = Math.max(max, pop.val);
                 if (pop.left != null) {
                     list.add(pop.left);
@@ -112,26 +109,25 @@ public class Code05_TreeMaxWidth {
     }
 
     public static void main(String[] args) {
-        TreeNode node1 = new TreeNode(1);
-        TreeNode node2 = new TreeNode(3);
-        TreeNode node3 = new TreeNode(2);
+        TreeNode treeNode1 = new TreeNode(1);
+        TreeNode treeNode2 = new TreeNode(3);
+        TreeNode treeNode3 = new TreeNode(2);
 
-        TreeNode node4 = new TreeNode(5);
-        TreeNode node5 = new TreeNode(3);
+        TreeNode treeNode4 = new TreeNode(5);
+        TreeNode treeNode5 = new TreeNode(3);
 
-        TreeNode node16 = new TreeNode(9);
+        TreeNode treeNode16 = new TreeNode(9);
 
-        node1.left = node2;
-        node1.right = node3;
+        treeNode1.left = treeNode2;
+        treeNode1.right = treeNode3;
 
-        node2.left = node4;
-        node2.right = node5;
+        treeNode2.left = treeNode4;
+        treeNode2.right = treeNode5;
 
-        node3.left = null;
-        node3.right = node16;
+        treeNode3.left = null;
+        treeNode3.right = treeNode16;
 
-        Code05_TreeMaxWidth code05_treeMaxWidth = new Code05_TreeMaxWidth();
-        code05_treeMaxWidth.widthOfBinaryTree(node1);
+        widthOfBinaryTree(treeNode1);
 
 
     }
@@ -144,58 +140,48 @@ public class Code05_TreeMaxWidth {
      * @param root
      * @return
      */
-    public int widthOfBinaryTree(TreeNode root) {
-        int res = 1;
-        // JDK24已经的去除了javafx的包 没有替换选项
-        // 使用宽度优先遍历遍历这个树
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        while (!queue.isEmpty()) {
-
-        }
-        return res;
-    }
-
-    public static int maxWidthwWithMap(Node head) {
-
-        if (head == null) {
+    public static int widthOfBinaryTree(TreeNode root) {
+        if (root == null) {
             return 0;
         }
-
-        // key 在 哪一层，value
-        HashMap<Node, Integer> levelMap = new HashMap<>();
-        levelMap.put(head, 1);
-        Queue<Node> queue = new LinkedList<>();
-        queue.add(head);
-        // 当前层
-        int curLevel = 1;
-        // 当前层有多少节点
-        int curLevelNodes = 0;
-        int max = 0;
-
-        while (!queue.isEmpty()) {
-            Node cur = queue.poll();
-            if (cur.left != null) {
-                levelMap.put(cur.left, levelMap.get(cur) + 1);
-                queue.add(cur.left);
-            }
-
-            if (cur.right != null) {
-                levelMap.put(cur.right, levelMap.get(cur) + 1);
-                queue.add(cur.right);
-            }
-
-            // 不是当前层
-            if (levelMap.get(cur) != curLevel) {
-                max = Math.max(max, curLevelNodes);
-                curLevel++;
-                curLevelNodes = 1;
-            } else {
-                curLevelNodes++;
-            }
+        if (root.left == null && root.right == null) {
+            return 1;
         }
+        int ans = 0;
+        LinkedList<Node> queue = new LinkedList<>();
+        Node node = new Node(root, 1);
+        queue.add(node);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            // 当前下标是index
+            // 当前层的宽度是
+            int curLevel = queue.peekLast().index - queue.peekFirst().index + 1;
+            ans = Math.max(ans, curLevel);
+            for (int i = 0; i < size; i++) {
+                Node curNode = queue.poll();
+                TreeNode curTreeNode = curNode.treeNode;
+                int index = curNode.index;
+                if (curTreeNode.left != null) {
+                    queue.add(new Node(curTreeNode.left, index << 1));
+                }
+                if (curTreeNode.right != null) {
+                    queue.add(new Node(curTreeNode.right, index << 1 | 1));
+                }
+            }
 
-        return max;
+        }
+        return ans;
     }
+
+    public static class Node {
+        TreeNode treeNode;
+        int index;
+
+        Node(TreeNode treeNode, int index) {
+            this.treeNode = treeNode;
+            this.index = index;
+        }
+    }
+    
 
 }
