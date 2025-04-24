@@ -12,9 +12,8 @@ import systemlearning.code16.Test;
  * 说明：叶子节点是指没有子节点的节点。
  * <p>
  * https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/
- *
+ * <p>
  * 以下两种方式测试通过
- *
  */
 public class Code02_MinDepth {
 
@@ -60,9 +59,12 @@ public class Code02_MinDepth {
 
     /**
      * 求树的最小深度 与Morris遍历结合
-     * 根据Morris遍历的过程可以推断出来
-     * 先明确一个结论 如果一个节点在Morris遍历的过程中 第二次来到某个节点 如果当前节点左树的最右侧节点是当前节点 并且左树的最右侧节点的左孩子节点为空 那么左树的最右侧节点就是叶子节点
      *
+     * 根据Morris遍历的过程可以推断出来
+     * 先明确一个结论 如果一个节点在Morris遍历的过程中 第二次来到某个节点
+     *
+     * 如果当前节点左树的最右侧节点是当前节点 并且左树的最右侧节点的左孩子节点为空 那么左树的最右侧节点就是叶子节点
+     * <p>
      * 并且在第二次回到当前节点时候 进行结算 怎么进行结算 当前节点的高度就是 当前层的高度减去左树最右侧节点的个数
      * <p>
      * 如果在遍历的过程中左树的最右侧节点的左孩子节点不为空 那么左树的最右侧节点不是叶子节点 树在当前分支就还没有结束
@@ -97,7 +99,8 @@ public class Code02_MinDepth {
                     // mostRight的右孩子节点不为空的时候
                     // 意味着mostRight的右孩子节点的第二次来到该节点
                     // 意味着右孩子节点的所有节点都已经遍历完了
-                    // 进行结算
+                    // 这里为什么还要判断右侧节点左节点为空
+                    // 只有左侧节点为空的时候才是叶子节点 只有叶子节点才进行结算
                     if (mostRight.left == null) {
                         depth = Math.min(depth, level);
                     }
@@ -110,6 +113,7 @@ public class Code02_MinDepth {
         }
 
         // 针对左右侧的分支进行单独计算
+        // 二叉树的右视图的那个路线没有进行结算
         int finalLevel = 1;
         cur = root;
         while (cur.right != null) {
@@ -121,6 +125,30 @@ public class Code02_MinDepth {
         }
 
         return depth;
+    }
+
+    public int minDepth3(Test.TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return process3(root);
+    }
+
+    private int process3(Test.TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        if (node.left == null && node.right == null) {
+            return 1;
+        }
+        int ans = Integer.MAX_VALUE;
+        if (node.left != null) {
+            ans = Math.min(ans, process3(node.left));
+        }
+        if (node.right != null) {
+            ans = Math.min(ans, process3(node.right));
+        }
+        return ans + 1;
     }
 
     public static void main(String[] args) {

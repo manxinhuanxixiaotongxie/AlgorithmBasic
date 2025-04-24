@@ -2,8 +2,11 @@ package systemimprove.code24;
 
 /**
  * manacher练习题
- *
+ * <p>
  * 给定一个字符串str1，只能往str1的后面添加字符变成str2，要求str2整体都是回文串且最短
+ * <p>
+ * <p>
+ * 说明：必须包含最后一个字符的情况下最长的回文子串是什么
  */
 public class Code02_AddShortestEnd {
 
@@ -25,10 +28,13 @@ public class Code02_AddShortestEnd {
                     break;
                 }
             }
+
             if (i + pArr[i] > R) {
                 R = i + pArr[i];
                 c = i;
             }
+            // 一旦发现已经到达最后
+            // 说明必须包含最后一个字符的最长回文半径已经找到
             if (R == str.length) {
                 maxLength = pArr[i];
                 break;
@@ -37,13 +43,18 @@ public class Code02_AddShortestEnd {
         }
         // 已经求出来了最长回文半径的长度（目前求的是加工之后的）
         // 那么需要补充的字符的长度就是原始字符串的长度减去-（最长回文半径的长度-1）
-        int[] res = new int[s.length() - (maxLength - 1)];
-        StringBuilder builder = new StringBuilder();
-        // 从最后一个位置开始填充
-        for (int i = res.length-1;i>=0;i--) {
-            builder.append(s.charAt(i));
+//        int[] res = new int[s.length() - (maxLength - 1)];
+//        StringBuilder builder = new StringBuilder();
+//        // 从最后一个位置开始填充
+//        for (int i = res.length - 1; i >= 0; i--) {
+//            builder.append(s.charAt(i));
+//        }
+//        return builder.toString();
+        char[] res = new char[s.length() - (maxLength - 1)];
+        for (int i = res.length - 1; i >= 0; i--) {
+            res[i] = str[c + i];
         }
-        return builder.toString();
+        return String.valueOf(res);
 
     }
 
