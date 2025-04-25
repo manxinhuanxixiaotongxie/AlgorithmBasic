@@ -6,6 +6,10 @@ import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Set;
 
+/**
+ * Primeal Tree Prim Algorithm
+ *
+ */
 public class Code05_GraphP {
 
     /**
@@ -18,8 +22,11 @@ public class Code05_GraphP {
      */
     public Set<Edge> minSpanningTreeP(Graph graph) {
         Set<Edge> ans = new HashSet<>();
+        // 优先级队列，存放所有解锁的边 小根堆
         PriorityQueue<Edge> priorityQueue = new PriorityQueue<>(new ComparatorEdge());
+        // 哪些点被解锁出来了
         Set<Node> set = new HashSet<>();
+        // 随意从哪一点出发
         for (Node node : graph.nodes.values()) {
             if (!set.contains(node)) {
                 set.add(node);
@@ -27,8 +34,11 @@ public class Code05_GraphP {
                     priorityQueue.add(edge);
                 }
                 while (!priorityQueue.isEmpty()) {
+                    // 已经解锁的边的最小值
                     Edge edge = priorityQueue.poll();
+                    // 可能是新点
                     Node toNode = edge.to;
+                    // 不包含的场景下就是新的点
                     if (!set.contains(toNode)) {
                         set.add(toNode);
                         ans.add(edge);
@@ -39,7 +49,7 @@ public class Code05_GraphP {
                 }
             }
             // 防森林
-            break;
+            // break;
         }
 
         return ans;

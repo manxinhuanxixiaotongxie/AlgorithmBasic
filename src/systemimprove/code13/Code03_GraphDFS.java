@@ -16,16 +16,6 @@ public class Code03_GraphDFS {
         Set<Node> set = new HashSet<>();
         set.add(node);
         List<Node> ans = new ArrayList<>();
-//        while (!stack.isEmpty()) {
-//            Node node1 = stack.pop();
-//            ans.add(node1);
-//            for (Node next : node1.nexts) {
-//                if (!set.contains(next)) {
-//                    stack.push(next);
-//                    set.add(next);
-//                }
-//            }
-//        }
         while (!stack.isEmpty()) {
             Node cur = stack.pop();
             ans.add(cur);

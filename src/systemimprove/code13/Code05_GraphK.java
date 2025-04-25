@@ -28,6 +28,7 @@ public class Code05_GraphK {
         UnionSet unionSet = new UnionSet();
         unionSet.makeSet(graph);
         Set<Edge> result = new HashSet<>();
+        // 边解锁点
         while (!edgePriorityQueue.isEmpty()) {
             Edge pop = edgePriorityQueue.poll();
             Node from = pop.from;
