@@ -1,9 +1,10 @@
-package classic;
+package classicsort;
 
-import static classic.InsertSort.insertSort1;
+import java.util.Arrays;
 
 /**
- * @Description:经典排序算法堆排序
+ * @Description 经典排序算法堆排序
+ *
  * @Author Scurry
  * @Date 2023-05-09 15:53
  */
@@ -21,31 +22,44 @@ public class HeapSort {
 //        for (int i = 0; i < arr.length; i++) {
 //            heapInsert(arr, i);
 //        }
+        int heapSize = arr.length;
 
         // O(N)
         for (int i = arr.length - 1; i >= 0; i--) {
-            heapify(arr, i, arr.length);
+            heapify(arr, i, heapSize);
         }
 
-        int heapSize = arr.length;
-
-        swap(arr, 0, --heapSize);
+        // 堆的弹出过程 将堆顶的位置与堆的最后一个位置进行交换
+        // 堆的大小进行减小
+//        swap(arr, 0, --heapSize);
+//
+//        while (heapSize > 0) {
+//            heapify(arr, 0, heapSize);
+//            swap(arr, 0, --heapSize);
+//        }
 
         while (heapSize > 0) {
-            heapify(arr, 0, heapSize--);
-
-            swap(arr, 0, heapSize);
+            swap(arr, 0, --heapSize);
+            heapify(arr, 0, heapSize);
         }
 
     }
 
+    /**
+     * 向下调整
+     *
+     * @param arr
+     * @param index
+     * @param heapSize
+     */
     public static void heapify(int[] arr, int index, int heapSize) {
         int left = index * 2 + 1;
         while (left < heapSize) {
+            // 找到子节点的最大值
             int maxValueIndex = left + 1 < heapSize && arr[left + 1] > arr[left] ? left + 1 : left;
-
+            // 子节点的最大值与当前位置进行比较
             maxValueIndex = arr[maxValueIndex] > arr[index] ? maxValueIndex : index;
-
+            // 如果当前位置已经是最大值了  不需要进行处理
             if (maxValueIndex == index) {
                 break;
             }
@@ -55,6 +69,12 @@ public class HeapSort {
         }
     }
 
+    /**
+     * 在index位置 插入arr[index]的数组
+     *
+     * @param arr
+     * @param index
+     */
     public static void heapInsert(int[] arr, int index) {
 
         while (arr[index] > arr[(index - 1) / 2]) {
@@ -131,7 +151,7 @@ public class HeapSort {
             int[] arr3 = copyArray(arr1);
             int[] arr4 = copyArray(arr1);
             heapsort(arr1);
-            insertSort1(arr2);
+            Arrays.sort(arr2);
             if (!isEqual(arr1, arr2)) {
                 System.out.println("出错了！");
                 printArray(arr1);

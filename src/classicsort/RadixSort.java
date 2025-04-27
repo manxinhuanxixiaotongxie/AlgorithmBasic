@@ -1,7 +1,8 @@
-package classic;
+package classicsort;
 
 /**
- * @Description桶排序
+ * @Description 桶排序
+ *
  * @Author Scurry
  * @Date 2023-05-09 16:17
  */
@@ -26,9 +27,6 @@ public class RadixSort {
 
         int i = 0;
         for (int j = 0; j < help.length; j++) {
-//            if (help[i] != 0) {
-//                arr[i++] = i;
-//            }
             while (help[j]-- > 0) {
                 arr[i++] = j;
             }
@@ -37,6 +35,7 @@ public class RadixSort {
 
     /**
      * 找到最大的数的位数 其余补0
+     *
      * 个位进行排序
      * 十位进行排序
      * 百位进行排序
@@ -64,6 +63,7 @@ public class RadixSort {
             }
 
             /**
+             *
              * 经典桶排序实现：
              * 这段代码详细解释：
              * count原始表示的是每个桶对应的是多少个数

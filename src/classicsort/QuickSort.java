@@ -1,6 +1,6 @@
-package classic;
+package classicsort;
 
-import static classic.InsertSort.insertSort1;
+import static classicsort.InsertSort.insertSort1;
 
 /**
  * @Description经典排序算法：快速排序

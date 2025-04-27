@@ -1,4 +1,4 @@
-package classic;
+package classicsort;
 
 /**
  * @Description

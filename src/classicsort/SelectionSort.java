@@ -1,4 +1,4 @@
-package classic;
+package classicsort;
 
 /**
  * @Description经典排序算法:选择排序
@@ -8,7 +8,6 @@ package classic;
 public class SelectionSort {
 
     public static void main(String[] args) {
-//        int[] arr = {5, 3, 12, 2, 1, 6, 5};
         int[] arr = {5,3,12,2,1,6,5};
         printArr(arr);
         selectionSort(arr);
@@ -23,15 +22,11 @@ public class SelectionSort {
         for (int i = 0; i < arr.length - 1; i++) {
             int minIndex = i;
             for (int j = i + 1; j < arr.length; j++) {
-                if (arr[j] < arr[minIndex]) {
-                    minIndex = j;
-                }
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
             }
-
-            if (minIndex != i) {
-                swap(arr, i, minIndex);
+            if (minIndex == i) {
+                continue;
             }
-
         }
     }
 
@@ -43,18 +38,17 @@ public class SelectionSort {
     }
 
     /**
-     * 注意：这里异或交换的坑，当i==j成立
-     * 会将数组的值变成0
+     * 注意：这里异或交换的坑，只有i和j不相等时才可以使用
+     *
+     * 不然得话会将数组的原始的值变成0
+     *
      * @param arr
      * @param i
      * @param j
      */
     public static void swap(int[] arr, int i, int j) {
-
         arr[i] = arr[i]^arr[j];
         arr[j] = arr[i]^arr[j];
         arr[i] = arr[i]^arr[j];
-
-
     }
 }
