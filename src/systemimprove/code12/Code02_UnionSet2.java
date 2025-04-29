@@ -7,7 +7,7 @@ package systemimprove.code12;
  *
  * 2.第二种 使用数组实现
  *  2.1 使用数组实现 两个数组 一个是节点到父节点的映射 一个是节点所在集合的大小
- *  2.2 使用辅助数组 干什么用呢？ 在向上找父亲的过程中，把沿途的点都指向父亲
+ *  2.2 使用辅助数组 干什么用呢？ 在向上找父亲的过程中，把沿途的点都指向父亲 模拟栈操作
  *
  *  在笔试的过程中，如果遇到并查集的问题，优先使用第二种方式
  */
@@ -32,7 +32,7 @@ public class Code02_UnionSet2 {
             }
         }
 
-        public int find(int i) {
+        public int findFather(int i) {
             int hi = 0;
             while (i != parents[i]) {
                 // 沿途的点都记录下来
@@ -47,12 +47,12 @@ public class Code02_UnionSet2 {
         }
 
         public boolean isSameSet(int i, int j) {
-            return find(i) == find(j);
+            return findFather(i) == findFather(j);
         }
 
         public void union(int i, int j) {
-            int f1 = find(i);
-            int f2 = find(j);
+            int f1 = findFather(i);
+            int f2 = findFather(j);
             if (f1 != f2) {
                 int big = sizes[f1] >= sizes[f2] ? f1 : f2;
                 int small = big == f1 ? f2 : f1;
