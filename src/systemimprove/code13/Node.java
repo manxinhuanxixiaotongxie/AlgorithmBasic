@@ -2,6 +2,10 @@ package systemimprove.code13;
 
 import java.util.List;
 
+/**
+ * 图的表示方式
+ *
+ */
 public class Node {
     // 边集
     public List<Edge> edges;

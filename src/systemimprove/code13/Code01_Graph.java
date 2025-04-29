@@ -5,15 +5,16 @@ public class Code01_Graph {
      * 图的表示方式
      * <p>
      * <p>
-     * 邻接表法
-     * 邻接矩阵法
+     * 邻接表法：
+     *
+     * 邻接矩阵法：
+     *
      * <p>
      * <p>
      * 1.点集
      * 2.边集
      */
     public Graph createGraph(int[][] matrix) {
-
         Graph graph = new Graph();
         int N = matrix.length;
         for (int i = 0; i < N; i++) {
@@ -38,8 +39,6 @@ public class Code01_Graph {
             Edge newEdge = new Edge(weight, fromNode, toNode);
             fromNode.edges.add(newEdge);
             graph.edges.add(newEdge);
-
-
         }
         return graph;
 
