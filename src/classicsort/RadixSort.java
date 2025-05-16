@@ -1,13 +1,14 @@
 package classicsort;
 
+import java.util.Arrays;
+
 /**
  * @Description 桶排序
- *
  * @Author Scurry
  * @Date 2023-05-09 16:17
  */
 public class RadixSort {
-    
+
     public static void countSort(int[] arr) {
         if (arr == null || arr.length < 2) {
             return;
@@ -19,7 +20,7 @@ public class RadixSort {
             }
         }
 
-        int[] help = new int[max+1];
+        int[] help = new int[max + 1];
 
         for (int i = 0; i < arr.length; i++) {
             help[arr[i]]++;
@@ -35,7 +36,7 @@ public class RadixSort {
 
     /**
      * 找到最大的数的位数 其余补0
-     *
+     * <p>
      * 个位进行排序
      * 十位进行排序
      * 百位进行排序
@@ -48,13 +49,15 @@ public class RadixSort {
         int i = 0, j = 0;
         // 有多少个数准备多少个辅助空间
         int[] help = new int[R - L + 1];
-        for (int d = 1; d <= digit; d++) { // 有多少位就进出几次
+        // 有多少位就进出几次
+        for (int d = 1; d <= digit; d++) {
             // 10个空间
             // count[0] 当前位(d位)是0的数字有多少个
             // count[1] 当前位(d位)是(0和1)的数字有多少个
             // count[2] 当前位(d位)是(0、1和2)的数字有多少个
             // count[i] 当前位(d位)是(0~i)的数字有多少个
-            int[] count = new int[radix]; // count[0..9]
+            // count[0..9]
+            int[] count = new int[radix];
             for (i = L; i <= R; i++) {
                 // 103  1   3
                 // 209  1   9
@@ -104,23 +107,24 @@ public class RadixSort {
 
     /**
      * 获取数组最大数的位数
+     *
      * @param arr
      * @return
      */
-    public int getIndex(int[] arr) {
+    public static int getIndex(int[] arr) {
 
         int max = arr[0];
         for (int i = 0; i < arr.length; i++) {
 //            if (arr[i] > max) {
 //                max = arr[i];
 //            }
-            max = Math.max(max,arr[i]);
+            max = Math.max(max, arr[i]);
         }
 
         int index = 0;
         while (max != 0) {
             index++;
-            max /=10;
+            max /= 10;
         }
         return index;
     }
@@ -139,5 +143,45 @@ public class RadixSort {
         return ((x / ((int) Math.pow(10, d - 1))) % 10);
     }
 
+
+    public static int[] getRandomArray(int maxSize, int maxValue) {
+        int[] arr = new int[(int) (Math.random() * (maxSize + 1))];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) (Math.random() * (maxValue + 1));
+        }
+        return arr;
+    }
+
+    public static int[] copyArray(int[] arr) {
+        if (arr == null) {
+            return null;
+        }
+        int[] res = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            res[i] = arr[i];
+        }
+        return res;
+    }
+
+
+    public static void main(String[] args) {
+        int testTimes = 1000000;
+        int maxSize = 100;
+        System.out.println("test begin");
+        for (int i = 0; i < testTimes; i++) {
+            int[] arr = getRandomArray(maxSize, maxSize);
+            int[] copy = copyArray(arr);
+            int digit = getIndex(arr);
+            radixSort(arr, 0, arr.length - 1, digit);
+            Arrays.sort(copy);
+            if (!Arrays.equals(arr, copy)) {
+                System.out.println("Oops!");
+                System.out.println(Arrays.toString(arr));
+                System.out.println(Arrays.toString(copy));
+                break;
+            }
+        }
+        System.out.println("test end");
+    }
 
 }
