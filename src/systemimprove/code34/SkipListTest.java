@@ -15,7 +15,7 @@ class SKipList<K extends Comparable<K>, V> {
     private int maxLevel;
 
     SKipList(SkipNode head) {
-        head = new SkipNode(null,null);
+        head = new SkipNode(null, null);
         head.next.add(null);
     }
 
@@ -67,7 +67,7 @@ class SKipList<K extends Comparable<K>, V> {
                     pre.next.set(level, next.next.get(level));
                 }
                 // 降层
-                if (level != 0 && pre==head&& pre.next.get(level) == null) {
+                if (level != 0 && pre == head && pre.next.get(level) == null) {
                     head.next.remove(level);
                     maxLevel--;
                 }

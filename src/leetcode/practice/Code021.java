@@ -28,11 +28,11 @@ public class Code021 {
                 // 谁小谁向下移动
                 next = next.next;
                 cur1 = cur1.next;
-            }else {
+            } else {
                 next.next = cur2;
                 next = next.next;
                 // 当前链表的下一个节点
-               cur2 = cur2.next;
+                cur2 = cur2.next;
             }
 
         }

@@ -8,9 +8,8 @@ package class03;
 
 /**
  * 删除链表指定的值
- *
+ * <p>
  * 单向链表
- *
  */
 public class Code02_DeleteGivenNum {
 
@@ -24,8 +23,7 @@ public class Code02_DeleteGivenNum {
     }
 
 
-
-    private static Node deleteNumberInList(Node head, int num){
+    private static Node deleteNumberInList(Node head, int num) {
 
 
         /**
@@ -64,7 +62,6 @@ public class Code02_DeleteGivenNum {
             }
             head = head.next;
         }
-
 
 
         Node pre = head;

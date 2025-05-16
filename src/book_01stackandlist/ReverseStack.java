@@ -20,6 +20,7 @@ import java.util.Stack;
  * 设计两个函数：
  * 第一个函数，找到栈底元素
  * 第二个函数 翻转栈
+ *
  * @param <T>
  */
 public class ReverseStack<T> {
@@ -44,6 +45,7 @@ public class ReverseStack<T> {
 
     /**
      * 将栈底元素返回并移除
+     *
      * @param stack
      * @return
      */
@@ -72,6 +74,7 @@ public class ReverseStack<T> {
 
     /**
      * 将栈底元素返回并移除
+     *
      * @param stack
      * @return
      */

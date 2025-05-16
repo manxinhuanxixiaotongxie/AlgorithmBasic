@@ -15,7 +15,6 @@ public class Code2271 {
      * 这个方法会少算一些
      * 具体原因还要排查
      *
-     *
      * @param tiles
      * @param carpetLen
      * @return

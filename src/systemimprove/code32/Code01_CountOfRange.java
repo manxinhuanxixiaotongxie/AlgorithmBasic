@@ -4,11 +4,10 @@ import java.util.HashSet;
 
 /**
  * 给定一个数组 给定一个范围 返回数组中有多少个数在这个范围上
- *
+ * <p>
  * 给定一个数组arr，和两个整数a和b（a<=b）
  * 求arr中有多少个子数组，累加和在[a,b]这个范围上
  * 返回达标的子数组数量
- *
  */
 public class Code01_CountOfRange {
 
@@ -272,7 +271,7 @@ public class Code01_CountOfRange {
         }
 
         public SBTNode leftRotate(SBTNode cur) {
-            long same = cur.all - (cur.left !=null?cur.left.all:0) - (cur.right != null ? cur.right.all : 0);
+            long same = cur.all - (cur.left != null ? cur.left.all : 0) - (cur.right != null ? cur.right.all : 0);
             SBTNode right = cur.right;
             cur.right = right.left;
             right.left = cur;
@@ -284,7 +283,7 @@ public class Code01_CountOfRange {
         }
 
         public SBTNode rightRotate(SBTNode cur) {
-            long same = cur.all - (cur.left !=null?cur.left.all:0) - (cur.right != null ? cur.right.all : 0);
+            long same = cur.all - (cur.left != null ? cur.left.all : 0) - (cur.right != null ? cur.right.all : 0);
             SBTNode left = cur.left;
             cur.left = left.right;
             left.right = cur;

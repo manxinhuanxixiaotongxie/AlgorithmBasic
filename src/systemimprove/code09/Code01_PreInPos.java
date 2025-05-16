@@ -8,7 +8,7 @@ public class Code01_PreInPos {
         if (root == null) {
             return;
         }
-        System.out.print(root.val+"    ");
+        System.out.print(root.val + "    ");
         pre(root.left);
         pre(root.right);
 
@@ -19,7 +19,7 @@ public class Code01_PreInPos {
             return;
         }
         in(root.left);
-        System.out.print(root.val+"    ");
+        System.out.print(root.val + "    ");
         in(root.right);
 
     }
@@ -30,11 +30,12 @@ public class Code01_PreInPos {
         }
         pos(root.left);
         pos(root.right);
-        System.out.print(root.val+"    ");
+        System.out.print(root.val + "    ");
     }
 
     /**
      * 先序 头左右
+     *
      * @param root
      */
     public static void pre2(TreeNode root) {
@@ -45,7 +46,7 @@ public class Code01_PreInPos {
         stack.push(root);
         while (!stack.isEmpty()) {
             TreeNode pop = stack.pop();
-            System.out.print(pop.val+"    ");
+            System.out.print(pop.val + "    ");
             if (pop.right != null) {
                 stack.push(pop.right);
             }
@@ -59,7 +60,7 @@ public class Code01_PreInPos {
     /**
      * 先序是头左右
      * 后序是左右头
-     *
+     * <p>
      * 怎么根据先序想出后序遍历的代码
      *
      * @param node
@@ -86,7 +87,7 @@ public class Code01_PreInPos {
 
 
         while (!help.isEmpty()) {
-            System.out.print(help.pop().val+"    ");
+            System.out.print(help.pop().val + "    ");
         }
         System.out.println();
     }
@@ -97,9 +98,6 @@ public class Code01_PreInPos {
      * in
      * 打印
      * in
-     *
-     *
-     *
      */
     public static void in2(TreeNode node) {
         if (node == null) {
@@ -116,7 +114,7 @@ public class Code01_PreInPos {
                 cur = cur.left;
             } else {
                 TreeNode pop = stack.pop();
-                System.out.print(pop.val+"    ");
+                System.out.print(pop.val + "    ");
                 cur = pop.right;
             }
         }
@@ -130,7 +128,7 @@ public class Code01_PreInPos {
          *      2               3
          *  4     5           6   7
          */
-        TreeNode  head = new TreeNode(1);
+        TreeNode head = new TreeNode(1);
         head.left = new TreeNode(2);
         head.right = new TreeNode(3);
         head.left.left = new TreeNode(4);

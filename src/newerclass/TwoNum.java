@@ -12,6 +12,7 @@ public class TwoNum {
 
     /**
      * 时间复杂度O（n^2）
+     *
      * @param nums
      * @param target
      * @return
@@ -24,7 +25,7 @@ public class TwoNum {
          */
         int[] ans = new int[2];
         for (int i = 0; i < nums.length; i++) {
-            for (int j = i+1 ; j < nums.length; j++) {
+            for (int j = i + 1; j < nums.length; j++) {
                 if (nums[i] + nums[j] == target) {
                     ans[0] = i;
                     ans[1] = j;
@@ -39,6 +40,7 @@ public class TwoNum {
     /**
      * 进阶  能不能想一个时间复杂度更好的
      * 使用hashmap
+     *
      * @param nums
      * @param target
      * @return
@@ -50,13 +52,13 @@ public class TwoNum {
          时间复杂度O（N）
          */
         int[] ans = new int[2];
-        Map<Integer,Integer> map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            if (map.containsKey(target-nums[i])) {
+            if (map.containsKey(target - nums[i])) {
                 ans[0] = i;
-                ans[1] = map.get(target-nums[i]);
+                ans[1] = map.get(target - nums[i]);
             }
-            map.put(nums[i],i );
+            map.put(nums[i], i);
         }
         return ans;
 

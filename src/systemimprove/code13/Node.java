@@ -4,7 +4,6 @@ import java.util.List;
 
 /**
  * 图的表示方式
- *
  */
 public class Node {
     // 边集
@@ -33,6 +32,7 @@ public class Node {
     public void setIn(int in) {
         this.in = in;
     }
+
     public void setOut(int out) {
         this.out = out;
     }

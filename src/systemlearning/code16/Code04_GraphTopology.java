@@ -32,14 +32,14 @@ public class Code04_GraphTopology {
             return null;
         }
 
-        HashMap<DirectedGraphNode,Integer> indegreeMap = new HashMap<>();
+        HashMap<DirectedGraphNode, Integer> indegreeMap = new HashMap<>();
         for (DirectedGraphNode node : graph) {
-            indegreeMap.put(node,0);
+            indegreeMap.put(node, 0);
         }
 
         for (DirectedGraphNode node : graph) {
             for (DirectedGraphNode neighbor : node.neighbors) {
-                indegreeMap.put(neighbor,indegreeMap.get(neighbor) + 1);
+                indegreeMap.put(neighbor, indegreeMap.get(neighbor) + 1);
             }
         }
 
@@ -56,7 +56,7 @@ public class Code04_GraphTopology {
             DirectedGraphNode node = zeroIndegreeQueue.poll();
             result.add(node);
             for (DirectedGraphNode neighbor : node.neighbors) {
-                indegreeMap.put(neighbor,indegreeMap.get(neighbor) - 1);
+                indegreeMap.put(neighbor, indegreeMap.get(neighbor) - 1);
                 if (indegreeMap.get(neighbor) == 0) {
                     zeroIndegreeQueue.offer(neighbor);
                 }

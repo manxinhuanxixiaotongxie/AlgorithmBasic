@@ -21,6 +21,7 @@ public class Code05_IsBST {
         node3.right = node5;
         System.out.println(isValidBST(node1));
     }
+
     /**
      * 判断一棵树是否是二叉搜索树
      * 二叉搜索树特点：
@@ -35,9 +36,10 @@ public class Code05_IsBST {
 
     /**
      * 递归实现
-     *          5
-     *       4    6
-     *     nu nu 3  7
+     * 5
+     * 4    6
+     * nu nu 3  7
+     *
      * @param root
      * @return
      */
@@ -55,7 +57,7 @@ public class Code05_IsBST {
         int max = value;
 
         if (leftInfo != null) {
-            max = Math.max(leftInfo.max,max);
+            max = Math.max(leftInfo.max, max);
         }
 
         /**
@@ -84,7 +86,7 @@ public class Code05_IsBST {
         }
 
         if (rightInfo != null) {
-            min = Math.min(rightInfo.min,min);
+            min = Math.min(rightInfo.min, min);
         }
 
         boolean isBST = true;
@@ -100,7 +102,7 @@ public class Code05_IsBST {
         if (rightInfo != null && rightInfo.min <= root.value) {
             isBST = false;
         }
-        return new Info(min,max,isBST);
+        return new Info(min, max, isBST);
     }
 
     public static class Info {
@@ -108,7 +110,7 @@ public class Code05_IsBST {
         int max;
         boolean isBST;
 
-        Info(int min,int max,boolean isBST) {
+        Info(int min, int max, boolean isBST) {
             this.min = min;
             this.max = max;
             this.isBST = isBST;

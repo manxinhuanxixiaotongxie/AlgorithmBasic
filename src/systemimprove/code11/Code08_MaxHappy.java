@@ -62,9 +62,9 @@ public class Code08_MaxHappy {
     }
 
     /**
-     *              X
-     *     a        b       c
-     *   d e f    g h i    j k
+     * X
+     * a        b       c
+     * d e f    g h i    j k
      *
      * @param X
      * @return

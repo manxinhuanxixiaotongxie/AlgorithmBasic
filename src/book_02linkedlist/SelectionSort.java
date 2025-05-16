@@ -41,13 +41,13 @@ public class SelectionSort {
 
             if (tail == null) {
                 head = small;
-            }else {
+            } else {
                 tail.next = small;
             }
             tail = small;
 
 
-            cur = cur == small?cur.next:cur;
+            cur = cur == small ? cur.next : cur;
 
         }
 

@@ -66,20 +66,20 @@ public class Code02_ArrNum {
      * 分析一下为什么？
      * 1.最大窗口的更新结构的值只会变大
      * 2.最小窗口的更新结构的值只会变小
-     *
-     *
-     *
+     * <p>
+     * <p>
+     * <p>
      * 以L开头的位置有多少个子数组满足条件
      * 数组是1 4 3 7 6 num的值是5
      * 怎么理解这个过程：
-     *
-     *
+     * <p>
+     * <p>
      * 生成两个双端队列maxQueue和minQueue。当子数组为arr[i..j]时，maxQueue维护了窗口子数组arr[i..j]的最大值更新的结
      * 构，minQueue维护了窗口子数组arr[i..j]的最小值更新的结构。当子数组arr[i..j]向右扩一个位置变成arr[i..j+1]时，
      * maxQueue和minQueue结构可以在O(1)的时间内更新，并且可以在O(1)的时间内得到arr[i..j+1]的最大值和最小值。当子数组
      * arr[i..j]向左缩一个位置变成arr[i+1..j]时，maxQueue和minQueue结构依然可以在O(1)的时间内更新，并且在O(1)的时间
      * 内得到arr[i+1..j]的最大值和最小值。
-     *
+     * <p>
      * 通过分析题目满足的条件，可以得到如下两个结论：
      * １、如果子数组arr[i..j]满足条件，即max(arr[i..j])-min(arr[i..j])<=num，那么arr[i..j]中的每一个子数组，即
      * arr[k..l](i<=k<=l<=j)都满足条件。我们以子数组arr[i..j-1]为例说明，arr[i..j-1]最大值只可能小于或等于
@@ -87,7 +87,7 @@ public class Code02_ArrNum {
      * arr[i..j]中的每一个子数组都满足条件。
      * ２、如果子数组arr[i..j]不满足条件，那么所有包含arr[i..j]的子数组，即arr[k..l](k<=i<=j<=l)都不满足条件。证明过
      * 程同第一个结论。
-     *
+     * <p>
      * 根据双端队列maxQueue和minQueue的结构性质，以及如上两个结论，设计整个过程如下：
      * １、生成两个双端队列maxQueue和minQueue，含义如上文所说。生成两个整型变量i和j，表示子数组的范围，即arr[i..j]。生
      * 成整型变量res，表示所有满足条件的子数组数量。
@@ -102,7 +102,6 @@ public class Code02_ArrNum {
      * 累加起来的数量就是最终的结果。
      * 上述过程中，所有的下标值最多进maxQueue和minQueue一次，出maxQueue和minQueue一次。i和j的值也不断增加，并且从来不
      * 减小。所以整个过程的时间复杂度为O(N)。
-     *
      */
 
     public static int getNum4(int[] arr, int sum) {

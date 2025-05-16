@@ -35,20 +35,20 @@ public class Code0134 {
         // 尾巴一定是最大的
         int k = gas.length;
         // 先维持一个大小为k-1的窗口
-        for (int i = 0; i < k ; i++) {
+        for (int i = 0; i < k; i++) {
             while (!widnow.isEmpty() && sum[i] <= sum[widnow.peekLast()]) {
                 widnow.pollLast();
             }
             widnow.addLast(i);
         }
         // 从0-gas.length-1开始遍历
-        for (int offset = 0, i = 0;i < gas.length;offset = sum[i++]) {
+        for (int offset = 0, i = 0; i < gas.length; offset = sum[i++]) {
             // 从0-N-1开始遍历
             // 看是哪个位置可以走到原始出发点
-            while (!widnow.isEmpty() && sum[i+gas.length -1] <= sum[widnow.peekLast()]) {
+            while (!widnow.isEmpty() && sum[i + gas.length - 1] <= sum[widnow.peekLast()]) {
                 widnow.pollLast();
             }
-            widnow.addLast(i+gas.length - 1);
+            widnow.addLast(i + gas.length - 1);
             // 有了一个窗口之后
             // 结算
             if (sum[widnow.peekFirst()] - offset >= 0) {
@@ -76,8 +76,8 @@ public class Code0134 {
 
     public static void main(String[] args) {
         Code0134 code = new Code0134();
-        int[] gas = {2,3,4};
-        int[] cost = {3,4,3};
+        int[] gas = {2, 3, 4};
+        int[] cost = {3, 4, 3};
         System.out.println(code.canCompleteCircuit(gas, cost));
     }
 }

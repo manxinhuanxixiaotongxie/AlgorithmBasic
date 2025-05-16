@@ -95,9 +95,10 @@ public class Code04_WaysOfMoney3 {
 
     /**
      * 斜率优化   分析严格位置依赖的动态规划  找到可能进行优化的机会
-     *
-     *
+     * <p>
+     * <p>
      * 目前这个斜率优化 还有问题  待后续优化
+     *
      * @param arr
      * @param aim
      * @return
@@ -218,7 +219,7 @@ public class Code04_WaysOfMoney3 {
             int ans2 = dp(arr, aim);
             int ans3 = new Code04_WaysOfMoney3().dp1(arr, aim);
             int ans4 = new Code04_WaysOfMoney3().dp2(arr, aim);
-            if (ans1 != ans2 || ans2 != ans3 || ans2 != ans4 ) {
+            if (ans1 != ans2 || ans2 != ans3 || ans2 != ans4) {
                 System.out.println("Oops!");
             }
         }

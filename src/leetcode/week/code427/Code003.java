@@ -11,9 +11,7 @@ import java.util.Queue;
 
 public class Code003 {
     /**
-     *
      * 这个写法无法AC
-     *
      *
      * @param edges1
      * @param edges2

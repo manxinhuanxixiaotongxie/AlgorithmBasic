@@ -11,9 +11,9 @@ public class Code014 {
         }
         StringBuilder ans = new StringBuilder();
         MyTrieNode cur = trieTree.root;
-        for (String string:strs) {
+        for (String string : strs) {
             for (int i = 0; i < string.length(); i++) {
-                if (cur != null && cur.next[string.charAt(i)-'a'] != null && cur.next[string.charAt(i) - 'a'].pass == strs.length) {
+                if (cur != null && cur.next[string.charAt(i) - 'a'] != null && cur.next[string.charAt(i) - 'a'].pass == strs.length) {
                     ans.append(string.charAt(i));
                     cur = cur.next[string.charAt(i) - 'a'];
                 } else {
@@ -32,8 +32,10 @@ public class Code014 {
 
     }
 }
+
 class MyTrieTree {
     MyTrieNode root;
+
     MyTrieTree() {
         root = new MyTrieNode('/');
         root.next = new MyTrieNode[26];
@@ -59,6 +61,7 @@ class MyTrieNode {
     MyTrieNode[] next;
     int pass;
     int end;
+
     MyTrieNode(char val) {
         this.val = val;
         next = new MyTrieNode[26];

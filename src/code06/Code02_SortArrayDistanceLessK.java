@@ -16,13 +16,13 @@ import java.util.Queue;
 public class Code02_SortArrayDistanceLessK {
 
 
-    public static void sortedArrDistanceLessK(int[] arr,int k) {
+    public static void sortedArrDistanceLessK(int[] arr, int k) {
         // 小根堆
         Queue<Integer> heap = new PriorityQueue<>();
 
         // 先找出前K个最小值
         int index = 0;
-        for (;index <= Math.min(arr.length,k);index++) {
+        for (; index <= Math.min(arr.length, k); index++) {
             heap.add(arr[index]);
         }
 
@@ -30,7 +30,7 @@ public class Code02_SortArrayDistanceLessK {
          * 在0-arr.length-k依次放入堆顶的值
          */
         int i = 0;
-        for (;index<arr.length;index++,i++) {
+        for (; index < arr.length; index++, i++) {
             arr[i] = heap.poll();
             heap.add(arr[index]);
         }
@@ -44,7 +44,6 @@ public class Code02_SortArrayDistanceLessK {
 
 
     }
-
 
 
 }

@@ -37,11 +37,11 @@ public class Code04_WinnerScore {
 
     /**
      * 作为先手 在L+R范围上 能获取到的最好的分数
-     *
+     * <p>
      * 从这个题目是不是可以这么进行处理暴力递归
-     *
+     * <p>
      * 其实就是站在上帝视角 进行任务的划分
-     *
+     * <p>
      * 以这个题目为例：
      * 在选择的过程中 怎么体现绝顶聪明 实际就是说 作为一个先手函数 我应该怎么选择对我比较有利
      *
@@ -168,7 +168,7 @@ public class Code04_WinnerScore {
     public static void main(String[] args) {
         Code04_WinnerScore winnerScore = new Code04_WinnerScore();
 //        int[] arr = {100, 2, 100, 4};
-        int[] arr = { 5, 7, 4, 5, 8, 1, 6, 0, 3, 4, 6, 1, 7 };
+        int[] arr = {5, 7, 4, 5, 8, 1, 6, 0, 3, 4, 6, 1, 7};
         System.out.println(winnerScore.winnerScore1(arr));
         System.out.println(winnerScore.winnerScore2(arr));
         System.out.println(winnerScore.winnerScore3(arr));

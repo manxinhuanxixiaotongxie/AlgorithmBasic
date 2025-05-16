@@ -3,9 +3,7 @@ package book_01stackandlist;
 import java.util.Stack;
 
 /**
- * @Description
- *
- * 设计一个又有getMin功能的栈
+ * @Description 设计一个又有getMin功能的栈
  * 特殊的栈 实现栈的基本功能，又实现返回栈中最小元素的功能
  * @Author Scurry
  * @Date 2022-10-12 19:48
@@ -29,11 +27,11 @@ public class GetMinStack {
             if (minStack.isEmpty()) {
                 minStack.push(num);
                 dataStack.push(num);
-            }else {
+            } else {
                 Integer peek = getMin();
-                if (peek>num) {
+                if (peek > num) {
                     minStack.push(num);
-                }else {
+                } else {
                     minStack.push(peek);
                 }
                 dataStack.push(num);
@@ -44,13 +42,13 @@ public class GetMinStack {
             if (minStack.isEmpty()) {
                 System.out.println("stack is empty");
                 return 0;
-            }else {
+            } else {
                 return minStack.peek();
             }
 
         }
 
-        public int pop(){
+        public int pop() {
             minStack.pop();
             return dataStack.pop();
         }
@@ -72,7 +70,7 @@ public class GetMinStack {
         public void push(Integer num) {
             if (minStack.isEmpty()) {
                 minStack.push(num);
-            }else {
+            } else {
                 Integer peek = getMin();
                 if (peek >= num) {
                     minStack.push(num);
@@ -85,13 +83,13 @@ public class GetMinStack {
             if (minStack.isEmpty()) {
                 System.out.println("stack is empty");
                 return 0;
-            }else {
+            } else {
                 return minStack.peek();
             }
 
         }
 
-        public int pop(){
+        public int pop() {
             Integer pop = dataStack.pop();
             if (pop == getMin()) {
                 minStack.pop();

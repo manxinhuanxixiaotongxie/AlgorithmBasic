@@ -5,7 +5,7 @@ public class Code0198 {
         return process(nums, 0);
     }
 
-    private int process(int[] nums,int index) {
+    private int process(int[] nums, int index) {
         if (index >= nums.length) {
             return 0;
         }
@@ -23,11 +23,11 @@ public class Code0198 {
      * @return
      */
     public int rob2(int[] nums) {
-       int N = nums.length ;
-       int[] dp = new int[N+2];
-       for (int i = N-1; i >= 0; i--) {
-           dp[i] = Math.max(nums[i] + dp[i+2], dp[i+1]);
-       }
-         return dp[0];
+        int N = nums.length;
+        int[] dp = new int[N + 2];
+        for (int i = N - 1; i >= 0; i--) {
+            dp[i] = Math.max(nums[i] + dp[i + 2], dp[i + 1]);
+        }
+        return dp[0];
     }
 }

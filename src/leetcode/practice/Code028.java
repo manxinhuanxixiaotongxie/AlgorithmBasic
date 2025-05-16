@@ -49,7 +49,7 @@ public class Code028 {
             return next;
         }
         int cn = 0;
-        for (int i = 2; i < pi.length;) {
+        for (int i = 2; i < pi.length; ) {
             if (pi[i - 1] == pi[cn]) {
                 next[i++] = ++cn;
             } else if (cn == 0) {

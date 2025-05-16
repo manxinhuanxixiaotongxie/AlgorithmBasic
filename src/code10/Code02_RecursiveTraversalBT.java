@@ -39,7 +39,7 @@ public class Code02_RecursiveTraversalBT {
         }
     }
 
-    public static void pre(Node head){
+    public static void pre(Node head) {
 
         if (head == null) {
             return;
@@ -52,7 +52,7 @@ public class Code02_RecursiveTraversalBT {
 
     }
 
-    public static void in(Node head){
+    public static void in(Node head) {
 
         if (head == null) {
             return;
@@ -67,7 +67,7 @@ public class Code02_RecursiveTraversalBT {
 
     }
 
-    public static void pos(Node head){
+    public static void pos(Node head) {
 
         if (head == null) {
             return;

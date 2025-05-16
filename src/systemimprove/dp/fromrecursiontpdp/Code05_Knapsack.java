@@ -53,7 +53,7 @@ public class Code05_Knapsack {
 
     public static void main(String[] args) {
         Code05_Knapsack code05_knapsack = new Code05_Knapsack();
-        int[] weights = {3, 2, 4, 7, 3, 1, 7 };
+        int[] weights = {3, 2, 4, 7, 3, 1, 7};
         int[] values = {5, 6, 3, 19, 12, 4, 2};
         int bag = 15;
         System.out.println(code05_knapsack.maxVlaue(weights, values, bag));

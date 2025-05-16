@@ -47,7 +47,7 @@ public class Code02_SlideWindow {
     }
 
     public static void main(String[] args) {
-        int[] nums = {-2147483648,-2147483648,2147483647,-2147483648,1,3,-2147483648,-100,8,17,22,-2147483648,-2147483648,2147483647,2147483647,2147483647,2147483647,-2147483648,2147483647,-2147483648};
+        int[] nums = {-2147483648, -2147483648, 2147483647, -2147483648, 1, 3, -2147483648, -100, 8, 17, 22, -2147483648, -2147483648, 2147483647, 2147483647, 2147483647, 2147483647, -2147483648, 2147483647, -2147483648};
         int w = 6;
         double[] ans = medianSlidingWindow(nums, w);
         for (double an : ans) {
@@ -61,8 +61,8 @@ class WindowTreeMap<K extends Comparable<K>, V> {
     private WindowNode root;
     private int size;
 
-    public WindowNode<K,V> leftRoate(WindowNode<K,V> node) {
-        WindowNode<K,V> right = node.right;
+    public WindowNode<K, V> leftRoate(WindowNode<K, V> node) {
+        WindowNode<K, V> right = node.right;
         node.right = right.left;
         right.left = node;
         right.size = node.size;
@@ -70,8 +70,8 @@ class WindowTreeMap<K extends Comparable<K>, V> {
         return right;
     }
 
-    public WindowNode rightRoate(WindowNode<K,V> node) {
-        WindowNode<K,V> left = node.left;
+    public WindowNode rightRoate(WindowNode<K, V> node) {
+        WindowNode<K, V> left = node.left;
         node.left = left.right;
         left.right = node;
         left.size = node.size;
@@ -87,7 +87,7 @@ class WindowTreeMap<K extends Comparable<K>, V> {
         root = delete(root, key);
     }
 
-    private WindowNode<K,V> delete(WindowNode<K,V> node, K key) {
+    private WindowNode<K, V> delete(WindowNode<K, V> node, K key) {
         if (node == null) {
             return null;
         }
@@ -163,7 +163,7 @@ class WindowTreeMap<K extends Comparable<K>, V> {
         }
     }
 
-    private WindowNode<K,V> maintain(WindowNode<K,V> node) {
+    private WindowNode<K, V> maintain(WindowNode<K, V> node) {
         if (node == null) {
             return null;
         }
@@ -232,6 +232,6 @@ class Node implements Comparable<Node> {
     @Override
     public int compareTo(Node o) {
         // return value != o.value ? value - o.value : index - o.index;
-        return value != o.value?Integer.compare(value,o.value):Integer.compare(index,o.index);
+        return value != o.value ? Integer.compare(value, o.value) : Integer.compare(index, o.index);
     }
 }

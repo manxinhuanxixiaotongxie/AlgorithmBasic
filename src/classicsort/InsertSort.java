@@ -2,7 +2,6 @@ package classicsort;
 
 /**
  * @Description 经典排序算法插入排序
- *
  * @Author Scurry
  * @Date 2023-05-16 10:39
  */

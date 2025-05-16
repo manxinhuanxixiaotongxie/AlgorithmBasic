@@ -8,7 +8,6 @@ import java.util.Set;
 
 /**
  * Primeal Tree Prim Algorithm
- *
  */
 public class Code05_GraphP {
 

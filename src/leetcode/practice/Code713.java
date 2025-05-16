@@ -3,7 +3,6 @@ package leetcode.practice;
 /**
  * 有多少子数组的乘积小于K
  * 提供两种写法 思路是一样的  写法不同
- *
  */
 public class Code713 {
     public int numSubarrayProductLessThanK(int[] nums, int k) {

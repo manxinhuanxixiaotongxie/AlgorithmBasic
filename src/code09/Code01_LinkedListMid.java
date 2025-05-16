@@ -41,6 +41,7 @@ public class Code01_LinkedListMid {
      * 如果是偶数返回上中点
      * 奇数返回中点
      * 0 0 0 0 0 0
+     *
      * @param head
      * @return
      */
@@ -51,7 +52,7 @@ public class Code01_LinkedListMid {
         }
         Node slow = head.next;
         Node fast = head.next.next;
-        while (fast.next !=null && fast.next.next != null) {
+        while (fast.next != null && fast.next.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
@@ -63,6 +64,7 @@ public class Code01_LinkedListMid {
      * 如果是偶数返回下中点
      * 奇数返回中点
      * 0 0 0 0 0 0
+     *
      * @param head
      * @return
      */
@@ -73,7 +75,7 @@ public class Code01_LinkedListMid {
         }
         Node slow = head.next;
         Node fast = head.next;
-        while (fast.next !=null && fast.next.next != null) {
+        while (fast.next != null && fast.next.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
@@ -82,6 +84,7 @@ public class Code01_LinkedListMid {
 
     /**
      * 上中点的前一个节点
+     *
      * @return
      */
     public static Node midOrUpMidPreNode(Node head) {
@@ -99,6 +102,7 @@ public class Code01_LinkedListMid {
 
     /**
      * 下中点的前一个节点
+     *
      * @param head
      * @return
      */

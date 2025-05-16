@@ -9,8 +9,8 @@ public class Rotate {
 
     /**
      * 两个字符串是否为旋转词
-     *
-     *
+     * <p>
+     * <p>
      * 要求：时间复杂度O（N）
      */
 
@@ -22,7 +22,7 @@ public class Rotate {
 
         // 1aab2 aab21 aab21
 
-        String s21 = s2+s2;
+        String s21 = s2 + s2;
 //        return
         return true;
     }

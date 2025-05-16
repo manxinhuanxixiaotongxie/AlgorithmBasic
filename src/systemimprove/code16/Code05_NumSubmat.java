@@ -3,11 +3,6 @@ package systemimprove.code16;
 /**
  * 给定一个二维数组matrix，其中的值不是0就是1，
  * 返回全部由1组成的子矩形数量
- *
- *
- *
- *
- *
  */
 public class Code05_NumSubmat {
     public static int numSubmat(int[][] mat) {
@@ -80,7 +75,7 @@ public class Code05_NumSubmat {
         }
         while (si != -1) {
             int cur = stack[si--];
-            int left = si == -1  ? -1 : stack[si];
+            int left = si == -1 ? -1 : stack[si];
             int n = height.length - left - 1;
             int down = left == -1 ? 0 : height[left];
             nums += (height[cur] - down) * num(n);

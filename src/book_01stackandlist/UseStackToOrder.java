@@ -49,7 +49,7 @@ public class UseStackToOrder {
                 help.push(pop);
             }
             while (!help.isEmpty() && (pop > help.peek())) {
-                    stack.push(help.pop());
+                stack.push(help.pop());
             }
             help.push(pop);
 

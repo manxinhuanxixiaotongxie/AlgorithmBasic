@@ -6,8 +6,7 @@ import java.util.Map;
 import java.util.Stack;
 
 /**
- * @Description
- * 并查集
+ * @Description 并查集
  * 1.使用map实现
  * 2.使用数组实现
  * @Author Scurry
@@ -91,10 +90,11 @@ public class Code05_Union {
         private int[] parent;
         private int[] size;
         private int[] help;
+
         UnionFind2(int N) {
             parent = new int[N];
             help = new int[N];
-            for (int i = 0;i<N;i++) {
+            for (int i = 0; i < N; i++) {
                 // i位置的父节点是谁 初始化是自己
                 parent[i] = i;
                 size[i] = 1;
@@ -119,14 +119,14 @@ public class Code05_Union {
             }
             // help[i]代表的从当前节点找到代表节点过程中沿途遍历节点
             // 将沿途遍历的节点均指向代表节点
-            for (int i = hi-1;i>=0;i--) {
+            for (int i = hi - 1; i >= 0; i--) {
                 parent[help[i]] = a;
             }
 
             return a;
         }
 
-        public void union(int a,int b) {
+        public void union(int a, int b) {
             int aFather = findfather(a);
             int bFather = findfather(b);
             if (aFather != bFather) {

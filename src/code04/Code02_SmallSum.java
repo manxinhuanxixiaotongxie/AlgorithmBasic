@@ -23,37 +23,37 @@ public class Code02_SmallSum {
      */
 
     /**
-     *第一种解法：简单粗暴  定义一个小和变量 遍历数组 满足条件累加
+     * 第一种解法：简单粗暴  定义一个小和变量 遍历数组 满足条件累加
      * 第二种解法：二分
+     *
      * @param arr
      * @return
      */
     public static int smallSum(int[] arr) {
 
-        return process(arr,0,arr.length-1);
+        return process(arr, 0, arr.length - 1);
 
     }
 
-    public static int process(int[] arr,int L,int R) {
-        if (L== R) {
+    public static int process(int[] arr, int L, int R) {
+        if (L == R) {
             return 0;
         }
 
-        int mid = L + ((R-L) >> 1);
+        int mid = L + ((R - L) >> 1);
 
-        return process(arr,L,mid)+process(arr,mid+1,R)+ merge(arr,L,mid,R);
-
+        return process(arr, L, mid) + process(arr, mid + 1, R) + merge(arr, L, mid, R);
 
 
     }
 
 
-    public static int merge(int[] arr,int L,int mid,int R) {
+    public static int merge(int[] arr, int L, int mid, int R) {
 
-        int[] help = new int[R-L+1];
+        int[] help = new int[R - L + 1];
 
         int lIndex = L;
-        int rIndex = mid+1;
+        int rIndex = mid + 1;
         int index = 0;
 
 //        while (L < R) {
@@ -69,8 +69,8 @@ public class Code02_SmallSum {
              * 右边的数假设已经进行过对比，并且比lIndex大的话
              * 那么rIndex-R位置上的数都是小和
              */
-            res += arr[lIndex] < arr[rIndex]?(R-rIndex+1)*arr[lIndex]:0;
-            help[index++] = arr[lIndex]<=arr[rIndex]?arr[lIndex++]:arr[rIndex];
+            res += arr[lIndex] < arr[rIndex] ? (R - rIndex + 1) * arr[lIndex] : 0;
+            help[index++] = arr[lIndex] <= arr[rIndex] ? arr[lIndex++] : arr[rIndex];
         }
 
         while (lIndex <= mid) {
@@ -81,8 +81,8 @@ public class Code02_SmallSum {
             help[index++] = arr[rIndex++];
         }
 
-        for (int i = 0;i<help.length;i++) {
-            arr[L+i] = help[i];
+        for (int i = 0; i < help.length; i++) {
+            arr[L + i] = help[i];
         }
 
         return res;

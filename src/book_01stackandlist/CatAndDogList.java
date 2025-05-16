@@ -114,9 +114,9 @@ public class CatAndDogList {
     public void pollAll() {
         while (!dogList.isEmpty() && !catList.isEmpty()) {
             if (dogList.peek().getCount() < catList.peek().count) {
-                 catList.poll();
+                catList.poll();
             } else {
-                 dogList.poll();
+                dogList.poll();
             }
         }
 

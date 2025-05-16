@@ -13,7 +13,7 @@ public class Code060 {
         }
         List<String> res = new ArrayList<>();
         Set<Integer> set = new HashSet<>();
-        process2(factorial, 0, new StringBuilder(), res, set,k);
+        process2(factorial, 0, new StringBuilder(), res, set, k);
         return res.get(k - 1);
     }
 
@@ -33,7 +33,7 @@ public class Code060 {
         }
     }
 
-    private void process2(int[] nums, int index,StringBuilder path, List<String> res,Set<Integer> set,int k) {
+    private void process2(int[] nums, int index, StringBuilder path, List<String> res, Set<Integer> set, int k) {
         if (res.size() == k) {
             return;
         }
@@ -43,7 +43,7 @@ public class Code060 {
             for (int i = 0; i < nums.length; i++) {
                 if (!set.contains(i)) {
                     set.add(i);
-                    process2(nums, index + 1, path.append(nums[i]), res, set,k);
+                    process2(nums, index + 1, path.append(nums[i]), res, set, k);
                     path.deleteCharAt(path.length() - 1);
                     set.remove(i);
                 }

@@ -16,7 +16,7 @@ public class Code04_HeapGreater<T extends Comparator<T>> {
     private int limit;
     private int heapSize;
     private Map<T, Integer> indexMap;
-    private Map<Integer,T> reverseMap;
+    private Map<Integer, T> reverseMap;
 
     public Code04_HeapGreater(int limit) {
         heap = (T[]) new Object[limit];
@@ -31,7 +31,7 @@ public class Code04_HeapGreater<T extends Comparator<T>> {
     }
 
     public void push(T t) {
-        indexMap.put(t,heapSize);
+        indexMap.put(t, heapSize);
 
         heapInsert(heapSize++);
     }
@@ -69,7 +69,6 @@ public class Code04_HeapGreater<T extends Comparator<T>> {
 //        }
 //
 //    }
-
     public void heapify(T[] arr, int index, int heapSize) {
         int leftIndex = index * 2 + 1;
         while (leftIndex < heapSize) {
@@ -91,15 +90,14 @@ public class Code04_HeapGreater<T extends Comparator<T>> {
     }
 
     /**
-     *
      * @param t
      */
     public void remove(T t) {
         int index = indexMap.get(t);
-        T replace = reverseMap.get(heapSize-1);
+        T replace = reverseMap.get(heapSize - 1);
         swap(index, --heapSize);
         indexMap.remove(t);
-        indexMap.put(replace,index);
+        indexMap.put(replace, index);
         resign(replace);
     }
 
@@ -114,8 +112,8 @@ public class Code04_HeapGreater<T extends Comparator<T>> {
         indexMap.put(heap[l], l);
         indexMap.put(heap[j], j);
 
-        reverseMap.put(l,heap[l]);
-        reverseMap.put(j,heap[j]);
+        reverseMap.put(l, heap[l]);
+        reverseMap.put(j, heap[j]);
     }
 
 

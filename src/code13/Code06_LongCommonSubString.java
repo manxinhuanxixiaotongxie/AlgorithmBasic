@@ -25,7 +25,7 @@ public class Code06_LongCommonSubString {
         char[] chars1 = text1.toCharArray();
         char[] chars2 = text2.toCharArray();
 //        return process2(chars1, chars2, chars1.length - 1, chars2.length - 1);
-        return dp2(chars1,chars2);
+        return dp2(chars1, chars2);
     }
 
     //ABCD ACDF
@@ -85,17 +85,15 @@ public class Code06_LongCommonSubString {
         int[][] dp = new int[m][n];
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
-                if (chars1[i-1] == chars2[j-1]) {
-                    dp[i][j] = dp[i-1][j-1] + 1;
+                if (chars1[i - 1] == chars2[j - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
                 } else {
-                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
                 }
             }
         }
-        return dp[m+1][n+1];
+        return dp[m + 1][n + 1];
     }
-
-
 
 
     public int dp(String text1, String text2) {

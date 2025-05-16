@@ -6,10 +6,8 @@ package systemlearning.code15;
  * 如果城市a与城市b直接相连，且城市b与城市c直接相连，
  * 那么城市a与城市c间接相连。
  * 省份 是一组直接或间接相连的城市，
- *
+ * <p>
  * https://leetcode.cn/problems/number-of-provinces/description/?utm_source=LCUS&utm_medium=ip_redirect&utm_campaign=transfer2china
- *
- *
  * @Author Scurry
  * @Date 2023-10-01 14:22
  */

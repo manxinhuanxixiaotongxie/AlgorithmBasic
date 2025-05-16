@@ -88,6 +88,7 @@ public class Code0070 {
      * dp[]i+1] = dp[i] + dp[i-1]
      * 因此这里并不需要构建完整dp的数组
      * 只需要使用两个变量进行滚动更新
+     *
      * @param n
      * @return
      */

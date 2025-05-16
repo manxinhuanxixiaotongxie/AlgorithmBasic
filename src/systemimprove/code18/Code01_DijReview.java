@@ -168,7 +168,7 @@ class HeapGreater {
 
 }
 
-class ReCord{
+class ReCord {
     public GraphNode node;
     public int distance;
 

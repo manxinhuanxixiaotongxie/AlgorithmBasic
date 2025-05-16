@@ -61,22 +61,22 @@ public class Code77 {
         }
         ListNode l = process(head, slow);
         ListNode r = process(slow, tail);
-        ListNode merge = merge(l,r);
+        ListNode merge = merge(l, r);
         return merge;
     }
 
-    public ListNode merge(ListNode L,ListNode R) {
+    public ListNode merge(ListNode L, ListNode R) {
         ListNode left = L;
         ListNode right = R;
         // 初始化一个头结点
         ListNode head = new ListNode(0);
         ListNode cur = head;
         while (left != null && right != null) {
-            if (left.val < right.val){
+            if (left.val < right.val) {
                 cur.next = left;
                 cur = left;
                 left = left.next;
-            }else {
+            } else {
                 cur.next = right;
                 cur = right;
                 right = right.next;

@@ -26,7 +26,7 @@ public class MergeTest {
         if (arr == null || arr.length < 2) {
             return;
         }
-        process(arr,0,arr.length-1);
+        process(arr, 0, arr.length - 1);
 
 
     }

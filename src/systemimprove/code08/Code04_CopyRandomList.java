@@ -34,7 +34,7 @@ public class Code04_CopyRandomList {
         Node cur = head;
 
         while (cur != null) {
-            map.put(cur,new Node(cur.val));
+            map.put(cur, new Node(cur.val));
             cur = cur.next;
         }
         Node neaHead = map.get(head);
@@ -91,7 +91,7 @@ public class Code04_CopyRandomList {
         while (cur != null) {
             // 原链表的下一个节点
             next = cur.next.next;
-            next2 =next != null?next.next:null;
+            next2 = next != null ? next.next : null;
             cur.next = next;
             cur1.next = next2;
             cur = next;

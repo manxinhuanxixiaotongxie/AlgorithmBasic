@@ -11,7 +11,7 @@ public class Code059 {
         int[][] ans = new int[n][n];
         int index = 1;
         while (leftIndex <= rightIndex) {
-            index = cycle(ans,leftIndex,leftIndex,rightIndex,rightIndex,index);
+            index = cycle(ans, leftIndex, leftIndex, rightIndex, rightIndex, index);
             leftIndex++;
             rightIndex--;
         }
@@ -19,7 +19,7 @@ public class Code059 {
     }
 
     // 打印每一圈信息
-    private int cycle(int[][] matrix,int leftR,int leftC,int rightR,int rightC,int index) {
+    private int cycle(int[][] matrix, int leftR, int leftC, int rightR, int rightC, int index) {
         // 在每一圈里面设置数组的值
         // 第一行
         int r = leftR;

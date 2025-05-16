@@ -17,15 +17,13 @@ import java.util.Stack;
 public class Code05_GetMinStack {
 
 
-
     public static class MyStack1 {
         private Stack dataStack;
         private Stack minStack;
 
-        public void push(){
+        public void push() {
 //            dataStack.push()
         }
-
 
 
     }

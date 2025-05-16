@@ -50,7 +50,7 @@ public class Code300 {
             return 0;
         }
         // 分析可能性
-        for (int i = 0 ; i < index; i++) {
+        for (int i = 0; i < index; i++) {
             if (nums[i] > pre) {
                 return Math.max(process1(nums, i + 1, nums[i]) + 1, process1(nums, i + 1, pre));
             }
@@ -82,8 +82,6 @@ public class Code300 {
         }
         return res;
     }
-
-
 
 
 }

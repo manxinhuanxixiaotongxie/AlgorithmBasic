@@ -56,7 +56,7 @@ public class Code695 {
 
     public static void main(String[] args) {
         int[][] grid = new int[][]
-                        {{0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                {{0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
                         {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
@@ -100,7 +100,6 @@ class Uniset {
 
         return sizeMap.get(find(i, j));
     }
-
 
 
     public void union(int i1, int j1, int i2, int j2) {

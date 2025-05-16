@@ -18,7 +18,7 @@ public class Code01_MinLetter {
         return process(strs, new TreeSet<>()).first();
     }
 
-    public  String lowestString1(String[] strs) {
+    public String lowestString1(String[] strs) {
         if (strs == null || strs.length == 0) {
             return "";
         }
@@ -30,19 +30,18 @@ public class Code01_MinLetter {
      * 暴力解法
      * 暴力遍历所有组合情况 返回字典序最小的拼接字符串
      *
-     *
      * @param strs
      * @return
      */
-    public TreeSet<String> process(String[] strs,TreeSet<String> strings) {
+    public TreeSet<String> process(String[] strs, TreeSet<String> strings) {
         if (strs.length == 0) {
             strings.add("");
             return strings;
         }
-        for (int i = 0;i < strs.length;i++) {
+        for (int i = 0; i < strs.length; i++) {
             String first = strs[i];
-            String[] nexts = except(strs,i);
-            TreeSet<String> next = process(nexts,strings);
+            String[] nexts = except(strs, i);
+            TreeSet<String> next = process(nexts, strings);
             for (String s : next) {
                 strings.add(first + s);
             }
@@ -58,6 +57,7 @@ public class Code01_MinLetter {
      * 暴力解法
      * 暴力的过程
      * "ab"  ==>
+     *
      * @param strs
      * @return
      */
@@ -141,10 +141,10 @@ public class Code01_MinLetter {
     }
 
 
-    public String[] except(String[] strings,int index) {
+    public String[] except(String[] strings, int index) {
         String[] ans = new String[strings.length - 1];
         int ansIndex = 0;
-        for (int i = 0;i < strings.length;i++) {
+        for (int i = 0; i < strings.length; i++) {
             if (i != index) {
                 ans[ansIndex++] = strings[i];
             }

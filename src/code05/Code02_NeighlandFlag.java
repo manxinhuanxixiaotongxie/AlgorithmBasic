@@ -8,17 +8,15 @@ package code05;
 
 /**
  * 荷兰国旗问题
- *
+ * <p>
  * 将一个数组拆分成三部分
  * 左边的数比给定的数小
  * 中间的数与给定的数相等
  * 右边的数比给定的数大
- *
  */
 public class Code02_NeighlandFlag {
 
     /**
-     *
      * 5 4 3  2 2 2 6 1 3 2    2
      * 实现思路：
      * 1.给定两个范围  一个两个范围  left right
@@ -31,10 +29,9 @@ public class Code02_NeighlandFlag {
      * 可能会出现一个问题
      * 举个例子：假设现在数组是 5 4 4  给定3   4最后一个 就会少被右侧范围统计进去
      * 4.相等  index++
-     *
      */
 
-    public static void netherlandFlag(int[] arr,int num){
+    public static void netherlandFlag(int[] arr, int num) {
         // 左边界
         int left = -1;
         // 右边界
@@ -62,9 +59,9 @@ public class Code02_NeighlandFlag {
 
     }
 
-    public static void netherlandFlag2(int[] arr, int L,int R){
+    public static void netherlandFlag2(int[] arr, int L, int R) {
         // 左边界
-        int left = L-1;
+        int left = L - 1;
         // 右边界
         int right = R;
 
@@ -76,11 +73,11 @@ public class Code02_NeighlandFlag {
             }
 
             if (arr[index] < arr[R]) {
-                swap(arr,++left,index++);
+                swap(arr, ++left, index++);
             }
 
             if (arr[index] > arr[R]) {
-                swap(arr,--right,index);
+                swap(arr, --right, index);
             }
         }
         /**
@@ -90,7 +87,7 @@ public class Code02_NeighlandFlag {
          * 讲最左侧最后一个数交换
          * 将最右侧前一个数交换
          */
-        swap(arr,right,R);
+        swap(arr, right, R);
 
         /**
          * 假设给定的数组是：
@@ -99,9 +96,7 @@ public class Code02_NeighlandFlag {
     }
 
 
-
-
-    public static void swap(int[] arr,int a,int b){
+    public static void swap(int[] arr, int a, int b) {
 
         int temp = arr[a];
         arr[a] = arr[b];

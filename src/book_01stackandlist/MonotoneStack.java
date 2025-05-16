@@ -108,9 +108,9 @@ public class MonotoneStack {
                 int leftIndex = -1;
                 int rightIndex = -1;
                 if (pop.size() > 0) {
-                    leftIndex  = pop.get(pop.size()-1);
+                    leftIndex = pop.get(pop.size() - 1);
                     rightIndex = i;
-                    for (int j = 0;j < pop.size();j++) {
+                    for (int j = 0; j < pop.size(); j++) {
                         res[j][0] = leftIndex;
                         res[j][1] = rightIndex;
                     }
@@ -135,8 +135,8 @@ public class MonotoneStack {
 
             int leftIndex = -1;
             int rightIndex = -1;
-            leftIndex = stack.isEmpty() ? -1 : stack.peek().get((stack.peek().size()-1));
-            for (int i = 0;i< pop.size();i++) {
+            leftIndex = stack.isEmpty() ? -1 : stack.peek().get((stack.peek().size() - 1));
+            for (int i = 0; i < pop.size(); i++) {
                 res[i][0] = leftIndex;
                 res[i][1] = rightIndex;
             }

@@ -14,13 +14,12 @@ public class ReversePartLinkedList {
     }
 
     /**
-     *
      * 给定链表头结点单链表
      * 给定from to
      * 翻转from到to这部分节点
      * 要求：链表长度为N时间复杂度要求到O（N），空间复杂度要求到O（1）
      */
-    public DeleteKNode.Node reversePartLinkedList(DeleteKNode.Node head,int from,int to) {
+    public DeleteKNode.Node reversePartLinkedList(DeleteKNode.Node head, int from, int to) {
 
         if (from > to || from < 1 || to < 0) {
             return head;
@@ -36,9 +35,9 @@ public class ReversePartLinkedList {
             // 如果from的值是链表的长度，那么直接已经来到链表的最后一步
             // 找到当前节点的前一个节点
 //            fromNode = from==1?null:from==len+1?cur:cur;
-            fromNode = len==from-1?cur:fromNode;
+            fromNode = len == from - 1 ? cur : fromNode;
             // 找到当前节点的下一个节点
-            toNode = len==to+1?cur:toNode;
+            toNode = len == to + 1 ? cur : toNode;
             cur = cur.next;
         }
 
@@ -59,7 +58,7 @@ public class ReversePartLinkedList {
          * 1 2 3 4   1 3   ----> 3 2 1 4
          * 1 2 3 4   2 3   ----> 1 3 2 4
          */
-        cur = fromNode == null?head:fromNode.next;
+        cur = fromNode == null ? head : fromNode.next;
 
         DeleteKNode.Node nextNode = toNode;
 

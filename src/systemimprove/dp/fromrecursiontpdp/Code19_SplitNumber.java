@@ -11,9 +11,8 @@ public class Code19_SplitNumber {
 
     /**
      * 这里如果从0开始递归的话 会算多一种情况
-     *
+     * <p>
      * 比如7    0 7  7 0这种情况会多算一种
-     *
      *
      * @param num
      * @return
@@ -127,7 +126,6 @@ public class Code19_SplitNumber {
     /**
      * 这个方法的的动态规划是使用pre做行 rest做列改出来的动态规划
      * 斜率优化之后的样子
-     *
      *
      * @param n
      * @return

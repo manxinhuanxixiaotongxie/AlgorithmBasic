@@ -93,9 +93,9 @@ public class MyCalendar {
         if (treeSet.isEmpty()) {
             treeSet.add(new int[]{startTime, endTime});
             return true;
-        }else {
+        } else {
             // 找到开始时间大于等于结束时间的日程
-            int[] ceiling = treeSet.ceiling(new int[] {endTime, 0});
+            int[] ceiling = treeSet.ceiling(new int[]{endTime, 0});
             int[] pre = ceiling == null ? treeSet.last() : treeSet.lower(ceiling);
             // treeSet.lower 严格小于
             if (ceiling == treeSet.first() || treeSet.lower(ceiling)[1] <= startTime) {

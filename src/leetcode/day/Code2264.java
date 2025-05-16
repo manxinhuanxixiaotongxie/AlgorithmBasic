@@ -33,7 +33,6 @@ public class Code2264 {
     /**
      * 对字符串的操作拖垮了常数时间
      *
-     *
      * @param num
      * @return
      */

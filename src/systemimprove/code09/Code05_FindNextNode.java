@@ -69,7 +69,7 @@ public class Code05_FindNextNode {
             return null;
         }
         List<TreeNode> ansList = new ArrayList<>();
-        process(root,ansList) ;
+        process(root, ansList);
         for (int i = 0; i < ansList.size(); i++) {
             if (ansList.get(i) == p) {
                 return i == ansList.size() - 1 ? null : ansList.get(i + 1);
@@ -79,18 +79,19 @@ public class Code05_FindNextNode {
 
     }
 
-    public void process(TreeNode node,List<TreeNode> ansList) {
+    public void process(TreeNode node, List<TreeNode> ansList) {
         if (node == null) {
             return;
         }
-        process(node.left,ansList);
+        process(node.left, ansList);
         ansList.add(node);
-        process(node.right,ansList);
+        process(node.right, ansList);
 
     }
 
     /**
      * 使用栈的形式
+     *
      * @param root
      * @param p
      * @return
@@ -104,7 +105,7 @@ public class Code05_FindNextNode {
             return null;
         }
         List<TreeNode> ansList = new ArrayList<>();
-        in(root,ansList);
+        in(root, ansList);
         for (int i = 0; i < ansList.size(); i++) {
             if (ansList.get(i) == p) {
                 return i == ansList.size() - 1 ? null : ansList.get(i + 1);
@@ -114,7 +115,7 @@ public class Code05_FindNextNode {
 
     }
 
-    public List<TreeNode> in(TreeNode root,List<TreeNode> ansList) {
+    public List<TreeNode> in(TreeNode root, List<TreeNode> ansList) {
         if (root == null) {
             return null;
         }
@@ -123,7 +124,7 @@ public class Code05_FindNextNode {
         Stack<TreeNode> stack = new Stack<>();
         // 中序遍历 左头右
         while (!stack.isEmpty() || cur != null) {
-            if(cur != null) {
+            if (cur != null) {
                 stack.push(cur);
                 cur = cur.left;
             } else {

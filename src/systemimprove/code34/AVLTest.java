@@ -31,9 +31,9 @@ class AVLTree<K extends Comparable<K>, V> {
         Node lastIndex = findLastIndex(key);
         if (lastIndex != null && lastIndex.k.compareTo(key) == 0) {
             lastIndex.v = v;
-        }else {
+        } else {
             size++;
-            root = add(root, key,v);
+            root = add(root, key, v);
         }
     }
 
@@ -60,16 +60,16 @@ class AVLTree<K extends Comparable<K>, V> {
     }
 
 
-    public Node add(Node node, K k,V v) {
+    public Node add(Node node, K k, V v) {
         if (node == null) {
             return new Node<K, V>(k);
         }
 
         if (node.k.compareTo(node.k) < 0) {
-            node.left = add(node.left, k,v);
+            node.left = add(node.left, k, v);
         } else if (node.k.compareTo(node.k) > 0) {
-            node.right = add(node.right, k,v);
-        }else {
+            node.right = add(node.right, k, v);
+        } else {
             node.v = v;
         }
         node.height = Math.max(node.left == null ? 0 : node.left.height, node.right == null
@@ -92,7 +92,7 @@ class AVLTree<K extends Comparable<K>, V> {
                 cur = cur.left == null ? cur.right : cur.left;
             } else {
                 // 右树最左侧节点
-                Node<K,V> rightNode = cur.right;
+                Node<K, V> rightNode = cur.right;
                 while (rightNode.left != null) {
                     rightNode = rightNode.left;
                 }

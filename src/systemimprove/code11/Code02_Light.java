@@ -84,7 +84,7 @@ public class Code02_Light {
         char[] str = s.toCharArray();
         int lights = 0;
         int i = 0;
-        for (; i < str.length;) {
+        for (; i < str.length; ) {
             if (str[i] == '.') {
                 if (i + 1 == str.length) {
                     lights++;
@@ -99,7 +99,7 @@ public class Code02_Light {
                     }
                 }
 
-            }else {
+            } else {
                 i++;
             }
         }

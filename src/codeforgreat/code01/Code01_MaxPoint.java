@@ -27,6 +27,7 @@ public class Code01_MaxPoint {
 
     /**
      * 滑动窗口
+     *
      * @param arr
      * @param k
      * @return
@@ -36,7 +37,7 @@ public class Code01_MaxPoint {
         int ans = 1;
         int windowL = 0;
         for (int i = 0; i < arr.length; i++) {
-            while (windowL <arr.length && arr[windowL]-arr[i] <=k) {
+            while (windowL < arr.length && arr[windowL] - arr[i] <= k) {
                 windowL++;
             }
             ans = Math.max(ans, windowL - i);

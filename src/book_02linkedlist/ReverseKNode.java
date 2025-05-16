@@ -11,17 +11,16 @@ public class ReverseKNode {
      * 将单链表的每K个节点之间逆序
      * 给定一个head 实现一个调整单链表的函数
      * st 每K个节点之间逆序 如果k个节点不够一组 则不调整最后几个节点
-     *
      */
 
-    public ListNode reverseKNode(ListNode head,int k) {
+    public ListNode reverseKNode(ListNode head, int k) {
         if (head == null || k <= 0) {
             return head;
         }
         ListNode cur = head;
         int length = 0;
         while (cur != null) {
-            length ++;
+            length++;
             cur = cur.next;
         }
         if (length < k) {
@@ -36,12 +35,12 @@ public class ReverseKNode {
                 begin = cur;
             }
             ++length;
-            if (length+1 == k) {
+            if (length + 1 == k) {
                 ListNode reverse = reverse(begin, cur.next);
                 if (newHead == null) {
                     newHead = reverse;
                 }
-                length =0;
+                length = 0;
             }
             cur = cur.next;
         }
@@ -53,17 +52,16 @@ public class ReverseKNode {
      * 将单链表的每K个节点之间逆序
      * 给定一个head 实现一个调整单链表的函数
      * st 每K个节点之间逆序 如果k个节点不够一组 则不调整最后几个节点
-     *
      */
 
-    public ListNode reverseKNode2(ListNode head,int k) {
+    public ListNode reverseKNode2(ListNode head, int k) {
         if (head == null || k <= 0) {
             return head;
         }
         ListNode cur = head;
         int length = 0;
         while (cur != null) {
-            length ++;
+            length++;
             cur = cur.next;
         }
         if (length < k) {
@@ -78,12 +76,12 @@ public class ReverseKNode {
                 begin = cur;
             }
             ++length;
-            if (length+1 == k) {
+            if (length + 1 == k) {
                 ListNode reverse = reverse(begin, cur.next);
                 if (newHead == null) {
                     newHead = reverse;
                 }
-                length =0;
+                length = 0;
             }
             cur = cur.next;
         }
@@ -95,17 +93,17 @@ public class ReverseKNode {
      * 将单链表的每K个节点之间逆序
      * 给定一个head 实现一个调整单链表的函数
      * st 每K个节点之间逆序 如果k个节点不够一组 则不调整最后几个节点
-     *测试通过
+     * 测试通过
      */
 
-    public ListNode reverseKNode3(ListNode head,int k) {
+    public ListNode reverseKNode3(ListNode head, int k) {
         if (head == null || k <= 0) {
             return head;
         }
         ListNode cur = head;
         int length = 0;
         while (cur != null) {
-            length ++;
+            length++;
             cur = cur.next;
         }
         if (length < k) {
@@ -118,11 +116,11 @@ public class ReverseKNode {
         ListNode next = null;
         while (cur != null) {
             if (length == k) {
-                start = pre == null?head:pre.next;
-                head = pre == null?cur:head;
-                resign2(pre,start,cur,next);
+                start = pre == null ? head : pre.next;
+                head = pre == null ? cur : head;
+                resign2(pre, start, cur, next);
                 pre = start;
-                length =1;
+                length = 1;
             }
             length++;
             cur = next;
@@ -132,7 +130,7 @@ public class ReverseKNode {
         return head;
     }
 
-    public void resign2(ListNode left,ListNode start,ListNode end,ListNode right) {
+    public void resign2(ListNode left, ListNode start, ListNode end, ListNode right) {
         ListNode pre = start;
         ListNode cur = start.next;
         ListNode next = null;
@@ -149,7 +147,7 @@ public class ReverseKNode {
 
     }
 
-    public ListNode reverse(ListNode begin,ListNode end) {
+    public ListNode reverse(ListNode begin, ListNode end) {
         ListNode cur = begin;
         ListNode next = end;
         ListNode nextNode;

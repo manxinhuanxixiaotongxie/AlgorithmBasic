@@ -13,9 +13,9 @@ import java.util.*;
  * <p>
  * 思路：使用并查集
  * matrix[i][j]为1的时候 上下左右为1的时候进行合并
- *
- *
- *
+ * <p>
+ * <p>
+ * <p>
  * leetcode 200题
  */
 public class Code04_Island {
@@ -71,17 +71,17 @@ public class Code04_Island {
         UnionSet2 unionSet2 = new UnionSet2(grid);
 
         // 算第0行的位置
-        for (int i = 1;i < N; i++) {
+        for (int i = 1; i < N; i++) {
             if (grid[0][i] == '1' && grid[0][i - 1] == '1') {
-                unionSet2.union(0,i,0,i - 1);
+                unionSet2.union(0, i, 0, i - 1);
             }
         }
 
 
         // 算第0行的位置
-        for (int j = 1; j < M;j++) {
+        for (int j = 1; j < M; j++) {
             if (grid[j][0] == '1' && grid[j - 1][0] == '1') {
-                unionSet2.union(j,0,j - 1,0);
+                unionSet2.union(j, 0, j - 1, 0);
             }
         }
 
@@ -91,10 +91,10 @@ public class Code04_Island {
             for (int j = 1; j < N; j++) {
                 if (grid[i][j] == '1') {
                     if (grid[i - 1][j] == '1') {
-                        unionSet2.union(i,j,i - 1,j);
+                        unionSet2.union(i, j, i - 1, j);
                     }
                     if (grid[i][j - 1] == '1') {
-                        unionSet2.union(i,j,i,j - 1);
+                        unionSet2.union(i, j, i, j - 1);
                     }
                 }
             }
@@ -193,13 +193,13 @@ public class Code04_Island {
             father = new int[len];
             size = new int[len];
             help = new int[len];
-            for(int i = 0;i < M; i ++) {
-                for (int j = 0;j < N;j++) {
+            for (int i = 0; i < M; i++) {
+                for (int j = 0; j < N; j++) {
                     if (board[i][j] == '1') {
-                        int index = index(i,j);
+                        int index = index(i, j);
                         father[index] = index;
                         size[index] = 1;
-                        sets ++ ;
+                        sets++;
                     }
                 }
             }
@@ -221,8 +221,8 @@ public class Code04_Island {
 //            return i;
 //        }
 
-        public int findFather(int c,int j) {
-            int index = index(c,j);
+        public int findFather(int c, int j) {
+            int index = index(c, j);
             int hi = 0;
             while (index != father[index]) {
                 help[hi++] = index;
@@ -234,19 +234,19 @@ public class Code04_Island {
             return index;
         }
 
-        public boolean isSameSet(int c1,int j1,int c2,int j2) {
-            return findFather(c1,j1) == findFather(c2,j2);
+        public boolean isSameSet(int c1, int j1, int c2, int j2) {
+            return findFather(c1, j1) == findFather(c2, j2);
         }
 
-        public int index(int r,int c) {
+        public int index(int r, int c) {
             return r * col + c;
         }
 
-        public void union(int c1,int j1,int c2,int j2) {
+        public void union(int c1, int j1, int c2, int j2) {
 //            int aIndex = index(c1,j1);
 //            int bIndex = index(c2,j2);
-            int aFather = findFather(c1,j1);
-            int bFather = findFather(c2,j2);
+            int aFather = findFather(c1, j1);
+            int bFather = findFather(c2, j2);
             if (aFather != bFather) {
                 int aSize = size[aFather];
                 int bSize = size[bFather];
@@ -259,7 +259,7 @@ public class Code04_Island {
                     size[bFather] = aSize + bSize;
                     size[aFather] = 0;
                 }
-                sets --;
+                sets--;
             }
         }
 

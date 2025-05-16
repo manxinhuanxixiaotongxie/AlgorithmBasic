@@ -62,11 +62,11 @@ public class Code05_PrintRectangle {
 //                {'a', 'b', 'c', 'd'},
 //                {'e', 'f', 'g', 'h'},
 //                {'i', 'j', 'k', 'l'}
-                {'a','b','c'},
-                {'d','e','f'},
-                {'g','h','i'},
-                {'j','k','l'},
-                {'m','n','o'}
+                {'a', 'b', 'c'},
+                {'d', 'e', 'f'},
+                {'g', 'h', 'i'},
+                {'j', 'k', 'l'},
+                {'m', 'n', 'o'}
         };
         Code05_PrintRectangle code05_printRectangle = new Code05_PrintRectangle();
         code05_printRectangle.printRec(arr);

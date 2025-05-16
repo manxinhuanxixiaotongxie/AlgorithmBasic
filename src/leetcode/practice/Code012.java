@@ -2,23 +2,20 @@ package leetcode.practice;
 
 /**
  * 整数转罗马数字
- *
+ * <p>
  * I  1
- *
+ * <p>
  * V  5
- *
+ * <p>
  * x 10
- *
+ * <p>
  * l 50
- *
+ * <p>
  * c 100
- *
+ * <p>
  * d 500
- *
+ * <p>
  * m 1000
- *
- *
-
  */
 public class Code012 {
     static char[] value1 = {'I', 'X', 'C', 'M'};
@@ -71,14 +68,14 @@ public class Code012 {
                 }
 
                 // 当前数值是9
-            }else {
+            } else {
                 // 当前数值不是4 也不是9
-                if (now <5) {
+                if (now < 5) {
                     while (now > 0) {
                         ans.append(value1[index]);
                         now--;
                     }
-                }else {
+                } else {
                     now -= 5;
                     ans.append(value2[index]);
                     while (now > 0) {
@@ -106,10 +103,10 @@ public class Code012 {
 
     public static String intToRoman2(int num) {
         String[][] c = {
-                { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" },
-                { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" },
-                { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" },
-                { "", "M", "MM", "MMM" } };
+                {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"},
+                {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"},
+                {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"},
+                {"", "M", "MM", "MMM"}};
         return c[3][num / 1000 % 10] +
                 c[2][num / 100 % 10] +
                 c[1][num / 10 % 10] +

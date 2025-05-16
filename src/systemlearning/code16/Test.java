@@ -469,6 +469,7 @@ public class Test {
 
     /**
      * 矩阵的p次方
+     *
      * @param m
      * @param p
      * @return

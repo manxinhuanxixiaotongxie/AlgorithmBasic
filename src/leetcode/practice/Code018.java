@@ -18,7 +18,7 @@ public class Code018 {
             if (i == 0 || nums[i - 1] != nums[i]) {
                 // 转化为三数之和
                 long target1 = target - nums[i];
-                if (target1 > Integer.MAX_VALUE  || target1 < Integer.MIN_VALUE ) {
+                if (target1 > Integer.MAX_VALUE || target1 < Integer.MIN_VALUE) {
                     continue;
                 }
                 List<List<Integer>> nexts = threeSum(nums, i + 1, target1);
@@ -36,7 +36,7 @@ public class Code018 {
         for (int i = begin; i < sum.length; i++) {
             if (i == begin || sum[i] != sum[i - 1]) {
                 long target1 = target - sum[i];
-                if (target1 > Integer.MAX_VALUE  || target1 < Integer.MIN_VALUE ) {
+                if (target1 > Integer.MAX_VALUE || target1 < Integer.MIN_VALUE) {
                     continue;
                 }
                 List<List<Integer>> nexts = twoSum(sum, i + 1, target1);
@@ -75,7 +75,7 @@ public class Code018 {
 
     public static void main(String[] args) {
         Code018 code018 = new Code018();
-        int[] nums = {1000000000,1000000000,1000000000,1000000000};
+        int[] nums = {1000000000, 1000000000, 1000000000, 1000000000};
         List<List<Integer>> lists = code018.fourSum(nums, -294967296);
         for (List<Integer> list : lists) {
             System.out.println(list);

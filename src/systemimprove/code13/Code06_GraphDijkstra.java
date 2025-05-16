@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * dijkstra算法
  * 就是为了计算从一个节点出发到其他所有节点的最短路径的问题
- *
+ * <p>
  * 过程：
  * 1.给定出发点 建一张距离表 表中没有的数据表示无穷大
  * 2.从给定点出发
@@ -16,9 +16,8 @@ import java.util.Set;
 public class Code06_GraphDijkstra {
 
     /**
-     *
      * 本实现方法没有负边
-     *
+     * <p>
      * 1.新建一张距离表 一开始的时候所有的点都不在距离表中 任务距离正无穷大
      * 2.开始点自己到自己的距离认为是0
      * 3.考察最小距离的边
@@ -69,18 +68,18 @@ public class Code06_GraphDijkstra {
         return ans;
     }
 
-    public Map<Node,Integer> dijkstra12(Node from,int size) {
-        Map<Node,Integer> result = new HashMap<>();
+    public Map<Node, Integer> dijkstra12(Node from, int size) {
+        Map<Node, Integer> result = new HashMap<>();
         NodeHeap nodeHeap = new NodeHeap(size);
-        nodeHeap.addOrUpdateOrIgnore(from,0);
+        nodeHeap.addOrUpdateOrIgnore(from, 0);
         while (!nodeHeap.isEmpty()) {
             NodeRecord record = nodeHeap.pop();
             Node cur = record.node;
             int distance = record.distance;
             for (Edge edge : cur.edges) {
-                nodeHeap.addOrUpdateOrIgnore(edge.to,edge.weight + distance);
+                nodeHeap.addOrUpdateOrIgnore(edge.to, edge.weight + distance);
             }
-            result.put(cur,distance);
+            result.put(cur, distance);
         }
 
         return result;
@@ -91,10 +90,10 @@ public class Code06_GraphDijkstra {
     }
 
     class NodeHeap {
-        private Map<Node,Integer> distanceMap;
+        private Map<Node, Integer> distanceMap;
         private int size;
         // 在这个堆结构中，如果一个数已经进入过堆并且已经结算过距离的话 将index的位置置为-1
-        private Map<Node,Integer> indexMap;
+        private Map<Node, Integer> indexMap;
         private Node[] heap;
 
         NodeHeap(int limit) {
@@ -107,8 +106,9 @@ public class Code06_GraphDijkstra {
         public boolean isEmpty() {
             return size == 0;
         }
+
         public NodeRecord pop() {
-            NodeRecord record = new NodeRecord(heap[0],distanceMap.get(heap[0]));
+            NodeRecord record = new NodeRecord(heap[0], distanceMap.get(heap[0]));
             swap(0, size - 1);
             indexMap.put(heap[size - 1], -1);
             distanceMap.remove(heap[size - 1]);
@@ -133,7 +133,7 @@ public class Code06_GraphDijkstra {
             }
         }
 
-        public void addOrUpdateOrIgnore(Node node,int distance) {
+        public void addOrUpdateOrIgnore(Node node, int distance) {
             // 进过小跟堆 但是还没有进行结算
             if (inHeap(node)) {
                 distanceMap.put(node, Math.min(distanceMap.get(node), distance));
@@ -169,7 +169,7 @@ public class Code06_GraphDijkstra {
         }
 
         public boolean isEntered(Node node) {
-         return indexMap.containsKey(node);
+            return indexMap.containsKey(node);
         }
     }
 
@@ -177,7 +177,7 @@ public class Code06_GraphDijkstra {
         public Node node;
         public int distance;
 
-        NodeRecord(Node node,int distance) {
+        NodeRecord(Node node, int distance) {
             this.node = node;
             this.distance = distance;
         }

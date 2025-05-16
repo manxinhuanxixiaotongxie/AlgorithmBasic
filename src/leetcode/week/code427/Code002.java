@@ -19,7 +19,7 @@ public class Code002 {
             int rest = sum - nums[i];
             // 假设i位置是异常数 怎么快速获取是不是满足条件
             // 2x+y == sum 如果x不是异常数的话 那么一定存在这种关系
-            if (map.containsKey(rest - nums[i]) && (rest - nums[i] != nums[i] || map.get(rest - nums[i]) > 1 )) {
+            if (map.containsKey(rest - nums[i]) && (rest - nums[i] != nums[i] || map.get(rest - nums[i]) > 1)) {
                 ans = Math.max(ans, rest - nums[i]);
                 map.put(nums[i], map.get(nums[i]) - 1);
             }

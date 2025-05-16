@@ -66,7 +66,6 @@ public class AddList {
         }
 
 
-
         // 设置进位
 //        boolean isNeedAdd = false;
 //        while (!stack1.isEmpty() && !stack2.isEmpty()) {
@@ -123,12 +122,12 @@ public class AddList {
         ListNode pre = null;
         while (!stack1.isEmpty() || !stack2.isEmpty()) {
             n1 = stack1.isEmpty() ? 0 : stack1.pop();
-            n2 = stack2.isEmpty()?0:stack2.pop();
-            if ((n1 + n2+ cal) >= 10) {
-                newNode = new ListNode((n1+n2+cal)%10);
-                cal = (n1+n2+cal)/10;
-            }else {
-                newNode = new ListNode((n1+n2+cal));
+            n2 = stack2.isEmpty() ? 0 : stack2.pop();
+            if ((n1 + n2 + cal) >= 10) {
+                newNode = new ListNode((n1 + n2 + cal) % 10);
+                cal = (n1 + n2 + cal) / 10;
+            } else {
+                newNode = new ListNode((n1 + n2 + cal));
             }
             newNode.next = pre;
             pre = newNode;
@@ -136,7 +135,7 @@ public class AddList {
         }
 
         // 所有数都弹出还有需要进位
-        if (cal >0) {
+        if (cal > 0) {
             pre = newNode;
             newNode = new ListNode(cal);
             newNode.next = pre;
@@ -148,6 +147,7 @@ public class AddList {
 
     /**
      * 利用链表的逆序，节省栈空间
+     *
      * @param head1
      * @param head2
      * @return
@@ -191,11 +191,11 @@ public class AddList {
         ListNode c1 = head1;
         ListNode c2 = head2;
         while (c1 != null || c2 != null) {
-            n1 = head1 == null?0:head1.val;
-            n2 = head2 == null?0:head2.val;
+            n1 = head1 == null ? 0 : head1.val;
+            n2 = head2 == null ? 0 : head2.val;
             n = n1 + n2 + cal;
-            newHead = new ListNode(n%10);
-            cal = n/10;
+            newHead = new ListNode(n % 10);
+            cal = n / 10;
 
             newHead.next = pre;
 
@@ -205,8 +205,8 @@ public class AddList {
 //            if (head2 != null) {
 //                head2 = head2.next;
 //            }
-            c1 = head1 != null?c1.next:null;
-            c2 = head2 != null?c2.next:null;
+            c1 = head1 != null ? c1.next : null;
+            c2 = head2 != null ? c2.next : null;
 
 
         }

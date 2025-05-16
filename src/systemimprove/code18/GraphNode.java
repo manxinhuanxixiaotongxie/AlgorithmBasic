@@ -8,6 +8,7 @@ public class GraphNode {
     public int out;
     public List<GraphEdge> edges;
     public List<GraphNode> next;
+
     public GraphNode(int v) {
         value = v;
     }

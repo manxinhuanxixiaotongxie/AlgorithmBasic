@@ -5,6 +5,6 @@ import java.util.Set;
 
 public class Graph {
 
-    Map<Integer,Node> nodes;
+    Map<Integer, Node> nodes;
     Set<Edge> edges;
 }

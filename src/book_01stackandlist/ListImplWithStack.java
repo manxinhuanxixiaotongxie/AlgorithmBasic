@@ -17,7 +17,8 @@ public class ListImplWithStack {
     public class MyList<T> {
         private Stack<T> dataStack;
         private Stack<T> helpStack;
-        MyList () {
+
+        MyList() {
             dataStack = new Stack<>();
             helpStack = new Stack<>();
         }

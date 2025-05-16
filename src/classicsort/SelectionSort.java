@@ -8,7 +8,7 @@ package classicsort;
 public class SelectionSort {
 
     public static void main(String[] args) {
-        int[] arr = {5,3,12,2,1,6,5};
+        int[] arr = {5, 3, 12, 2, 1, 6, 5};
         printArr(arr);
         selectionSort(arr);
         printArr(arr);
@@ -39,7 +39,7 @@ public class SelectionSort {
 
     /**
      * 注意：这里异或交换的坑，只有i和j不相等时才可以使用
-     *
+     * <p>
      * 不然得话会将数组的原始的值变成0
      *
      * @param arr
@@ -47,8 +47,8 @@ public class SelectionSort {
      * @param j
      */
     public static void swap(int[] arr, int i, int j) {
-        arr[i] = arr[i]^arr[j];
-        arr[j] = arr[i]^arr[j];
-        arr[i] = arr[i]^arr[j];
+        arr[i] = arr[i] ^ arr[j];
+        arr[j] = arr[i] ^ arr[j];
+        arr[i] = arr[i] ^ arr[j];
     }
 }

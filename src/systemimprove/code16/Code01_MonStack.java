@@ -61,20 +61,20 @@ public class Code01_MonStack {
         return ans;
     }
 
-    public int[] generateArr(int maxvalue,int maxLength) {
-        int[] ans = new int[(int) ((maxLength+1)*Math.random())];
+    public int[] generateArr(int maxvalue, int maxLength) {
+        int[] ans = new int[(int) ((maxLength + 1) * Math.random())];
         Set<Integer> set = new HashSet<>();
-        for (int i= 0;i < ans.length;i++) {
-            int value = (int) ((maxvalue+1)*Math.random()) - (int) (maxvalue*Math.random());
+        for (int i = 0; i < ans.length; i++) {
+            int value = (int) ((maxvalue + 1) * Math.random()) - (int) (maxvalue * Math.random());
             while (set.contains(value)) {
-                value = (int) ((maxvalue+1)*Math.random()) - (int) (maxvalue*Math.random());
+                value = (int) ((maxvalue + 1) * Math.random()) - (int) (maxvalue * Math.random());
             }
             ans[i] = value;
         }
         return ans;
     }
 
-    public boolean isEqual(int[][] a,int[][] b) {
+    public boolean isEqual(int[][] a, int[][] b) {
         if (a == null && b == null) {
             return true;
         }
@@ -106,7 +106,7 @@ public class Code01_MonStack {
             return;
         }
         for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i]+" ");
+            System.out.print(arr[i] + " ");
         }
         System.out.println();
     }
@@ -117,10 +117,10 @@ public class Code01_MonStack {
         int maxLength = 20;
         int testTime = 100000;
         for (int i = 0; i < testTime; i++) {
-            int[] arr = monStack.generateArr(maxvalue,maxLength);
+            int[] arr = monStack.generateArr(maxvalue, maxLength);
             int[][] ans1 = monStack.monStack(arr);
             int[][] ans2 = monStack.monStack2(arr);
-            if (!monStack.isEqual(ans1,ans2)) {
+            if (!monStack.isEqual(ans1, ans2)) {
                 System.out.println("Oops!");
                 monStack.printArr(arr);
                 System.out.println("=========");

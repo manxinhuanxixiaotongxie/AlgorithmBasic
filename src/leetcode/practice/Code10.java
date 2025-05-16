@@ -10,6 +10,7 @@ public class Code10 {
 
     /**
      * str 从si出发 能不能匹配出 pattern 从pi出发的后续字符串
+     *
      * @param str
      * @param pattern
      * @param si

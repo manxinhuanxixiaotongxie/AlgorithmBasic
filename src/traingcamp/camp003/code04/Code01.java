@@ -10,16 +10,16 @@ import java.util.TreeMap;
  * 给你一个字符串类型的数组arr，譬如:
  * String[] arr = { "b\st", "d\", "a\d\e", "a\b\c" };
  * 把这些路径中蕴含的目录结构给打印出来，子目录直接列在父目录下面，并比父目录向右进两格，就像这样:
-
-  a
-    b
-        c
-    d
-        e
-  b
-    st
-  d
-
+ * <p>
+ * a
+ * b
+ * c
+ * d
+ * e
+ * b
+ * st
+ * d
+ * <p>
  * 同一级的需要按字母顺序排列不能乱。
  */
 public class Code01 {
@@ -42,7 +42,7 @@ public class Code01 {
             }
         }
         // 有了前缀树数组之后 打印这颗前缀树
-        printProcess(root,0);
+        printProcess(root, 0);
 
     }
 
@@ -50,6 +50,7 @@ public class Code01 {
      * 使用宽度优先遍历有问题
      * 问题是什么？
      * 宽度优先遍历没有把一层遍历完
+     *
      * @param root
      */
     private void printTrieTree(TrieNode root) {
@@ -74,7 +75,7 @@ public class Code01 {
         }
     }
 
-    private void printProcess(TrieNode node,int lelvel) {
+    private void printProcess(TrieNode node, int lelvel) {
         if (lelvel != 0) {
             System.out.println(get4nSpace(lelvel) + node.path);
         }

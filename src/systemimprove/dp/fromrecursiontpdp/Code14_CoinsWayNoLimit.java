@@ -77,7 +77,7 @@ public class Code14_CoinsWayNoLimit {
     }
 
     // 为了测试
-    public  int[] randomArray(int maxLen, int maxValue) {
+    public int[] randomArray(int maxLen, int maxValue) {
         int N = (int) (Math.random() * maxLen);
         int[] arr = new int[N];
         boolean[] has = new boolean[maxValue + 1];
@@ -91,7 +91,7 @@ public class Code14_CoinsWayNoLimit {
     }
 
     // 为了测试
-    public  void printArray(int[] arr) {
+    public void printArray(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");
         }

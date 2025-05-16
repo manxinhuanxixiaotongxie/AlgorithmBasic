@@ -18,18 +18,19 @@ public class ReverseListKGroup {
         n2.next = n3;
         n3.next = n4;
         n4.next = n5;
-        reverseKGroup(n1,2);
+        reverseKGroup(n1, 2);
     }
+
     /**
      * leetcode k个一组翻转链表
      * 给定一个链表
      * 给定一个整数K
      * 每K个进行反转
-     *
+     * <p>
      * 进阶：你可以设计一个O(1)额外内存空间的算法解决这个问题吗
      */
 
-    public static ListNode reverseKGroup (ListNode head,int k) {
+    public static ListNode reverseKGroup(ListNode head, int k) {
 
         if (head == null || k <= 0) {
             return head;
@@ -71,7 +72,7 @@ public class ReverseListKGroup {
      * @param end
      * @return
      */
-    public static ListNode reverseListNode(ListNode start , ListNode end) {
+    public static ListNode reverseListNode(ListNode start, ListNode end) {
 
         ListNode pre = null;
         ListNode next = null;
@@ -88,7 +89,7 @@ public class ReverseListKGroup {
 
     }
 
-    public static ListNode getNextNode(ListNode start,int k) {
+    public static ListNode getNextNode(ListNode start, int k) {
         while (--k > 0 && start != null) {
             start = start.next;
         }

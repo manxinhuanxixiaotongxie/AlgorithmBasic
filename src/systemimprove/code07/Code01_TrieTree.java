@@ -15,9 +15,9 @@ public class Code01_TrieTree {
     class Node {
         private int pass;
         private int end;
-        private Map<Integer,Node> next;
+        private Map<Integer, Node> next;
 
-        Node(int pass,int end) {
+        Node(int pass, int end) {
             this.pass = pass;
             this.end = end;
             this.next = new HashMap<>();
@@ -25,23 +25,25 @@ public class Code01_TrieTree {
     }
 
     public Code01_TrieTree() {
-        this.root = new Node(0,0);
+        this.root = new Node(0, 0);
     }
 
-    /** Inserts a word into the trie. */
+    /**
+     * Inserts a word into the trie.
+     */
     public void insert(String word) {
-        if (word == null || word.length() ==0) {
+        if (word == null || word.length() == 0) {
             return;
         }
 
         char[] charArray = word.toCharArray();
         Node cur = root;
-        for (int i = 0; i < charArray.length;i++) {
+        for (int i = 0; i < charArray.length; i++) {
             root.pass++;
             if (cur.next.get(charArray[i] - 'A') == null) {
-                cur.next.put(charArray[i] - 'A',new Node(1,0));
+                cur.next.put(charArray[i] - 'A', new Node(1, 0));
             } else {
-                cur.next.get(charArray[i] -'A').pass++;
+                cur.next.get(charArray[i] - 'A').pass++;
             }
             cur = cur.next.get(charArray[i] - 'A');
 
@@ -50,15 +52,17 @@ public class Code01_TrieTree {
 
     }
 
-    /** Returns if the word is in the trie. */
+    /**
+     * Returns if the word is in the trie.
+     */
     public boolean search(String word) {
-        if (word == null || word.length() ==0) {
+        if (word == null || word.length() == 0) {
             return false;
         }
         char[] charArray = word.toCharArray();
         Node cur = root;
-        for (int i = 0; i < charArray.length;i++) {
-            if (cur.next.get(charArray[i]-'A') == null) {
+        for (int i = 0; i < charArray.length; i++) {
+            if (cur.next.get(charArray[i] - 'A') == null) {
                 return false;
             }
             cur = cur.next.get(charArray[i] - 'A');
@@ -86,15 +90,17 @@ public class Code01_TrieTree {
     }
 
 
-    /** Returns if there is any word in the trie that starts with the given prefix. */
+    /**
+     * Returns if there is any word in the trie that starts with the given prefix.
+     */
     public boolean startsWith(String prefix) {
         char[] charArray = prefix.toCharArray();
         Node cur = root;
-        for (int i = 0; i < charArray.length;i++) {
+        for (int i = 0; i < charArray.length; i++) {
             if (cur.next.get(charArray[i] - 'A') == null) {
                 return false;
             }
-            cur = cur.next.get(charArray[i] -'A');
+            cur = cur.next.get(charArray[i] - 'A');
         }
         return true;
 

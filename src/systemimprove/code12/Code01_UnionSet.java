@@ -64,13 +64,13 @@ public class Code01_UnionSet {
     }
 
     /**
-     *               0
-     *            1
-     *          2
-     *   |  cur = 0 father = 0        |
-     *   |  cur = 1 father = 0        |
-     *   |  cur = 2 father = 1        |
-     *   |____________________________|
+     * 0
+     * 1
+     * 2
+     * |  cur = 0 father = 0        |
+     * |  cur = 1 father = 0        |
+     * |  cur = 2 father = 1        |
+     * |____________________________|
      *
      * @param cur
      * @return

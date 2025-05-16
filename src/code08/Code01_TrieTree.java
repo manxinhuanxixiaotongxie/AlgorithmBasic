@@ -68,7 +68,7 @@ public class Code01_TrieTree {
                 cur = cur.nexts[way];
             }
 //            return true;
-            return cur.end >0;
+            return cur.end > 0;
         }
 
         // word这个单词加入过几次
@@ -114,9 +114,6 @@ public class Code01_TrieTree {
         }
 
 
-
-
-
     }
 
     public static class Trie2 {
@@ -128,7 +125,6 @@ public class Code01_TrieTree {
         }
 
         /**
-         *
          * Node1实现方式有很大的局限性
          */
         public static class Node2 {
@@ -148,10 +144,10 @@ public class Code01_TrieTree {
             Node2 cur = root;
             cur.pass++;
             char[] chars = word.toCharArray();
-            for (int i =0; i<chars.length;i++) {
+            for (int i = 0; i < chars.length; i++) {
                 int index = chars[i];
                 if (!cur.next.containsKey(index)) {
-                    cur.next.put(index,new Node2());
+                    cur.next.put(index, new Node2());
                 }
                 cur = cur.next.get(index);
                 cur.pass++;
@@ -162,6 +158,7 @@ public class Code01_TrieTree {
 
         /**
          * 完整的串加入了多少次
+         *
          * @param word
          * @return
          */
@@ -171,7 +168,7 @@ public class Code01_TrieTree {
             }
             char[] chars = word.toCharArray();
             Node2 cur = root;
-            for (int i =0;i<chars.length;i++) {
+            for (int i = 0; i < chars.length; i++) {
                 int index = chars[i] = 'a';
                 if (cur.next.get(index) == null) {
                     return 0;
@@ -221,9 +218,9 @@ public class Code01_TrieTree {
 //                cur.end--;
 
                 cur.pass--;
-                for (int i=0;i<word.length();i++) {
-                    int index = chars[i] -'a';
-                    if (--cur.next.get(index).pass ==0) {
+                for (int i = 0; i < word.length(); i++) {
+                    int index = chars[i] - 'a';
+                    if (--cur.next.get(index).pass == 0) {
                         cur.next.remove(index);
                         return;
                     }

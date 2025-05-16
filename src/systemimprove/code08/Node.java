@@ -2,7 +2,6 @@ package systemimprove.code08;
 
 /**
  * 定义链表节点
- *
  */
 public class Node {
 

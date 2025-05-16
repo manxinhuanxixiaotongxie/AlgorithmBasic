@@ -182,6 +182,6 @@ public class Code05_TreeMaxWidth {
             this.index = index;
         }
     }
-    
+
 
 }

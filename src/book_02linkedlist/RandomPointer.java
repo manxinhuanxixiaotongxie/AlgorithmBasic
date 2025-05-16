@@ -20,6 +20,7 @@ public class RandomPointer {
 
     /**
      * 进阶解法
+     *
      * @param randomNode
      * @return
      */
@@ -45,7 +46,7 @@ public class RandomPointer {
         while (cur.next != null) {
             next = cur.next.next;
             randomNodeCopy = cur.next;
-            randomNodeCopy.random = cur.random != null?cur.random:null;
+            randomNodeCopy.random = cur.random != null ? cur.random : null;
             cur = next;
         }
 
@@ -55,10 +56,9 @@ public class RandomPointer {
             next = cur.next.next;
             randomNodeCopy = cur.next;
             cur.next = next;
-            randomNodeCopy.next = next != null?next.next:null;
+            randomNodeCopy.next = next != null ? next.next : null;
             cur = next;
         }
-
 
 
         return head.next;
@@ -66,6 +66,7 @@ public class RandomPointer {
 
     /**
      * 普通解法
+     *
      * @param randomNode
      * @return
      */
@@ -75,10 +76,10 @@ public class RandomPointer {
             return randomNode;
         }
 
-        Map<RandomNode,RandomNode> map = new HashMap<>();
+        Map<RandomNode, RandomNode> map = new HashMap<>();
         RandomNode cur = randomNode;
         while (cur.next != null) {
-            map.put(cur,new RandomNode(cur.value));
+            map.put(cur, new RandomNode(cur.value));
         }
         cur = randomNode;
         while (cur.next != null) {
@@ -86,7 +87,6 @@ public class RandomPointer {
             map.get(cur).random = map.get(cur.random);
             cur = cur.next;
         }
-
 
 
         return map.get(randomNode);

@@ -55,7 +55,7 @@ public class Code871 {
                 // 剩余的油量是当前加油站的油量加上之前剩余的油量（刚开始的油量减去已经走过路程）
                 startFuel += info.fuel - (pre > stations[info.index][0] ? 0 : stations[info.index][0] - pre);
                 // 剩余的路程为
-                target -= (pre < stations[info.index][0]?stations[info.index][0] - pre:0);
+                target -= (pre < stations[info.index][0] ? stations[info.index][0] - pre : 0);
                 pre = Math.max(stations[info.index][0], pre);
                 ans++;
             }
@@ -66,7 +66,7 @@ public class Code871 {
             } else {
                 Info info = queue.poll();
                 startFuel += info.fuel - (pre > stations[info.index][0] ? 0 : stations[info.index][0] - pre);
-                target -= (pre < stations[info.index][0]?stations[info.index][0] - pre:0);
+                target -= (pre < stations[info.index][0] ? stations[info.index][0] - pre : 0);
                 pre = Math.max(stations[info.index][0], pre);
                 ans++;
 

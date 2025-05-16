@@ -19,7 +19,7 @@ public class Code0395 {
             dp[i] = map.get(s.charAt(i)) >= k ? dp[i - 1] + 1 : 0;
         }
 
-        for (int i = 0; i < s.length();i++) {
+        for (int i = 0; i < s.length(); i++) {
             ans = Math.max(ans, dp[i]);
         }
 

@@ -18,7 +18,7 @@ public class Code0080 {
                 for (int i = temp; i < n; i++) {
                     nums[tempL++] = nums[i];
                 }
-                r = l+1;
+                r = l + 1;
             }
             r++;
             l = r;
@@ -31,7 +31,7 @@ public class Code0080 {
 //        int[] nums = {1, 1, 1};
 //        int[] nums = {0,0,1,1,1,1,2,3,3};
 //        int[] nums = {1, 1, 1, 2, 2, 2, 3, 3};
-        int[] nums = {0,1,2,2,2,2,2,3,4,4,4};
+        int[] nums = {0, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4};
         System.out.println(solution.removeDuplicates(nums));
     }
 }

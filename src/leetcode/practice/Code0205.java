@@ -32,7 +32,7 @@ public class Code0205 {
         int carry = 0;
 
         while (l1 != null && l2 != null) {
-            int sum  = l1.val + l2.val + carry;
+            int sum = l1.val + l2.val + carry;
             if (sum >= 10) {
                 carry = 1;
                 sum -= 10;

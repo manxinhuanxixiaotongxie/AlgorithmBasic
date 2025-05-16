@@ -8,7 +8,6 @@ package code06;
 
 /**
  * 堆排序
- *
  */
 public class Code01_HeapSort {
 
@@ -40,7 +39,7 @@ public class Code01_HeapSort {
             heapSize = 0;
         }
 
-        public void push (int value){
+        public void push(int value) {
 
             if (heapSize == limit) {
                 System.out.println("heap is full");
@@ -48,7 +47,7 @@ public class Code01_HeapSort {
 
             heap[heapSize] = value;
 
-            heapInsert(heap,heapSize++);
+            heapInsert(heap, heapSize++);
 
         }
 
@@ -62,13 +61,13 @@ public class Code01_HeapSort {
                 System.out.println("heap is null");
             }
             int temp = heap[0];
-            swap(heap,0,--heapSize);
-            heapify(heap,0,heapSize);
+            swap(heap, 0, --heapSize);
+            heapify(heap, 0, heapSize);
             return temp;
 
         }
 
-        public static void heapify(int[] arr,int index,int heapSize) {
+        public static void heapify(int[] arr, int index, int heapSize) {
             int leftIndex = index >> 1 | 1;
             // 选出左右节点较小的那个下标
 //            int minIndex = arr[leftIndex + 1] < arr[leftIndex] ? leftIndex + 1 : leftIndex;
@@ -84,24 +83,25 @@ public class Code01_HeapSort {
                 if (minIndex == index) {
                     break;
                 }
-                swap(arr,minIndex,index);
-                leftIndex = index*2 + 1;
+                swap(arr, minIndex, index);
+                leftIndex = index * 2 + 1;
             }
 
         }
 
         /**
          * 小跟堆
+         *
          * @param arr
          * @param index
          */
-        public void  heapInsert(int[] arr,int index) {
+        public void heapInsert(int[] arr, int index) {
 
-            while (arr[index] < arr[(index -1) / 2]) {
+            while (arr[index] < arr[(index - 1) / 2]) {
 //                heapSize++;
-                swap(arr,index,(index-1)/2);
+                swap(arr, index, (index - 1) / 2);
                 // index向上查找
-                index = (index-1)/2;
+                index = (index - 1) / 2;
             }
 
         }
@@ -114,16 +114,16 @@ public class Code01_HeapSort {
          */
         public static void heapSort(int[] arr) {
             int heapSize = arr.length;
-            swap(arr,0,--heapSize);
+            swap(arr, 0, --heapSize);
             while (heapSize > 0) {
-                heapify(arr,0,heapSize);
-                swap(arr,0,--heapSize);
+                heapify(arr, 0, heapSize);
+                swap(arr, 0, --heapSize);
             }
 
         }
     }
 
-    public static void swap(int[] arr,int a,int b) {
+    public static void swap(int[] arr, int a, int b) {
 
         int temp = arr[a];
         arr[a] = arr[b];
@@ -131,8 +131,6 @@ public class Code01_HeapSort {
 
 
     }
-
-
 
 
 }

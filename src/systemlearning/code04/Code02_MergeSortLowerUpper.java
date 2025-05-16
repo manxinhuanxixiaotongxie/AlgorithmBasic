@@ -64,18 +64,15 @@ public class Code02_MergeSortLowerUpper {
      * L左边界
      * R右边界
      * mid中点
-     *
-     *
+     * <p>
+     * <p>
      * 求区间和的个数：
      * sum[i]表达的是0-i的和
      * sum[j]-sum[i]表达的是i-j的和
-     *
-     *
-     *
+     * <p>
+     * <p>
+     * <p>
      * 【2 3 3】【1 2 5】
-     *
-     *
-     *
      *
      * @param sum
      * @param L

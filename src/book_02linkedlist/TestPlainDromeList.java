@@ -31,7 +31,7 @@ public class TestPlainDromeList {
         ListNode n2 = head;
         // 1 0 0
 
-        while (n1.next != null &&  n2.next != null && n2.next.next != null) {
+        while (n1.next != null && n2.next != null && n2.next.next != null) {
 
             n1 = n1.next;
             n2 = n2.next.next;

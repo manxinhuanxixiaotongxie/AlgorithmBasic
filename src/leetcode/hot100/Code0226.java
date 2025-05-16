@@ -7,7 +7,7 @@ public class Code0226 {
 
     // 返回调整之后的头节点
     private TreeNode process(TreeNode root) {
-        if(root == null) {
+        if (root == null) {
             return null;
         }
         TreeNode left = process(root.right);

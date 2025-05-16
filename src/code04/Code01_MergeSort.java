@@ -11,12 +11,12 @@ public class Code01_MergeSort {
 
     }
 
-    public static void mergeSort(int[] arr,int L, int R){
+    public static void mergeSort(int[] arr, int L, int R) {
 
         if (L == R) {
             return;
         }
-        int mid = L + ((R- L) >> 1);
+        int mid = L + ((R - L) >> 1);
 
         /**
          * 执行顺序
@@ -48,9 +48,9 @@ public class Code01_MergeSort {
          *
          *
          */
-        mergeSort(arr,L,mid);
-        mergeSort(arr,mid+1,R);
-        merge(arr,L,mid,R);
+        mergeSort(arr, L, mid);
+        mergeSort(arr, mid + 1, R);
+        merge(arr, L, mid, R);
 
     }
 
@@ -59,23 +59,24 @@ public class Code01_MergeSort {
      * 左边右边都有序的情况下  将两边数组的数值大小一次进行比对
      * 假设现在是有小到大排序
      * 那么现在谁小将谁放入新数组
+     *
      * @param arr
      * @param L
      * @param R
      */
-    public static void merge(int[] arr,int L,int mid,int R) {
+    public static void merge(int[] arr, int L, int mid, int R) {
         int lIndex = 0;
-        int rIndex = mid+1;
+        int rIndex = mid + 1;
         int index = 0;
 
-        int[] help = new int[R-L+1];
+        int[] help = new int[R - L + 1];
 
         /**
          * 构建一个辅助数组  谁小放谁
          * 可能出现左边没结束  或者右边没结束  直接放进去
          */
-        while (lIndex <=mid && rIndex<= R ) {
-            help[index++] = arr[lIndex] > arr[rIndex]?arr[lIndex++]:arr[rIndex++];
+        while (lIndex <= mid && rIndex <= R) {
+            help[index++] = arr[lIndex] > arr[rIndex] ? arr[lIndex++] : arr[rIndex++];
         }
 
         while (lIndex <= mid) {
@@ -83,7 +84,7 @@ public class Code01_MergeSort {
         }
 
 
-        while (rIndex<= R) {
+        while (rIndex <= R) {
             help[index++] = arr[rIndex];
 
         }
@@ -93,8 +94,8 @@ public class Code01_MergeSort {
          * 使得原有数组部分有序或者全部有序
          */
 
-        for (int i = 0 ; i< help.length;i++) {
-            arr[L+i] = help[i];
+        for (int i = 0; i < help.length; i++) {
+            arr[L + i] = help[i];
         }
 
 

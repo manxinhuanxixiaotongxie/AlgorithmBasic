@@ -26,7 +26,6 @@ public class Code01_AppleMinBags {
     }
 
     /**
-     *
      * 根据对舒淇找规律
      *
      * @param apple

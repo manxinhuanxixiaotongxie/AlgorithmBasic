@@ -7,6 +7,7 @@ public class Code004 {
         int[] nums2 = {3, 4};
         System.out.println(code004.findMedianSortedArrays(nums1, nums2));
     }
+
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int m = nums1.length;
         int n = nums2.length;
@@ -18,7 +19,7 @@ public class Code004 {
         } else {
             // 偶数
             int midIndex1 = length / 2 - 1, midIndex2 = length / 2;
-            return (getKthElement(nums1, nums2, midIndex1 ) + getKthElement(nums1, nums2, midIndex2)) / 2.0;
+            return (getKthElement(nums1, nums2, midIndex1) + getKthElement(nums1, nums2, midIndex2)) / 2.0;
         }
     }
 

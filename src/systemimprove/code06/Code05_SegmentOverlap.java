@@ -11,18 +11,17 @@ import java.util.PriorityQueue;
  * 1）线段的开始和结束位置一定都是整数值
  * 2）线段重合区域的长度必须>=1
  * 返回线段最多重合区域中，包含了几条线段
- *
+ * <p>
  * 暴力解法：
  * 1. 找到所有线段的最大值和最小值
  * 2. 从最小值到最大值，每次+0.5，看看有多少条线段包含这个点
  * 3. 选出最大的那个
- *
+ * <p>
  * 使用堆进行处理：
- *
+ * <p>
  * 1. 将所有线段按照start进行排序
  * 2. 从左到右遍历，每次遍历到一个线段，将这个线段的end放入堆中
  * 3. 每次遍历到一个线段，将堆中所有小于当前start的点弹出
- *
  */
 public class Code05_SegmentOverlap {
 
@@ -53,7 +52,7 @@ public class Code05_SegmentOverlap {
             min = Math.min(min, segment.start);
         }
         int ans = 0;
-        for (double i = min + 0.5; i < max; i ++) {
+        for (double i = min + 0.5; i < max; i++) {
             int count = 0;
             for (Segment segment : segments) {
                 if (segment.start < i && segment.end > i) {
@@ -71,9 +70,6 @@ public class Code05_SegmentOverlap {
      * 1. 将所有线段按照start进行排序
      * 2. 从左到右遍历，每次遍历到一个线段，将这个线段的end放入堆中
      * 3. 每次遍历到一个线段，将堆中所有小于当前start的点弹出
-     *
-     *
-     *
      *
      * @param segments
      * @return

@@ -22,23 +22,22 @@ public class DeleteRepeatNode {
          * 时间复杂度O（N）
          */
         if (head == null) {
-            return head ;
+            return head;
         }
         // 0 0 0 0
         ListNode pre = head;
         ListNode cur = head.next;
-        Map<Integer,ListNode> map = new HashMap<>();
-        map.put(cur.val,cur);
+        Map<Integer, ListNode> map = new HashMap<>();
+        map.put(cur.val, cur);
         while (cur != null) {
             if (map.containsKey(cur.val)) {
                 pre.next = cur.next;
             } else {
-                map.put(cur.val,cur);
+                map.put(cur.val, cur);
                 pre = cur;
             }
             cur = cur.next;
         }
-
 
 
         return head;
@@ -56,7 +55,7 @@ public class DeleteRepeatNode {
          * 时间复杂度O（1）
          */
         if (head == null) {
-            return head ;
+            return head;
         }
         // 0 0 0 0
         ListNode cur = head;
@@ -68,14 +67,13 @@ public class DeleteRepeatNode {
             while (next != null) {
                 if (cur.val == next.val) {
                     pre.next = cur.next;
-                }else {
+                } else {
                     pre = next;
                 }
                 next = next.next;
             }
             cur = cur.next;
         }
-
 
 
         return head;

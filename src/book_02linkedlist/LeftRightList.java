@@ -28,14 +28,14 @@ public class LeftRightList {
         // 此时slow走到中间节点
         cur = slow;
         ListNode curLeft = head;
-        ListNode leftNext ;
+        ListNode leftNext;
         ListNode rightNext;
         while (curLeft.next != null) {
             rightNext = cur.next;
             cur.next = curLeft.next;
             curLeft.next = cur;
             curLeft = cur.next;
-            cur= rightNext;
+            cur = rightNext;
         }
 
         curLeft.next = cur;

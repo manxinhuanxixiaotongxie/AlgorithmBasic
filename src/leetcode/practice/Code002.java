@@ -12,17 +12,17 @@ public class Code002 {
         ListNode pre = null;
         while (cur1 != null && cur2 != null) {
             ListNode cur = null;
-            if (cur1.val + cur2.val + (needAdd?1:0) >= 10) {
-                cur = new ListNode(cur1.val + cur2.val - 10 + (needAdd?1:0));
+            if (cur1.val + cur2.val + (needAdd ? 1 : 0) >= 10) {
+                cur = new ListNode(cur1.val + cur2.val - 10 + (needAdd ? 1 : 0));
                 needAdd = true;
-            }else {
-                cur = new ListNode(cur1.val + cur2.val + (needAdd?1:0));
+            } else {
+                cur = new ListNode(cur1.val + cur2.val + (needAdd ? 1 : 0));
                 needAdd = false;
             }
             if (newHead == null) {
                 newHead = cur;
                 pre = cur;
-            }else {
+            } else {
                 pre.next = cur;
                 pre = cur;
             }
@@ -31,11 +31,11 @@ public class Code002 {
         }
         while (cur1 != null) {
             ListNode cur = null;
-            if (cur1.val + (needAdd?1:0) >= 10) {
-                cur = new ListNode(cur1.val - 10 + (needAdd?1:0));
+            if (cur1.val + (needAdd ? 1 : 0) >= 10) {
+                cur = new ListNode(cur1.val - 10 + (needAdd ? 1 : 0));
                 needAdd = true;
-            }else {
-                cur = new ListNode(cur1.val + (needAdd?1:0));
+            } else {
+                cur = new ListNode(cur1.val + (needAdd ? 1 : 0));
                 needAdd = false;
             }
             pre.next = cur;
@@ -44,11 +44,11 @@ public class Code002 {
         }
         while (cur2 != null) {
             ListNode cur = null;
-            if (cur2.val + (needAdd?1:0) >= 10) {
-                cur = new ListNode(cur2.val - 10 + (needAdd?1:0));
+            if (cur2.val + (needAdd ? 1 : 0) >= 10) {
+                cur = new ListNode(cur2.val - 10 + (needAdd ? 1 : 0));
                 needAdd = true;
-            }else {
-                cur = new ListNode(cur2.val + (needAdd?1:0));
+            } else {
+                cur = new ListNode(cur2.val + (needAdd ? 1 : 0));
                 needAdd = false;
             }
             pre.next = cur;

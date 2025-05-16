@@ -26,8 +26,9 @@ public class Code03_IPO {
 
     /**
      * 贪心算法
-     *
+     * <p>
      * 这个算法在leetcode数据量大跑不过
+     *
      * @param k
      * @param w
      * @param profits
@@ -72,6 +73,7 @@ public class Code03_IPO {
 
     /**
      * 可以跑通
+     *
      * @param k
      * @param w
      * @param profits

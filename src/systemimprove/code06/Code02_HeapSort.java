@@ -82,7 +82,7 @@ public class Code02_HeapSort {
 //        }
 
         for (int i = arr.length - 1; i >= 0; i--) {
-            heapify(arr, i,arr.length);
+            heapify(arr, i, arr.length);
         }
 
         // 最大值放在的数组最后一个位置

@@ -42,10 +42,10 @@ public class Code0210 {
 
         Queue<GraphNode> queue = new LinkedList<>();
         int index = 0;
-        for (int i = 0;i < numCourses;i++) {
+        for (int i = 0; i < numCourses; i++) {
             if (!map.containsKey(i)) {
                 ans[index++] = i;
-            }else if (map.get(i).in == 0) {
+            } else if (map.get(i).in == 0) {
                 queue.add(map.get(i));
             }
         }

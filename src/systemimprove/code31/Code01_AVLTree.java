@@ -1,7 +1,6 @@
 package systemimprove.code31;
 
 /**
- *
  * 所有的有序表结构必须要保证key是可以比较的
  */
 public class Code01_AVLTree {
@@ -12,105 +11,104 @@ public class Code01_AVLTree {
      * 2.哈希表不能解决范围查询的问题
      * 3.哈希表不能解决最大值最小值的问题
      * 4.哈希表不能解决前驱后继的问题
-     *
-     *
+     * <p>
+     * <p>
      * 可比较
      * 为什么可以使用索引加快查询的效率？
      * 有序表
-     *
+     * <p>
      * 维护一个数据结构可以快速实现增删改查
      * 以BST为例：
-     *  BST特性 当前节点左边节点比当前节点小 右边节点比当前节点大
+     * BST特性 当前节点左边节点比当前节点小 右边节点比当前节点大
      * 1.新增节点
-     *  给定一个的新的节点 如果比当前值小 那么就往左走 如果比当前值大 那么就往右走
-     *  直到找到一个空的位置 就是新节点的位置
+     * 给定一个的新的节点 如果比当前值小 那么就往左走 如果比当前值大 那么就往右走
+     * 直到找到一个空的位置 就是新节点的位置
      * 2.查找节点
-     *   也比较荣容易  给定一个值 从根节点开始比较 如果比当前节点小 那么就往左走 如果比当前节点大 那么就往右走
-     *  直到找到一个节点的值等于给定值
+     * 也比较荣容易  给定一个值 从根节点开始比较 如果比当前节点小 那么就往左走 如果比当前节点大 那么就往右走
+     * 直到找到一个节点的值等于给定值
      * 3.删除节点
-     *   对于二叉搜索树来说 新增节点以及查找节点都是非常容易的
-     *   但是对于删除节点来说就比较麻烦
-     *   分四种情况：
-     *   1.删除节点左右子树都为空 直接删除该节点
-     *   2.删除节点只有一个子树 那么直接删除该节点 将子树挂到删除节点的位置
-     *   3.删除节点有两个子树 那么找到删除节点的前驱节点或者后继节点 用前驱节点或者后继节点替换删除节点
-     *   这点很关键  二叉搜索树的特性决定了前驱节点或者后继节点一定是删除节点的左子树的最大值或者右子树的最小值
-     *
-     *
-     *   二叉搜索树的问题：
-     *   树的形状跟用户输入的数据有关 最差的情况下可能会退化成链表 时间复杂度O(N)
-     *
-     *   AVL树
-     *   注意：平衡二叉搜索树只是高度做了严格的限制 实际上还是二叉搜索树 调整完之后满足二叉搜索树的特性
-     *   即左子树的值比父节点小 右子树的值比父节点大
-     *   平衡二叉搜索树的特性： 左右子树的高度差不超过1 即 |左子树高度-右子树高度| < 2
-     *   1.新增节点
-     *   找到对应的位置 挂进去 但是要保证平衡 需要增加平衡的补丁
-     *   2.删除节点
-     *   3.查找节点
-     *   查找节点
-     *
-     *   平衡的补丁是怎么维护的：
-     *   1.左旋
-     *   2.右旋
-     *
-     *   分为以下四种情况：
-     *   1.LL
-     *   这种情况下需要右旋
-     *   2.LR
-     *   将节点进行左旋 然后再进行右旋
-     *   3.RR
-     *   只需要左旋
-     *   4.RL
-     *   当前节点的树进行右旋 然后再进行左旋
-     *
-     *   一种特殊的情况：
-     *   同时满足LL\LR 或者RR\RL
-     *   LL\LR 进行右旋
-     *   为什么要这么处理呢？
-     *   举个例子：
-     *   例子1：
-     *                                                     （root）
-     *                                (left1)7                                    (right1)6
-     *                  (left2)6                (right2)6
-     *                                    (left3)4  (right3)5
-     *
-     *   这种情况下不违规
-     *   假设此时在右树上删除一个节点 此时树变成了以下这个样子：
-     *                                                      （root）
-     *                               (left1)7                                    (right1)5
-     *                 (left2)6               (right2)6
-     *                                   (left3)4    (right3)5
-     *
-     *    如果一棵树右边的数删除了一个 那个这棵树不满足平衡二叉搜索树的特性
-     *    并且同时满足LL\LR
-     *    这个时候只需要进行右旋 那么此时这棵树变成了下面这个样子
-     *                                                      （left1）8
-     *                                        (left2)6                          （root）7
-     *                                                                   (right2)6      (right1)5
-     *                                                            (left3)4   (right4)5
-     *
-     *已经是平衡的了
-     *
+     * 对于二叉搜索树来说 新增节点以及查找节点都是非常容易的
+     * 但是对于删除节点来说就比较麻烦
+     * 分四种情况：
+     * 1.删除节点左右子树都为空 直接删除该节点
+     * 2.删除节点只有一个子树 那么直接删除该节点 将子树挂到删除节点的位置
+     * 3.删除节点有两个子树 那么找到删除节点的前驱节点或者后继节点 用前驱节点或者后继节点替换删除节点
+     * 这点很关键  二叉搜索树的特性决定了前驱节点或者后继节点一定是删除节点的左子树的最大值或者右子树的最小值
+     * <p>
+     * <p>
+     * 二叉搜索树的问题：
+     * 树的形状跟用户输入的数据有关 最差的情况下可能会退化成链表 时间复杂度O(N)
+     * <p>
+     * AVL树
+     * 注意：平衡二叉搜索树只是高度做了严格的限制 实际上还是二叉搜索树 调整完之后满足二叉搜索树的特性
+     * 即左子树的值比父节点小 右子树的值比父节点大
+     * 平衡二叉搜索树的特性： 左右子树的高度差不超过1 即 |左子树高度-右子树高度| < 2
+     * 1.新增节点
+     * 找到对应的位置 挂进去 但是要保证平衡 需要增加平衡的补丁
+     * 2.删除节点
+     * 3.查找节点
+     * 查找节点
+     * <p>
+     * 平衡的补丁是怎么维护的：
+     * 1.左旋
+     * 2.右旋
+     * <p>
+     * 分为以下四种情况：
+     * 1.LL
+     * 这种情况下需要右旋
+     * 2.LR
+     * 将节点进行左旋 然后再进行右旋
+     * 3.RR
+     * 只需要左旋
+     * 4.RL
+     * 当前节点的树进行右旋 然后再进行左旋
+     * <p>
+     * 一种特殊的情况：
+     * 同时满足LL\LR 或者RR\RL
+     * LL\LR 进行右旋
+     * 为什么要这么处理呢？
+     * 举个例子：
+     * 例子1：
+     * （root）
+     * (left1)7                                    (right1)6
+     * (left2)6                (right2)6
+     * (left3)4  (right3)5
+     * <p>
+     * 这种情况下不违规
+     * 假设此时在右树上删除一个节点 此时树变成了以下这个样子：
+     * （root）
+     * (left1)7                                    (right1)5
+     * (left2)6               (right2)6
+     * (left3)4    (right3)5
+     * <p>
+     * 如果一棵树右边的数删除了一个 那个这棵树不满足平衡二叉搜索树的特性
+     * 并且同时满足LL\LR
+     * 这个时候只需要进行右旋 那么此时这棵树变成了下面这个样子
+     * （left1）8
+     * (left2)6                          （root）7
+     * (right2)6      (right1)5
+     * (left3)4   (right4)5
+     * <p>
+     * 已经是平衡的了
+     * <p>
      * 但是我们如果按照LR的方式进行处理的话：
      * 第一次 节点进行左旋的时候，这棵树变成了下面这个样子：
-     *                                         （root） 8
-     *                               （right2）7                       （right1）5
-     *                        （left1）6      （right3）5
-     *                   （left2）5  (left3)4
-     *
+     * （root） 8
+     * （right2）7                       （right1）5
+     * （left1）6      （right3）5
+     * （left2）5  (left3)4
+     * <p>
      * 依然不平 按照LL 进行右旋 那么 这棵树就会变成下面这个样子：
-     *                                                        （right2）8
-     *                                        (left1)   6                             （root）7
-     *                                   (left2)5    (left3) 4               (righ3)5     (right1)5
-     *
-     *
-     *   RR\RL 进行左旋
-     *
-     *   平衡二叉搜索树执行严格的平衡性 对于每一个节点来说 左右子树的高度差不超过1
-     *
-     *   旋转的时间复杂度是O(1)
-     *
+     * （right2）8
+     * (left1)   6                             （root）7
+     * (left2)5    (left3) 4               (righ3)5     (right1)5
+     * <p>
+     * <p>
+     * RR\RL 进行左旋
+     * <p>
+     * 平衡二叉搜索树执行严格的平衡性 对于每一个节点来说 左右子树的高度差不超过1
+     * <p>
+     * 旋转的时间复杂度是O(1)
      */
 
     public static class AVLNode<K extends Comparable<K>, V> {
@@ -151,9 +149,9 @@ public class Code01_AVLTree {
             cur.right = right.left;
             right.left = cur;
             // 要调整高度 当前节点的高度怎么计算 如果cur本身是有left节点的话 那么cur节点的高度就是cur.left 与cur.right的最大值
-            cur.height = Math.max(cur.left == null ? 0 : cur.left.height,cur.right == null ? 0 : cur.right.height) + 1;
+            cur.height = Math.max(cur.left == null ? 0 : cur.left.height, cur.right == null ? 0 : cur.right.height) + 1;
             // right节点的高度也要调整 调整之后的高度为cur节点的高度与right节点的右节点的高度的最大值
-            right.height = Math.max(right.left.height,right.right == null ? 0 : right.right.height) + 1;
+            right.height = Math.max(right.left.height, right.right == null ? 0 : right.right.height) + 1;
             return right;
         }
 
@@ -163,6 +161,7 @@ public class Code01_AVLTree {
          * 那么cur的左孩子会替代当前cur的位置
          * cur节点会接管cur的左孩子的右孩子
          * cur会变成新节点的右孩子
+         *
          * @param cur
          * @return
          */
@@ -172,16 +171,16 @@ public class Code01_AVLTree {
             cur.left = left.right;
             left.right = cur;
             // 右旋调整高度
-            cur.height = Math.max(cur.left == null ? 0 : cur.left.height,cur.right == null ? 0 : cur.right.height) + 1;
+            cur.height = Math.max(cur.left == null ? 0 : cur.left.height, cur.right == null ? 0 : cur.right.height) + 1;
             left.height = Math.max(left.left == null ? 0 : left.left.height, left.right.height) + 1;
             return left;
         }
 
-        public void put(K key,V value) {
+        public void put(K key, V value) {
             AVLNode<K, V> lastIndex = findLastIndex(key);
-            if (lastIndex!=null && lastIndex.k.compareTo(key)==0) {
+            if (lastIndex != null && lastIndex.k.compareTo(key) == 0) {
                 lastIndex.value = value;
-            }else {
+            } else {
                 size++;
                 root = add(root, key, value);
             }
@@ -198,7 +197,7 @@ public class Code01_AVLTree {
              */
             if (cur == null) {
                 // 如果cur已经来到了空位置 那么意味着 已经来到了可以放节点位置的地方
-                AVLNode node = new AVLNode(key,value);
+                AVLNode node = new AVLNode(key, value);
                 return node;
             }
             if (cur.k.compareTo(key) < 0) {
@@ -212,15 +211,16 @@ public class Code01_AVLTree {
                 cur.value = value;
             }
             // 更新当前节点的高度
-            cur.height = Math.max(cur.left == null ? 0 : cur.left.height,cur.right == null ? 0 : cur.right.height) + 1;
+            cur.height = Math.max(cur.left == null ? 0 : cur.left.height, cur.right == null ? 0 : cur.right.height) + 1;
             // 维护平衡性
             return maintain(cur);
         }
 
         /**
          * 维护平衡性
-         *
+         * <p>
          * avl树的平衡性维护 严格遵循左右子树的高度差不超过1
+         *
          * @param cur
          * @return
          */
@@ -272,18 +272,18 @@ public class Code01_AVLTree {
                     if (leftLeftHeight >= leftRightHeight) {
                         // LL型或者是LL与LR同时满足的类型 进行一次的右旋
                         cur = rightRotate(cur);
-                    }else {
+                    } else {
                         // 仅仅是满足LR型的情况 需要进行两次旋转
                         // 将左树进行左旋
                         cur.left = leftRotate(cur.left);
                         // 将cur进行右旋
-                        cur =  rightRotate(cur);
+                        cur = rightRotate(cur);
                     }
                 } else {
                     // 右子树的高度大于左子树的高度
                     // 已经明确是右树违规
                     // 要确认是RL型还是RR型
-                    int rightLeftHeight = cur.right != null && cur.right.left != null? cur.right.left.height : 0;
+                    int rightLeftHeight = cur.right != null && cur.right.left != null ? cur.right.left.height : 0;
                     int rightRightHeight = cur.right != null && cur.right.right != null ? cur.right.right.height : 0;
                     // 现在需要确认的是 到底是RL型违规 还是RR型违规
                     if (rightRightHeight >= rightLeftHeight) {
@@ -314,8 +314,8 @@ public class Code01_AVLTree {
          * 第四种：左树与右树都不为空 为了保持 搜索树的特性 需要找到当前节点的前驱节点或者后继节点
          * 前驱节点：左树的最右侧节点
          * 后继节点：右树的最左侧节点
-         *
-         *
+         * <p>
+         * <p>
          * 对于AVL树来说 删除节点也需要维持平衡性
          * 因此维护平衡性的过程也是比较麻烦的
          * 针对第一种情况 左树右树都没有的情况下 当前节点删除   从这个节点开始一直到父节点都需要进行AVL树的调整
@@ -383,14 +383,15 @@ public class Code01_AVLTree {
             if (key == null) {
                 return;
             }
-            if (contains(root,key)) {
+            if (contains(root, key)) {
                 size--;
-                root = delete(root,key);
+                root = delete(root, key);
             }
         }
 
         /**
          * 在cur这棵树找到是否存在key
+         *
          * @param cur
          * @return
          */
@@ -399,9 +400,9 @@ public class Code01_AVLTree {
                 return false;
             }
             if (cur.k.compareTo(key) < 0) {
-                return contains(cur.right,key);
+                return contains(cur.right, key);
             } else if (cur.k.compareTo(key) > 0) {
-                return contains(cur.left,key);
+                return contains(cur.left, key);
             } else {
                 return true;
             }
@@ -409,6 +410,7 @@ public class Code01_AVLTree {
 
         /**
          * 在树中进行查找 如果存在当前key的节点 返回当前节点 否则返回离key最近的节点
+         *
          * @param key
          * @return
          */
@@ -430,6 +432,7 @@ public class Code01_AVLTree {
 
         /**
          * 找到离key最近的节点比key小
+         *
          * @param key
          * @return
          */
@@ -470,9 +473,7 @@ public class Code01_AVLTree {
         }
 
 
-
     }
-
 
 
 }

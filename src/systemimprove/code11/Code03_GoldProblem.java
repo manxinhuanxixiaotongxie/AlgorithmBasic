@@ -39,13 +39,14 @@ public class Code03_GoldProblem {
      * int ansi = 0;
      * // 遍历原始数组
      * for(int index = 0;index < arr.length;index++))   {
-     *     // 将i位置与j位置的元素进行合并
-     *     arrNew[ansi++] = arr[i] + arr[j];
-     *     // 其他位置维持原样
-     *     if (index != i && index != j) {
-     *         arrNew[ansi++] = arr[index];
-     *     }
+     * // 将i位置与j位置的元素进行合并
+     * arrNew[ansi++] = arr[i] + arr[j];
+     * // 其他位置维持原样
+     * if (index != i && index != j) {
+     * arrNew[ansi++] = arr[index];
      * }
+     * }
+     *
      * @param arr
      * @param i
      * @param j

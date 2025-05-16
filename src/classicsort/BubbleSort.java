@@ -2,7 +2,6 @@ package classicsort;
 
 /**
  * @Description经典排序算法冒泡
- *
  * @Author Scurry
  * @Date 2023-05-09 15:53
  */
@@ -26,6 +25,7 @@ public class BubbleSort {
      * 假设此时最大值在最右侧
      * 那么再从0-N-1找到次最大值
      * 周而复始
+     *
      * @param arr
      */
     public static void bubbleSort(int[] arr) {

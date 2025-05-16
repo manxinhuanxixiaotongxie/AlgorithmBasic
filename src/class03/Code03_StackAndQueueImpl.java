@@ -55,10 +55,10 @@ public class Code03_StackAndQueueImpl {
         }
 
 
-        public void addFromBottom(Node<T> node){
+        public void addFromBottom(Node<T> node) {
             if (head == null) {
 
-            }else {
+            } else {
                 tail.next = node;
                 node.pre = tail;
                 node.next = null;
@@ -66,7 +66,7 @@ public class Code03_StackAndQueueImpl {
             }
         }
 
-        public Node<T> popFromHead(){
+        public Node<T> popFromHead() {
 
             /**
              * 不能直接返回head节点，弹出之前头结点要向后移动
@@ -76,25 +76,25 @@ public class Code03_StackAndQueueImpl {
             if (head == null) {
                 head = null;
                 tail = null;
-            }else {
+            } else {
 
                 head.next = null;
                 head = cur.next;
                 head.pre = null;
 
-                
+
             }
             return cur;
         }
 
 
-        public Node<T> popFromButtom(){
+        public Node<T> popFromButtom() {
 
             Node<T> cur = tail;
             if (head == null) {
                 head = null;
-                tail =null;
-            }else {
+                tail = null;
+            } else {
 
                 tail = tail.pre;
                 tail.next = null;

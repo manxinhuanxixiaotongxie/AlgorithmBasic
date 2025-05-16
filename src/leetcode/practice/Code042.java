@@ -4,7 +4,6 @@ import java.util.Stack;
 
 /**
  * 接雨水问题一维数组
- *
  */
 public class Code042 {
 

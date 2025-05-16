@@ -100,7 +100,7 @@ public class Code02_MinCurrnecy {
         int maxLen = 20;
         int maxValue = 30;
         int testTimes = 10000;
-        for (int times = 0;times < testTimes;times++) {
+        for (int times = 0; times < testTimes; times++) {
             int[] arr = randomArray(maxLen, maxValue);
             int aim = (int) (Math.random() * maxValue);
             Code02_MinCurrnecy code02_minCurrnecy = new Code02_MinCurrnecy();
@@ -112,7 +112,6 @@ public class Code02_MinCurrnecy {
         }
         System.out.println("测试结束");
     }
-
 
 
 }

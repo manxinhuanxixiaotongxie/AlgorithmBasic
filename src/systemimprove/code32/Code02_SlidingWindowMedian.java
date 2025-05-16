@@ -114,6 +114,7 @@ public class Code02_SlidingWindowMedian {
          * 1.能够添加重复值
          * 2.允许删除节点 并且值相等的时候 能准确删除数组相对位置数
          * 3.能够根据index找到对应的节点
+         *
          * @param cur
          * @param key
          * @return
@@ -158,6 +159,7 @@ public class Code02_SlidingWindowMedian {
 
         /**
          * 在树中找到第kth个节点
+         *
          * @param cur
          * @param kth
          * @return
@@ -208,6 +210,7 @@ public class Code02_SlidingWindowMedian {
          * 获取第index个节点
          * 比如 tree的size为4 对应的index是0 1 2 3
          * 要找到
+         *
          * @param index
          * @return
          */
@@ -230,8 +233,9 @@ public class Code02_SlidingWindowMedian {
         }
 
         /**
-         *这里的比较需要注意 直接用减号不行
+         * 这里的比较需要注意 直接用减号不行
          * 超过int的范围 会越界 导致判断不准确
+         *
          * @param o the object to be compared.
          * @return
          */
@@ -244,13 +248,14 @@ public class Code02_SlidingWindowMedian {
 
     /**
      * 这棵树当value相等的时候  排序的规则是按照数组的下标的相对位置进行处理
-     *
+     * <p>
      * 当value不相等的时候  就按照value的大小进行排序
-     *
+     * <p>
      * 那么就意味着 当value不相等的时候size的相对位置与原数组相对位置是相对的
      * 当value相等的时候 size的位置与数组的相对位置是一一对应的  那么就意味着
      * 不管在什么时候  size的相对的位置总是与原数组的下标总是相对应的
      * 我们在删除一个节点的时候 只要给定index位置以及value值 就能准确的删除对应的节点
+     *
      * @param nums
      * @param k
      * @return
@@ -281,7 +286,7 @@ public class Code02_SlidingWindowMedian {
     }
 
     public static void main(String[] args) {
-        int[] nums = {-2147483648,-2147483648,2147483647,-2147483648,1,3,-2147483648,-100,8,17,22,-2147483648,-2147483648,2147483647,2147483647,2147483647,2147483647,-2147483648,2147483647,-2147483648};
+        int[] nums = {-2147483648, -2147483648, 2147483647, -2147483648, 1, 3, -2147483648, -100, 8, 17, 22, -2147483648, -2147483648, 2147483647, 2147483647, 2147483647, 2147483647, -2147483648, 2147483647, -2147483648};
         int w = 6;
         double[] ans = medianSlidingWindow(nums, w);
         for (double an : ans) {

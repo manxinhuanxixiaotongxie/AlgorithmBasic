@@ -4,12 +4,12 @@ public class KMPTest {
     /**
      * kmp算法 是为了解决两个字符串匹配问题
      * 给定一个字符串str1 再给定一个字符串str2 如果字符串1包含字符窜2的话 返回第一次包含的下标 如果不包含的话返回-1
-     *
+     * <p>
      * 1.暴力解法
      * 2.kmp解法
      */
 
-    public int indexOf1(String str1,String str2) {
+    public int indexOf1(String str1, String str2) {
         if (str1 == null || str1.length() < str2.length() || str2 == null) {
             return -1;
         }
@@ -22,7 +22,7 @@ public class KMPTest {
         int[] next = getNext(str2);
         int x = 0;
         int y = 0;
-        while (x<str1.length() && y < str2.length()) {
+        while (x < str1.length() && y < str2.length()) {
             if (str1.charAt(x) == str2.charAt(y)) {
                 x++;
                 y++;
@@ -45,7 +45,7 @@ public class KMPTest {
         next[0] = -1;
         next[1] = 0;
         for (int i = 2; i < str.length(); i++) {
-            if (str.charAt(i-1) == str.charAt(cn)) {
+            if (str.charAt(i - 1) == str.charAt(cn)) {
                 next[i] = ++cn;
             } else if (cn > 0) {
                 cn = next[cn];

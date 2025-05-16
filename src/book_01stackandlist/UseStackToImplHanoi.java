@@ -21,7 +21,7 @@ public class UseStackToImplHanoi {
 
     public static void main(String[] args) {
 //        moveLeftToRight(2);
-        hanoiProblem1(6 ,"left", "mid", "right");
+        hanoiProblem1(6, "left", "mid", "right");
     }
 
 
@@ -47,7 +47,6 @@ public class UseStackToImplHanoi {
      * .
      * .
      * f(2) = f(1) + 2
-     *
      */
 
     public static int hanoiProblem1(int num, String left, String mid, String right) {

@@ -120,6 +120,7 @@ public class PlalinDromeList {
 
     /**
      * 测试运行成功
+     *
      * @param head
      * @return
      */
@@ -132,7 +133,7 @@ public class PlalinDromeList {
         ListNode n2 = head;
         // 1 0 0
 
-        while (n1.next != null &&  n2.next != null && n2.next.next != null) {
+        while (n1.next != null && n2.next != null && n2.next.next != null) {
 
             n1 = n1.next;
             n2 = n2.next.next;
@@ -184,12 +185,13 @@ public class PlalinDromeList {
     /**
      * https://leetcode.cn/problems/palindrome-linked-list/description/
      * 判断是否是回文链表
+     *
      * @param head
      * @return
      */
     public static boolean isPalindrome(ListNode head) {
 
-        if(head == null || head.next == null) {
+        if (head == null || head.next == null) {
             return true;
         }
 
@@ -221,6 +223,7 @@ public class PlalinDromeList {
 
     /**
      * 1 2 2 1
+     *
      * @param head
      * @return
      */

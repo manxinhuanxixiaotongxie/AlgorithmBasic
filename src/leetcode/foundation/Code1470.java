@@ -6,10 +6,10 @@ public class Code1470 {
         int index = 0;
         int l = 0;
         int r = n;
-        while (index <helper.length) {
-            if (index %2 == 0) {
+        while (index < helper.length) {
+            if (index % 2 == 0) {
                 helper[index++] = nums[l++];
-            }else {
+            } else {
                 helper[index++] = nums[r++];
             }
         }

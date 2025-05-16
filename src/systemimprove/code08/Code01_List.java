@@ -17,9 +17,7 @@ public class Code01_List {
      */
 
     /**
-     *
      * 输入链表头节点，奇数长度返回中点，偶数长度返回上中点
-     *
      */
     public Node getLastMId(Node head) {
         if (head == null) {
@@ -28,7 +26,7 @@ public class Code01_List {
         Node slow;
         Node fast;
         slow = fast = head;
-        while(fast != null && fast.next != null) {
+        while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }

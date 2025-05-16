@@ -27,8 +27,6 @@ public class Code01_Light {
      * 递归过程拆解：
      * 【X . . . X】
      *
-     *
-     *
      * @param chars
      * @param index
      * @param lights

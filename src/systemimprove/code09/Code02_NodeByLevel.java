@@ -137,7 +137,7 @@ public class Code02_NodeByLevel {
                 // 将下一层的最后一个节点赋值给当前层的最后一个节点
                 curLevelEnd = nextLevelEnd;
                 // 下一层的高度加1
-                curLevel ++;
+                curLevel++;
                 levelMax = 0;
             }
 

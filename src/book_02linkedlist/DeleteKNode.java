@@ -16,7 +16,7 @@ public class DeleteKNode {
             this.value = value;
         }
 
-        Node(Node node,int value,Node last) {
+        Node(Node node, int value, Node last) {
             this.value = value;
             this.next = next;
             this.last = last;
@@ -33,14 +33,14 @@ public class DeleteKNode {
      * 遍历链表，
      */
 
-    public Node deleteKNode (Node head,int k) {
+    public Node deleteKNode(Node head, int k) {
 
         Node cur = head;
         while (cur != null) {
             k--;
             cur = cur.next;
         }
-        if (k>0) {
+        if (k > 0) {
             return head;
         }
 
@@ -61,7 +61,7 @@ public class DeleteKNode {
 //                break;
 //            }
 //        }
-        if (k< 0) {
+        if (k < 0) {
             while (++k < 0) {
                 cur = cur.next;
             }

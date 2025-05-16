@@ -40,7 +40,7 @@ public class Code0200 {
 
         UnionSet200 unionSet = new UnionSet200(grid);
         // 第一行
-        for (int i = 1; i < grid[0].length;i++) {
+        for (int i = 1; i < grid[0].length; i++) {
             if (grid[0][i] == '1' && grid[0][i - 1] == '1') {
                 unionSet.union(0, i, 0, i - 1);
             }

@@ -119,13 +119,15 @@ public class Code02_IsPalindromeList {
     public static class Node {
         private int value;
         private Node next;
-        Node (int value) {
+
+        Node(int value) {
             this.value = value;
         }
     }
 
     /**
      * 使用栈方式  时间复杂度O(N) 空间复杂度 O(N)
+     *
      * @param head
      * @return
      */
@@ -137,7 +139,7 @@ public class Code02_IsPalindromeList {
 
         Stack<Node> stack = new Stack<>();
         Node cur = head;
-        while (cur !=null) {
+        while (cur != null) {
             stack.push(cur);
             cur = cur.next;
         }
@@ -156,6 +158,7 @@ public class Code02_IsPalindromeList {
     /**
      * 使用栈方式  后半部分入栈
      * 时间复杂度O(N) 空间复杂度O(N/2)
+     *
      * @param head
      * @return
      */
@@ -167,14 +170,14 @@ public class Code02_IsPalindromeList {
 
         Node left = head;
         Node right = head;
-        while (right.next != null && right.next.next!= null) {
+        while (right.next != null && right.next.next != null) {
             left = left.next;
             right = right.next.next;
         }
 
         Stack<Node> stack = new Stack<>();
         //慢指针来到中间位置 上中点
-        while (left.next !=null) {
+        while (left.next != null) {
             stack.push(left.next);
             left = left.next;
         }
@@ -195,6 +198,7 @@ public class Code02_IsPalindromeList {
      * 2.翻转后面的链表 依次对比
      * 3.回复链表
      * 时间复杂度O(N) 空间复杂度O(1)
+     *
      * @param head
      * @return
      */
@@ -209,7 +213,7 @@ public class Code02_IsPalindromeList {
          */
         Node left = head;
         Node right = head;
-        while (right.next != null && right.next.next!= null) {
+        while (right.next != null && right.next.next != null) {
             left = left.next;
             right = right.next.next;
         }
@@ -249,7 +253,7 @@ public class Code02_IsPalindromeList {
         // 恢复链表
         Node next2 = null;
         while (pre != null) {
-             Node next1= pre.next;
+            Node next1 = pre.next;
 //            pre.next = next2;
 //             next2 = pre ;
 //            pre = next1;

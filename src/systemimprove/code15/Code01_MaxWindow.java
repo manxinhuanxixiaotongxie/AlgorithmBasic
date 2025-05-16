@@ -12,7 +12,7 @@ public class Code01_MaxWindow {
         int[] ans = new int[arr.length - w + 1];
         for (int i = 0; i < arr.length - w + 1; i++) {
             int max = arr[i];
-            for (int j = i +1 ; j < i + w; j++) {
+            for (int j = i + 1; j < i + w; j++) {
                 max = Math.max(max, arr[j]);
             }
             ans[i] = max;
@@ -20,7 +20,7 @@ public class Code01_MaxWindow {
         return ans;
     }
 
-    public int[] generateArr(int maxValue,int maxLength) {
+    public int[] generateArr(int maxValue, int maxLength) {
         int[] arr = new int[(int) (Math.random() * maxLength) + 1];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) (Math.random() * maxValue) + 1;
@@ -55,8 +55,9 @@ public class Code01_MaxWindow {
 
     /**
      * 维护一个窗口最大值的更新结构
-     *
+     * <p>
      * 队列里面的大小是的从头到位一次减小
+     *
      * @param arr
      * @param k
      * @return

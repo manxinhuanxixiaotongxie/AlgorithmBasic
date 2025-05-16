@@ -13,7 +13,7 @@ public class Code2586 {
         characters.add('u');
         while (left <= right) {
             String cur = words[left];
-            if (characters.contains(cur.charAt(0)) && characters.contains(cur.charAt(cur.length() - 1))){
+            if (characters.contains(cur.charAt(0)) && characters.contains(cur.charAt(cur.length() - 1))) {
                 ans++;
             }
             left++;

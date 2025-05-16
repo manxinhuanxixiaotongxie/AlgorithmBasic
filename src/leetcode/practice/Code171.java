@@ -9,6 +9,7 @@ public class Code171 {
 
     /**
      * leetcode170测试通过
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -21,8 +22,8 @@ public class Code171 {
 
         char[] chars = columnTitle.toCharArray();
         int ans = 0;
-        for (int i = chars.length-1;i>=0;i--) {
-            ans += (chars[i] - 'A' + 1) * Math.pow(26,chars.length-1-i);
+        for (int i = chars.length - 1; i >= 0; i--) {
+            ans += (chars[i] - 'A' + 1) * Math.pow(26, chars.length - 1 - i);
         }
         return ans;
     }

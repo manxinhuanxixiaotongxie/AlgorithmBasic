@@ -19,7 +19,7 @@ public class Trie {
         private int pass;
         private int end;
         private Node1[] nexts;
-        private Map<Integer,Node1> map;
+        private Map<Integer, Node1> map;
 
         Node1() {
 //            this.nexts = new Node1[26];
@@ -36,20 +36,20 @@ public class Trie {
 
         public void insert(String word) {
 
-            if(word == null) {
+            if (word == null) {
                 return;
             }
             char[] chars = word.toCharArray();
             Node1 cur = root;
             cur.pass++;
-            for (int i = 0;i<chars.length;i++) {
-                int index = chars[i] -'a';
+            for (int i = 0; i < chars.length; i++) {
+                int index = chars[i] - 'a';
                 if (cur.map.get(index) == null) {
                     Node1 node1 = new Node1();
 
                     cur.map.put(index, node1);
                     cur = node1;
-                }else {
+                } else {
                     cur = cur.map.get(index);
                 }
                 cur.pass++;
@@ -62,41 +62,41 @@ public class Trie {
         public boolean searchExist(String word) {
             char[] chars = word.toCharArray();
             Node1 cur = root;
-            for (int i = 0;i<chars.length;i++) {
-                int index = chars[i] -'a';
+            for (int i = 0; i < chars.length; i++) {
+                int index = chars[i] - 'a';
                 if (cur.map.get(index) == null) {
                     return false;
                 }
                 cur = cur.map.get(index);
             }
-            return cur.end>0;
+            return cur.end > 0;
         }
 
         // word这个单词加入过几次
         public boolean search(String word) {
             char[] chars = word.toCharArray();
             Node1 cur = root;
-            for (int i = 0;i<chars.length;i++) {
-                int index = chars[i] -'a';
+            for (int i = 0; i < chars.length; i++) {
+                int index = chars[i] - 'a';
                 if (cur.map.get(index) == null) {
                     return false;
                 }
                 cur = cur.map.get(index);
             }
-            return cur.end>0;
+            return cur.end > 0;
         }
 
         public boolean startsWith(String prefix) {
             char[] chars = prefix.toCharArray();
             Node1 cur = root;
-            for (int i = 0;i<chars.length;i++) {
-                int index = chars[i] -'a';
+            for (int i = 0; i < chars.length; i++) {
+                int index = chars[i] - 'a';
                 if (cur.map.get(index) == null) {
                     return false;
                 }
                 cur = cur.map.get(index);
             }
-            return cur.pass>0 ;
+            return cur.pass > 0;
         }
 
         // 删除Word
@@ -105,8 +105,8 @@ public class Trie {
             if (searchExist(word)) {
                 char[] chars = word.toCharArray();
                 Node1 cur = root;
-                for (int i = 0;i<chars.length;i++) {
-                    int index = chars[i] -'a';
+                for (int i = 0; i < chars.length; i++) {
+                    int index = chars[i] - 'a';
                     if (--cur.pass == 0) {
                         cur.nexts[index] = null;
                         break;

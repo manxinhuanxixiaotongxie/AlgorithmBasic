@@ -1,6 +1,6 @@
 //package systemimprove.dp.fromrecursiontpdp;
 //
-///**
+/// **
 // *
 // * 给定一个数组arr，arr[i]代表第i号咖啡机泡一杯咖啡的时间
 // * 给定一个正数N，表示N个人等着咖啡机泡咖啡，每台咖啡机只能轮流泡咖啡

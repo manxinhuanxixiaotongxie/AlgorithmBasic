@@ -40,26 +40,28 @@ public class FibonacciProblem {
 
     /**
      * 时间复杂度O（2^n）
+     *
      * @param n
      * @return
      */
     public int f1(int n) {
-        if (n <=0 ) {
+        if (n <= 0) {
             return 0;
         }
-        if (n == 1 || n ==2) {
+        if (n == 1 || n == 2) {
             return 1;
         }
-        return f1(n-1)+f1(n-2);
+        return f1(n - 1) + f1(n - 2);
     }
 
     /**
      * 时间复杂度O（N）
+     *
      * @param n
      * @return
      */
     public int f2(int n) {
-        if (n<1) {
+        if (n < 1) {
             return 0;
         }
         if (n == 1 || n == 2) {
@@ -70,9 +72,9 @@ public class FibonacciProblem {
         int res = 1;
         int temp = 0;
 
-        for (int i = 3;i <= n;i++) {
+        for (int i = 3; i <= n; i++) {
             temp = res;
-            res = pre+res;
+            res = pre + res;
             pre = res;
         }
 
@@ -85,14 +87,14 @@ public class FibonacciProblem {
      * O(N^2)
      */
     public int c1(int n) {
-        if (n<1) {
+        if (n < 1) {
             return 0;
         }
-        if (n==1 || n ==2 || n == 3) {
+        if (n == 1 || n == 2 || n == 3) {
             return n;
         }
 
-        return c1(n-1)+c1(n-3);
+        return c1(n - 1) + c1(n - 3);
     }
 
     /**
@@ -100,10 +102,10 @@ public class FibonacciProblem {
      * O(N)
      */
     public int c2(int n) {
-        if (n<1) {
+        if (n < 1) {
             return 0;
         }
-        if (n==1 || n ==2 || n == 3) {
+        if (n == 1 || n == 2 || n == 3) {
             return n;
         }
 
@@ -112,7 +114,7 @@ public class FibonacciProblem {
         int temp1 = 0;
         int temp2 = 0;
         int res = 3;
-        for (int i =4;i<=n;i++) {
+        for (int i = 4; i <= n; i++) {
             temp1 = res;
             temp2 = pre;
             res = res + prePre;
@@ -121,12 +123,6 @@ public class FibonacciProblem {
         }
         return res;
     }
-
-
-
-
-
-
 
 
 }

@@ -3,8 +3,7 @@ package systemlearning.code04;
 import java.util.Arrays;
 
 /**
- * @Description:
- * 归并排序以及由归并排序引起的扩展
+ * @Description: 归并排序以及由归并排序引起的扩展
  * 1.归并排序的实现 mergeSort
  * 2.小和问题
  * 3.逆序对问题 逆序提供两种思路
@@ -18,18 +17,19 @@ public class Code01_MergeSortAndExport {
      * 归并排序怎么处理？
      * 第一步，将数组一分为2
      * 注意分的方式：
-     *      1.int mid = (R + L) / 2;
-     *      2.int mid = L+((R-L)>>1) 这种方式可以防止越界
+     * 1.int mid = (R + L) / 2;
+     * 2.int mid = L+((R-L)>>1) 这种方式可以防止越界
      * 第二步：左边merge
      * 第三步：右边merge
      * 第四部：将左右两边的数进行merge
      * 第五步：merge函数
-     *
+     * <p>
      * 经过上述两步之后，左边部分与右边部分已经是有序的了  只需要将左右两部分进行合并
-     *过程：
+     * 过程：
      * 当左边的数小于右边的数时，将左边的数放入help数组中，左边的指针向右移动
      * 当右边的数小于左边的数时，将右边的数放入help数组中，右边的指针向右移动
      * 当左右两边的数相等时，将左边的数放入help数组中，左边的指针向右移动
+     *
      * @param arr
      * @return
      */
@@ -121,7 +121,7 @@ public class Code01_MergeSortAndExport {
 
     /**
      * 在一个数组中，一个数的左边比他小的数的总和，叫做这个数的小和，所有数的小和累加起来，叫做数组的小和，求数组的小和
-     *
+     * <p>
      * 暴力解法，用作对数器
      *
      * @param arr
@@ -153,6 +153,7 @@ public class Code01_MergeSortAndExport {
      * 在归并排序的过程中   左组与右组都是有序的
      * 1.当左组的数比右组的数小，意味着当前右组的index位置到R位置的数都小 产生小和R-index+1
      * 2.相等时复制右组
+     *
      * @param arr
      * @return
      */
@@ -228,7 +229,7 @@ public class Code01_MergeSortAndExport {
     /**
      * 逆序对
      * （a,b）a > b
-     *
+     * <p>
      * 提供了两种思路：
      * 1.依然是merge过程，只是在merge过程中，要进行转化
      * 从help数组的右边开始进行回复  当左边的数大于右边的数的时候，产生逆序对，逆序对的个数是p2-m个
@@ -260,10 +261,10 @@ public class Code01_MergeSortAndExport {
      * 逆序对问题思路：
      * 归并排序依然是从小到大
      * 如果左组或者右组从左边开始 即左组从L开始  右组从mid+1开始
-     *在左右两组进行过程中会出现重复计算
-     *
+     * 在左右两组进行过程中会出现重复计算
+     * <p>
      * 将左组右组从右边开始进行计算
-     *
+     * <p>
      * 这个过程就变成：
      * p1从mid开始向左移动
      * p2从R开始向左移动
@@ -304,10 +305,10 @@ public class Code01_MergeSortAndExport {
 
     /**
      * merge3  merge3New都是对的
-     *
-     *
+     * <p>
+     * <p>
      * merge3New的思路：
-     *
+     * <p>
      * 现在要求的是逆序对
      * 就是右边有多少数比我小
      * 我们现在将归并拍戏设计成从大到小的排序
@@ -359,7 +360,6 @@ public class Code01_MergeSortAndExport {
     }
 
 
-
     public int getRightLessThanTwice(int[] arr) {
         if (arr == null || arr.length < 2) {
             return 0;
@@ -378,6 +378,7 @@ public class Code01_MergeSortAndExport {
 
     /**
      * 右边有多少数*2《当前数
+     *
      * @param arr
      * @param L
      * @param R
@@ -407,7 +408,7 @@ public class Code01_MergeSortAndExport {
             help[index++] = arr[left] <= arr[right] ? arr[left++] : arr[right++];
         }
 
-        while (left <=mid) {
+        while (left <= mid) {
             help[index++] = arr[left++];
         }
 
@@ -421,7 +422,7 @@ public class Code01_MergeSortAndExport {
         return ans;
     }
 
-    public  int comparatorForTwice(int[] arr) {
+    public int comparatorForTwice(int[] arr) {
         int ans = 0;
         for (int i = 0; i < arr.length; i++) {
             for (int j = i + 1; j < arr.length; j++) {

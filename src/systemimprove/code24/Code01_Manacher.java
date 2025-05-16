@@ -4,9 +4,8 @@ package systemimprove.code24;
  * 假设字符串str长度为N，想返回最长回文子串的长度
  * <p>
  * 时间复杂度O(N)
- *
+ * <p>
  * manacher算法是1975年manacher发现的
- *
  */
 public class Code01_Manacher {
 
@@ -20,7 +19,7 @@ public class Code01_Manacher {
      * 1.将字符串加工一个 在每个字符的前后都加一个特殊的字符
      * 2.遍历index位置 以i位置为基准 向左右两边扩展
      * 3.找到最大的回文子串
-     *
+     * <p>
      * 2.manacher算法流程：
      * 先介绍几个概念：
      * 1.回文半径：举个例子ababc   回文半径就是abc 长度是3

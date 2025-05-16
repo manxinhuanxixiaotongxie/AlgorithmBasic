@@ -4,11 +4,11 @@ package leetcode.practice;
 public class Code007 {
     public int reverse(int x) {
         boolean isNeg = x < 0;
-        x = isNeg? x : -x;
+        x = isNeg ? x : -x;
         int ans = 0;
         int limit = Integer.MIN_VALUE / 10;
         int last = Integer.MIN_VALUE % 10;
-        while (x !=0) {
+        while (x != 0) {
             // 防止溢出
             // 1. ans < limit
             // 一个负数如果比最小值/10还小，那么乘以10之后一定会溢出
@@ -28,7 +28,7 @@ public class Code007 {
         System.out.println(solution.reverse(1534236469));
 
 
-        System.out.println(Integer.MAX_VALUE *10);
+        System.out.println(Integer.MAX_VALUE * 10);
 
     }
 }

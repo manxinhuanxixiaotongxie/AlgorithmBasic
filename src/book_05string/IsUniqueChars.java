@@ -24,7 +24,7 @@ public class IsUniqueChars {
 
         boolean[] map = new boolean[256];
 
-        for (int i=0;i<chars.length;i++) {
+        for (int i = 0; i < chars.length; i++) {
             if (map[chars[i]]) {
                 return false;
             }
@@ -37,16 +37,16 @@ public class IsUniqueChars {
      * 时间空间复杂度O（1）
      * 尽可能的实现时间复杂度最优
      *
-     * @See classic/*
-     * @Desc 经典排序算法代码及思路
      * @param chars
      * @return
+     * @See classic/*
+     * @Desc 经典排序算法代码及思路
      */
     public boolean isUniqueChars2(char[] chars) {
 
         boolean[] map = new boolean[256];
 
-        for (int i=0;i<chars.length;i++) {
+        for (int i = 0; i < chars.length; i++) {
             if (map[chars[i]]) {
                 return false;
             }

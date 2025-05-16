@@ -16,18 +16,18 @@ public class Code08_GetMax {
      * 2、二分
      */
 
-    public static int getMax(int[] arr, int L , int R){
+    public static int getMax(int[] arr, int L, int R) {
 
 
         if (L == R) {
             return arr[L];
         }
-        int mid = L +( L + (R- L) >> 1);
+        int mid = L + (L + (R - L) >> 1);
         int l = getMax(arr, L, mid);
 
         int r = getMax(arr, mid + 1, R);
 
-        return Math.max(l,r);
+        return Math.max(l, r);
 
         /**
          *

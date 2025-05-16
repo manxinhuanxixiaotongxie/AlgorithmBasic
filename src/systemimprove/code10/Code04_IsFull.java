@@ -17,6 +17,7 @@ public class Code04_IsFull {
         TreeNode left;
         TreeNode right;
     }
+
     public class Info1 {
         int height;
         int nodes;

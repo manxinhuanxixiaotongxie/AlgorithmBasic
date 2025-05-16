@@ -9,12 +9,11 @@ import java.util.Stack;
 
 /**
  * @Description 图的深度优先遍历
- *
+ * <p>
  * 1，利用栈实现
  * 2，从源节点开始把节点按照深度放入栈，然后弹出
  * 3，每弹出一个点，把该节点下一个没有进过栈的邻接点放入栈
  * 4，直到栈变空
- *
  * @Author Scurry
  * @Date 2023-10-09 17:04
  */
@@ -46,7 +45,6 @@ public class Code03_GraphDFS {
 
     /**
      * 深度优先遍历使用栈实现
-     *
      *
      * @param node
      * @return

@@ -4,6 +4,7 @@ public class Code01_Dichotomy {
 
     /**
      * 在一个有序数组中查找某个数是否存在
+     *
      * @param arr
      * @param num
      * @return
@@ -83,7 +84,6 @@ public class Code01_Dichotomy {
     /**
      * 局部最小值问题
      * 在一个无序数组中找到一个局部最小值
-     *
      *
      * @param nums
      * @return

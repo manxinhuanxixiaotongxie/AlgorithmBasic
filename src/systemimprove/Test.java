@@ -207,12 +207,12 @@ public class Test {
         return ans;
     }
 
-    private void process(String[] nums,int index,String path,List<String> ans) {
+    private void process(String[] nums, int index, String path, List<String> ans) {
         if (index == nums.length) {
             ans.add(path);
         }
-        for (int i = index;i < nums.length;i++) {
-            process(nums,i+1,path + nums[i],ans);
+        for (int i = index; i < nums.length; i++) {
+            process(nums, i + 1, path + nums[i], ans);
         }
     }
 
@@ -795,7 +795,7 @@ public class Test {
         }
 //        cur = head;
         ListNode pre2 = null;
-        ListNode next= null;
+        ListNode next = null;
         // 可能涉及到换头
         while (cur != null) {
             next = cur.next;

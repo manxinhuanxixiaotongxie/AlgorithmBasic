@@ -11,15 +11,16 @@ public class Code01_ReverseList {
     /**
      * 单向链表
      */
-    public static class Node{
+    public static class Node {
         private int value;
         private Node next;
+
         Node(int value) {
-            this.value= value;
+            this.value = value;
         }
     }
 
-    public static class DoubleNode{
+    public static class DoubleNode {
 
         private int value;
         private DoubleNode pre;
@@ -36,7 +37,7 @@ public class Code01_ReverseList {
      * 单链表反转
      */
 
-    public static void reverseSingleList(Node head){
+    public static void reverseSingleList(Node head) {
 
         // 假设现在有这么一个链表  0 -> 1 -> 2 -> 3
 
@@ -66,10 +67,9 @@ public class Code01_ReverseList {
     /**
      * 翻转双向链表
      *
-     *
      * @param head
      */
-    private static void reverseDoubleList(DoubleNode head){
+    private static void reverseDoubleList(DoubleNode head) {
 
 
         DoubleNode pre = null;
@@ -95,7 +95,7 @@ public class Code01_ReverseList {
              *
              * 把这些做完之后  头节点需要变成next 同时 pre必须指向当前节点
              */
-            head.next =pre;
+            head.next = pre;
             head.pre = next;
 
             pre = head;
@@ -103,8 +103,6 @@ public class Code01_ReverseList {
             head = next;
 
         }
-
-
 
 
     }

@@ -24,8 +24,7 @@ public class Code994 {
         for (int r = 0; r < grid.length; r++) {
             for (int c = 0; c < grid[0].length; c++) {
                 if (grid[r][c] == 2 && (checkNeedAffect(grid, r + 1, c) || checkNeedAffect(grid, r - 1, c)
-                        || checkNeedAffect(grid, r, c + 1) || checkNeedAffect(grid, r, c - 1)))
-                {
+                        || checkNeedAffect(grid, r, c + 1) || checkNeedAffect(grid, r, c - 1))) {
                     affect(grid, r + 1, c);
                     affect(grid, r - 1, c);
                     affect(grid, r, c + 1);
@@ -95,8 +94,8 @@ public class Code994 {
                 }
             }
         }
-        for (int[] row: grid) {
-            for (int v: row) {
+        for (int[] row : grid) {
+            for (int v : row) {
                 if (v == 1) {
                     return -1;
                 }
@@ -112,16 +111,16 @@ public class Code994 {
 //        int[][] grid = {{0, 2}};
         //      [[2,0,1,1,1,1,1,1,1,1],[1,0,1,0,0,0,0,0,0,1],[1,0,1,0,1,1,1,1,0,1],[1,0,1,0,1,0,0,1,0,1],[1,0,1,0,1,0,0,1,0,1],[1,0,1,0,1,1,0,1,0,1],[1,0,1,0,0,0,0,1,0,1],[1,0,1,1,1,1,1,1,0,1],[1,0,0,0,0,0,0,0,0,1],[1,1,1,1,1,1,1,1,1,1]]
         int[][] grid =
-                       {{2,0,1,1,1,1,1,1,1,1},
-                        {1,0,1,0,0,0,0,0,0,1},
-                        {1,0,1,0,1,1,1,1,0,1},
-                        {1,0,1,0,1,0,0,1,0,1},
-                        {1,0,1,0,1,0,0,1,0,1},
-                        {1,0,1,0,1,1,0,1,0,1},
-                        {1,0,1,0,0,0,0,1,0,1},
-                        {1,0,1,1,1,1,1,1,0,1},
-                        {1,0,0,0,0,0,0,0,0,1},
-                        {1,1,1,1,1,1,1,1,1,1}};
+                {{2, 0, 1, 1, 1, 1, 1, 1, 1, 1},
+                        {1, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+                        {1, 0, 1, 0, 1, 1, 1, 1, 0, 1},
+                        {1, 0, 1, 0, 1, 0, 0, 1, 0, 1},
+                        {1, 0, 1, 0, 1, 0, 0, 1, 0, 1},
+                        {1, 0, 1, 0, 1, 1, 0, 1, 0, 1},
+                        {1, 0, 1, 0, 0, 0, 0, 1, 0, 1},
+                        {1, 0, 1, 1, 1, 1, 1, 1, 0, 1},
+                        {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
         Code994 code994 = new Code994();
         System.out.println(code994.orangesRotting(grid));
         System.out.println(code994.orangesRotting2(grid));

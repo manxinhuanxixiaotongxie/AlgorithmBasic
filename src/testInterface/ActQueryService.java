@@ -5,7 +5,7 @@ package testInterface;
  * @Author Scurry
  * @Date 2022-09-19 9:30
  */
-public class ActQueryService extends AbstractService{
+public class ActQueryService extends AbstractService {
 
 
     @Override

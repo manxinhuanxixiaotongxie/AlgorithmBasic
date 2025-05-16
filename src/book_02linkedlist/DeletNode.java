@@ -18,8 +18,8 @@ public class DeletNode {
     public DeleteKNode.Node deleteMidNode(DeleteKNode.Node head) {
         DeleteKNode.Node fastIndex = head;
         DeleteKNode.Node slowIndex = head;
-        DeleteKNode.Node cur= head;
-        while (fastIndex.next!= null && fastIndex.next.next != null) {
+        DeleteKNode.Node cur = head;
+        while (fastIndex.next != null && fastIndex.next.next != null) {
             fastIndex = fastIndex.next.next;
             cur = slowIndex;
             slowIndex = slowIndex.next;
@@ -31,12 +31,13 @@ public class DeletNode {
 
     /**
      * 删除a/b处的节点
+     *
      * @param head
      * @param a
      * @param b
      * @return
      */
-    public DeleteKNode.Node deleteABNode(DeleteKNode.Node head,int a, int b) {
+    public DeleteKNode.Node deleteABNode(DeleteKNode.Node head, int a, int b) {
 
         /**
          *
@@ -50,7 +51,7 @@ public class DeletNode {
          *
          */
 
-        if (a<0 || a/b >1) {
+        if (a < 0 || a / b > 1) {
             return head;
         }
 //        int index=a/b;
@@ -63,12 +64,12 @@ public class DeletNode {
 //        cur.next = cur.next.next;
         DeleteKNode.Node cur = head;
         int n = 0;
-        while (cur!= null) {
+        while (cur != null) {
             n++;
             cur = cur.next;
         }
 
-        double index = a/b;
+        double index = a / b;
         // 应该删除的节点
         n = (int) Math.ceil((double) (n * index));
 
