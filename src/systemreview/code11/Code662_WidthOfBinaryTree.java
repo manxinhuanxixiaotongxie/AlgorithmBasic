@@ -1,7 +1,6 @@
 package systemreview.code11;
 
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * 给你一棵二叉树的根节点 root ，返回树的 最大宽度 。

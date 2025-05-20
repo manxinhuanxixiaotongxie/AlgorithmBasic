@@ -2,7 +2,6 @@ package traingcamp.camp003.code04;
 
 import leetcode.ListNode;
 
-import java.util.List;
 import java.util.Queue;
 
 /**

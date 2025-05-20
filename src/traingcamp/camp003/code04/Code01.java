@@ -1,7 +1,5 @@
 package traingcamp.camp003.code04;
 
-import leetcode.TreeNode;
-
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.TreeMap;

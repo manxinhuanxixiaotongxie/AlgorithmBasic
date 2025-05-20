@@ -1,7 +1,5 @@
 package classicsort;
 
-import book_02linkedlist.ListNode;
-
 /**
  * @Description 经典排序算法归并排序
  * @Author Scurry

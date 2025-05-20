@@ -1,7 +1,5 @@
 package book_02linkedlist;
 
-import java.util.LinkedList;
-
 /**
  * @Description
  * @Author Scurry

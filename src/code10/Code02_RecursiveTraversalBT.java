@@ -12,9 +12,6 @@ package code10;
  * @date: 2022/7/21 23:53
  */
 
-import class03.Code01_ReverseList;
-import code09.Code03_SmallerEuqalBigger;
-
 /**
  * 二叉树的先序、中序、后序遍历
  * 先序：任何子数的处理顺序都是，先头节点、再左子树，然后右子树

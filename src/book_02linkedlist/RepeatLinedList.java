@@ -1,8 +1,5 @@
 package book_02linkedlist;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @Description 打印两个有序链表的重复部分
  * @Author Scurry

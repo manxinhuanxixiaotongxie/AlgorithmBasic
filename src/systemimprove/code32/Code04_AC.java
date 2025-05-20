@@ -1,7 +1,5 @@
 package systemimprove.code32;
 
-import newerclass.TreeNode;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

@@ -2,7 +2,6 @@ package systemimprove.code09;
 
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * 用先序方式序列化二叉树

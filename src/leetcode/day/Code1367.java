@@ -4,7 +4,6 @@ import leetcode.ListNode;
 import leetcode.TreeNode;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * 给你一棵以 root 为根的二叉树和一个 head 为第一个节点的链表。

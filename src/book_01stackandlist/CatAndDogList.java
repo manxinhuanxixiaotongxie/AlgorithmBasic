@@ -6,9 +6,7 @@ package book_01stackandlist;
  * @Date 2022-10-18 19:55
  */
 
-import java.sql.BatchUpdateException;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 /**

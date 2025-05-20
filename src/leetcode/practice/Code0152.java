@@ -1,7 +1,5 @@
 package leetcode.practice;
 
-import java.util.Map;
-
 public class Code0152 {
     public int maxProduct(int[] nums) {
         // 必须一nums[i]开头的子数组最大乘积

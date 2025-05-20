@@ -1,7 +1,5 @@
 package leetcode.practice;
 
-import java.util.Arrays;
-
 public class Code3264 {
     public int[] getFinalState(int[] nums, int k, int multiplier) {
         while (k > 0) {
