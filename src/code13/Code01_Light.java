@@ -5,6 +5,7 @@ import java.util.HashSet;
 /**
  * @Description
  * @Author Scurry
+ *
  * @Date 2023-06-29 19:34
  */
 public class Code01_Light {
@@ -27,6 +28,10 @@ public class Code01_Light {
      * 递归过程拆解：
      * 【X . . . X】
      *
+     * 这个题目有贪心解法
+     *
+     *
+     *
      * @param chars
      * @param index
      * @param lights
@@ -43,7 +48,6 @@ public class Code01_Light {
             }
             return lights.size();
         } else {
-
             int no = process(chars, index + 1, lights);
             int yes = Integer.MAX_VALUE;
 
@@ -59,5 +63,10 @@ public class Code01_Light {
             }
             return Math.max(no, yes);
         }
+    }
+
+    public static void main(String[] args) {
+        Code01_Light code01_light = new Code01_Light();
+        System.out.println(code01_light.light("X.X.X.X"));
     }
 }
