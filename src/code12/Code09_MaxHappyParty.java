@@ -121,17 +121,40 @@ public class Code09_MaxHappyParty {
         int yes = employee.happy;
         // 当前节点不来
         int no = 0;
-        for (Employee employee1 : employee.subordinates) {
-            Info process = process(employee1);
+        for (Employee child : employee.subordinates) {
+            Info next = process(child);
             // 领导来的话  就是子节点（整棵树）不来的值
-            yes += process.no;
+            yes += next.no;
             // 领导不来 取当前节点来不来最大值
-            no += Math.max(process.yes, process.no);
-
-            System.out.println(yes);
-            System.out.println(no);
+            no += Math.max(next.yes, next.no);
         }
         return new Info(yes, no);
+    }
+
+    /**
+     * 该函数的含义是 来到了employee节点 flag表示上级节点是否要过来
+     *
+     * @param employee
+     * @param flag
+     * @return
+     */
+    public static int process2(Employee employee, boolean flag) {
+        if (flag) {
+            // 上级决定过来 那么下属就只能不来
+            int ans = 0;
+            for (Employee child : employee.subordinates) {
+                ans += process2(child, false);
+            }
+            return ans;
+        } else {
+            int p1 = employee.happy;
+            int p2 = 0;
+            for (Employee child : employee.subordinates) {
+                p1 += process2(child, true);
+                p2 += process2(child, false);
+            }
+            return Math.max(p1, p2);
+        }
     }
 
 }

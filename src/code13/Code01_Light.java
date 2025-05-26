@@ -60,4 +60,31 @@ public class Code01_Light {
             return Math.max(no, yes);
         }
     }
+
+    public int minLight2(String str) {
+        if (str == null || str.length() == 0) {
+            return 0;
+        }
+        char[] chars = str.toCharArray();
+        int index = 0;
+        int lights = 0;
+        while (index < chars.length) {
+            if (chars[index] == 'X') {
+                index++;
+            } else {
+                lights++;
+                if (index + 1 == chars.length) {
+                    break;
+                } else {
+                    if (chars[index + 1] == 'X') {
+                        index += 2;
+                    } else {
+                        index += 3;
+                    }
+                }
+            }
+        }
+
+        return lights;
+    }
 }

@@ -8,16 +8,23 @@ import java.util.Map;
 
 /**
  * @Description
+ * 给定两个节点 p q 找到p q这两个节点的最低公共祖先
+ *
  * @Author Scurry
  * @Date 2023-06-28 19:10
  */
 public class Code10_LowerAncestor {
-    /**
-     * 最低公共祖先
-     */
 
     /**
      * 非递归实现
+     *
+     * 定义一个map用于记录该节点与父节点的对应关系
+     *
+     * 在深度优先遍历的过程中 填充这个map 将节点的上下级关系进行填充
+     *
+     * 从任意节点出发 向上进行查找 将对应的路径放入一个set中
+     *
+     * 从另外一个节点的出发 向上查找
      *
      * @param root
      * @param p
@@ -45,16 +52,36 @@ public class Code10_LowerAncestor {
 
     }
 
+    /**
+     * 这两个方法都对
+     *
+     * @param treeNode
+     * @param fatherMap
+     */
     public void fillFatherMap(TreeNode treeNode, Map<TreeNode, TreeNode> fatherMap) {
+        if (treeNode == null) {
+            return;
+        }
         if (treeNode.left != null) {
             fatherMap.put(treeNode.left, treeNode);
-            fillFatherMap(treeNode.left, fatherMap);
         }
+        fillFatherMap(treeNode.left, fatherMap);
         if (treeNode.right != null) {
             fatherMap.put(treeNode.right, treeNode);
-            fillFatherMap(treeNode.right, fatherMap);
         }
+        fillFatherMap(treeNode.right, fatherMap);
     }
+
+//    public void fillFatherMap(TreeNode treeNode, Map<TreeNode, TreeNode> fatherMap) {
+//        if (treeNode.left != null) {
+//            fatherMap.put(treeNode.left, treeNode);
+//            fillFatherMap(treeNode.left, fatherMap);
+//        }
+//        if (treeNode.right != null) {
+//            fatherMap.put(treeNode.right, treeNode);
+//            fillFatherMap(treeNode.right, fatherMap);
+//        }
+//    }
 
 
     /**
