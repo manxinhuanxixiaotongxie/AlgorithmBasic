@@ -5,6 +5,7 @@ import java.util.HashSet;
 /**
  * @Description
  * @Author Scurry
+ *
  * @Date 2023-06-29 19:34
  */
 public class Code01_Light {
@@ -26,6 +27,10 @@ public class Code01_Light {
     /**
      * 递归过程拆解：
      * 【X . . . X】
+     *
+     * 这个题目有贪心解法
+     *
+     *
      *
      * @param chars
      * @param index
