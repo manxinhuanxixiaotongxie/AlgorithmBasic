@@ -60,7 +60,7 @@ public class Code02_SaveWater {
                 } else {
                     // 如果j是大于10的
                     // 以bag/n的概率进袋子
-                    if (((int) (Math.random() * (n + 1))) < bag) {
+                    if (((int) (Math.random() * (j + 1))) < bag) {
                         // 决定进袋子
                         // 随机选一个袋子里面的球进行替换
                         int replace = (int) (Math.random() * (bag + 1));
