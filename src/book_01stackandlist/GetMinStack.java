@@ -41,7 +41,7 @@ public class GetMinStack {
         public int getMin() {
             if (minStack.isEmpty()) {
                 System.out.println("stack is empty");
-                return 0;
+                throw new RuntimeException("stack is empty");
             } else {
                 return minStack.peek();
             }
@@ -54,6 +54,10 @@ public class GetMinStack {
         }
     }
 
+    /**
+     * 节省空间的做法
+     *
+     */
     public class MyStack2 {
         private Stack<Integer> dataStack;
         private Stack<Integer> minStack;
@@ -82,7 +86,7 @@ public class GetMinStack {
         public int getMin() {
             if (minStack.isEmpty()) {
                 System.out.println("stack is empty");
-                return 0;
+                throw new RuntimeException("stack is empty");
             } else {
                 return minStack.peek();
             }
@@ -90,6 +94,10 @@ public class GetMinStack {
         }
 
         public int pop() {
+            if (dataStack.isEmpty()) {
+                System.out.println("stack is empty");
+                throw new RuntimeException("stack is empty");
+            }
             Integer pop = dataStack.pop();
             if (pop == getMin()) {
                 minStack.pop();

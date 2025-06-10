@@ -6,9 +6,7 @@ package book_01stackandlist;
  * @Date 2022-10-25 20:15
  */
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * 长度为N的数组   长度为W的窗口
@@ -20,32 +18,27 @@ public class GenerateMaxWindow {
 
     public int[] getMaxWindow(int[] arr, int w) {
 
-        /**
-         * 。。。。。。。。。。。。。。
-         * 使用双循环，在内循环找每个内循环的最大值放进去返回数组里
-         *
-         */
-//    for (int i = 0; i < arr.length; i++) {
-//        int max ;
-//        for (int j = i; j < i + w; j++) {
-//
-//        }
-//
-//    }
+        if (arr == null || arr.length == 0 || w < 1 || arr.length < w) {
+            return null;
+        }
 
         /**
          * 。。。。。。。。。。。。。。
-         * 使用双端队列
+         * 使用双端队列 窗口的最大值的更新问题
+         *
          * 时间复杂度O（N）
          *
          * 思路:
          * 第一个数放进去队列里
          * 第二个数和第一个数比较，如果比第一个数大，就把第一个数弹出，把第二个数放进去
          * 第w个数和第w-1个数比较，如果比第w-1个数大，就把第w-1个数弹出，把第w个数放进去
+         * 在这个过程中 窗口始终维护的是最大值或者最小值
          *如果第w个数比w-1小的话加到队列的尾巴
          *
          */
+        // 最大值的更新结构
         LinkedList<Integer> qmax = new LinkedList<>();
+        // 窗口的大小是w 数组的长度是N 那么总共产生n-w+1个窗口
         int[] res = new int[arr.length - w + 1];
         int index = 0;
         for (int i = 0; i < arr.length; i++) {
@@ -61,6 +54,7 @@ public class GenerateMaxWindow {
             // 先前放入的数如果还存在于结构中，那么该数一定比后放入的数都大
             // 最大数的下标与窗口的下一个数相等，意味着最大数已经不在窗口中了
             // 最大值是这样的，如果一个窗口的最大值被确定 意味着这个最大值只能作为这个窗口的最大值   当最大值的下标加上一个窗口大小等于当前的下标时，说明这个最大值已经不在这个窗口里了
+
             if (qmax.peekFirst() == i - w) {
                 qmax.pollFirst();
             }
@@ -74,56 +68,89 @@ public class GenerateMaxWindow {
             if (i >= w - 1) {
                 res[index++] = arr[qmax.peekFirst()];
             }
-        }
 
+        }
         return res;
     }
 
-    public void run(int[] values, int windowCount) {
-        int counter = 0;
-        LinkedList<Integer> lst = new LinkedList<Integer>();
-        List<Integer> maxValues = new ArrayList<Integer>();
-        for (int value : values) {
-            // 队列中没有元素直接放入list中
-            if (lst.size() == 0) {
-                lst.add(value);
-            } else {
-                while (lst.size() > 0) {
-                    int tail = lst.peekLast();
-                    if (tail <= value) {
-                        lst.removeLast();
-                    } else {
-                        break;
-                    }
-                }
-                // 满足上述条件之后假如的队列一定是单调递减的
+    public int[] right(int[] arr, int w) {
 
-                lst.add(value);
-
-                String elements = "";
-                for (int i = 0; i < lst.size(); i++) {
-                    elements = elements + lst.get(i) + "; ";
-                }
-
-            }
-
-            counter++;
-            // 只要索引大于了窗口，每个加入的元素都会产生一个窗口最大值
-            if (counter >= windowCount) {
-                int head = lst.get(0);
-                maxValues.add(head);
-            }
-            // 如果队列个数满足了三个，头元素删除
-            if (lst.size() == 3) {
-                lst.remove(0);
-            }
+        if (arr == null || arr.length == 0 || w < 1 || arr.length < w) {
+            return null;
         }
-
-        int index = 1;
-        for (int maxValue : maxValues) {
-            System.out.println(index++ + ". value: " + maxValue);
+        int[] res = new int[arr.length - w + 1];
+        int l = 0;
+        int r = w - 1;
+        while (r < arr.length) {
+            int max = arr[l];
+            for (int i = l + 1; i <= r; i++) {
+                max = Math.max(max, arr[i]);
+            }
+            res[l] = max;
+            l++;
+            r++;
         }
+        return res;
     }
 
+    public int[] generateArr(int maxSize,int maxValue) {
+        int[] arr = new int[(int) (Math.random() * (maxSize + 1))];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) (Math.random() * (maxValue + 1));
+        }
+        return arr;
+    }
+
+    public boolean isEqual(int[] arr1, int[] arr2) {
+        if (arr1 == null && arr2 == null) {
+            return true;
+        }
+        if (arr1 == null || arr2 == null) {
+            return false;
+        }
+        if (arr1.length != arr2.length) {
+            return false;
+        }
+        for (int i = 0; i < arr1.length; i++) {
+            if (arr1[i] != arr2[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        int testTime = 100000;
+        int maxLength = 10;
+        int maxValue = 100;
+        System.out.println("test begin");
+        GenerateMaxWindow generateMaxWindow = new GenerateMaxWindow();
+        for (int i = 0; i < testTime; i++) {
+            int[] arr = generateMaxWindow.generateArr(maxLength, maxValue);
+            int w = (int) (Math.random() * (arr.length + 1));
+            int[] res1 = generateMaxWindow.getMaxWindow(arr, w);
+            int[] res2 = generateMaxWindow.right(arr, w);
+            if (!generateMaxWindow.isEqual(res1, res2)) {
+                System.out.println("Oops!");
+                System.out.println("arr:");
+                for (int num : arr) {
+                    System.out.print(num + " ");
+                }
+                System.out.println();
+                System.out.println("w:" + w);
+                System.out.println("res1:");
+                for (int num : res1) {
+                    System.out.print(num + " ");
+                }
+                System.out.println();
+                System.out.println("res2:");
+                for (int num : res2) {
+                    System.out.print(num + " ");
+                }
+                System.out.println();
+            }
+        }
+        System.out.println("test end");
+    }
 
 }

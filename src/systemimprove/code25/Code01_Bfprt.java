@@ -10,6 +10,9 @@ import java.util.Arrays;
  * <p>
  * 1、改写快排
  * 2、bfprt算法
+ * 该算法于1973年由Blum、Floyd、Pratt、Rivest和Tarjan提出，故称为bfprt算法。
+ * 3.n * logn的方式
+ * 4.n*logk的方式 维护一个大小为k的堆 这个堆代表目前选出的前K个最小的数 在堆中K个元素堆顶的元素就是最小的K个数最大的那个 大跟堆
  *
  * @author Scurry
  * @date 2024/12/26 2024/12/26
@@ -104,6 +107,15 @@ public class Code01_Bfprt {
     }
 
 
+    /**
+     * 在left到right范围上找到第k小的数
+     *
+     * @param nums
+     * @param left
+     * @param right
+     * @param k
+     * @return
+     */
     private int bfprt(int[] nums, int left, int right, int k) {
         if (left >= right) {
             return nums[left];
@@ -150,12 +162,22 @@ public class Code01_Bfprt {
             // 最后一组可能不足五个数
             // 要与最后一个数取最小值
             int leftIndex = (i * 5) + left;
+            // 在5个一组的小数组中进行插入排序 并返回中位数
+            // 可能最后一组不够五个数
             newArr[i] = getFiveMid(nums, leftIndex, Math.min(leftIndex + 4, right));
         }
         // 针对新数组进行bfprt newArr是中位数数组
         return bfprt(newArr, 0, newArr.length - 1, newArr.length / 2);
     }
 
+    /**
+     * 下中位数
+     *
+     * @param arr
+     * @param left
+     * @param right
+     * @return
+     */
     private int getFiveMid(int[] arr, int left, int right) {
         // 在left-right位置上进行排序
         // 插入排序的常数时间复杂度最好
@@ -166,7 +188,7 @@ public class Code01_Bfprt {
                 j--;
             }
         }
-        // 返回中位数的位置
+        // 返回下中位数的位置
         return arr[((left + right) / 2)];
     }
 
@@ -225,41 +247,41 @@ public class Code01_Bfprt {
                 i++;
             }
         }
-        int[] ans = new int[2];
-        ans[0] = leftIndex + 1;
-        ans[1] = righrIndex - 1;
-        return ans;
+        return new int[]{leftIndex + 1, righrIndex - 1};
 
     }
 
+    /**
+     * 改写快排
+     *
+     * @param nums
+     * @param left
+     * @param right
+     * @return
+     */
     private int[] partition(int[] nums, int left, int right) {
         // 随机选择一个数字
         int random = left + (int) Math.random() * (right - left + 1);
+        int num = nums[random];
         // 找到随机数之后将当前数作为一个基准进行比较
         // 小于num[random]放在左边
         // 等于nums[random]放在中间
         // 大于nums[random]放在右边
         // 交换random位置的值与最后一位的值
-        swap(nums, random, right);
         int leftIndex = left - 1;
-        int righrIndex = right;
+        int righrIndex = right + 1;
         int i = left;
         while (i < righrIndex) {
-            if (nums[i] > nums[right]) {
+            if (nums[i] > num) {
                 swap(nums, i, --righrIndex);
-            } else if (nums[i] < nums[right]) {
+            } else if (nums[i] < num) {
                 swap(nums, i++, ++leftIndex);
             } else {
                 i++;
             }
         }
         // 经过这个步骤之后 数组已经变成了左边小 右边大 中间相等的状态
-        swap(nums, right, righrIndex);
-        int[] ans = new int[2];
-        ans[0] = leftIndex + 1;
-        ans[1] = righrIndex;
-        return ans;
-
+        return new int[]{leftIndex + 1, righrIndex - 1};
     }
 
     /***

@@ -12,11 +12,11 @@ import java.util.Stack;
  * 编写一个类 用两个栈实现队列
  * 支持队列的基本操作add poll peek
  */
-public class ListImplWithStack {
+public class ListImplWithStack<T> {
 
-    public class MyList<T> {
-        private Stack<T> dataStack;
-        private Stack<T> helpStack;
+    public static class MyList<T> {
+        private final Stack<T> dataStack;
+        private final Stack<T> helpStack;
 
         MyList() {
             dataStack = new Stack<>();
@@ -47,10 +47,8 @@ public class ListImplWithStack {
                 while (!dataStack.isEmpty()) {
                     helpStack.push(dataStack.pop());
                 }
-
             }
             return helpStack.peek();
-
         }
     }
 }
