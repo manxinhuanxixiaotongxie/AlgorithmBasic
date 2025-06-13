@@ -4,6 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Code3387 {
+    /**
+     * 不能AC
+     *
+     * 见code02 使用DFS+图
+     *
+     * @param initialCurrency
+     * @param pairs1
+     * @param rates1
+     * @param pairs2
+     * @param rates2
+     * @return
+     */
     public double maxAmount(String initialCurrency, List<List<String>> pairs1, double[] rates1, List<List<String>> pairs2, double[] rates2) {
         // 遍历pair2
         boolean findInitialCurrency = false;
