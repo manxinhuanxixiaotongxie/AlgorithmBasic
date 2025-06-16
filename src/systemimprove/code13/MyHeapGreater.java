@@ -58,29 +58,6 @@ public class MyHeapGreater<T extends Comparator<T>> {
 
     }
 
-
-    /**
-     * 冗余代码过多
-     *
-     * @param t
-     *//*
-    public void heapInSert(T t) {
-        if (heap.length == limit) {
-            throw new RuntimeException("heap is full");
-        }
-        // 这里不用管是不是第一次加入
-        heap[heapSize] = t;
-        indexMap.put(t, heapSize);
-        int index = heapSize;
-        heapSize++;
-        int fatherIndex = (index - 1) / 2;
-        while (heap[index].compare(heap[index], heap[fatherIndex]) < 0) {
-            swap(index, fatherIndex);
-            index = fatherIndex;
-            fatherIndex = (index - 1) / 2;
-        }
-
-    }*/
     public void resign(T t) {
         int index = indexMap.get(t);
         // 堆的调整过程 下面的两个方法只会进入一个分支
@@ -126,23 +103,19 @@ public class MyHeapGreater<T extends Comparator<T>> {
         }
     }
 
+    /**
+     * 交换堆中i位置与j位置的元素
+     *
+     * @param i
+     * @param j
+     */
     public void swap(int i, int j) {
         T temp = heap[i];
         heap[i] = heap[j];
         heap[j] = temp;
+
         indexMap.put(heap[i], i);
         indexMap.put(heap[j], j);
     }
-
-//    public void swap(T t1, T t2) {
-//        int index1 = indexMap.get(t1);
-//        int index2 = indexMap.get(t2);
-//        T temp = t1;
-//        t1 = t2;
-//        t2 = temp;
-//        // 一开始的时候V1在index1交换值之后 位置来到了index2
-//        indexMap.put(t1,index2);
-//        indexMap.put(t2,index1);
-//    }
 
 }

@@ -43,32 +43,6 @@ public class Code04_HeapGreater<T extends Comparator<T>> {
         }
     }
 
-    /***
-     * 这段代码只能新增元素，然后向上调整生成一个小根堆
-     *
-     * 但是在没有生成元素 只是元素的值发生了变化之后，这个方法就不适用了
-     *
-     * @param arr
-     * @param index
-     * @param heapSize
-     */
-//    public void heapInsert(T t) {
-//
-//        if (heapSize == limit) {
-//            throw new RuntimeException("heap is full");
-//        }
-//        heap[heapSize] = t;
-//        indexMap.put(t, heapSize);
-//        reverseMap.put(heapSize,t);
-//        int index = heapSize;
-//        heapSize++;
-//        // 向上调整
-//        while (heap[index].compare(heap[index], heap[(index - 1) / 2]) > 0) {
-//            swap( index, (index - 1) / 2);
-//            index = (index - 1) / 2;
-//        }
-//
-//    }
     public void heapify(T[] arr, int index, int heapSize) {
         int leftIndex = index * 2 + 1;
         while (leftIndex < heapSize) {
