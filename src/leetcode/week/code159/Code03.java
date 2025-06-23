@@ -20,8 +20,11 @@ import java.util.Deque;
  *
  */
 public class Code03 {
+    // 新建一个长度为50001的布尔数组 NOT_PRIME，用于标记非质数。
+    // 题目已经给定了 nums 的范围是 1 到 50000，因此我们可以预先计算出所有非质数。
     private static final int MX = 50_001;
     private static final boolean[] NOT_PRIME = new boolean[MX];
+    // 只初始化一次
     private static boolean initialized = false;
 
     // 这样写比 static block 更快
@@ -32,10 +35,17 @@ public class Code03 {
         initialized = true;
 
         NOT_PRIME[1] = true; // 1 不是质数
+        // 从2-50000进行筛选 判断哪个数是质数
         for (int i = 2; i * i < MX; i++) {
             if (NOT_PRIME[i]) {
                 continue;
             }
+            // 质数的判断 使用埃氏筛筛选判断一个数是不是质数 质数与素数是一个概念 指的是
+            // 大于1的自然数 只能被1和他本身整除的数
+            // 埃氏筛是一种用于计算质素的高效算法 特别适合用于生成一定范围内的所有素数
+            // 核心思想通过维护一个素数表来避免重复标记合数 对于每个素数P 只标记P的倍数 并且只标记那些是P的倍数的数
+            // 筛选过程从2开始遍历到N
+            // 如果当前数是素数
             for (int j = i * i; j < MX; j += i) {
                 NOT_PRIME[j] = true; // j 是质数 i 的倍数
             }
