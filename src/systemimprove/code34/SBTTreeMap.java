@@ -1,22 +1,21 @@
 package systemimprove.code34;
 
 /**
- * size balance tree 测试文件
+ * size balance tree 实现
+ * 特点：
+ * 孙子节点的数量不能超过叔叔节点的数量
+ *
  */
-public class SBTTest {
-    /**
-     * 侄子节点的数量不能比叔叔节点的数量要大
-     */
-}
 
-class SBTTree<K extends Comparable<K>, V> {
-    private SBTNode root;
+public class SBTTreeMap<K extends Comparable<K>, V> {
+    private SBTNode<K,V> root;
     private int size;
 
-    public SBTNode<K, V> add(SBTNode node, K k) {
+    public SBTNode<K, V> add(SBTNode<K,V> node, K k) {
         if (node == null) {
             return new SBTNode<>(k);
         }
+        size++;
         if (node.k.compareTo(k) > 0) {
             node.left = add(node.left, k);
         } else if (node.k.compareTo(k) < 0) {
@@ -25,6 +24,16 @@ class SBTTree<K extends Comparable<K>, V> {
         return maintain(node);
     }
 
+    /**
+     * 调整 四种情况的违规
+     * 1.ll型违规 当前节点右旋
+     * 2.lr型违规 左树节点左旋 当前节点进行右旋
+     * 3.rr型违规 当前节点左旋
+     * 4.rl型违规 右树节点右旋 当前节点进行左旋
+     *
+     * @param node
+     * @return
+     */
     public SBTNode<K, V> maintain(SBTNode<K, V> node) {
         if (node == null) {
             return null;
@@ -35,6 +44,7 @@ class SBTTree<K extends Comparable<K>, V> {
         int leftRightSize = node.left != null && node.left.right != null ? node.left.right.size : 0;
         int rightLeftSize = node.right != null && node.right.left != null ? node.right.left.size : 0;
         int rightRightSize = node.right != null && node.right.right != null ? node.right.right.size : 0;
+        // ll型违规
         if (leftLeftSize > righSize) {
             // LL型
             node = rightRotate(node);
@@ -99,18 +109,8 @@ class SBTTree<K extends Comparable<K>, V> {
             } else if (cur.left == null && cur.right != null) {
                 cur = cur.right;
             } else {
-//                SBTNode leftMostRightNode = cur.right;
-//                // 找到右树最左侧节点
-//                while (leftMostRightNode.left != null) {
-//                    leftMostRightNode = leftMostRightNode.left;
-//                }
-//                cur.right = delete(cur.right,key);
-//                leftMostRightNode.left = cur.left;
-//                leftMostRightNode.right = cur.right;
-//                cur = leftMostRightNode;
-
-                SBTNode pre = null;
-                SBTNode leftMostRightNode = cur.right;
+                SBTNode<K,V> pre = null;
+                SBTNode<K,V> leftMostRightNode = cur.right;
                 // 找到右树最左侧节点
                 while (leftMostRightNode.left != null) {
                     pre = leftMostRightNode;
@@ -118,7 +118,7 @@ class SBTTree<K extends Comparable<K>, V> {
                     leftMostRightNode.size--;
                 }
 
-                // p
+                // 要考虑的一种场景 右树的最左侧节点的右树如果存在的话  右树最左侧节点的右树会被pre的左树接管
                 if (pre != null) {
                     pre.left = leftMostRightNode.right;
                     leftMostRightNode.right = cur.right;
@@ -129,20 +129,17 @@ class SBTTree<K extends Comparable<K>, V> {
                 cur = leftMostRightNode;
 
             }
-            if (cur != null) {
-                cur.size = (cur.left == null ? 0 : cur.left.size) + (cur.right == null ? 0 : cur.right.size) + 1;
-            }
         }
 //        return maintain(cur);
         return cur;
     }
 
-    public SBTNode leftRotate(SBTNode cur) {
+    public SBTNode<K,V> leftRotate(SBTNode<K,V> cur) {
         if (cur == null) {
             return null;
         }
         // 左旋
-        SBTNode right = cur.right;
+        SBTNode<K,V> right = cur.right;
         cur.right = right.left;
         right.left = cur;
         right.size = cur.size;
@@ -150,11 +147,11 @@ class SBTTree<K extends Comparable<K>, V> {
         return right;
     }
 
-    public SBTNode rightRotate(SBTNode cur) {
+    public SBTNode<K,V> rightRotate(SBTNode<K,V> cur) {
         if (cur == null) {
             return null;
         }
-        SBTNode left = cur.left;
+        SBTNode<K,V> left = cur.left;
         cur.left = left.right;
         left.right = cur;
         left.size = cur.size;
@@ -163,20 +160,3 @@ class SBTTree<K extends Comparable<K>, V> {
     }
 }
 
-class SBTNode<K extends Comparable<K>, V> {
-    K k;
-    V v;
-    SBTNode<K, V> left;
-    SBTNode<K, V> right;
-    int size;
-
-    SBTNode(K k, V v) {
-        this.k = k;
-        this.v = v;
-        this.size = 1;
-    }
-
-    SBTNode(K k) {
-        this(k, null);
-    }
-}
