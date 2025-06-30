@@ -1,7 +1,5 @@
 package systemimprove.code32;
 
-import java.util.HashSet;
-
 /**
  * 给定一个数组 给定一个范围 返回数组中有多少个数在这个范围上
  * <p>
@@ -167,14 +165,9 @@ public class Code01_CountOfRange {
     public class SBTGreater {
 
         private SBTNode root;
-        private HashSet<Long> set = new HashSet<>();
 
         public void put(long sum) {
-
-//            boolean contains = set.contains(sum);
             root = add(root, sum, containsKey(sum));
-//            set.add((long) sum);
-
         }
 
         public boolean containsKey(long num) {
@@ -193,15 +186,30 @@ public class Code01_CountOfRange {
             return ans;
         }
 
+        /**
+         * 添加一个数
+         * 需要注意的是：
+         * 经典SBT是不支持相同的key的  本结构也一样
+         * 但是本题目的实现，使用all的辅助节点 使得相同的key可以被添加
+         * 但是相同的key在添加的时候平衡因子不能发生变化
+         *
+         * @param cur
+         * @param value
+         * @param contains
+         * @return
+         */
         public SBTNode add(SBTNode cur, long value, boolean contains) {
             if (cur == null) {
                 return new SBTNode(value);
             } else {
+                // 沿途节点的all需要加1
                 cur.all++;
                 if (cur.value == value) {
                     return cur;
                 } else {
                     if (!contains) {
+                        // 不能破坏平衡因子
+                        // 只有key不存在的时候才需要增加size
                         cur.size++;
                     }
                     if (value < cur.value) {
@@ -216,6 +224,12 @@ public class Code01_CountOfRange {
             }
         }
 
+        /**
+         * 查找有多少个数小于num
+         *
+         * @param num
+         * @return
+         */
         public int findLessNum(long num) {
             SBTNode cur = root;
             int ans = 0;
@@ -224,6 +238,8 @@ public class Code01_CountOfRange {
                     ans += (cur.left != null ? cur.left.all : 0);
                     break;
                 } else if (cur.value < num) {
+                    // 向右走 获取当前节点的左树以及当前节点的same的数量
+                    // 即当前节点的all减去当前节点的右树的all的数量
                     ans += cur.all - (cur.right != null ? cur.right.all : 0);
                     cur = cur.right;
                 } else {
@@ -270,7 +286,14 @@ public class Code01_CountOfRange {
 
         }
 
+        /**
+         * 左旋
+         *
+         * @param cur
+         * @return
+         */
         public SBTNode leftRotate(SBTNode cur) {
+            // 与当前节点相同数值的数有多少个
             long same = cur.all - (cur.left != null ? cur.left.all : 0) - (cur.right != null ? cur.right.all : 0);
             SBTNode right = cur.right;
             cur.right = right.left;
@@ -282,6 +305,12 @@ public class Code01_CountOfRange {
             return right;
         }
 
+        /**
+         * 右旋
+         *
+         * @param cur
+         * @return
+         */
         public SBTNode rightRotate(SBTNode cur) {
             long same = cur.all - (cur.left != null ? cur.left.all : 0) - (cur.right != null ? cur.right.all : 0);
             SBTNode left = cur.left;
@@ -294,12 +323,13 @@ public class Code01_CountOfRange {
             return left;
         }
 
-
     }
 
-    class SBTNode {
+      class SBTNode {
         long value;
+        // 平衡因子
         long size;
+        // 辅助结构
         long all;
         SBTNode left;
         SBTNode right;

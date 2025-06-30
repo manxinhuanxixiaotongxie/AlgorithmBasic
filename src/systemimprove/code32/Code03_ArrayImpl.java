@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * 2.删除index位置的数
  * 3.二叉树能接受重复的数据
  * <p>
- * 新增一个辅助的all字段   平衡因子怎么定义呢
+ * 本方法实现SBT中平衡因子size既作为平衡因子又作为数组的下标
  */
 public class Code03_ArrayImpl {
 
@@ -141,7 +141,7 @@ class ArrayListImplByTree<V> {
     }
 
     /**
-     * 获取index位置的数据  在数据中 如果数组是设计从0开始 那么获取index位置数 其实就是获取size是index+1的数
+     * 获取index位置的数据  在数据中 如果数组是设计从0开始 那么获取index位置数 其实的size是index+1
      *
      * @param cur
      * @param index
@@ -191,8 +191,9 @@ class ArrayListImplByTree<V> {
         cur.size++;
         // size==1 表示占据的是是0位置 如果我们要在index等于0的位置加入一个数据的话 需要将新增数据的节点放在当前节点的左树 当前节点的size++
         // 此时 左树的size变成了1 占据0位置
+        // leftSize的含义是包括当前节点在内 包含
         int leftSize = (cur.left != null ? cur.left.size : 0) + 1;
-        //
+        // index是1 意味着是第二个数要找到的位置是的leftSize+1的位置  放在leftSize+1位置的左树上
         if (index < leftSize) {
             cur.left = add(cur.left, index, node);
         } else {
@@ -214,6 +215,8 @@ class ArrayListImplByTree<V> {
              *
              *
              */
+            // 左树占据的位置是0-cur.left.size-1 左树加上当前节点已经明确要来到index位置 对应的size = index+1 左树已经占据了leftSize的位置
+            // 在右树查找index+1- leftSize
             cur.right = add(cur.right, index - leftSize, node);
         }
         return maintain(cur);

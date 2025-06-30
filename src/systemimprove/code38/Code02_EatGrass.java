@@ -11,13 +11,22 @@ package systemimprove.code38;
  */
 public class Code02_EatGrass {
 
-
+    /**
+     * 给定n份草 返回最终谁会赢
+     * 如果是先手赢的话 返回先手
+     * 如果是后手赢的话 返回后手
+     *
+     * @param n
+     * @return
+     */
     public static String whoWin(int n) {
         if (n < 5) {
             return n == 0 || n == 2 ? "后手" : "先手";
         }
         int want = 1;
         while (want <= n) {
+            // 当前先选 whowin(n - want) 后手 当前怎么才能赢
+            // 必须要whoWin(n - want) 是后手
             if (whoWin(n - want).equals("后手")) {
                 return "先手";
             }

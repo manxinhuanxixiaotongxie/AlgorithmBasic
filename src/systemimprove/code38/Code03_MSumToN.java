@@ -30,17 +30,22 @@ public class Code03_MSumToN {
         return false;
     }
 
-    public boolean process(int cur, int rest) {
+    public boolean process(int pre, int rest) {
         if (rest == 0) {
             return true;
         }
         if (rest < 0) {
             return false;
         }
-        return process(cur + 1, rest - cur);
+        return process(pre + 1, rest - pre);
     }
 
-
+    /**
+     * 非递归版本
+     *
+     * @param num
+     * @return
+     */
     public boolean isNums2(int num) {
         if (num <= 2) {
             return false;
@@ -79,13 +84,16 @@ public class Code03_MSumToN {
     public static void main(String[] args) {
         Code03_MSumToN code03_mSumToN = new Code03_MSumToN();
         int testTimes = 100000;
+        System.out.println("test begin");
         for (int i = 1; i < testTimes; i++) {
             boolean ans1 = code03_mSumToN.isNums(i);
             boolean ans2 = code03_mSumToN.isNums2(i);
             boolean ans3 = code03_mSumToN.isNums3(i);
             if (ans1 != ans2 || ans2 != ans3) {
                 System.out.println("Oops!");
+                break;
             }
         }
+        System.out.println("test finish");
     }
 }

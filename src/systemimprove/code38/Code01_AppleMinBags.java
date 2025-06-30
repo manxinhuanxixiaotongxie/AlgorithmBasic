@@ -9,6 +9,14 @@ package systemimprove.code38;
  */
 public class Code01_AppleMinBags {
 
+    /**
+     * 袋子必须全部装满
+     * 要想使用的袋子最少 就必须要使用更多的8号袋子
+     * 使用最多的8号袋子开始尝试
+     *
+     * @param apple
+     * @return
+     */
     public static int minBags(int apple) {
         if (apple < 6) {
             return -1;
@@ -47,6 +55,7 @@ public class Code01_AppleMinBags {
             System.out.println(apple + " : " + minBags(apple));
             if (minBags(apple) != minBagAwesome(apple)) {
                 System.out.println("Oops!");
+                break;
             }
         }
         System.out.println("finish");
