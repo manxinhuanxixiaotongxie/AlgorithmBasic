@@ -1,32 +1,31 @@
 package book_02linkedlist;
 
 /**
- * @Description
+ * @Description 翻转部分链表
+ *
  * @Author Scurry
  * @Date 2023-02-09 17:13
  */
-public class ReversePartLinkedList {
-
-    public static void main(String[] args) {
-
-    }
+public class Code05_ReversePartLinkedList {
 
     /**
      * 给定链表头结点单链表
      * 给定from to
      * 翻转from到to这部分节点
      * 要求：链表长度为N时间复杂度要求到O（N），空间复杂度要求到O（1）
+     * 如果不满足1 <= from <= to <= N 则不用调整
      */
-    public DeleteKNode.Node reversePartLinkedList(DeleteKNode.Node head, int from, int to) {
+    public Code02_DeleteKNode.ListNode reversePartLinkedList(Code02_DeleteKNode.ListNode head, int from, int to) {
 
         if (from > to || from < 1 || to < 0) {
             return head;
         }
         int len = 0;
-        DeleteKNode.Node cur = head;
+        Code02_DeleteKNode.ListNode cur = head;
         // 找到from的上一个节点  以及to的下一个节点
-        DeleteKNode.Node fromNode = null;
-        DeleteKNode.Node toNode = null;
+        Code02_DeleteKNode.ListNode fromNode = null;
+        Code02_DeleteKNode.ListNode toNode = null;
+        // 找到要翻转链表的前一个节点和后一个节点
         while (cur != null) {
             len++;
             // 如果from值是1的话，那么就从head到to进行翻转
@@ -58,14 +57,13 @@ public class ReversePartLinkedList {
          */
         cur = fromNode == null ? head : fromNode.next;
 
-        DeleteKNode.Node nextNode = toNode;
+        Code02_DeleteKNode.ListNode nextNode = toNode;
 
-        DeleteKNode.Node node2 = cur.next;
+        Code02_DeleteKNode.ListNode node2 = cur.next;
         node2.next = toNode;
 
-
         while (cur != toNode) {
-            DeleteKNode.Node next = cur.next;
+            Code02_DeleteKNode.ListNode next = cur.next;
             cur.next = nextNode;
             nextNode = cur;
             cur = next;
@@ -77,8 +75,6 @@ public class ReversePartLinkedList {
             fromNode.next = cur;
             return head;
         }
-
-
         return cur;
     }
 }

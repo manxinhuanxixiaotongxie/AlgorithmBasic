@@ -65,55 +65,6 @@ public class AddList {
             cur = cur.next;
         }
 
-
-        // 设置进位
-//        boolean isNeedAdd = false;
-//        while (!stack1.isEmpty() && !stack2.isEmpty()) {
-//            ListNode pop1 = stack1.pop();
-//            ListNode pop2 = stack2.pop();
-//            if (!isNeedAdd && (pop1.val + pop2.val) >= 10 || isNeedAdd && ((pop1.val + pop2.val + 1) > 10)) {
-//                // 需要进位
-//                isNeedAdd = true;
-//                newHead = new ListNode((pop1.val+pop2.val)-10);
-//
-//            }else {
-//                newHead = new ListNode((pop1.val+pop2.val));
-//                isNeedAdd = false;
-//            }
-//            newHead.next = next;
-//            next = newHead;
-//
-//        }
-//        // 处理剩下的不为空的栈
-//        while (!stack1.isEmpty()) {
-//            ListNode pop = stack1.pop();
-//            if (isNeedAdd) {
-//                if ((pop.val+1)>=10) {
-//                    isNeedAdd = true;
-//                    newHead = new ListNode((pop.val)-10);
-//                }else {
-//                    newHead = new ListNode((pop.val));
-//                }
-//            }
-//            newHead.next = next;
-//            next = newHead;
-//
-//        }
-//
-//        while (!stack2.isEmpty()) {
-//            ListNode pop = stack2.pop();
-//            if (isNeedAdd) {
-//                if ((pop.val+1)>=10) {
-//                    isNeedAdd = true;
-//                    newHead = new ListNode((pop.val)-10);
-//                }else {
-//                    newHead = new ListNode((pop.val));
-//                }
-//            }
-//            newHead.next = next;
-//            next = newHead;
-//        }
-
         int n1 = 0;
         int n2 = 0;
         int cal = 0;

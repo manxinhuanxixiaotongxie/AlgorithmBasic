@@ -5,7 +5,7 @@ package book_02linkedlist;
  * @Author Scurry
  * @Date 2023-02-03 10:24
  */
-public class RepeatLinedList {
+public class Code01_RepeatLinedList {
 
     class Node {
         Node next;
@@ -17,17 +17,6 @@ public class RepeatLinedList {
         }
     }
 
-    public static void main(String[] args) {
-        /**
-         *
-         * 给定两个链表head1 head2
-         *
-         */
-        Node head1;
-        Node head2;
-
-
-    }
 
     /**
      * 有序
@@ -39,11 +28,9 @@ public class RepeatLinedList {
         while (head1 != null && head2 != null) {
             if (head1.value > head2.value) {
                 head2 = head2.next;
-            }
-            if (head1.value < head2.value) {
+            } else if (head1.value < head2.value) {
                 head1 = head1.next;
-            }
-            if (head1.value == head2.value) {
+            } else {
                 System.out.println(head1.value);
                 head1 = head1.next;
                 head2 = head2.next;
