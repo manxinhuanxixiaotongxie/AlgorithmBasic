@@ -93,7 +93,7 @@ public class GenerateMaxWindow {
         return res;
     }
 
-    public int[] generateArr(int maxSize,int maxValue) {
+    public int[] generateArr(int maxSize, int maxValue) {
         int[] arr = new int[(int) (Math.random() * (maxSize + 1))];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) (Math.random() * (maxValue + 1));
@@ -148,6 +148,7 @@ public class GenerateMaxWindow {
                     System.out.print(num + " ");
                 }
                 System.out.println();
+                break;
             }
         }
         System.out.println("test end");

@@ -34,6 +34,7 @@ public class ChildArrNums {
         LinkedList<Integer> qMax = new LinkedList<>();
         LinkedList<Integer> qMin = new LinkedList<>();
         // 使用两个变量i j维护子数组的范围
+        // 含义 以i开通的子数组 j结尾
         int i = 0;
         // 另J不断扩大范围 同时维护最大值和最小值的更新结构
         // 一旦不满足条件就停止j的扩大
