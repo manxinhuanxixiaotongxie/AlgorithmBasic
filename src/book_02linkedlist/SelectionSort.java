@@ -24,16 +24,6 @@ public class SelectionSort {
             // 获取往后最小node节点
             small = cur;
             smallPre = getSmallListNode(cur);
-//            if (smallPre == cur) {
-//                head = smallPre;
-//            }
-//            if (pre != null && smallPre != null) {
-//                pre.next = smallPre.next;
-//                smallPre.next = cur;
-//                pre.next.next = cur.next;
-//                smallPre.next = smallPre.next.next;
-//                cur = pre.next;
-//            }
             if (smallPre != null) {
                 small = smallPre.next;
                 smallPre.next = small.next;
@@ -61,12 +51,10 @@ public class SelectionSort {
         ListNode smallPre = null;
         ListNode pre = null;
         while (cur != null) {
-
             if (small.val > cur.val) {
                 smallPre = pre;
                 small = cur;
             }
-
             pre = cur;
             cur = cur.next;
 

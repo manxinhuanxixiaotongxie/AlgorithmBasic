@@ -30,20 +30,20 @@ public class RandomPointer {
             return randomNode;
         }
         // 原样复制原来的新链表
-        RandomNode randomNodeNew;
         RandomNode next;
         RandomNode head = randomNode;
-        while (randomNode.next != null) {
+        // 将链表每一个节点都复制一份 链接到原链表中去
+        while (randomNode != null) {
             next = randomNode.next;
             randomNode.next = new RandomNode(randomNode.value);
             randomNode.next.next = next;
             randomNode = next;
 
         }
-        // 还原链表,设置random指针
+        // 设置random指针
         RandomNode randomNodeCopy = null;
         RandomNode cur = head;
-        while (cur.next != null) {
+        while (cur != null) {
             next = cur.next.next;
             randomNodeCopy = cur.next;
             randomNodeCopy.random = cur.random != null ? cur.random : null;
@@ -52,14 +52,13 @@ public class RandomPointer {
 
         // 拆除新复制的链表
         cur = head;
-        while (cur.next != null) {
+        while (cur != null) {
             next = cur.next.next;
             randomNodeCopy = cur.next;
             cur.next = next;
             randomNodeCopy.next = next != null ? next.next : null;
             cur = next;
         }
-
 
         return head.next;
     }
@@ -81,8 +80,7 @@ public class RandomPointer {
         while (cur.next != null) {
             map.put(cur, new RandomNode(cur.value));
         }
-        cur = randomNode;
-        while (cur.next != null) {
+        while (cur != null) {
             map.get(cur).next = map.get(cur.next);
             map.get(cur).random = map.get(cur.random);
             cur = cur.next;

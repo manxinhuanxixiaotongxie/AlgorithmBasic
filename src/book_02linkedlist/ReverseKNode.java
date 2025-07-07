@@ -13,41 +13,48 @@ public class ReverseKNode {
      * st 每K个节点之间逆序 如果k个节点不够一组 则不调整最后几个节点
      */
 
-    public ListNode reverseKNode(ListNode head, int k) {
-        if (head == null || k <= 0) {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        // 使用O（1）的算法解决这个问题
+        if (k == 1) {
             return head;
         }
-        ListNode cur = head;
-        int length = 0;
-        while (cur != null) {
-            length++;
-            cur = cur.next;
-        }
-        if (length < k) {
-            return head;
-        }
-        length = 0;
-        cur = head;
-        ListNode begin = null;
+        // k个一组翻转链表
         ListNode newHead = null;
+        ListNode cur = head;
+        // 定义一个一个影子节点
+        // 用于标记上一个位置的结尾
+        ListNode lastPre = new ListNode(-1);
+        int index = 0;
         while (cur != null) {
-            if (length == 0) {
-                begin = cur;
-            }
-            ++length;
-            if (length + 1 == k) {
-                ListNode reverse = reverse(begin, cur.next);
-                if (newHead == null) {
-                    newHead = reverse;
+            ListNode pre = cur;
+            ListNode tempCur = cur;
+            while ((++index) <= k) {
+                if (cur == null) {
+                    return newHead;
                 }
-                length = 0;
+                cur = cur.next;
             }
-            cur = cur.next;
+            // 此时cur来到了要翻转链表的下一个位置
+            // 从pre开始翻转链表
+            ListNode tempPre = null;
+            while ((--index) > 0) {
+                ListNode tempNext = pre.next;
+                pre.next = tempPre;
+                tempPre = pre;
+                pre = tempNext;
+            }
+            // 上次一次的尾巴连接下一次的头
+            lastPre.next = tempPre;
+            // 这一次的头连接下一次的头
+            tempCur.next = cur;
+            if (newHead == null) {
+                newHead = tempPre;
+            }
+            lastPre = tempCur;
+
         }
-
-        return head;
+        return newHead;
     }
-
     /**
      * 将单链表的每K个节点之间逆序
      * 给定一个head 实现一个调整单链表的函数

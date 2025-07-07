@@ -17,18 +17,11 @@ public class RingLinekList {
         }
     }
 
-    public static void main(String[] args) {
-
-    }
-
     public Node killPeople1(Node head, int num) {
 
         if (head == null || head.next == null) {
             return head;
         }
-//        while (head.next != head) {
-//            tail = head.next;
-//        }
 
         Node tail = head;
         while (tail.next != head) {
@@ -50,19 +43,6 @@ public class RingLinekList {
             head = tail.next;
         }
 
-//        while (head != tail) {
-//            if (++index == num) {
-//                tail.next = tail.next.next;
-//                index = 0;
-//
-//            }else {
-//
-//                tail = tail.next;
-//
-//            }
-//
-//            head = tail.next;
-//        }
         return head;
     }
 

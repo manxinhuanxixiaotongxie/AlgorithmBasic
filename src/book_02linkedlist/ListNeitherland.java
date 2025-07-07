@@ -1,7 +1,7 @@
 package book_02linkedlist;
 
 /**
- * @Description
+ * @Description 将单向链表按某值划分成左边小、中间相等、右边大的形式
  * @Author Scurry
  * @Date 2023-04-10 17:24
  */
@@ -117,8 +117,8 @@ public class ListNeitherland {
 
     /**
      * 将单项链表划分成左边小、中间相等、右边大的形式
-     * 实现一种方式时间复杂度O(N),空间复杂度N（1）
-     * 时间复杂度o(N) 空间复杂度o(1)
+     * 实现：时间复杂度O(N),空间复杂度N（1）
+     * =
      *
      * @param head
      * @return
@@ -165,33 +165,19 @@ public class ListNeitherland {
                     biggerTail = cur;
                 }
             }
-
             cur = cur.next;
-
-        }
-        if (smallHead != null) {
-            head = smallHead;
-            while (smallHead.next != null) {
-                smallTail = smallHead.next;
-            }
-        }
-
-        if (equalHead != null) {
-            head = equalHead;
-            while (equalHead.next != null) {
-                equalHead = equalHead.next;
-            }
         }
 
         if (smallTail != null) {
-            smallTail.next = equalHead == null ? biggerHead : equalHead;
-        } else {
-            if (equalTail != null) {
-                equalTail.next = biggerHead;
-            }
+            smallTail.next = equalHead;
+            equalTail = equalTail == null ? smallTail : equalTail;
         }
 
-        return head;
+        if (equalTail != null) {
+            equalTail.next = biggerHead;
+        }
+
+        return smallHead != null ? smallHead : equalHead != null ? equalHead : biggerHead;
     }
 
 
