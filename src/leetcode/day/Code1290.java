@@ -5,7 +5,7 @@ public class Code1290 {
         if (head == null) return 0;
         ListNode cur = head;
         ListNode pre = null;
-        ListNode next = null;
+        ListNode next;
         // 翻转链表
         while (cur != null) {
             next = cur.next;
