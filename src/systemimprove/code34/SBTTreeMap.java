@@ -96,9 +96,9 @@ public class SBTTreeMap<K extends Comparable<K>, V> {
 
         cur.size--;
         if (cur.k.compareTo(key) > 0) {
-            cur = delete(cur.left, key);
+            cur.left = delete(cur.left, key);
         } else if (cur.k.compareTo(key) < 0) {
-            cur = delete(cur.right, key);
+            cur.right = delete(cur.right, key);
         } else {
 
             // 相等要执行删除
