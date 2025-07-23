@@ -70,10 +70,8 @@ public class FibonacciProblem {
 
         int pre = 1;
         int res = 1;
-        int temp = 0;
 
         for (int i = 3; i <= n; i++) {
-            temp = res;
             res = pre + res;
             pre = res;
         }

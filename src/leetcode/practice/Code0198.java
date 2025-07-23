@@ -30,4 +30,22 @@ public class Code0198 {
         }
         return dp[0];
     }
+
+    /**
+     * 节省空间
+     *
+     * @param nums
+     * @return
+     */
+    public int rob3(int[] nums) {
+
+        int prePre = 0;
+        int pre = nums[nums.length - 1];
+        for (int index = nums.length - 2; index >= 0; index--) {
+            int temp = Math.max(pre, prePre + nums[index]);
+            prePre = pre;
+            pre = temp;
+        }
+        return pre;
+    }
 }

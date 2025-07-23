@@ -88,4 +88,43 @@ public class Code08_LongestCommonSubsequence {
         }
         return dp[n1 - 1][n2 - 1];
     }
+
+    /**
+     * 空间压缩 最优解法
+     *
+     * @param str1
+     * @param str2
+     * @return
+     */
+    public int longestCommonSubsequence3(String str1, String str2) {
+        char[] s1 = str1.toCharArray();
+        char[] s2 = str2.toCharArray();
+        int[] dp = new int[s2.length];
+        dp[0] = s1[0] == s2[0] ? 1 : 0;
+        // 普遍位置依赖左边 上边 左上角的位置
+        // 滚动更新数组
+        for (int i = 1; i < s2.length; i++) {
+            dp[i] = s1[0] == s2[i] ? 1 : dp[i - 1];
+        }
+        // 定义一个变量标记左上角
+        int leftTop = Integer.MIN_VALUE;
+        for (int i = 1; i < s1.length; i++) {
+            // 总共要遍历这么多次
+            leftTop = dp[0];
+            dp[0] = s1[i] == s2[0] ? 1 : dp[0];
+            for (int j = 1; j < dp.length; j++) {
+                if (s1[i] == s2[j]) {
+                    int temp = dp[j];
+                    dp[j] = 1 + leftTop;
+                    leftTop = temp;
+                } else {
+                    int temp = dp[j];
+                    dp[j] = Math.max(dp[j - 1], Math.max(dp[j], leftTop));
+                    leftTop = temp;
+                }
+            }
+        }
+
+        return dp[s2.length - 1];
+    }
 }
