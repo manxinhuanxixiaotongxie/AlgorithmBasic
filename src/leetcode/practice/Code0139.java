@@ -26,7 +26,8 @@ public class Code0139 {
             return true;
         }
         for (int start = index; start < s.length(); start++) {
-            if (wordDict.contains(s.substring(index, start + 1)) && process(s, start + 1, wordDict)) {
+            if (wordDict.contains(s.substring(index, start + 1))
+                    && process(s, start + 1, wordDict)) {
                 return true;
             }
         }
