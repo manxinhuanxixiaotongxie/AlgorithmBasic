@@ -44,6 +44,12 @@ public class Code02 {
         return ans;
     }
 
+    /**
+     * 简单的pair类
+     * java 16新特性
+     * @param to
+     * @param rate
+     */
     private record Pair(String to, double rate) {
     }
 
