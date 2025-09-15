@@ -70,8 +70,10 @@ public class Code300 {
             return 0;
         }
         int[] dp = new int[n];
+        // 给定默认值 最少的长度为1
         Arrays.fill(dp, 1);
         int res = 1;
+        // 这里的尝试是以i位置结尾的最长递增子序列
         for (int i = 1; i < n; i++) {
             for (int j = 0; j < i; j++) {
                 if (nums[i] > nums[j]) {
