@@ -1,5 +1,10 @@
 package leetcode.week.code170;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
 /**
  * 给你一个正整数 n 和一个整数 target。
  *
@@ -17,6 +22,57 @@ package leetcode.week.code170;
  */
 public class Code03 {
     public int[] lexSmallestNegatedPerm(int n, long target) {
-        return null;
+        long[][] help = new long[n][2];
+        for (int i = 0; i <n; i++) {
+            help[i][1] = i + 1;
+            help[i][0] = -help[i][1];
+        }
+        ArrayList<ArrayList<Long>> ans = new ArrayList<>();
+        process(help,n,0,target,ans,new ArrayList<>());
+        if (ans.size() == 0) return new int[0];
+        // 排序
+        Collections.sort(ans, new Comparator<ArrayList<Long>>() {
+            @Override
+            public int compare(ArrayList<Long> o1, ArrayList<Long> o2) {
+                return o1.get(0).compareTo(o2.get(0));
+            }
+        });
+        // 转换数组
+        ArrayList<Long> integers = ans.get(0);
+        int[] res = new int[integers.size()];
+        for (int i = 0; i < integers.size(); i++) {
+            res[i] = integers.get(i).intValue();
+        }
+        return res;
     }
+
+    /**
+     * 开始选择 总共要选择n个数
+     */
+    public void process(long[][] help,int n,int index, long restNum, ArrayList<ArrayList<Long>> ans,ArrayList<Long> cur) {
+        // 总共要选n个数 从index=1开始进行选择，一直选到N个数
+        if (index == n) {
+            // 选完了  一种有可能得可能性
+            if (restNum == 0) {
+                // 产生了可能得选择
+                ans.add(new ArrayList<>(cur));
+            }
+            return;
+        }
+        // 在当前位置进行自由选择
+        for (int i = 1; i < help.length; i++) {
+            // 可以选0位置 也可以选1位置
+            long[] ints = help[index];
+            for (int i1 = 0; i1 < ints.length; i1++) {
+            cur.add(ints[i1]);
+            process(help,n,index+1,restNum - ints[i1],ans,cur);
+            }
+            cur.remove(cur.size()-1);
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(new Code03().lexSmallestNegatedPerm(3, 0)));
+    }
+
 }
