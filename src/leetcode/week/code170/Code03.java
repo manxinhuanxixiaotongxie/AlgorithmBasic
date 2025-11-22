@@ -55,24 +55,32 @@ public class Code03 {
             // 选完了  一种有可能得可能性
             if (restNum == 0) {
                 // 产生了可能得选择
-                ans.add(new ArrayList<>(cur));
+                ArrayList<Long> curs = new ArrayList<>(cur);
+                Collections.sort(curs, new Comparator<Long>() {
+                    @Override
+                    public int compare(Long o1, Long o2) {
+                        return o1.compareTo(o2);
+                    }
+                });
+
+                ans.add(curs);
             }
             return;
         }
         // 在当前位置进行自由选择
-        for (int i = 1; i < help.length; i++) {
+        for (int i = 0; i < help.length; i++) {
             // 可以选0位置 也可以选1位置
             long[] ints = help[index];
             for (int i1 = 0; i1 < ints.length; i1++) {
             cur.add(ints[i1]);
             process(help,n,index+1,restNum - ints[i1],ans,cur);
-            }
             cur.remove(cur.size()-1);
+            }
         }
     }
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(new Code03().lexSmallestNegatedPerm(3, 0)));
+        System.out.println(Arrays.toString(new Code03().lexSmallestNegatedPerm(4, -4)));
     }
 
 }
