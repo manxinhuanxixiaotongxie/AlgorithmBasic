@@ -1,5 +1,7 @@
 package leetcode.week.code476;
 
+import java.util.Arrays;
+
 /**
  * 给你一个 正 整数 n。
  *
@@ -128,6 +130,81 @@ public class Code03 {
 
         return ans;
     }
+
+    /**
+     * 使用数位dp进行处理
+     *
+     * @param n
+     * @return
+     */
+    public long countDistinct3(long n) {
+        return digitDP(1, n, 0); // 见动态规划题单「十、数位 DP」
+    }
+
+
+    /**
+     * 返回[low,high]中的恰好包含target个0的数字个数
+     *
+     * @param low
+     * @param high
+     * @param target
+     * @return
+     */
+    public long digitDP(long low, long high, int target) {
+        char[] lowS = String.valueOf(low).toCharArray();
+        char[] highS = String.valueOf(high).toCharArray();
+
+        int n = highS.length;
+        long[][] memo = new long[n][target + 1];
+        for (long[] row : memo) {
+            Arrays.fill(row, -1);
+        }
+
+        return dfs(0, 0, true, true, lowS, highS, target, memo);
+    }
+
+    private long dfs(int i, int cnt0, boolean limitLow, boolean limitHigh, char[] lowS, char[] highS, int target, long[][] memo) {
+        if (cnt0 > target) {
+            return 0; // 不合法
+        }
+        if (i == highS.length) {
+            return cnt0 == target ? 1 : 0;
+        }
+
+        if (!limitLow && !limitHigh && memo[i][cnt0] >= 0) {
+            return memo[i][cnt0];
+        }
+
+        int diff = highS.length - lowS.length;
+        int lo = limitLow && i >= diff ? lowS[i - diff] - '0' : 0;
+        int hi = limitHigh ? highS[i] - '0' : 9;
+
+        long res = 0;
+        int d = lo;
+
+        // 通过 limitLow 和 i 可以判断能否不填数字，无需 isNum 参数
+        // 如果前导零不影响答案，去掉这个 if block
+        if (limitLow && i < diff) {
+            // 不填数字，上界不受约束
+            res = dfs(i + 1, 0, true, false, lowS, highS, target, memo);
+            d = 1;
+        }
+
+        for (; d <= hi; d++) {
+            res += dfs(i + 1,
+                    cnt0 + (d == 0 ? 1 : 0), // 统计 0 的个数
+                    limitLow && (d == lo),
+                    limitHigh && (d == hi),
+                    lowS, highS, target, memo);
+            // res %= MOD;
+        }
+
+        if (!limitLow && !limitHigh) {
+            memo[i][cnt0] = res;
+        }
+        return res;
+    }
+
 
 
     public static void main(String[] args) {
