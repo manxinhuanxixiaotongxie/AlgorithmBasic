@@ -19,7 +19,6 @@ public class Code0149 {
         Map<String, Integer> map = new HashMap<>();
         for (int i = 0; i < points.length; i++) {
             map.clear();
-            int samePosition = 0;
             for (int j = i + 1; j < points.length; j++) {
                 int x = points[j][0] - points[i][0];
                 int y = points[j][1] - points[i][1];
@@ -27,28 +26,40 @@ public class Code0149 {
                 x /= gcd;
                 y /= gcd;
                 String key = x + "_" + y;
-                if (x == 0 && y == 0) {
-                    samePosition++;
-                } else {
-                    map.merge(key, 1, Integer::sum);
-                }
+                map.merge(key, 1, Integer::sum);
             }
             int max = 0;
             for (Integer value : map.values()) {
                 max = Math.max(max, value);
             }
-            ans = Math.max(ans, max + samePosition + 1);
-
+            ans = Math.max(ans, max + 1);
         }
         return ans;
     }
 
+    /**
+     * 辗转相除
+     *
+     * @param a
+     * @param b
+     * @return
+     */
     public static int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+
+    public static int gcd2(int a,int b){
         while (b != 0) {
             int temp = a % b;
             a = b;
             b = temp;
         }
         return a;
+    }
+
+    static void main() {
+        Code0149 code0149 = new Code0149();
+        int[][] points = {{1, 1}, {2, 2}, {3, 3}};
+        System.out.println(code0149.maxPoints(points));
     }
 }
