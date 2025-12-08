@@ -10,6 +10,14 @@ package leetcode.day;
  *
  */
 public class Code3578 {
+
+    /**
+     * 标准的划分型DP
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
     public int countPartitions(int[] nums, int k) {
         return 0;
     }
