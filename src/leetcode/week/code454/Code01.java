@@ -50,10 +50,10 @@ public class Code01 {
 
         long ans = 0;
         for (int i = 1; i < n - 1; i++) {
-            ans += leftIndex[i] * rightIndex[i];
+            ans += (leftIndex[i] * rightIndex[i]) % 1000000007;
         }
 
-        return (int) ((ans % 1000000007 + 1000000007) % 1000000007);
+        return (int) (ans % 1000000007);
     }
 
 }
