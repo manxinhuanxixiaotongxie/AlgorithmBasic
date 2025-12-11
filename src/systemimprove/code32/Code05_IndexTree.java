@@ -168,6 +168,7 @@ public class Code05_IndexTree {
             while (index > 0) {
                 ans += help[index];
                 index -= index & -index;
+                // index &= index - 1;
             }
             return ans;
         }

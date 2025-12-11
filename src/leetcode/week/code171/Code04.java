@@ -1,5 +1,7 @@
 package leetcode.week.code171;
 
+import java.util.Arrays;
+
 /**
  * 固定成昂度子数组中的最小逆序对数目
  * 给你一个长度为 n 的整数数组 nums 和一个整数 k。
@@ -99,13 +101,69 @@ public class Code04 {
 
     /**
      * indextree可以做
+     * 滑动窗口 + 树状数组
+     *
+     * 滑窗的同时 实时维护窗口内的逆序对个数inv
+     * (1)元素x进入窗口时，inv增加了窗口内的大于x的元素个数
+     * (2)元素x离开窗口时，inv减少的了窗口内的小于x的元素个数
+     *
+     * 这可以用值域树状数组动态维护 维护什么？ 维护元素的出现次数的前缀和
+     *
+     * 由于元素范围很大 我们又只需要知道元素的相对大小（元素的绝对大小不重要） 所以可以先离散化 把元素映射到n以内
+     * 例如300,300,100，80 离散化以后就是2 2 1 3 保留了元素的相对大小
+     * 注：这里从1开始 树状数组必须从1开始 从0开始没有这性质
+     *
+     * 小优化：如果循环中发现ans = 0 那么已经达到最小值 直接跳出循环
      *
      * @param nums
      * @param k
      * @return
      */
     public long minInversionCount2(int[] nums, int k) {
-        return 0;
+        // 离散化
+        int n = nums.length;
+        int[] sorted = nums.clone();
+        Arrays.sort(sorted);
+        // 树状数组下标从 1 开始
+        // 离散化 把元素映射到N以内
+        // 总结：这就是“离散化”，常用于数值范围大但只关心相对大小的场景。
+        for (int i = 0; i < n; i++) {
+            nums[i] = Arrays.binarySearch(sorted, nums[i]) + 1;
+        }
+
+        FenwickTree t = new FenwickTree(sorted.length);
+        // 窗口逆序对个数
+        long inv = 0;
+        long ans = Long.MAX_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            // 1. 入
+            int in = nums[i];
+            t.update(in, 1);
+            // 逆序对转换
+            // 窗口大小 - (<=x 的元素个数) = (>x 的元素个数)
+            inv += Math.min(i + 1, k) - t.sum(in);
+
+            int left = i + 1 - k;
+            // 尚未形成第一个窗口
+            if (left < 0) {
+                continue;
+            }
+
+            // 2. 更新答案
+            ans = Math.min(ans, inv);
+            // 已经最小了，无需再计算
+            if (ans == 0) {
+                break;
+            }
+
+            // 3. 出
+            int out = nums[left];
+            // < out 的元素个数3
+            inv -= t.sum(out - 1);
+            t.update(out, -1);
+        }
+        return ans;
     }
 
     static void main() {
@@ -117,3 +175,36 @@ public class Code04 {
     }
 
 }
+
+class FenwickTree {
+    private final int[] tree;
+
+    public FenwickTree(int n) {
+        tree = new int[n + 1]; // 使用下标 1 到 n
+    }
+
+    // a[i] 增加 val
+    // 1 <= i <= n
+    // 时间复杂度 O(log n)
+    public void update(int i, int val) {
+        for (; i < tree.length; i += i & -i) {
+            tree[i] += val;
+        }
+    }
+
+    // 求前缀和 a[1] + ... + a[i]
+    // 1 <= i <= n
+    // 时间复杂度 O(log n)
+    public int sum(int i) {
+        int res = 0;
+        for (; i > 0; i -= i & -i) {
+            res += tree[i];
+        }
+        // 等效
+//        for (; i > 0; i &=(i -1)) {
+//            res += tree[i];
+//        }
+        return res;
+    }
+}
+
