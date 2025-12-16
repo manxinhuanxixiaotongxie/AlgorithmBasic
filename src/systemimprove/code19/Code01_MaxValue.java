@@ -1,6 +1,12 @@
 package systemimprove.code19;
 
 /**
+ * 背包问题
+ * 状态DP相关
+ *
+ * 状态机 DP
+ * 一般定义 f[i][j] 表示前缀 a[:i] 在状态 j 下的最优值。j 一般很小。
+ *
  * 给定两个长度都为N的数组weights和values，
  * weights[i]和values[i]分别代表 i号物品的重量和价值。
  * 给定一个正数bag，表示一个载重bag的袋子，
@@ -44,6 +50,16 @@ public class Code01_MaxValue {
 
     // 设计一个函数返回最大价值
     // 本题规定 当bag的容量为0的时候 可以继续选择  因为可能存在某种货物的重量为0 但是价值不为0
+
+    /**
+     * 状态定义 f[i][j]前i个货物 选完后背后剩余容量为j时的最大价值
+     *
+     * @param weights
+     * @param value
+     * @param index
+     * @param rest
+     * @return
+     */
     public int process1(int[] weights, int[] value, int index, int rest) {
         if (rest < 0) {
             return -1;

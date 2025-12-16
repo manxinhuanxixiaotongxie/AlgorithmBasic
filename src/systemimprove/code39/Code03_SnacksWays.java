@@ -14,6 +14,13 @@ package systemimprove.code39;
  */
 public class Code03_SnacksWays {
 
+    /**
+     * 0-1的背包问题
+     *
+     * @param arr
+     * @param w
+     * @return
+     */
     public static int ways1(int[] arr, int w) {
         return process(arr, 0, w);
     }
