@@ -26,4 +26,9 @@ public class Code02 {
     public List<List<String>> wordSquares(String[] words) {
         return null;
     }
+
+    // 在范围内进行选择
+    public void process(String[] words) {
+
+    }
 }
