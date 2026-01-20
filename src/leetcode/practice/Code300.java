@@ -32,17 +32,18 @@ public class Code300 {
      * @param index
      * @return
      */
-    public int process(int[] nums, int index, int pre) {
+    public int process(int[] nums, int index, int lastNum) {
         if (index == nums.length) {
             return 0;
         }
-        // 分析可能性
-        for (int i = index; i < nums.length; i++) {
-            if (nums[i] > pre) {
-                return Math.max(process(nums, i + 1, nums[i]) + 1, process(nums, i + 1, pre));
-            }
+        // 当前位置不选
+        int p1 = process(nums, index + 1, lastNum);
+        // 当前位置选 但是 有条件的选
+        if (nums[index] > lastNum) {
+            // 当前位置可选
+            p1 = Math.max(p1, process(nums, index + 1, nums[index]) + 1);
         }
-        return 0;
+        return p1;
     }
 
     public int process1(int[] nums, int index, int pre) {

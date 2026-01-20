@@ -1,9 +1,8 @@
-package leetcode.practice;
+package leetcode.classic150;
 
 import java.util.List;
 
-public class Code0139 {
-
+public class Code139 {
     public boolean wordBreak(String s, List<String> wordDict) {
         if (s == null || s.isEmpty()) {
             return false;
@@ -109,7 +108,7 @@ public class Code0139 {
         return dp[0];
     }
 
-    public boolean process2(String s, int index, TrieTree root) {
+    public boolean process2(String s, int index,TrieTree root) {
         if (index == s.length()) {
             return true;
         }
@@ -175,6 +174,4 @@ public class Code0139 {
             this.next = new TrieNode[26];
         }
     }
-
-
 }
