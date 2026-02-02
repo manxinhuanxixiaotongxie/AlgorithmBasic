@@ -40,9 +40,11 @@ public class Code162 {
      */
     public int findPeakElement(int[] nums) {
         // 开区间
+        // 开区间 (-1, n-1)
         int left = -1;
-        int right = nums.length - 1; // 开区间 (-1, n-1)
-        while (left + 1 < right) { // 开区间不为空
+        int right = nums.length - 1;
+        // 开区间不为空
+        while (left + 1 < right) {
             int mid = left + (right - left) / 2;
             if (nums[mid] > nums[mid + 1]) { // 下坡，峰顶位置 <= mid
                 right = mid;
@@ -53,15 +55,21 @@ public class Code162 {
         return right;
     }
 
+    /**
+     * 二分写法 闭区间
+     *
+     * @param nums
+     * @return
+     */
     public int findPeakElement2(int[] nums) {
         // 闭区间
         int left = 0;
-        int right = nums.length - 1; // 开区间 (-1, n-1)
-        while (left < right) { // 开区间不为空
+        int right = nums.length - 1;
+        while (left < right) {
             int mid = left + (right - left) / 2;
-            if (nums[mid] > nums[mid + 1]) { // 下坡，峰顶位置 <= mid
+            if (nums[mid] > nums[mid + 1]) {
                 right = mid;
-            } else { // 上坡，峰顶位置 > mid
+            } else {
                 left = mid + 1;
             }
         }
