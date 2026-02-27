@@ -66,18 +66,17 @@ public class Code3108 {
         int to = query[1];
         Code3108Node fromNode = graph.nodes.get(from);
         Code3108Node toNode = graph.nodes.get(to);
-        // 初始化小根堆
         GreatHeap greatHeap = new GreatHeap();
         greatHeap.addOrIgnoreOrUpdate(fromNode, 0);
         while (!greatHeap.isEmpty()) {
             GreatHeap.Info pop = greatHeap.pop();
             for (Code3108Edge edge : pop.node.edges) {
-                // 获取到当前点的边集
                 Code3108Node toNode1 = edge.to;
                 greatHeap.addOrIgnoreOrUpdate(toNode1, pop.distance + edge.weight);
             }
         }
-        return greatHeap.distanceMap.get(toNode) == null ? -1 : greatHeap.distanceMap.get(toNode);
+        Integer res = greatHeap.distanceMap.get(toNode);
+        return res == null ? -1 : res;
     }
 
     private Code3108Node getMinNode(Map<Code3108Node, Integer> map, Set<Code3108Node> set) {
@@ -147,6 +146,10 @@ public class Code3108 {
             return false;
         }
 
+        @Override
+        public int hashCode() {
+            return Integer.hashCode(val);
+        }
     }
 
     class Code3108Edge {
@@ -181,13 +184,13 @@ public class Code3108 {
 
         public void addOrIgnoreOrUpdate(Code3108Node node, int distance) {
             if (inHeap(node)) {
-                // 执行更新操作
-                distanceMap.put(node, Math.min(distanceMap.get(node), distance));
-                heapInsert(heapIndexMap.get(indexMap.get(node)), indexMap.get(node));
+                if (distance < distanceMap.get(node)) {
+                    distanceMap.put(node, distance);
+                    heapInsert(node, indexMap.get(node));
+                }
+                return;
             }
-
             if (!isEntered(node)) {
-                // 执行新增操作
                 heapIndexMap.put(size, node);
                 indexMap.put(node, size);
                 distanceMap.put(node, distance);
@@ -196,7 +199,7 @@ public class Code3108 {
         }
 
         public boolean isEmpty() {
-            return heapIndexMap.isEmpty();
+            return size == 0;
         }
 
         // 判断一个节点是否在堆中
@@ -209,24 +212,21 @@ public class Code3108 {
         }
 
         public Info pop() {
-            if (heapIndexMap.isEmpty()) {
+            if (size == 0) {
                 return null;
             }
             Info info = new Info(heapIndexMap.get(0), distanceMap.get(heapIndexMap.get(0)));
             swap(0, --size);
-            distanceMap.remove(size);
             heapIndexMap.remove(size);
             indexMap.put(info.node, -1);
-            heapify(size);
+            heapify(0);
             return info;
         }
 
-        // 组装小根堆
-        private void heapInsert(Code3108Node node, int size) {
-
-            while (distanceMap.get(heapIndexMap.get(size)) < distanceMap.get(heapIndexMap.get((size - 1) / 2))) {
-                swap(size, (size - 1) / 2);
-                size = (size - 1) / 2;
+        private void heapInsert(Code3108Node node, int idx) {
+            while (idx > 0 && distanceMap.get(heapIndexMap.get(idx)) < distanceMap.get(heapIndexMap.get((idx - 1) / 2))) {
+                swap(idx, (idx - 1) / 2);
+                idx = (idx - 1) / 2;
             }
         }
 
