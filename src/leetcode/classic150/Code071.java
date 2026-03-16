@@ -1,5 +1,8 @@
 package leetcode.classic150;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 你一个字符串 path ，表示指向某一文件或目录的 Unix 风格 绝对路径 （以 '/' 开头），请你将其转化为 更加简洁的规范路径。
  *
@@ -19,17 +22,32 @@ package leetcode.classic150;
  *
  */
 public class Code071 {
+    /**
+     * 思路：
+     * 把path用/分割 得到一个字符串列表
+     * 遍历字符串列表 用栈维护遍历过的字符串
+     *
+     * 1.如果当前字符串是空或者.什么也不做
+     * 2，如果的当前字符串不是.. 字符入栈
+     * 3.否则弹出栈顶字符串（前提是栈不为空） 模拟返回上一级目录
+     *
+     * 最后把栈中字符串用/连接起来 就是规范路径
+     *
+     * @param path
+     * @return
+     */
     public String simplifyPath(String path) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        char[] pathStr = path.toCharArray();
-        int n = pathStr.length;
-        int i = 0;
-        // 栈
-
-
-
-        return stringBuilder.toString();
-
+        List<String> stk = new ArrayList<>();
+        for (String s : path.split("/")) {
+            if (s.isEmpty() || s.equals(".")) {
+                continue;
+            }
+            if (!s.equals("..")) {
+                stk.add(s);
+            } else if (!stk.isEmpty()) {
+                stk.removeLast(); // stk.remove(stk.size() - 1);
+            }
+        }
+        return "/" + String.join("/", stk);
     }
 }

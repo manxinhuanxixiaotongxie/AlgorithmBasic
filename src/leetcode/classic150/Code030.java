@@ -176,53 +176,6 @@ public class Code030 {
         return ans;
     }
 
-    public List<Integer> findSubstring3(String s, String[] words) {
-        Map<String,Integer> targetCnt = new HashMap<>();
-        // 统计words出现的次数
-        for (String word:words) {
-            targetCnt.merge(word, 1, Integer::sum);
-        }
-        // 统计出现次数之后 进行定长窗口的滑动
-        int wordLen = words[0].length();
-        int windowLen = wordLen * words.length;
-        int sLen = s.length();
-        int minus = sLen - windowLen;
-        List<Integer> ans = new ArrayList<>();
-
-        for (int start = 0;start < minus; start++) {
-            Map<String, Integer> cnt = new HashMap<>();
-            // 向后推送长度
-            for (int curStart = start + wordLen;curStart < sLen;curStart += wordLen) {
-                String inWord = s.substring(curStart - wordLen, curStart);
-                cnt.merge(inWord, 1, Integer::sum);
-                // 长度校验
-                int left = curStart- start - windowLen;
-                if (left < 0) {
-                    continue;
-                }
-                // 校验是否满足条件
-                boolean valid = true;
-                for (Map.Entry<String, Integer> entry:cnt.entrySet()) {
-                    for (Map.Entry<String, Integer> entry1:targetCnt.entrySet()) {
-                        if (entry.getKey().equals(entry1.getKey())) {
-                            if (!entry.getValue().equals(entry1.getValue())) {
-                                valid = false;
-                                break;
-                            }
-                        }
-                    }
-                }
-                if (valid) {
-                    ans.add(left);
-                }
-                String outWord = s.substring(left, left + wordLen);
-                cnt.merge(outWord, -1, Integer::sum);
-            }
-        }
-
-        return ans;
-    }
-
 
     static void main() {
         Code030 code030 = new Code030();
