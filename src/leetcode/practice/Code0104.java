@@ -5,15 +5,15 @@ import leetcode.TreeNode;
 public class Code0104 {
 
     public int maxDepth1(TreeNode root) {
-        return procee(root);
+        return process(root);
     }
 
-    private int procee(TreeNode root) {
+    private int process(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        int leftHeight = procee(root.left);
-        int rightHeight = procee(root.right);
+        int leftHeight = process(root.left);
+        int rightHeight = process(root.right);
         return Math.max(leftHeight, rightHeight) + 1;
     }
 
@@ -39,6 +39,7 @@ public class Code0104 {
             if (cur.left == null) {
                 cur = cur.right;
                 curHeight++;
+                ans = Math.max(ans, curHeight);
             } else {
                 // 左树不为空 找到左树的最右侧节点
                 TreeNode left = cur.left;
@@ -54,9 +55,7 @@ public class Code0104 {
                 if (left.right != null) {
                     left.right = null;
                     cur = cur.right;
-                    if (left.left == null) {
-                        ans = Math.max(ans, curHeight);
-                    }
+                    ans = Math.max(ans, curHeight);
                     curHeight -= curLevel;
                 } else {
                     left.right = cur;
@@ -65,13 +64,11 @@ public class Code0104 {
                 }
             }
         }
-        // 单独结算只有右树
-        int finalHeight = 0;
-        while (root != null) {
-            finalHeight++;
-            root = root.right;
-        }
-        ans = Math.max(ans, finalHeight);
+        /**
+         *
+         * 删除末尾单独结算的代码   当左树不为空的时候已经结算过了 不需要重复结算
+         *
+         */
         return ans;
     }
 
