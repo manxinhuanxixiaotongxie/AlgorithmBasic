@@ -117,7 +117,6 @@ public class Code02_EvenTimesOddTimes {
         }
         System.out.println(a + "    " + (a ^ flag));
 
-
     }
 
 
@@ -128,9 +127,22 @@ public class Code02_EvenTimesOddTimes {
      * <p>
      * K < M
      */
-    private static void findKNumber(int[] arr) {
-
-
+    private static int findKNumber(int[] nums,int M) {
+        int[] help = new int[32];
+        for (int num : nums) {
+            for (int j = 0; j < 32; j++) {
+                if (((num >> j) & 1) != 0) {
+                    help[j]++;
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < 32; i++) {
+            if (help[i] % M != 0) {
+                ans |= (1 << i);
+            }
+        }
+        return ans;
     }
 
 }
