@@ -44,18 +44,16 @@ public class Code012 {
         map.put(2000,"MM");
         map.put(3000,"MMM");
     }
+
     public String intToRoman(int num) {
         StringBuilder sb = new StringBuilder();
         int mix = 0;
         while (num > 0) {
             int cur = num % 10;
-            if (cur == 0) {
-                num /= 10;
-                mix++;
-                continue;
+            if (cur != 0) {
+                int curNum = cur * (int) Math.pow(10, mix);
+                sb.insert(0, map.get(curNum));
             }
-            int curNum = cur * (int)Math.pow(10, mix);
-            sb.insert(0,map.get(curNum));
             num /= 10;
             mix++;
         }
