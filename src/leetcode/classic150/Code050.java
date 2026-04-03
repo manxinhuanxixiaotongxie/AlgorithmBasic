@@ -24,6 +24,7 @@ public class Code050 {
 
     /**
      * 利用二进制的特性
+     *
      * @param x
      * @param N
      * @return

@@ -42,7 +42,7 @@ public class Code030 {
     }
 
     public void process(int index, int n, String[] words, TrieTree tree) {
-        if (index == words.length) {
+        if (index == n) {
             StringBuilder sb = new StringBuilder();
             for (String word : words) {
                 sb.append(word);
