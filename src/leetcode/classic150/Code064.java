@@ -55,4 +55,34 @@ public class Code064 {
         }
         return dp[0][0];
     }
+
+    /**
+     * 空间压缩
+     *
+     * @param grid
+     * @return
+     */
+    public int minPathSum3(int[][] grid) {
+        int row = grid.length;
+        int col = grid[0].length;
+        int[] dp = new int[col];
+        dp[col - 1] = grid[row - 1][col - 1];
+        // 先把第一层进行填写
+        for (int curCol = col - 2; curCol >= 0; curCol--) {
+            // 依赖右侧的位置
+            dp[curCol] = grid[row - 1][curCol] + dp[curCol + 1];
+        }
+        // 进行滚动更新
+        // 总共滚动多少次
+        for (int curRow = row - 2; curRow >= 0; curRow--) {
+            // 最右侧的数字依赖下面的位置
+            // 进行当前行的变更
+            dp[col - 1] = grid[curRow][col - 1] + dp[col - 1];
+            for (int curCol = col - 2; curCol >= 0; curCol--) {
+                int down = dp[curCol];
+                dp[curCol] = grid[curRow][curCol] + Math.min(down, dp[curCol + 1]);
+            }
+        }
+        return dp[0];
+    }
 }
