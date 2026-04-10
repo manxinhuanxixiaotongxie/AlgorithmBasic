@@ -58,6 +58,7 @@ public class Code135 {
             while (i + 1 < n && ratings[i] < ratings[i + 1]) {
                 i++;
             }
+
             int top = i; // 峰顶
 
             // 找严格递减段
@@ -67,7 +68,7 @@ public class Code135 {
 
             int inc = top - start; // start 到 top 严格递增
             int dec = i - top;     // top 到 i 严格递减
-            // 0 + 1 + 2 + 3 + top- start -1
+            // 0 + 1 + 2 + 3 + top- start -i
             ans += (inc * (inc - 1) + dec * (dec - 1)) / 2 + Math.max(inc, dec);
         }
         return ans;
