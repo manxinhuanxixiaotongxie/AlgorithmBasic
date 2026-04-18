@@ -27,7 +27,7 @@ public class Code322 {
             return 0;
         }
         int ans = Integer.MAX_VALUE;
-        for (int zhang = 0; zhang * coins[index] <= amount && index < coins.length; zhang++) {
+        for (int zhang = 0; zhang * coins[index] <= amount; zhang++) {
             int next = process(coins, amount - coins[index] * zhang, index + 1);
             if (next != Integer.MAX_VALUE) {
                 ans = Math.min(ans, next + zhang);
