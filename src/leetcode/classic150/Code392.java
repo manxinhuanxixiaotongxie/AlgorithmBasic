@@ -2,7 +2,7 @@ package leetcode.classic150;
 
 public class Code392 {
     public boolean isSubsequence(String s, String t) {
-        if (s.length() == 0) {
+        if (s.isEmpty()) {
             return true;
         }
         if (s.length() > t.length()) {
