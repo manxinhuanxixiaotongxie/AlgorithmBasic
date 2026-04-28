@@ -2,6 +2,7 @@ package leetcode.practice;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
@@ -13,10 +14,12 @@ public class Code994 {
     /**
      * 这个解法是有问题的
      *
+     * 感染是同时发生的，所以不能在一次循环中就把所有的感染都处理掉，否则会导致感染的时间计算错误。
+     *
      * @param grid
      * @return
      */
-    public synchronized int orangesRotting(int[][] grid) {
+    public  int orangesRotting(int[][] grid) {
         if (grid == null || grid.length == 0) {
             return 0;
         }
@@ -59,49 +62,54 @@ public class Code994 {
     }
 
 
-    /**
-     * 官方解答
-     *
-     * @param grid
-     * @return
-     */
     public int orangesRotting2(int[][] grid) {
-        int R = grid.length, C = grid[0].length;
-        Queue<Integer> queue = new ArrayDeque<Integer>();
-        Map<Integer, Integer> depth = new HashMap<Integer, Integer>();
-        for (int r = 0; r < R; ++r) {
-            for (int c = 0; c < C; ++c) {
-                if (grid[r][c] == 2) {
-                    int code = r * C + c;
-                    queue.add(code);
-                    depth.put(code, 0);
+        boolean[][] visited = new boolean[grid.length][grid[0].length];
+        Queue<int[]> queue = new LinkedList<int[]>();
+        // 定义上下左右
+        int[] dx = {-1, 1, 0, 0};
+        int[] dy = {0, 0, -1, 1};
+        int row = grid.length;
+        int col = grid[0].length;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 2) {
+                    queue.offer(new int[]{i, j});
+                    visited[i][j] = true; // 标记腐烂的橘子已访问
+                }
+                if (grid[i][j] == 0) {
+                    visited[i][j] = true;
                 }
             }
         }
         int ans = 0;
         while (!queue.isEmpty()) {
-            int code = queue.remove();
-            int r = code / C, c = code % C;
-            for (int k = 0; k < 4; ++k) {
-                int nr = r + dr[k];
-                int nc = c + dc[k];
-                if (0 <= nr && nr < R && 0 <= nc && nc < C && grid[nr][nc] == 1) {
-                    grid[nr][nc] = 2;
-                    int ncode = nr * C + nc;
-                    queue.add(ncode);
-                    depth.put(ncode, depth.get(code) + 1);
-                    ans = depth.get(ncode);
+            int size = queue.size();
+            ans++;
+            for (int i = 0; i < size; i++) {
+                int[] cur = queue.poll();
+                for (int k = 0; k < 4; k++) {
+                    int x = cur[0] + dx[k];
+                    int y = cur[1] + dy[k];
+                    if (x < 0 || x >= row || y < 0 || y >= col || visited[x][y] || grid[x][y] != 1) {
+                        continue;
+                    }
+                    visited[x][y] = true;
+                    if (grid[x][y] == 1) {
+                        queue.offer(new int[]{x, y});
+                        grid[x][y] = 2;
+                    }
                 }
             }
         }
-        for (int[] row : grid) {
-            for (int v : row) {
-                if (v == 1) {
-                    return -1;
+        // 检查是否还有新鲜橘子
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 1) {
+                    return -1; // 如果还有新鲜橘子，返回 -1
                 }
             }
         }
-        return ans;
+        return ans == 0 ? 0 : ans - 1; // 如果没有新鲜橘子，返回 ans - 1
     }
 
     public static void main(String[] args) {
