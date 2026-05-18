@@ -47,9 +47,11 @@ public class Code01_DijReview {
         int minDistance = Integer.MAX_VALUE;
         for (Map.Entry<GraphNode, Integer> entry : distanceMap.entrySet()) {
             // 在distanceMap中找到最小距离的点  并且没有结算过
-            if (selectedNode.contains(entry.getKey()) && entry.getValue() < minDistance) {
-                ans = entry.getKey();
-                minDistance = entry.getValue();
+            GraphNode node = entry.getKey();
+            int value = entry.getValue();
+            if (!selectedNode.contains(node) && value < minDistance) {
+                ans = node;
+                minDistance = value;
             }
         }
         return ans;
