@@ -51,15 +51,15 @@ public class Code005 {
         if (s == null || s.isEmpty()) {
             return null;
         }
-        char[] newStr = new char[s.length() * 2 + 1];
         char[] str = s.toCharArray();
-        for (int i = 0; i < newStr.length; i++) {
-            if (i % 2 == 0) {
-                newStr[i] = '#';
-            } else {
-                newStr[i] = str[i >> 1];
-            }
+        int n = str.length;
+        char[] ans = new char[(n << 1) + 1];
+
+        for (int i = 0; i < n; i++) {
+            ans[2 * i + 1] = str[i];
+            ans[2 * i] = '#';
         }
-        return newStr;
+        ans[(2 * n)] = '#';
+        return ans;
     }
 }
