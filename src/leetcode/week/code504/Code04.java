@@ -21,7 +21,18 @@ import java.util.Arrays;
  *
  */
 public class Code04 {
+
     /**
+     * 适用场景：按照题目要求，数组会被分割成若干组，每一组的判断/处理逻辑是相同的。
+     *
+     * 核心思想：
+     *
+     * 外层循环负责遍历组之前的准备工作（记录开始位置），和遍历组之后的统计工作（更新答案）。
+     * 内层循环负责遍历组，找出这一组最远在哪结束。
+     * 这个写法的好处是，各个逻辑块分工明确，也不需要特判最后一组（易错点）。以我的经验，
+     * 这个写法是所有写法中最不容易出 bug 的，推荐大家记住。
+     *
+
      * 分组循环
      * 本题相当于把 nums 分成若干段，每段计算一个 mex（不在段中的最小非负整数），得到一个 mex 序列，要求最大化这个序列的字典序。
      *
@@ -43,7 +54,67 @@ public class Code04 {
      * @param nums
      * @return
      */
+    /**
+     * 通用分组循环写法（朴素版 不带 pos[x] 优化）
+     *
+     * 模板骨架：
+     *   for (int i = 0; i < n; ) {
+     *       int start = i;                  // ① 记录段起点
+     *       while (i < n && 段还能扩张) {    // ② 扩张
+     *           i++;
+     *       }
+     *       // ③ 段尾结算 [start, i)
+     *   }
+     *
+     * 本题的具体填法：
+     *   ① start = i 标记当前段的最左下标
+     *   ② 段能扩张 = 当前 mex 在剩余 nums[start..n-1] 里还能找到
+     *               找到就把段右端扩到该位置 mex++ 继续尝试
+     *               找不到就切刀
+     *   ③ 段尾把 mex 加入结果
+     *
+     * 复杂度：朴素查找 O(n^3) 仅用于理解模板和对数器验证
+     */
     public int[] maximumMEX(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[n];
+        int idx = 0;
+
+        for (int i = 0; i < n; ) {
+            int start = i;          // ① 段起点
+            int mex = 0;
+
+            // ② 扩张：贪心地让 mex 尽量大
+            // 怎么样mes才能尽量大呢 从start位置开始
+            while (true) {
+                // 在剩余区间 nums[start..n-1] 中找 mex 的最左下标
+                int leftmost = -1;
+                for (int k = start; k < n; k++) {
+                    if (nums[k] == mex) {
+                        leftmost = k;
+                        break;
+                    }
+                }
+                if (leftmost == -1) {
+                    // 剩余里找不到 mex 段无法再扩张 切刀
+                    break;
+                }
+                // 段右端必须覆盖到 leftmost 才能让 mex 真正"用上"
+                i = Math.max(i, leftmost);
+                mex++;
+            }
+
+            // ③ 段尾结算：把这一段的 mex 写入答案
+            ans[idx++] = mex;
+
+            // 推进到下一段的起点
+            i = i + 1;
+        }
+
+        return Arrays.copyOf(ans, idx);
+    }
+
+    public int[] maximumMEX2(int[] nums) {
         int n = nums.length;
         // mex 最大是 n，>= n 的数无需考虑
         ArrayDeque<Integer>[] pos = new ArrayDeque[n + 1]; // n 作为哨兵

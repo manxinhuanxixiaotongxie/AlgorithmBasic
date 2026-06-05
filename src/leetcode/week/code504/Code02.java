@@ -88,16 +88,13 @@ public class Code02 {
 
     /**
      * 0-1背包 + 枚举优化
-     *
+     * <p>
      * 0-1背包问题：给你一个容量为budget的背包 以及N个物品 其中物品的体积为prices[i]，价值为cnt(i) 在至多装满背包的情况下
      * 所选物品的的价值之和最大是多少
-     *
+     * <p>
      * 设装入背包的物品花费至多为i时，获得了f(i)个物品
-     *
+     * <p>
      * 可以重复购买物品 购买重复物品时，无法免费获取物品 贪心：重复购买便宜的物品 设其价格为minPrice
-     *
-     *
-     *
      *
      * @param items
      * @param budget
@@ -107,6 +104,7 @@ public class Code02 {
     int[] cnts;       // cnts[i] = 物品 i 对应的价值（因子倍数个数）
     int[][] items;
     int[] memo;       // memo 是二维的，压成一维：index * (budget+1
+
     public int maximumSaleItems2(int[][] items, int budget) {
         this.n = items.length;
         this.items = items;
@@ -117,7 +115,7 @@ public class Code02 {
         // 预处理每个物品的 cnt 和 minPrice
         for (int i = 0; i < n; i++) {
             int factor = items[i][0];
-            int price  = items[i][1];
+            int price = items[i][1];
             minPrice = Math.min(minPrice, price);
             int cnt = 0;
             for (int[] q : items) {
@@ -142,10 +140,10 @@ public class Code02 {
 
     /**
      * 递归语义：
-     *   从第 index 个物品开始，剩余预算为 rest，
-     *   通过"打折购买"能获得的最多物品数（不含贪心买最便宜部分）
-     *
-     *   从所有物品中各选至多一次 花费刚好rest 获得的最多物品数
+     * 从第 index 个物品开始，剩余预算为 rest，
+     * 通过"打折购买"能获得的最多物品数（不含贪心买最便宜部分）
+     * <p>
+     * 从所有物品中各选至多一次 花费刚好rest 获得的最多物品数
      *
      * @param index 当前考虑的物品下标
      * @param rest  剩余预算
@@ -159,7 +157,7 @@ public class Code02 {
         if (memo[key] != -1) return memo[key];
 
         int price = items[index][1];
-        int cnt   = cnts[index];
+        int cnt = cnts[index];
 
         // 选择1：不买第 index 个物品
         int skip = dfs(index + 1, rest);
@@ -171,5 +169,180 @@ public class Code02 {
         }
 
         return memo[key] = Math.max(skip, take);
+    }
+
+    /**
+     * 优化成dp
+     *
+     * @param items
+     * @param budget
+     * @return
+     */
+    public int maximumSaleItems3(int[][] items, int budget) {
+        int n = items.length;
+        int[] cnts = new int[n];
+        int minPrice = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            int factory = items[i][0];
+            int price = items[i][1];
+            minPrice = Math.min(minPrice, price);
+            for (int j = 0; j < n; j++) {
+                if (factory % items[j][0] == 0) {
+                    cnts[j]++;
+                }
+            }
+        }
+        // 将0-1背包问题改成动态规划
+        int[][] dp = new int[n + 1][budget + 1];
+        // 当前行依赖下一行 dp[n][i]==0 不需要进行填充
+        // 从n-1行开始填
+        for (int index = n - 1; index >= 0; index--) {
+            int price = items[index][1];
+            // 选择当前位置能够获得的个数
+            int cnt = cnts[index];
+            for (int rest = 0; rest <= budget; rest++) {
+                // 第一种情况 不买当前物品
+                dp[index][rest] = dp[index + 1][rest];
+                // 第二种情况 买当前物品 但是是有前提的
+                if (rest >= price) {
+                    dp[index][rest] = Math.max(dp[index][rest], cnt + dp[index + 1][rest - price]);
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i <= budget; i++) {
+            ans = Math.max(ans, dp[0][i] + (budget - i) / minPrice);
+        }
+        return ans;
+    }
+
+    public int maximumSaleItems4(int[][] items, int budget) {
+        int n = items.length;
+        int[] cnts = new int[n];
+        int minPrice = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            int factory = items[i][0];
+            int price = items[i][1];
+            minPrice = Math.min(minPrice, price);
+            for (int j = 0; j < n; j++) {
+                if (factory % items[j][0] == 0) {
+                    cnts[j]++;
+                }
+            }
+        }
+        // 将0-1背包问题改成动态规划
+        int[] dp = new int[budget + 1];
+        for (int index = n - 1; index >= 0; index--) {
+            // 总共要循环这么多次
+            int price = items[index][1];
+            // 选择当前位置能够获得的个数
+            int cnt = cnts[index];
+            // 当前物品太贵 这一行 dp 等于上一行 直接跳过
+            if (price > budget) continue;
+            // helpPrice 只保存"将来会被读到"的旧值 即 dp[0 .. budget - price]
+            int[] helpPrice = new int[budget - price + 1];
+            for (int rest = 0; rest <= budget; rest++) {
+                // 先备份：只备份会被后续 rest' = rest + price 读到的位置
+                if (rest <= budget - price) {
+                    helpPrice[rest] = dp[rest];
+                }
+                // 再更新：用之前已经备份过的旧值
+                if (rest >= price) {
+                    dp[rest] = Math.max(dp[rest], cnt + helpPrice[rest - price]);
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i <= budget; i++) {
+            ans = Math.max(ans, dp[i] + (budget - i) / minPrice);
+        }
+        return ans;
+    }
+
+    /**
+     * 空间压缩
+     * 能够优化成一维
+     *
+     * @param items
+     * @param budget
+     * @return
+     */
+    public int maximumSaleItems5(int[][] items, int budget) {
+        int n = items.length;
+        int[] cnts = new int[n];
+        int minPrice = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            int factory = items[i][0];
+            int price = items[i][1];
+            minPrice = Math.min(minPrice, price);
+            for (int j = 0; j < n; j++) {
+                if (factory % items[j][0] == 0) {
+                    cnts[j]++;
+                }
+            }
+        }
+        // 将0-1背包问题改成动态规划
+        int[] dp = new int[budget + 1];
+        for (int index = n - 1; index >= 0; index--) {
+            // 总共要循环这么多次
+            int price = items[index][1];
+            // 选择当前位置能够获得的个数
+            int cnt = cnts[index];
+            // 依赖的位置是下一行
+            // 从大到小 之前的位置一定是上一行的位置没有发生变化
+            for (int rest = budget; rest >= 0; rest--) {
+                if (rest >= price) {
+                    dp[rest] = Math.max(dp[rest], cnt + dp[rest - price]);
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i <= budget; i++) {
+            ans = Math.max(ans, dp[i] + (budget - i) / minPrice);
+        }
+        return ans;
+    }
+
+    /**
+     * 优化cnts的计算方式
+     *
+     * @param items
+     * @param budget
+     * @return
+     */
+    public int maximumSaleItems6(int[][] items, int budget) {
+        int n = items.length;
+        int[] cnts = new int[n];
+        int minPrice = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            int factory = items[i][0];
+            int price = items[i][1];
+            minPrice = Math.min(minPrice, price);
+            for (int j = 0; j < n; j++) {
+                if (factory % items[j][0] == 0) {
+                    cnts[j]++;
+                }
+            }
+        }
+        // 将0-1背包问题改成动态规划
+        int[] dp = new int[budget + 1];
+        for (int index = n - 1; index >= 0; index--) {
+            // 总共要循环这么多次
+            int price = items[index][1];
+            // 选择当前位置能够获得的个数
+            int cnt = cnts[index];
+            // 依赖的位置是下一行
+            // 从大到小 之前的位置一定是上一行的位置没有发生变化
+            for (int rest = budget; rest >= 0; rest--) {
+                if (rest >= price) {
+                    dp[rest] = Math.max(dp[rest], cnt + dp[rest - price]);
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i <= budget; i++) {
+            ans = Math.max(ans, dp[i] + (budget - i) / minPrice);
+        }
+        return ans;
     }
 }

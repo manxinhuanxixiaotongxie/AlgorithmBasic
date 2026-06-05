@@ -15,16 +15,70 @@ import java.util.List;
  * 对于每个有序对 (i, j)，无论你购买了多少个物品 i，你从物品 i 的购买中 最多只能一次 免费获得物品 j。
  * 如果免费物品 j 是通过购买不同种类的物品获得的，那么同一种物品 j 可以被免费获得多次。
  * 返回你在购买物品花费最多为 budget 的前提下，能够获得的 物品最大总数 ，包括购买的物品和免费的物品。
+ *
+ * 提示：
+ *
+ * 1 <= items.length <= 10^5
+ * items[i] = [factori, pricei]
+ * 1 <= factori <= items.length
+ * 1 <= pricei <= 10^9
+ * 1 <= budget <= 10^9
+ *
  */
 public class Code03 {
     /**
+     * 超时
      *
+     * 多重背包
      *
-     * @param items
-     * @param budget
-     * @return
+     * 暴力递归（对数器用 / 帮助理解题意）
+     * 思路：
+     *   1) 预处理 cnts[i] = 物品 i 的"赠品上限"
+     *      = factor_i 的真倍数（j != i 且 factor_i | factor_j）物品个数
+     *      含义：买物品 i 的前 cnts[i] 份每份送 1 件不同的 j；
+     *           超出 cnts[i] 后再买 i 不再送（因为同一对 (i,j) 全局只触发一次）。
+     *   2) 按 index 依次决策每个物品买几份（0 .. rest/price）。
+     *
+     * 时间复杂度指数级 仅用于小规模验证。
      */
     public int maximumSaleItems(int[][] items, int budget) {
+        int n = items.length;
+        int[] cnts = new int[n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i != j && items[j][0] % items[i][0] == 0) {
+                    cnts[i]++;
+                }
+            }
+        }
+        return process(items, cnts, 0, budget);
+    }
+
+    /**
+     *
+     * @param index 当前考虑的物品下标
+     * @param rest  剩余预算
+     * @return 从 index 开始能多获得的物品总数（买的 + 送的）
+     */
+    private int process(int[][] items, int[] cnts, int index, int rest) {
+        if (index == items.length) return 0;
+        int price = items[index][1];
+        int cap = cnts[index];               // 当前物品的赠品上限
+        int maxBuy = rest / price;           // 当前物品最多能买几份
+
+        int ans = 0;
+        // 枚举买 buy 份当前物品（含 0 份 = 不买）
+        for (int buy = 0; buy <= maxBuy; buy++) {
+            // 当前的i位置进行购买buy份 最多能获取到多少赠品
+            int gifts = Math.min(buy, cap);  // 前 cap 份每份带 1 个赠品
+            int got = buy + gifts;           // 本物品带来的总件数
+            int next = process(items, cnts, index + 1, rest - buy * price);
+            ans = Math.max(ans, got + next);
+        }
+        return ans;
+    }
+
+    public int maximumSaleItems2(int[][] items, int budget) {
         int n = items.length;
         int[] cntFactor = new int[n + 1];
         int minPrice = Integer.MAX_VALUE;
