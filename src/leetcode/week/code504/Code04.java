@@ -89,6 +89,7 @@ public class Code04 {
             while (true) {
                 // 在剩余区间 nums[start..n-1] 中找 mex 的最左下标
                 int leftmost = -1;
+                // 能不能让这段mex到达mex，比如，如果能到达0，那说明我们必须这一段的中点i至少要延伸到leftMost位置
                 for (int k = start; k < n; k++) {
                     if (nums[k] == mex) {
                         leftmost = k;
@@ -101,6 +102,7 @@ public class Code04 {
                 }
                 // 段右端必须覆盖到 leftmost 才能让 mex 真正"用上"
                 i = Math.max(i, leftmost);
+                // 既然搞定了0 内层while循环让mex++ 我再看看能不能让mex达到1？就得在start后面找到1
                 mex++;
             }
 
@@ -114,6 +116,13 @@ public class Code04 {
         return Arrays.copyOf(ans, idx);
     }
 
+    /**
+     * 优化：我们能不能不需要每次都去暴力遍历找数字
+     * 我们需要快速知道：在当前位置之后 数组的X第一次出现的地方在哪里？
+     * 因为数字是在数组里从左到右依次出现的，如果我们把每一个数字对应的所有下标，按顺序存进各自的队列里，就能实现O（1）的查找
+     * @param nums
+     * @return
+     */
     public int[] maximumMEX2(int[] nums) {
         int n = nums.length;
         // mex 最大是 n，>= n 的数无需考虑
