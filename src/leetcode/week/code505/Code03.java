@@ -518,8 +518,17 @@ public class Code03 {
             ArrayDeque<Integer> deque = new ArrayDeque<>();
             for (int index = n - 1; index >= 0; index--) {
                 dp[index][rest] = dp[index + 1][rest];
+                // 分析原有代码流程 当前位置代码流程应该怎么的优化
+                /**
+                 * 在原有的三层for循环中 当前dp[index][rest] 是怎么求的
+                 * （1）第一种情况 当前位置不选 只依赖下一行的位置也就是dp[index+1][rest] 就是下一行的位置
+                 * （2）第二种情况 依赖的是help[index + size -1] + dp[index + size][rest- 1] - help[index - 1]
+                 *  其中help[index - 1]是固定值 size的范围是[l,r]闭区间
+                 *  窗口最大值 窗口的范围就是[index + l,index + r] 窗口最大值存放的是(index + size) 这种下标
+                 */
 
                 // 1. 右边界过期（队头出）：end > index + r
+                // 窗口的最大值只能到[index + l,index + r] 超过index + r就是不合法范围
                 while (!deque.isEmpty() && deque.peekFirst() > index + r) {
                     deque.pollFirst();
                 }
@@ -528,8 +537,8 @@ public class Code03 {
                 int newEnd = index + l;
                 if (newEnd <= n) {
                     long fNew = help[newEnd - 1] + dp[newEnd][rest - 1];
-                    while (!deque.isEmpty()
-                            && help[deque.peekLast() - 1] + dp[deque.peekLast()][rest - 1] <= fNew) {
+                    // 这里的式子就是这个 help[index + size -1] + dp[index + size][rest- 1] - help[index - 1]
+                    while (!deque.isEmpty() && help[deque.peekLast() - 1] + dp[deque.peekLast()][rest - 1] <= fNew) {
                         deque.pollLast();
                     }
                     deque.addLast(newEnd);
@@ -542,8 +551,7 @@ public class Code03 {
                     long next = dp[bestEnd][rest - 1];
                     if (next != Long.MIN_VALUE) {
                         long prefix = (index == 0 ? 0 : help[index - 1]);
-                        dp[index][rest] = Math.max(dp[index][rest],
-                                help[bestEnd - 1] + next - prefix);
+                        dp[index][rest] = Math.max(dp[index][rest], help[bestEnd - 1] + next - prefix);
                     }
                 }
             }
