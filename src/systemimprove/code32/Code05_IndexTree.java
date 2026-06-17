@@ -173,10 +173,10 @@ public class Code05_IndexTree {
             return ans;
         }
 
-        public void add(int inedx, int num) {
-            while (inedx <= help.length) {
-                help[inedx] += num;
-                inedx += inedx & -inedx;
+        public void add(int index, int num) {
+            while (index <= help.length) {
+                help[index] += num;
+                index += index & -index;
             }
         }
 
