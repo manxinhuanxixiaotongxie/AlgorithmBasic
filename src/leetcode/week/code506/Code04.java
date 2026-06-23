@@ -149,6 +149,14 @@ public class Code04 {
         }
     }
 
+    /**
+     * 灵神题解
+     * indexTree存的是次数  数字1出现了5次  tree[1] = 5
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
     public long maxSum2(int[] nums, int k) {
         // 离散化
         int n = nums.length;
