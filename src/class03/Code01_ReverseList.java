@@ -65,6 +65,36 @@ public class Code01_ReverseList {
 
 
     /**
+     * 使用递归
+     *
+     * @param head
+     */
+    public static Node reverseSingleList2(Node head) {
+        return reverse(head);
+    }
+
+    public static Node pre;
+
+
+    public static Node reverse(Node head) {
+        if (head.next == null) {
+            head.next = pre;
+            pre = head;
+            return head;
+        }
+        // 有下一个的节点
+        // 正常的返回
+        Node next = reverse(head.next);
+        head.next = pre;
+//        if (pre != null) {
+//            pre.next = null;
+//        }
+        pre =  head;
+        return next;
+    }
+
+
+    /**
      * 翻转双向链表
      *
      * @param head
