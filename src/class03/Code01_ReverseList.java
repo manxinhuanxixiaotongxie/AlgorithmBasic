@@ -89,7 +89,35 @@ public class Code01_ReverseList {
 //        if (pre != null) {
 //            pre.next = null;
 //        }
-        pre =  head;
+        pre = head;
+        return next;
+    }
+
+    /**
+     * 更优雅的递归写法
+     *
+     * @param head
+     * @return
+     */
+    public static Node reverseSingleList3(Node head) {
+        return reverse2(head);
+    }
+
+    /**
+     * 递归含义：翻转当前节点作为头节点的链表 并且返回新的链表的头部
+     *
+     * @param head
+     * @return
+     */
+    public static Node reverse2(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        // 翻转下一个位置
+        Node next = reverse(head.next);
+        // 下一个位置的新节点
+        head.next.next = head;
+        head.next = null;
         return next;
     }
 
