@@ -113,11 +113,6 @@ public class Code03_CountOfRange {
             return 0;
         }
         // 加工原始数组
-//        long[] sum = new long[arr.length];
-//        sum[0] = arr[0];
-//        for (int i = 1; i < arr.length; i++) {
-//            sum[i] = sum[i - 1] + arr[i];
-//        }
         SizeMap sizeMap = new SizeMap();
         sizeMap.put(0);
         int ans = 0;
@@ -173,6 +168,77 @@ public class Code03_CountOfRange {
             }
         }
         return true;
+    }
+
+    /**
+     * 归并排序更通用的写法
+     *
+     * @param arr
+     * @param lower
+     * @param upper
+     * @return
+     */
+    public int countRangeSum4(int[] arr, int lower, int upper) {
+        int n = arr.length;
+        long[] sum = new long[n + 1];
+        for (int i = 0; i < n; i++) {
+            sum[i + 1] = sum[i] + arr[i];
+        }
+        return process2(sum, 0, sum.length - 1, lower, upper);
+
+    }
+
+    public int process2(long[] nums, int l, int r, int lower, int upper) {
+        if (l == r) {
+            return 0;
+        }
+        int mid = l + (r - l) / 2;
+        return process2(nums, l, mid, lower, upper) + process2(nums, mid + 1, r, lower, upper) + merge2(nums, l, mid, r, lower, upper);
+    }
+
+    public int merge2(long[] nums, int left, int mid, int right, int lower, int upper) {
+        // 求的是累加和在[lower,upper]范围上
+        // lower <= sum[r] - sum[l-1] <= upper
+        // 以当前位置结尾 sum[r] - sum[l -1] >= lower  ==>  sum[r] - lower >=sum[l-1]
+        //              sum[r] - sum[l-1]  <= upper ==>  sum[r] - upper <=sum[l-1]
+        // leftIndex 不会回退 单调的
+        int l = left;
+        int r = left;
+        int rightIndex = mid + 1;
+        int ans = 0;
+        while (rightIndex <= right) {
+            long min = nums[rightIndex] - upper;
+            long max = nums[rightIndex] - lower;
+            while (l <= mid && nums[l] < min) {
+                l++;
+            }
+            while (r <= mid && nums[r] <= max) {
+                r++;
+            }
+            ans += r - l;
+            rightIndex++;
+        }
+        int leftIndex = left;
+        rightIndex = mid + 1;
+        long[] help = new long[right - left + 1];
+        int index = 0;
+        while (leftIndex <= mid && rightIndex <= right) {
+            if (nums[leftIndex] < nums[rightIndex]) {
+                help[index++] = nums[leftIndex++];
+            } else {
+                help[index++] = nums[rightIndex++];
+            }
+        }
+        while (leftIndex <= mid) {
+            help[index++] = nums[leftIndex++];
+        }
+        while (rightIndex <= right) {
+            help[index++] = nums[rightIndex++];
+        }
+        for (int i = 0; i < help.length; i++) {
+            nums[left + i] = help[i];
+        }
+        return ans;
     }
 
     public static void main(String[] args) {
@@ -307,52 +373,6 @@ class SizeMap {
         }
     }
 
-//    public void remove(int value) {
-//        KeyNode keyNode = new KeyNode(value);
-//        root = delete(root, keyNode);
-//    }
-//
-//    private SizeNode delete(SizeNode cur, KeyNode keyNode) {
-//        if (cur == null) {
-//            return cur;
-//        }
-//        if (cur.keyNode.compareTo(keyNode) < 0) {
-//            // 如果当前节点比需要删除的节点要小 那么需要删除的节点在右树
-//            cur = delete(cur.right, keyNode);
-//        } else if (cur.keyNode.compareTo(keyNode) > 0) {
-//            cur = delete(cur.left, keyNode);
-//        } else {
-//            // 相等 意味着当前的节点就是需要删除的节点
-//            if (cur.left == null && cur.right == null) {
-//                cur = null;
-//            } else if (cur.left == null) {
-//                cur = cur.right;
-//            } else if (cur.right == null) {
-//                cur = cur.left;
-//            } else {
-//                // 左树右树都不为空  使用右树的最左侧节点替换当前节点
-//                // 为什么使用右树的最左侧节点  右树的最最左侧节点一定比当前节点的左树大并且比当前节点的右树要小
-//                // 调整之后能够保证整棵树依然满足二叉搜索树的性质 即当前节点的左树的所有节点比当前节点要小 右树的所有节点都比当前节点要大
-//                SizeNode pre = null;
-//                SizeNode mostRightLeft = cur.right;
-//                while (mostRightLeft.left != null) {
-//                    pre = mostRightLeft;
-//                    mostRightLeft = mostRightLeft.left;
-//                }
-//                if (pre != null) {
-//                    // pre 不为空 意味着 当前节点右树不止一个节点
-//                    // 那么需要进行的调整就是删除mostRighteft节点之后
-//                    // 需要pre节点的左树接管的mostRightLeft的右树
-//                    pre.left = mostRightLeft.right;
-//                    mostRightLeft.right = cur;
-//                }
-//                mostRightLeft.left = cur.left;
-//                cur = mostRightLeft;
-//                cur.size = (cur.left != null ? cur.left.size : 0) + (cur.right != null ? cur.right.size : 0) + 1;
-//            }
-//        }
-//        return cur;
-//    }
 
     private boolean containsKey(long value) {
         SizeNode cur = root;
@@ -372,17 +392,6 @@ class SizeMap {
         SizeNode cur = root;
         int ans = 0;
         while (cur != null) {
-//            if (cur.keyNode.compareTo(keyNode) < 0) {
-//                int same = cur.all - (cur.left != null ? cur.left.all : 0) - (cur.right != null ? cur.right.all : 0);
-//                ans += same + (cur.left != null ? cur.left.all : 0);
-//                cur = cur.right;
-//            } else if (cur.keyNode.compareTo(keyNode) > 0) {
-//                cur = cur.left;
-//            } else {
-//                int same = cur.all - (cur.left != null ? cur.left.all : 0) - (cur.right != null ? cur.right.all : 0);
-//                ans += (cur.left != null ? cur.left.all : 0) + same;
-//                break;
-//            }
             if (cur.value == value) {
                 ans += (cur.left != null ? cur.left.all : 0);
                 break;
@@ -412,16 +421,3 @@ class SizeNode {
         this.value = value;
     }
 }
-
-//class KeyNode implements Comparable<KeyNode> {
-//    private long value;
-//
-//    KeyNode(long value) {
-//        this.value = value;
-//    }
-//
-//    @Override
-//    public int compareTo(KeyNode keyNode) {
-//        return Long.compare(value, keyNode.value);
-//    }
-//}
