@@ -159,6 +159,13 @@ public class Code04 {
      * 下标从1开始
      * 管理的位置是当前index减去最后一个1 +1 的位置到当前位置
      *
+     * 用树状数组来快速统计 有多少个前缀和 <+当前前缀和 O（N* log(N)）算出所有有效子数组数量
+     *
+     * 问题转化：在前缀和数组里面 有多少对(i,j)满足 i<j并且sum[i] <=sum[j]
+     *
+     * 用树状数组从的左到右扫 没到一个位置就查之前有多少个值小于等于我
+     *
+     *
      * @param nums
      * @param a
      * @param b
@@ -167,6 +174,7 @@ public class Code04 {
     public long countRatioSubarrays3(int[] nums, int a, int b) {
         long[] sum = new long[nums.length + 1];
         int n = nums.length;
+        // 长度n+1 避免空前缀的影响
         for (int i = 0; i < n; i++) {
             sum[i + 1] = sum[i] + (nums[i] % 2 == 0 ? -b : a);
         }
@@ -178,10 +186,14 @@ public class Code04 {
         // 这里的树状数组维护的不是原始数组或者前缀和数值本身 而是
         // 某个数值出现了多少次
         Arrays.sort(sortedS);
+        // 为什么长度是n+1 sum有n+1个元素 离散化之后排名最大是n+1
         IndexTree tree = new IndexTree(n + 1);
         long ans = 0;
         for (long s : sum) {
             // 找S在所有前缀和里的排名
+            // 为什么要二分：是binarySearch把实际值映射成排名(1,2,3)
+            // 把数组的数全部都映射成相对排名
+            // 把比较大的数值李三成比较小的数值
             int x = Arrays.binarySearch(sortedS, s) + 1;
             // 在当前元素s的左边 有多少个前缀和是小于等于s的
             ans += tree.pre(x);
